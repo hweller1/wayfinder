@@ -1,0 +1,67 @@
+{
+  "properties": {
+    "end_line": {
+      "title": "End Line",
+      "type": "integer"
+    },
+    "path": {
+      "title": "Path",
+      "type": "string"
+    },
+    "score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Score"
+    },
+    "snippet": {
+      "title": "Snippet",
+      "type": "string"
+    },
+    "source": {
+      "enum": [
+        "semantic",
+        "grep",
+        "read"
+      ],
+      "title": "Source",
+      "type": "string"
+    },
+    "stale": {
+      "default": false,
+      "title": "Stale",
+      "type": "boolean"
+    },
+    "start_line": {
+      "minimum": 1,
+      "title": "Start Line",
+      "type": "integer"
+    },
+    "verified": {
+      "default": true,
+      "title": "Verified",
+      "type": "boolean"
+    },
+    "why": {
+      "maxLength": 300,
+      "title": "Why",
+      "type": "string"
+    }
+  },
+  "required": [
+    "path",
+    "start_line",
+    "end_line",
+    "why",
+    "source",
+    "snippet"
+  ],
+  "title": "SnippetHit",
+  "type": "object"
+}

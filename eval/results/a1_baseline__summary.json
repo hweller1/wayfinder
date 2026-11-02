@@ -1,0 +1,1529 @@
+{
+  "protocol": {
+    "tasks": "artifacts/teacher_test/stageB_tasks.json (50 dev tasks x seeds 0,1)",
+    "sampling": "A1 recommended: T 0.85, top_p 0.95, top_k 20, presence_penalty 1.1, enable_thinking true (scout a1 profile = serve/a1_35b.py SAMPLING)",
+    "retain_reasoning": true,
+    "max_turns": 40,
+    "max_seconds": 3600,
+    "nudge": "run.TEACHER_NUDGE",
+    "weights": "/weights/Agents-A1-FP8 (FP8), vLLM 0.32.0, qwen3_coder tool parser, qwen3 reasoning parser, max_model_len 65536, 1x H100 per arm-container"
+  },
+  "base": {
+    "n_rollouts": 100,
+    "n_tasks": 50,
+    "recall_reported": {
+      "mean": 0.2456,
+      "ci95": [
+        0.1769,
+        0.3179
+      ]
+    },
+    "all_gold_reported": {
+      "mean": 0.02,
+      "ci95": [
+        0.0,
+        0.06
+      ]
+    },
+    "recall_touched": {
+      "mean": 0.4633,
+      "ci95": [
+        0.3684,
+        0.5585
+      ]
+    },
+    "all_gold_touched": {
+      "mean": 0.15,
+      "ci95": [
+        0.06,
+        0.25
+      ]
+    },
+    "reported_before_cap": {
+      "mean": 0.21,
+      "ci95": [
+        0.12,
+        0.3
+      ]
+    },
+    "turns": {
+      "mean": 37.36,
+      "ci95": [
+        35.81,
+        38.7
+      ],
+      "p50": 40.0
+    },
+    "tokens": {
+      "mean": 821495.55,
+      "ci95": [
+        739775.97,
+        902461.74
+      ],
+      "p50": 845448.0
+    },
+    "calls_per_turn": {
+      "mean": 1.1445,
+      "ci95": [
+        1.0777,
+        1.2278
+      ]
+    },
+    "turn_latency_s": {
+      "mean": 5.6277,
+      "ci95": [
+        5.2491,
+        6.0388
+      ]
+    },
+    "wall_s": {
+      "mean": 202.8721,
+      "ci95": [
+        191.5096,
+        214.7023
+      ],
+      "p50": 189.9
+    },
+    "stop_reasons": {
+      "report": 21,
+      "turns": 79
+    },
+    "semantic_calls_mean": null
+  },
+  "validation": {
+    "grep": {
+      "rows": 100,
+      "ok_rows": 100,
+      "errors": 0,
+      "error_messages": [],
+      "tasks": 50,
+      "tasks_match_dev_file": true,
+      "pairs_unique": true,
+      "seeds": [
+        0,
+        1
+      ],
+      "models": [
+        "a1"
+      ],
+      "retain_reasoning": [
+        "True"
+      ],
+      "sampling": [
+        "T0.85 top_p0.95 top_k20 pp1.1 thinkTrue"
+      ],
+      "max_turns": [
+        40
+      ],
+      "max_seconds": [
+        3600
+      ],
+      "weights": [
+        "/weights/Agents-A1-FP8"
+      ],
+      "max_model_len": [
+        65536
+      ],
+      "turns_min_p50_max": [
+        8,
+        38,
+        40
+      ],
+      "wall_s_min_p50_max": [
+        101.38,
+        199.8,
+        437.6
+      ],
+      "n429": 0,
+      "n_retries": 0,
+      "with_reasoning_rate": 1.0,
+      "healthy": true
+    },
+    "sem": {
+      "rows": 100,
+      "ok_rows": 100,
+      "errors": 0,
+      "error_messages": [],
+      "tasks": 50,
+      "tasks_match_dev_file": true,
+      "pairs_unique": true,
+      "seeds": [
+        0,
+        1
+      ],
+      "models": [
+        "a1"
+      ],
+      "retain_reasoning": [
+        "True"
+      ],
+      "sampling": [
+        "T0.85 top_p0.95 top_k20 pp1.1 thinkTrue"
+      ],
+      "max_turns": [
+        40
+      ],
+      "max_seconds": [
+        3600
+      ],
+      "weights": [
+        "/weights/Agents-A1-FP8"
+      ],
+      "max_model_len": [
+        65536
+      ],
+      "turns_min_p50_max": [
+        7,
+        39,
+        40
+      ],
+      "wall_s_min_p50_max": [
+        45.89,
+        202.02,
+        389.18
+      ],
+      "n429": 0,
+      "n_retries": 0,
+      "with_reasoning_rate": 1.0,
+      "healthy": true
+    }
+  },
+  "parse_health": {
+    "grep": {
+      "rollouts": 100,
+      "assistant_turns": 3323,
+      "tool_calls": 3695,
+      "no_tool_call_turns": 6,
+      "bad_json_args": 0,
+      "unknown_tool": 9,
+      "invalid_args": 21,
+      "rollouts_with_malformed": 22,
+      "rollouts_stopped_3_malformed": 0,
+      "rollouts_with_no_tool_call_turn": 5,
+      "leaked_tool_markup_in_content": 0,
+      "empty_turns": 0,
+      "malformed_calls_total": 30,
+      "malformed_rate_per_call": 0.0081,
+      "no_tool_call_rate_per_turn": 0.0018
+    },
+    "sem": {
+      "rollouts": 100,
+      "assistant_turns": 3364,
+      "tool_calls": 3554,
+      "no_tool_call_turns": 2,
+      "bad_json_args": 0,
+      "unknown_tool": 1,
+      "invalid_args": 13,
+      "rollouts_with_malformed": 11,
+      "rollouts_stopped_3_malformed": 1,
+      "rollouts_with_no_tool_call_turn": 2,
+      "leaked_tool_markup_in_content": 0,
+      "empty_turns": 0,
+      "malformed_calls_total": 14,
+      "malformed_rate_per_call": 0.0039,
+      "no_tool_call_rate_per_turn": 0.0006
+    },
+    "v3_grep": {
+      "rollouts": 100,
+      "assistant_turns": 918,
+      "tool_calls": 2852,
+      "no_tool_call_turns": 1,
+      "bad_json_args": 0,
+      "unknown_tool": 0,
+      "invalid_args": 3,
+      "rollouts_with_malformed": 3,
+      "rollouts_stopped_3_malformed": 0,
+      "rollouts_with_no_tool_call_turn": 1,
+      "leaked_tool_markup_in_content": 0,
+      "empty_turns": 0,
+      "malformed_calls_total": 3,
+      "malformed_rate_per_call": 0.0011,
+      "no_tool_call_rate_per_turn": 0.0011
+    },
+    "v3_sem": {
+      "rollouts": 100,
+      "assistant_turns": 919,
+      "tool_calls": 2821,
+      "no_tool_call_turns": 0,
+      "bad_json_args": 0,
+      "unknown_tool": 0,
+      "invalid_args": 3,
+      "rollouts_with_malformed": 3,
+      "rollouts_stopped_3_malformed": 0,
+      "rollouts_with_no_tool_call_turn": 0,
+      "leaked_tool_markup_in_content": 0,
+      "empty_turns": 0,
+      "malformed_calls_total": 3,
+      "malformed_rate_per_call": 0.0011,
+      "no_tool_call_rate_per_turn": 0.0
+    },
+    "v4_grep": {
+      "rollouts": 100,
+      "assistant_turns": 998,
+      "tool_calls": 2900,
+      "no_tool_call_turns": 1,
+      "bad_json_args": 0,
+      "unknown_tool": 0,
+      "invalid_args": 2,
+      "rollouts_with_malformed": 2,
+      "rollouts_stopped_3_malformed": 0,
+      "rollouts_with_no_tool_call_turn": 1,
+      "leaked_tool_markup_in_content": 0,
+      "empty_turns": 0,
+      "malformed_calls_total": 2,
+      "malformed_rate_per_call": 0.0007,
+      "no_tool_call_rate_per_turn": 0.001
+    },
+    "v4_sem": {
+      "rollouts": 100,
+      "assistant_turns": 956,
+      "tool_calls": 2867,
+      "no_tool_call_turns": 0,
+      "bad_json_args": 0,
+      "unknown_tool": 0,
+      "invalid_args": 2,
+      "rollouts_with_malformed": 2,
+      "rollouts_stopped_3_malformed": 0,
+      "rollouts_with_no_tool_call_turn": 0,
+      "leaked_tool_markup_in_content": 0,
+      "empty_turns": 0,
+      "malformed_calls_total": 2,
+      "malformed_rate_per_call": 0.0007,
+      "no_tool_call_rate_per_turn": 0.0
+    }
+  },
+  "extra": {
+    "grep": {
+      "semantic_offered": 0,
+      "rollouts_calling_semantic_search": 8,
+      "semantic_search_calls_per_rollout": 0.09,
+      "reasoning_tokens_per_rollout": 4416,
+      "out_tokens_per_rollout": 6510
+    },
+    "sem": {
+      "semantic_offered": 100,
+      "rollouts_calling_semantic_search": 87,
+      "semantic_search_calls_per_rollout": 4.26,
+      "reasoning_tokens_per_rollout": 3820,
+      "out_tokens_per_rollout": 5887
+    },
+    "v3_grep": {
+      "semantic_offered": 0,
+      "rollouts_calling_semantic_search": 0,
+      "semantic_search_calls_per_rollout": 0.0,
+      "reasoning_tokens_per_rollout": 0,
+      "out_tokens_per_rollout": 6499
+    },
+    "v3_sem": {
+      "semantic_offered": 100,
+      "rollouts_calling_semantic_search": 77,
+      "semantic_search_calls_per_rollout": 1.06,
+      "reasoning_tokens_per_rollout": 0,
+      "out_tokens_per_rollout": 6614
+    },
+    "v4_grep": {
+      "semantic_offered": 0,
+      "rollouts_calling_semantic_search": 0,
+      "semantic_search_calls_per_rollout": 0.0,
+      "reasoning_tokens_per_rollout": 0,
+      "out_tokens_per_rollout": 6496
+    },
+    "v4_sem": {
+      "semantic_offered": 100,
+      "rollouts_calling_semantic_search": 75,
+      "semantic_search_calls_per_rollout": 1.07,
+      "reasoning_tokens_per_rollout": 0,
+      "out_tokens_per_rollout": 6875
+    }
+  },
+  "a1": {
+    "grep": {
+      "n_rollouts": 100,
+      "n_tasks": 50,
+      "recall_reported": {
+        "mean": 0.31,
+        "ci95": [
+          0.2382,
+          0.3863
+        ]
+      },
+      "all_gold_reported": {
+        "mean": 0.06,
+        "ci95": [
+          0.01,
+          0.13
+        ]
+      },
+      "recall_touched": {
+        "mean": 0.4485,
+        "ci95": [
+          0.3661,
+          0.5338
+        ]
+      },
+      "all_gold_touched": {
+        "mean": 0.11,
+        "ci95": [
+          0.04,
+          0.19
+        ]
+      },
+      "reported_before_cap": {
+        "mean": 0.54,
+        "ci95": [
+          0.44,
+          0.64
+        ]
+      },
+      "turns": {
+        "mean": 33.23,
+        "ci95": [
+          31.14,
+          35.06
+        ],
+        "p50": 38.0
+      },
+      "tokens": {
+        "mean": 784815.28,
+        "ci95": [
+          700130.74,
+          868518.84
+        ],
+        "p50": 757936.0
+      },
+      "calls_per_turn": {
+        "mean": 1.1842,
+        "ci95": [
+          1.1003,
+          1.2842
+        ]
+      },
+      "turn_latency_s": {
+        "mean": 6.8066,
+        "ci95": [
+          6.11,
+          7.6269
+        ]
+      },
+      "wall_s": {
+        "mean": 206.723,
+        "ci95": [
+          193.7959,
+          221.0533
+        ],
+        "p50": 198.0
+      },
+      "stop_reasons": {
+        "report": 54,
+        "turns": 43,
+        "context": 3
+      },
+      "semantic_calls_mean": null
+    },
+    "sem": {
+      "n_rollouts": 100,
+      "n_tasks": 50,
+      "recall_reported": {
+        "mean": 0.3315,
+        "ci95": [
+          0.259,
+          0.4073
+        ]
+      },
+      "all_gold_reported": {
+        "mean": 0.05,
+        "ci95": [
+          0.01,
+          0.11
+        ]
+      },
+      "recall_touched": {
+        "mean": 0.5035,
+        "ci95": [
+          0.4182,
+          0.5883
+        ]
+      },
+      "all_gold_touched": {
+        "mean": 0.13,
+        "ci95": [
+          0.05,
+          0.22
+        ]
+      },
+      "reported_before_cap": {
+        "mean": 0.51,
+        "ci95": [
+          0.39,
+          0.63
+        ]
+      },
+      "turns": {
+        "mean": 33.64,
+        "ci95": [
+          31.37,
+          35.68
+        ],
+        "p50": 39.0
+      },
+      "tokens": {
+        "mean": 826245.75,
+        "ci95": [
+          741725.84,
+          910821.09
+        ],
+        "p50": 829866.5
+      },
+      "calls_per_turn": {
+        "mean": 1.0986,
+        "ci95": [
+          1.0334,
+          1.1815
+        ]
+      },
+      "turn_latency_s": {
+        "mean": 6.4729,
+        "ci95": [
+          5.9472,
+          7.0363
+        ]
+      },
+      "wall_s": {
+        "mean": 209.4789,
+        "ci95": [
+          195.0998,
+          223.863
+        ],
+        "p50": 201.7
+      },
+      "stop_reasons": {
+        "report": 51,
+        "turns": 46,
+        "context": 3
+      },
+      "semantic_calls_mean": null
+    }
+  },
+  "refs": {
+    "v3_grep": {
+      "n_rollouts": 100,
+      "n_tasks": 50,
+      "recall_reported": {
+        "mean": 0.4076,
+        "ci95": [
+          0.327,
+          0.4905
+        ]
+      },
+      "all_gold_reported": {
+        "mean": 0.07,
+        "ci95": [
+          0.02,
+          0.14
+        ]
+      },
+      "recall_touched": {
+        "mean": 0.537,
+        "ci95": [
+          0.4491,
+          0.624
+        ]
+      },
+      "all_gold_touched": {
+        "mean": 0.16,
+        "ci95": [
+          0.07,
+          0.27
+        ]
+      },
+      "reported_before_cap": {
+        "mean": 0.96,
+        "ci95": [
+          0.91,
+          1.0
+        ]
+      },
+      "turns": {
+        "mean": 9.18,
+        "ci95": [
+          8.7,
+          9.68
+        ],
+        "p50": 9.0
+      },
+      "tokens": {
+        "mean": 269202.2,
+        "ci95": [
+          240771.71,
+          299094.67
+        ],
+        "p50": 258785.0
+      },
+      "calls_per_turn": {
+        "mean": 3.1299,
+        "ci95": [
+          3.0215,
+          3.2448
+        ]
+      },
+      "turn_latency_s": {
+        "mean": 30.4135,
+        "ci95": [
+          28.2773,
+          32.7434
+        ]
+      },
+      "wall_s": {
+        "mean": 280.0921,
+        "ci95": [
+          255.6928,
+          308.1085
+        ],
+        "p50": 256.5
+      },
+      "stop_reasons": {
+        "report": 96,
+        "context": 4
+      },
+      "semantic_calls_mean": null
+    },
+    "v3_sem": {
+      "n_rollouts": 100,
+      "n_tasks": 50,
+      "recall_reported": {
+        "mean": 0.3976,
+        "ci95": [
+          0.3193,
+          0.4791
+        ]
+      },
+      "all_gold_reported": {
+        "mean": 0.07,
+        "ci95": [
+          0.01,
+          0.14
+        ]
+      },
+      "recall_touched": {
+        "mean": 0.5244,
+        "ci95": [
+          0.4373,
+          0.6106
+        ]
+      },
+      "all_gold_touched": {
+        "mean": 0.16,
+        "ci95": [
+          0.07,
+          0.26
+        ]
+      },
+      "reported_before_cap": {
+        "mean": 0.98,
+        "ci95": [
+          0.94,
+          1.0
+        ]
+      },
+      "turns": {
+        "mean": 9.19,
+        "ci95": [
+          8.54,
+          9.94
+        ],
+        "p50": 8.0
+      },
+      "tokens": {
+        "mean": 279705.88,
+        "ci95": [
+          238662.29,
+          325894.21
+        ],
+        "p50": 230925.5
+      },
+      "calls_per_turn": {
+        "mean": 3.119,
+        "ci95": [
+          3.021,
+          3.212
+        ]
+      },
+      "turn_latency_s": {
+        "mean": 34.3391,
+        "ci95": [
+          32.3655,
+          36.2473
+        ]
+      },
+      "wall_s": {
+        "mean": 317.4295,
+        "ci95": [
+          286.2172,
+          352.5234
+        ],
+        "p50": 295.2
+      },
+      "stop_reasons": {
+        "context": 2,
+        "report": 98
+      },
+      "semantic_calls_mean": null
+    },
+    "v4_grep": {
+      "n_rollouts": 100,
+      "n_tasks": 50,
+      "recall_reported": {
+        "mean": 0.4207,
+        "ci95": [
+          0.3347,
+          0.5078
+        ]
+      },
+      "all_gold_reported": {
+        "mean": 0.09,
+        "ci95": [
+          0.03,
+          0.17
+        ]
+      },
+      "recall_touched": {
+        "mean": 0.5311,
+        "ci95": [
+          0.4367,
+          0.6229
+        ]
+      },
+      "all_gold_touched": {
+        "mean": 0.17,
+        "ci95": [
+          0.07,
+          0.28
+        ]
+      },
+      "reported_before_cap": {
+        "mean": 0.98,
+        "ci95": [
+          0.94,
+          1.0
+        ]
+      },
+      "turns": {
+        "mean": 9.98,
+        "ci95": [
+          9.3,
+          10.72
+        ],
+        "p50": 10.0
+      },
+      "tokens": {
+        "mean": 293113.88,
+        "ci95": [
+          257172.73,
+          332096.75
+        ],
+        "p50": 278717.0
+      },
+      "calls_per_turn": {
+        "mean": 2.98,
+        "ci95": [
+          2.8742,
+          3.0859
+        ]
+      },
+      "turn_latency_s": {
+        "mean": 27.8733,
+        "ci95": [
+          26.2509,
+          29.5622
+        ]
+      },
+      "wall_s": {
+        "mean": 273.665,
+        "ci95": [
+          251.415,
+          298.1918
+        ],
+        "p50": 258.9
+      },
+      "stop_reasons": {
+        "report": 98,
+        "context": 2
+      },
+      "semantic_calls_mean": null
+    },
+    "v4_sem": {
+      "n_rollouts": 100,
+      "n_tasks": 50,
+      "recall_reported": {
+        "mean": 0.3927,
+        "ci95": [
+          0.3089,
+          0.4772
+        ]
+      },
+      "all_gold_reported": {
+        "mean": 0.07,
+        "ci95": [
+          0.01,
+          0.14
+        ]
+      },
+      "recall_touched": {
+        "mean": 0.5191,
+        "ci95": [
+          0.4305,
+          0.606
+        ]
+      },
+      "all_gold_touched": {
+        "mean": 0.15,
+        "ci95": [
+          0.06,
+          0.25
+        ]
+      },
+      "reported_before_cap": {
+        "mean": 0.98,
+        "ci95": [
+          0.94,
+          1.0
+        ]
+      },
+      "turns": {
+        "mean": 9.56,
+        "ci95": [
+          8.96,
+          10.21
+        ],
+        "p50": 9.0
+      },
+      "tokens": {
+        "mean": 283913.39,
+        "ci95": [
+          246681.72,
+          324177.72
+        ],
+        "p50": 240932.0
+      },
+      "calls_per_turn": {
+        "mean": 3.0263,
+        "ci95": [
+          2.923,
+          3.1304
+        ]
+      },
+      "turn_latency_s": {
+        "mean": 30.7423,
+        "ci95": [
+          28.4609,
+          33.1814
+        ]
+      },
+      "wall_s": {
+        "mean": 296.9102,
+        "ci95": [
+          266.3127,
+          330.9128
+        ],
+        "p50": 279.2
+      },
+      "stop_reasons": {
+        "report": 98,
+        "context": 2
+      },
+      "semantic_calls_mean": null
+    }
+  },
+  "minus_a1": {
+    "v3_grep": {
+      "recall_reported": {
+        "delta": 0.0976,
+        "ci95": [
+          0.0554,
+          0.1426
+        ],
+        "n_tasks": 50
+      },
+      "all_gold_reported": {
+        "delta": 0.01,
+        "ci95": [
+          -0.02,
+          0.04
+        ],
+        "n_tasks": 50
+      },
+      "recall_touched": {
+        "delta": 0.0885,
+        "ci95": [
+          0.0524,
+          0.1276
+        ],
+        "n_tasks": 50
+      },
+      "all_gold_touched": {
+        "delta": 0.05,
+        "ci95": [
+          -0.01,
+          0.12
+        ],
+        "n_tasks": 50
+      },
+      "reported_before_cap": {
+        "delta": 0.42,
+        "ci95": [
+          0.31,
+          0.53
+        ],
+        "n_tasks": 50
+      },
+      "turns": {
+        "delta": -24.05,
+        "ci95": [
+          -25.9,
+          -22.07
+        ],
+        "n_tasks": 50
+      },
+      "tokens": {
+        "delta": -515613.08,
+        "ci95": [
+          -591168.74,
+          -439034.09
+        ],
+        "n_tasks": 50
+      },
+      "calls_per_turn": {
+        "delta": 1.9456,
+        "ci95": [
+          1.8303,
+          2.0573
+        ],
+        "n_tasks": 50
+      },
+      "turn_latency_s": {
+        "delta": 23.6069,
+        "ci95": [
+          21.6157,
+          25.8315
+        ],
+        "n_tasks": 50
+      },
+      "wall_s": {
+        "delta": 73.3691,
+        "ci95": [
+          44.1394,
+          103.7475
+        ],
+        "n_tasks": 50
+      }
+    },
+    "v4_grep": {
+      "recall_reported": {
+        "delta": 0.1108,
+        "ci95": [
+          0.065,
+          0.1594
+        ],
+        "n_tasks": 50
+      },
+      "all_gold_reported": {
+        "delta": 0.03,
+        "ci95": [
+          -0.01,
+          0.09
+        ],
+        "n_tasks": 50
+      },
+      "recall_touched": {
+        "delta": 0.0826,
+        "ci95": [
+          0.0425,
+          0.1243
+        ],
+        "n_tasks": 50
+      },
+      "all_gold_touched": {
+        "delta": 0.06,
+        "ci95": [
+          0.0,
+          0.13
+        ],
+        "n_tasks": 50
+      },
+      "reported_before_cap": {
+        "delta": 0.44,
+        "ci95": [
+          0.33,
+          0.55
+        ],
+        "n_tasks": 50
+      },
+      "turns": {
+        "delta": -23.25,
+        "ci95": [
+          -25.13,
+          -21.22
+        ],
+        "n_tasks": 50
+      },
+      "tokens": {
+        "delta": -491701.4,
+        "ci95": [
+          -568621.59,
+          -415488.25
+        ],
+        "n_tasks": 50
+      },
+      "calls_per_turn": {
+        "delta": 1.7957,
+        "ci95": [
+          1.6649,
+          1.9251
+        ],
+        "n_tasks": 50
+      },
+      "turn_latency_s": {
+        "delta": 21.0666,
+        "ci95": [
+          19.4118,
+          22.7836
+        ],
+        "n_tasks": 50
+      },
+      "wall_s": {
+        "delta": 66.942,
+        "ci95": [
+          42.2205,
+          91.9692
+        ],
+        "n_tasks": 50
+      }
+    },
+    "v3_sem": {
+      "recall_reported": {
+        "delta": 0.0661,
+        "ci95": [
+          0.0182,
+          0.119
+        ],
+        "n_tasks": 50
+      },
+      "all_gold_reported": {
+        "delta": 0.02,
+        "ci95": [
+          -0.02,
+          0.06
+        ],
+        "n_tasks": 50
+      },
+      "recall_touched": {
+        "delta": 0.0209,
+        "ci95": [
+          -0.0237,
+          0.0703
+        ],
+        "n_tasks": 50
+      },
+      "all_gold_touched": {
+        "delta": 0.03,
+        "ci95": [
+          -0.04,
+          0.11
+        ],
+        "n_tasks": 50
+      },
+      "reported_before_cap": {
+        "delta": 0.47,
+        "ci95": [
+          0.35,
+          0.59
+        ],
+        "n_tasks": 50
+      },
+      "turns": {
+        "delta": -24.45,
+        "ci95": [
+          -26.35,
+          -22.35
+        ],
+        "n_tasks": 50
+      },
+      "tokens": {
+        "delta": -546539.87,
+        "ci95": [
+          -625959.28,
+          -466311.31
+        ],
+        "n_tasks": 50
+      },
+      "calls_per_turn": {
+        "delta": 2.0204,
+        "ci95": [
+          1.9088,
+          2.1298
+        ],
+        "n_tasks": 50
+      },
+      "turn_latency_s": {
+        "delta": 27.8662,
+        "ci95": [
+          25.9678,
+          29.7676
+        ],
+        "n_tasks": 50
+      },
+      "wall_s": {
+        "delta": 107.9506,
+        "ci95": [
+          75.4796,
+          142.3845
+        ],
+        "n_tasks": 50
+      }
+    },
+    "v4_sem": {
+      "recall_reported": {
+        "delta": 0.0612,
+        "ci95": [
+          0.009,
+          0.1193
+        ],
+        "n_tasks": 50
+      },
+      "all_gold_reported": {
+        "delta": 0.02,
+        "ci95": [
+          -0.03,
+          0.07
+        ],
+        "n_tasks": 50
+      },
+      "recall_touched": {
+        "delta": 0.0157,
+        "ci95": [
+          -0.0448,
+          0.0764
+        ],
+        "n_tasks": 50
+      },
+      "all_gold_touched": {
+        "delta": 0.02,
+        "ci95": [
+          -0.06,
+          0.1
+        ],
+        "n_tasks": 50
+      },
+      "reported_before_cap": {
+        "delta": 0.47,
+        "ci95": [
+          0.35,
+          0.59
+        ],
+        "n_tasks": 50
+      },
+      "turns": {
+        "delta": -24.08,
+        "ci95": [
+          -26.06,
+          -21.93
+        ],
+        "n_tasks": 50
+      },
+      "tokens": {
+        "delta": -542332.36,
+        "ci95": [
+          -620000.54,
+          -464240.69
+        ],
+        "n_tasks": 50
+      },
+      "calls_per_turn": {
+        "delta": 1.9277,
+        "ci95": [
+          1.7972,
+          2.0544
+        ],
+        "n_tasks": 50
+      },
+      "turn_latency_s": {
+        "delta": 24.2694,
+        "ci95": [
+          21.9811,
+          26.6433
+        ],
+        "n_tasks": 50
+      },
+      "wall_s": {
+        "delta": 87.4313,
+        "ci95": [
+          55.8112,
+          120.5313
+        ],
+        "n_tasks": 50
+      }
+    },
+    "base_grep_MIXED_protocol_base_is_retain_off": {
+      "recall_reported": {
+        "delta": -0.0644,
+        "ci95": [
+          -0.114,
+          -0.0148
+        ],
+        "n_tasks": 50
+      },
+      "all_gold_reported": {
+        "delta": -0.04,
+        "ci95": [
+          -0.09,
+          0.0
+        ],
+        "n_tasks": 50
+      },
+      "recall_touched": {
+        "delta": 0.0148,
+        "ci95": [
+          -0.0348,
+          0.0656
+        ],
+        "n_tasks": 50
+      },
+      "all_gold_touched": {
+        "delta": 0.04,
+        "ci95": [
+          -0.04,
+          0.12
+        ],
+        "n_tasks": 50
+      },
+      "reported_before_cap": {
+        "delta": -0.33,
+        "ci95": [
+          -0.44,
+          -0.22
+        ],
+        "n_tasks": 50
+      },
+      "turns": {
+        "delta": 4.13,
+        "ci95": [
+          2.2,
+          6.12
+        ],
+        "n_tasks": 50
+      },
+      "tokens": {
+        "delta": 36680.27,
+        "ci95": [
+          -58617.29,
+          132379.02
+        ],
+        "n_tasks": 50
+      },
+      "calls_per_turn": {
+        "delta": -0.0397,
+        "ci95": [
+          -0.1383,
+          0.0558
+        ],
+        "n_tasks": 50
+      },
+      "turn_latency_s": {
+        "delta": -1.1789,
+        "ci95": [
+          -2.0656,
+          -0.408
+        ],
+        "n_tasks": 50
+      },
+      "wall_s": {
+        "delta": -3.8509,
+        "ci95": [
+          -22.9367,
+          14.3833
+        ],
+        "n_tasks": 50
+      }
+    }
+  },
+  "a1_minus_base": {
+    "grep": {
+      "recall_reported": {
+        "delta": 0.0644,
+        "ci95": [
+          0.0148,
+          0.114
+        ],
+        "n_tasks": 50
+      },
+      "all_gold_reported": {
+        "delta": 0.04,
+        "ci95": [
+          0.0,
+          0.09
+        ],
+        "n_tasks": 50
+      },
+      "recall_touched": {
+        "delta": -0.0148,
+        "ci95": [
+          -0.0656,
+          0.0348
+        ],
+        "n_tasks": 50
+      },
+      "all_gold_touched": {
+        "delta": -0.04,
+        "ci95": [
+          -0.12,
+          0.04
+        ],
+        "n_tasks": 50
+      },
+      "reported_before_cap": {
+        "delta": 0.33,
+        "ci95": [
+          0.22,
+          0.44
+        ],
+        "n_tasks": 50
+      },
+      "turns": {
+        "delta": -4.13,
+        "ci95": [
+          -6.12,
+          -2.2
+        ],
+        "n_tasks": 50
+      },
+      "tokens": {
+        "delta": -36680.27,
+        "ci95": [
+          -132379.02,
+          58617.29
+        ],
+        "n_tasks": 50
+      },
+      "calls_per_turn": {
+        "delta": 0.0397,
+        "ci95": [
+          -0.0558,
+          0.1383
+        ],
+        "n_tasks": 50
+      },
+      "turn_latency_s": {
+        "delta": 1.1789,
+        "ci95": [
+          0.408,
+          2.0656
+        ],
+        "n_tasks": 50
+      },
+      "wall_s": {
+        "delta": 3.8509,
+        "ci95": [
+          -14.3833,
+          22.9367
+        ],
+        "n_tasks": 50
+      }
+    }
+  },
+  "reasoning_render_evidence": {
+    "turn_pairs_short_results": 2019,
+    "median_prompt_growth_over_output_tokens": 1.2,
+    "turn_pairs_output_ge_300_tokens": 188,
+    "median_growth_over_output_ge_300": 1.05,
+    "share_growth_ge_0.8x_output_ge_300": 0.99,
+    "reading": "ratio near 1 means the previous turn's output, reasoning included, is re-rendered into the next prompt (reasoning IS retained by the template and by vLLM's reasoning_content -> reasoning mapping); ratio near 0 would mean it is dropped"
+  },
+  "prd15_a1_grep_vs_base": {
+    "reported_recall_delta (primary)": {
+      "delta": 0.0644,
+      "ci95": [
+        0.0148,
+        0.114
+      ],
+      "n_tasks": 50,
+      "pass": true,
+      "target_ge_0.10": false
+    },
+    "reported_before_cap_ge_0.80": {
+      "value": 0.54,
+      "base": 0.21,
+      "pass": false
+    },
+    "turns_p50_le_20": {
+      "value": 38.0,
+      "base": 40.0,
+      "pass": false
+    },
+    "touched_recall_guardrail": {
+      "delta": -0.0148,
+      "ci95": [
+        -0.0656,
+        0.0348
+      ],
+      "n_tasks": 50,
+      "pass": true
+    },
+    "tokens_down_ge_30pct": {
+      "down": 0.0447,
+      "pass": false
+    }
+  },
+  "prd15_passes": 2,
+  "v3_grep_prd15_vs_base_ref": {
+    "reported_recall_delta (primary)": {
+      "delta": 0.162,
+      "ci95": [
+        0.1153,
+        0.2133
+      ],
+      "n_tasks": 50,
+      "pass": true,
+      "target_ge_0.10": true
+    },
+    "reported_before_cap_ge_0.80": {
+      "value": 0.96,
+      "base": 0.21,
+      "pass": true
+    },
+    "turns_p50_le_20": {
+      "value": 9.0,
+      "base": 40.0,
+      "pass": true
+    },
+    "touched_recall_guardrail": {
+      "delta": 0.0738,
+      "ci95": [
+        0.0364,
+        0.1113
+      ],
+      "n_tasks": 50,
+      "pass": true
+    },
+    "tokens_down_ge_30pct": {
+      "down": 0.6723,
+      "pass": true
+    }
+  },
+  "v4_grep_prd15_vs_base_ref": {
+    "reported_recall_delta (primary)": {
+      "delta": 0.1751,
+      "ci95": [
+        0.1205,
+        0.2344
+      ],
+      "n_tasks": 50,
+      "pass": true,
+      "target_ge_0.10": true
+    },
+    "reported_before_cap_ge_0.80": {
+      "value": 0.98,
+      "base": 0.21,
+      "pass": true
+    },
+    "turns_p50_le_20": {
+      "value": 10.0,
+      "base": 40.0,
+      "pass": true
+    },
+    "touched_recall_guardrail": {
+      "delta": 0.0679,
+      "ci95": [
+        0.025,
+        0.1125
+      ],
+      "n_tasks": 50,
+      "pass": true
+    },
+    "tokens_down_ge_30pct": {
+      "down": 0.6432,
+      "pass": true
+    }
+  },
+  "a1_sem_minus_grep": {
+    "recall_reported": {
+      "delta": 0.0216,
+      "ci95": [
+        -0.0226,
+        0.0635
+      ],
+      "n_tasks": 50
+    },
+    "all_gold_reported": {
+      "delta": -0.01,
+      "ci95": [
+        -0.05,
+        0.02
+      ],
+      "n_tasks": 50
+    },
+    "recall_touched": {
+      "delta": 0.055,
+      "ci95": [
+        0.0024,
+        0.1048
+      ],
+      "n_tasks": 50
+    },
+    "all_gold_touched": {
+      "delta": 0.02,
+      "ci95": [
+        -0.03,
+        0.08
+      ],
+      "n_tasks": 50
+    },
+    "reported_before_cap": {
+      "delta": -0.03,
+      "ci95": [
+        -0.15,
+        0.08
+      ],
+      "n_tasks": 50
+    },
+    "turns": {
+      "delta": 0.41,
+      "ci95": [
+        -1.39,
+        2.16
+      ],
+      "n_tasks": 50
+    },
+    "tokens": {
+      "delta": 41430.47,
+      "ci95": [
+        -27373.79,
+        113223.42
+      ],
+      "n_tasks": 50
+    },
+    "calls_per_turn": {
+      "delta": -0.0856,
+      "ci95": [
+        -0.1941,
+        0.0289
+      ],
+      "n_tasks": 50
+    },
+    "turn_latency_s": {
+      "delta": -0.3337,
+      "ci95": [
+        -1.0469,
+        0.315
+      ],
+      "n_tasks": 50
+    },
+    "wall_s": {
+      "delta": 2.7559,
+      "ci95": [
+        -11.9812,
+        17.6212
+      ],
+      "n_tasks": 50
+    }
+  }
+}

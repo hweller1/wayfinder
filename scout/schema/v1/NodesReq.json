@@ -1,0 +1,31 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "branch_id": {
+      "pattern": "^[0-9a-f]{16,32}$",
+      "title": "Branch Id",
+      "type": "string"
+    },
+    "ids": {
+      "items": {
+        "pattern": "^[0-9a-f]{16,32}$",
+        "type": "string"
+      },
+      "maxItems": 500,
+      "title": "Ids",
+      "type": "array"
+    },
+    "repo_id": {
+      "pattern": "^[0-9a-f]{16,32}$",
+      "title": "Repo Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "repo_id",
+    "branch_id",
+    "ids"
+  ],
+  "title": "NodesReq",
+  "type": "object"
+}

@@ -1,0 +1,134 @@
+{
+  "$defs": {
+    "NodeUpsert": {
+      "additionalProperties": false,
+      "properties": {
+        "children_enc": {
+          "title": "Children Enc",
+          "type": "string"
+        },
+        "id": {
+          "pattern": "^[0-9a-f]{16,32}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "node_hash": {
+          "title": "Node Hash",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "node_hash",
+        "children_enc"
+      ],
+      "title": "NodeUpsert",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "branch_id": {
+      "pattern": "^[0-9a-f]{16,32}$",
+      "title": "Branch Id",
+      "type": "string"
+    },
+    "commit": {
+      "anyOf": [
+        {
+          "maxLength": 64,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Commit"
+    },
+    "expected_chunks": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expected Chunks"
+    },
+    "expected_root": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expected Root"
+    },
+    "minhash_b64": {
+      "anyOf": [
+        {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minhash B64"
+    },
+    "new_root": {
+      "title": "New Root",
+      "type": "string"
+    },
+    "node_deletes": {
+      "items": {
+        "pattern": "^[0-9a-f]{16,32}$",
+        "type": "string"
+      },
+      "maxItems": 500,
+      "title": "Node Deletes",
+      "type": "array"
+    },
+    "node_upserts": {
+      "items": {
+        "$ref": "#/$defs/NodeUpsert"
+      },
+      "maxItems": 500,
+      "title": "Node Upserts",
+      "type": "array"
+    },
+    "repo_id": {
+      "pattern": "^[0-9a-f]{16,32}$",
+      "title": "Repo Id",
+      "type": "string"
+    },
+    "staged_pages": {
+      "default": 0,
+      "maximum": 400,
+      "minimum": 0,
+      "title": "Staged Pages",
+      "type": "integer"
+    },
+    "written_chunks": {
+      "minimum": 0,
+      "title": "Written Chunks",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "repo_id",
+    "branch_id",
+    "new_root",
+    "written_chunks"
+  ],
+  "title": "CommitReq",
+  "type": "object"
+}

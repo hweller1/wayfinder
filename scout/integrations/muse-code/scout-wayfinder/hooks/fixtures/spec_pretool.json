@@ -1,0 +1,1 @@
+{"event": "PreToolUse", "matcher_input": "search", "cwd": "/", "stdin": {"hook_event_name": "PreToolUse", "tool_name": "search", "tool_input": {"pattern": "MethodNotAllowed"}, "session_id": "fixture-session", "cwd": "/"}}

@@ -1,0 +1,80 @@
+{
+  "$defs": {
+    "ErrorCode": {
+      "enum": [
+        "INVALID_ARGUMENT",
+        "UNAUTHENTICATED",
+        "LOGIN_REQUIRED",
+        "PERMISSION_DENIED",
+        "NOT_FOUND",
+        "NOT_A_REPO",
+        "PATH_REFUSED",
+        "RATE_LIMITED",
+        "CONFLICT",
+        "UPSTREAM_UNAVAILABLE",
+        "UPSTREAM_TIMEOUT",
+        "UNSUPPORTED_SCHEMA",
+        "INTERNAL"
+      ],
+      "title": "ErrorCode",
+      "type": "string"
+    },
+    "ErrorInfo": {
+      "description": "The `error` object of the wire body.",
+      "properties": {
+        "code": {
+          "$ref": "#/$defs/ErrorCode"
+        },
+        "details": {
+          "additionalProperties": true,
+          "title": "Details",
+          "type": "object"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "request_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Request Id"
+        },
+        "retryable": {
+          "title": "Retryable",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "retryable"
+      ],
+      "title": "ErrorInfo",
+      "type": "object"
+    }
+  },
+  "description": "Wire body (HTTP, CLI stdout on failure): `{\"schema_version\",\"error\":{...}}`.",
+  "properties": {
+    "error": {
+      "$ref": "#/$defs/ErrorInfo"
+    },
+    "schema_version": {
+      "default": "1.0",
+      "pattern": "^1\\.\\d+$",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "error"
+  ],
+  "title": "ErrorBody",
+  "type": "object"
+}

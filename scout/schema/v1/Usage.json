@@ -1,0 +1,62 @@
+{
+  "$defs": {
+    "ModelTokens": {
+      "properties": {
+        "in": {
+          "title": "In",
+          "type": "integer"
+        },
+        "out": {
+          "title": "Out",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "in",
+        "out"
+      ],
+      "title": "ModelTokens",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "cost_usd": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cost Usd"
+    },
+    "model_tokens": {
+      "$ref": "#/$defs/ModelTokens"
+    },
+    "tool_calls": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Tool Calls",
+      "type": "object"
+    },
+    "turns": {
+      "title": "Turns",
+      "type": "integer"
+    },
+    "wall_ms": {
+      "title": "Wall Ms",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "turns",
+    "tool_calls",
+    "model_tokens",
+    "wall_ms"
+  ],
+  "title": "Usage",
+  "type": "object"
+}

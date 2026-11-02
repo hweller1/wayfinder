@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "name": "scout-wayfinder",
+  "displayName": "Scout + Wayfinder code search",
+  "version": "0.3.0",
+  "description": "Indexed code exploration for Muse Code: a scout-explorer subagent that asks scout (Wayfinder over a voyage-code index) first, verifies the ranges it gets with read tools, fills gaps, and hands back a ranked path:start-end list.",
+  "compat": {
+    "source": "native",
+    "manifestDir": ".muse-plugin"
+  },
+  "capabilities": {
+    "skills": [
+      {
+        "id": "scout-explore",
+        "path": "skills/scout-explore/SKILL.md",
+        "enabledDefault": true
+      }
+    ],
+    "commands": [
+      {
+        "id": "index",
+        "path": "commands/index.md",
+        "enabledDefault": true
+      },
+      {
+        "id": "status",
+        "path": "commands/status.md",
+        "enabledDefault": true
+      },
+      {
+        "id": "find",
+        "path": "commands/find.md",
+        "enabledDefault": true
+      }
+    ],
+    "hooks": [
+      {
+        "id": "session-start",
+        "event": "SessionStart",
+        "command": [
+          "python3",
+          "hooks/session_start.py"
+        ],
+        "timeoutMs": 3000,
+        "statusMessage": "scout: checking the index and warming Wayfinder"
+      },
+      {
+        "id": "spec-session",
+        "event": "SessionStart",
+        "command": [
+          "python3",
+          "hooks/spec_session.py"
+        ],
+        "timeoutMs": 30000,
+        "statusMessage": "scout: resolving the retrieval spec"
+      },
+      {
+        "id": "route-explore",
+        "event": "PreToolUse",
+        "command": [
+          "python3",
+          "hooks/route_explore.py"
+        ],
+        "timeoutMs": 3000
+      },
+      {
+        "id": "spec-prompt",
+        "event": "UserPromptSubmit",
+        "command": [
+          "python3",
+          "hooks/spec_prompt.py"
+        ],
+        "timeoutMs": 10000
+      },
+      {
+        "id": "spec-pretool",
+        "event": "PreToolUse",
+        "command": [
+          "python3",
+          "hooks/spec_pretool.py"
+        ],
+        "timeoutMs": 10000
+      }
+    ],
+    "mcpServers": [
+      {
+        "id": "scout",
+        "transport": "stdio",
+        "command": [
+          "python3",
+          "bin/launch_mcp.py"
+        ]
+      }
+    ],
+    "reminders": []
+  }
+}

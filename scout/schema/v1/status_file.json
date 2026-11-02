@@ -1,0 +1,85 @@
+{
+  "description": "`<state_dir>/status.json`: read by the Claude Code hook without importing scout (stdlib only).",
+  "properties": {
+    "commit": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Commit"
+    },
+    "coverage": {
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Coverage",
+      "type": "number"
+    },
+    "gateway_ok_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Gateway Ok At"
+    },
+    "last_error": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Last Error"
+    },
+    "last_sync_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Last Sync At"
+    },
+    "schema": {
+      "default": "1.0",
+      "pattern": "^1\\.\\d+$",
+      "title": "Schema",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "ready",
+        "partial",
+        "absent"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "syncing": {
+      "default": false,
+      "title": "Syncing",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "state",
+    "coverage"
+  ],
+  "title": "StatusFile",
+  "type": "object"
+}

@@ -1,0 +1,73 @@
+{
+  "$defs": {
+    "Budget": {
+      "additionalProperties": false,
+      "properties": {
+        "max_seconds": {
+          "default": 120,
+          "maximum": 900,
+          "minimum": 5,
+          "title": "Max Seconds",
+          "type": "integer"
+        },
+        "max_turns": {
+          "default": 40,
+          "maximum": 200,
+          "minimum": 1,
+          "title": "Max Turns",
+          "type": "integer"
+        }
+      },
+      "title": "Budget",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "brief": {
+      "maxLength": 100000,
+      "minLength": 1,
+      "title": "Brief",
+      "type": "string"
+    },
+    "budget": {
+      "$ref": "#/$defs/Budget"
+    },
+    "max_results": {
+      "default": 12,
+      "maximum": 40,
+      "minimum": 1,
+      "title": "Max Results",
+      "type": "integer"
+    },
+    "paths": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Paths",
+      "type": "array"
+    },
+    "render_max_tokens": {
+      "default": 1500,
+      "title": "Render Max Tokens",
+      "type": "integer"
+    },
+    "root": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Root"
+    }
+  },
+  "required": [
+    "brief"
+  ],
+  "title": "ExploreRequest",
+  "type": "object"
+}

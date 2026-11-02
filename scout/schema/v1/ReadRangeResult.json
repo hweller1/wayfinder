@@ -1,0 +1,43 @@
+{
+  "properties": {
+    "end_line": {
+      "title": "End Line",
+      "type": "integer"
+    },
+    "lines": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 400,
+      "title": "Lines",
+      "type": "array"
+    },
+    "path": {
+      "title": "Path",
+      "type": "string"
+    },
+    "schema_version": {
+      "default": "1.0",
+      "pattern": "^1\\.\\d+$",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "start_line": {
+      "title": "Start Line",
+      "type": "integer"
+    },
+    "truncated": {
+      "title": "Truncated",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "path",
+    "start_line",
+    "end_line",
+    "lines",
+    "truncated"
+  ],
+  "title": "ReadRangeResult",
+  "type": "object"
+}

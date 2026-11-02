@@ -1,0 +1,341 @@
+{
+ "schema": "wayfinder-rubric-weights-v1",
+ "method": "Fit rubric weights (PRD section 7) by logistic regression of E2E coding pass on per-run retrieval features.\n\nRuns in the Modal CPU sandbox (numpy). Inputs under --inputs: screen_r3.json and runs_r2/issue/{35b_grep,35b_index,\nsonnet_grep,sonnet_index}/*.json (public E2E records; the no-search and oracle conditions have no retrieval features).\n\nRounds are NEVER pooled:\n  r3  = the pre-registered round: the 17 headroom tasks (screen_r3.json), seeds 1 and 2 only, 4 search conditions\n        (n = 136 runs). Seed 0 was the screening seed and is excluded, so the selection effect does not leak in.\n  r2  = every other search-condition record in runs_r2 (the pilot: 13 tasks, seed 0 screening runs plus pilot seed 1/2;\n        n = 70). Seed 0 picked headroom tasks (none fails, oracle passes), so r2 is selection-biased; it is a sign check only.\nRecords carry per-run retrieval metrics (recall, all_gold_found, precision, n_retrieved, tool counts, turns, tokens, stop\nreason) but not the subagent message list, so routing / output-quality / evidence terms cannot be fit and keep prior weights.\n\nFeatures (all in [0, 1], standardised before fitting): agf = all_gold_found; rec = recall; focus = 1 - min(1, n_retrieved / 60);\nturn_eff = 1 - min(1, turns / 40); tok_eff = 1 - min(1, completion_tokens / 8000); clean = stop_reason == \"answered\".\nModel: L2 logistic (ridge 1.0 on standardised features), Newton; AUC in sample, leave-one-task-out AUC, task-bootstrap 90% CI.\nWeights: non-negative refit of {agf, rec, focus} on r3 (drop negative coefficients, refit), proportional to the standardised\ncoefficients, with a floor of 10% of the fitted block per leaf (dense shaping for RL; AUC cannot separate agf from rec).\n",
+ "rounds": {
+  "r3": {
+   "conditions": {
+    "35b_grep": 34,
+    "35b_index": 34,
+    "sonnet_grep": 34,
+    "sonnet_index": 34
+   },
+   "agf_only": {
+    "features": [
+     "agf"
+    ],
+    "n": 136,
+    "n_tasks": 17,
+    "pass_rate": 0.6029411764705882,
+    "intercept_z": 0.4565604168797817,
+    "coef_standardised": {
+     "agf": 0.6639
+    },
+    "coef_per_unit": {
+     "agf": 1.349
+    },
+    "boot90_standardised": {
+     "agf": [
+      0.139,
+      1.197
+     ]
+    },
+    "auc_in_sample": 0.6653,
+    "auc_leave_one_task_out": 0.4687,
+    "pearson_r_with_pass": {
+     "agf": 0.329
+    }
+   },
+   "coverage_focus": {
+    "features": [
+     "agf",
+     "rec",
+     "focus"
+    ],
+    "n": 136,
+    "n_tasks": 17,
+    "pass_rate": 0.6029411764705882,
+    "intercept_z": 0.46529803914745177,
+    "coef_standardised": {
+     "agf": 0.4609,
+     "rec": 0.1317,
+     "focus": 0.4884
+    },
+    "coef_per_unit": {
+     "agf": 0.9366,
+     "rec": 0.5319,
+     "focus": 2.2448
+    },
+    "boot90_standardised": {
+     "agf": [
+      -0.177,
+      1.091
+     ],
+     "rec": [
+      -0.643,
+      0.845
+     ],
+     "focus": [
+      -0.008,
+      1.02
+     ]
+    },
+    "auc_in_sample": 0.7222,
+    "auc_leave_one_task_out": 0.598,
+    "pearson_r_with_pass": {
+     "agf": 0.329,
+     "rec": 0.264,
+     "focus": 0.29
+    }
+   },
+   "full": {
+    "features": [
+     "agf",
+     "rec",
+     "focus",
+     "turn_eff",
+     "tok_eff",
+     "clean"
+    ],
+    "n": 136,
+    "n_tasks": 17,
+    "pass_rate": 0.6029411764705882,
+    "intercept_z": 0.4749009575867649,
+    "coef_standardised": {
+     "agf": 0.5037,
+     "rec": 0.0869,
+     "focus": 0.7152,
+     "turn_eff": -0.465,
+     "tok_eff": -0.0407,
+     "clean": 0.1281
+    },
+    "coef_per_unit": {
+     "agf": 1.0234,
+     "rec": 0.3511,
+     "focus": 3.287,
+     "turn_eff": -1.5373,
+     "tok_eff": -0.1465,
+     "clean": 0.2576
+    },
+    "boot90_standardised": {
+     "agf": [
+      -0.152,
+      1.21
+     ],
+     "rec": [
+      -0.763,
+      0.827
+     ],
+     "focus": [
+      0.231,
+      1.251
+     ],
+     "turn_eff": [
+      -1.336,
+      0.229
+     ],
+     "tok_eff": [
+      -0.697,
+      0.602
+     ],
+     "clean": [
+      -0.152,
+      0.496
+     ]
+    },
+    "auc_in_sample": 0.7588,
+    "auc_leave_one_task_out": 0.6197,
+    "pearson_r_with_pass": {
+     "agf": 0.329,
+     "rec": 0.264,
+     "focus": 0.29,
+     "turn_eff": 0.005,
+     "tok_eff": -0.038,
+     "clean": 0.114
+    }
+   }
+  },
+  "r2": {
+   "conditions": {
+    "35b_grep": 17,
+    "35b_index": 17,
+    "sonnet_grep": 18,
+    "sonnet_index": 18
+   },
+   "agf_only": {
+    "features": [
+     "agf"
+    ],
+    "n": 70,
+    "n_tasks": 13,
+    "pass_rate": 0.8571428571428571,
+    "intercept_z": 1.8461416116564868,
+    "coef_standardised": {
+     "agf": 0.3883
+    },
+    "coef_per_unit": {
+     "agf": 0.7883
+    },
+    "boot90_standardised": {
+     "agf": [
+      0.017,
+      0.887
+     ]
+    },
+    "auc_in_sample": 0.6083,
+    "auc_leave_one_task_out": 0.3775,
+    "pearson_r_with_pass": {
+     "agf": 0.154
+    }
+   },
+   "coverage_focus": {
+    "features": [
+     "agf",
+     "rec",
+     "focus"
+    ],
+    "n": 70,
+    "n_tasks": 13,
+    "pass_rate": 0.8571428571428571,
+    "intercept_z": 1.9741085168026422,
+    "coef_standardised": {
+     "agf": 0.0887,
+     "rec": 0.1514,
+     "focus": 0.6086
+    },
+    "coef_per_unit": {
+     "agf": 0.18,
+     "rec": 0.603,
+     "focus": 3.0928
+    },
+    "boot90_standardised": {
+     "agf": [
+      -0.493,
+      0.731
+     ],
+     "rec": [
+      -0.685,
+      0.872
+     ],
+     "focus": [
+      0.223,
+      1.252
+     ]
+    },
+    "auc_in_sample": 0.775,
+    "auc_leave_one_task_out": 0.4483,
+    "pearson_r_with_pass": {
+     "agf": 0.154,
+     "rec": 0.18,
+     "focus": 0.306
+    }
+   },
+   "full": {
+    "features": [
+     "agf",
+     "rec",
+     "focus",
+     "turn_eff",
+     "tok_eff",
+     "clean"
+    ],
+    "n": 70,
+    "n_tasks": 13,
+    "pass_rate": 0.8571428571428571,
+    "intercept_z": 2.2604084165715177,
+    "coef_standardised": {
+     "agf": 0.18,
+     "rec": -0.1605,
+     "focus": 1.1676,
+     "turn_eff": -0.5901,
+     "tok_eff": -0.5888,
+     "clean": 0.3079
+    },
+    "coef_per_unit": {
+     "agf": 0.3655,
+     "rec": -0.6393,
+     "focus": 5.9334,
+     "turn_eff": -2.0975,
+     "tok_eff": -2.1316,
+     "clean": 0.6372
+    },
+    "boot90_standardised": {
+     "agf": [
+      -0.296,
+      0.725
+     ],
+     "rec": [
+      -0.939,
+      0.54
+     ],
+     "focus": [
+      0.737,
+      1.575
+     ],
+     "turn_eff": [
+      -1.65,
+      0.366
+     ],
+     "tok_eff": [
+      -1.254,
+      0.225
+     ],
+     "clean": [
+      -0.657,
+      1.311
+     ]
+    },
+    "auc_in_sample": 0.86,
+    "auc_leave_one_task_out": 0.47,
+    "pearson_r_with_pass": {
+     "agf": 0.154,
+     "rec": 0.18,
+     "focus": 0.306,
+     "turn_eff": -0.103,
+     "tok_eff": -0.175,
+     "clean": 0.109
+    }
+   }
+  }
+ },
+ "weights": {
+  "all_gold_found": 0.2771,
+  "recall": 0.0792,
+  "focus": 0.2937,
+  "hunk_overlap": 0.05,
+  "first_gold": 0.03,
+  "turn_eff": 0.03,
+  "token_eff": 0.02,
+  "no_rereads": 0.02,
+  "stops_in_budget": 0.02,
+  "no_repeated_queries": 0.015,
+  "single_report": 0.015,
+  "routing": 0.05,
+  "output_valid": 0.05,
+  "evidence": 0.05
+ },
+ "weights_derivation": {
+  "source_round": "r3",
+  "nonneg_active_features": [
+   "agf",
+   "rec",
+   "focus"
+  ],
+  "nonneg_coef_standardised": {
+   "agf": 0.4609,
+   "rec": 0.1317,
+   "focus": 0.4884
+  },
+  "share_before_floor": {
+   "agf": 0.4264,
+   "rec": 0.1218,
+   "focus": 0.4518
+  },
+  "floor_per_leaf": 0.1,
+  "fitted_block_mass": 0.65,
+  "prior_leaves": {
+   "hunk_overlap": 0.05,
+   "first_gold": 0.03,
+   "turn_eff": 0.03,
+   "token_eff": 0.02,
+   "no_rereads": 0.02,
+   "stops_in_budget": 0.02,
+   "no_repeated_queries": 0.015,
+   "single_report": 0.015,
+   "routing": 0.05,
+   "output_valid": 0.05,
+   "evidence": 0.05
+  },
+  "weights_sum": 1.0
+ },
+ "pooled_r2_r3": "not computed by design"
+}

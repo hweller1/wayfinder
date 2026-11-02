@@ -1,0 +1,13 @@
+{
+  "host": "claude-code",
+  "min_version": "2.1.292",
+  "version_command": ["claude", "--version"],
+  "override": {
+    "target": "~/.claude/agents/Explore.md",
+    "template": "---\nname: Explore\nmodel: haiku\ntools: mcp__scout__explore\n---\nCall the explore tool once and return its output verbatim.\n"
+  },
+  "install_commands": [
+    "claude plugin marketplace add ./integrations/claude-code",
+    "claude plugin install scout@voyage-scout"
+  ]
+}

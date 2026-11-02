@@ -1,0 +1,17 @@
+{
+  "name": "voyage-scout",
+  "owner": {
+    "name": "Henry Weller"
+  },
+  "plugins": [
+    {
+      "name": "scout",
+      "source": "./",
+      "version": "0.2.0",
+      "description": "Routes Explore to scout-explorer (Wayfinder sweep plus verified reads); /scout:index, /scout:status, /scout:find, /scout:model, /scout:mode."
+    }
+  ],
+  "metadata": {
+    "description": "scout: Wayfinder code search for Claude Code"
+  }
+}

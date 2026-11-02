@@ -1,0 +1,68 @@
+{
+  "$defs": {
+    "GrepFile": {
+      "properties": {
+        "matches": {
+          "items": {
+            "$ref": "#/$defs/GrepMatch"
+          },
+          "title": "Matches",
+          "type": "array"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "matches"
+      ],
+      "title": "GrepFile",
+      "type": "object"
+    },
+    "GrepMatch": {
+      "properties": {
+        "line": {
+          "title": "Line",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "line",
+        "text"
+      ],
+      "title": "GrepMatch",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "files": {
+      "items": {
+        "$ref": "#/$defs/GrepFile"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "schema_version": {
+      "default": "1.0",
+      "pattern": "^1\\.\\d+$",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "truncated": {
+      "title": "Truncated",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "files",
+    "truncated"
+  ],
+  "title": "GrepResult",
+  "type": "object"
+}

@@ -1,0 +1,190 @@
+[
+ {
+  "type": "function",
+  "function": {
+   "name": "semantic_search",
+   "description": "Search the indexed repository by meaning. Returns ranked snippets with line numbers.",
+   "parameters": {
+    "additionalProperties": false,
+    "properties": {
+     "query": {
+      "type": "string"
+     },
+     "path_glob": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null
+     },
+     "k": {
+      "default": 10,
+      "maximum": 30,
+      "minimum": 1,
+      "type": "integer"
+     }
+    },
+    "required": [
+     "query"
+    ],
+    "type": "object"
+   }
+  }
+ },
+ {
+  "type": "function",
+  "function": {
+   "name": "grep",
+   "description": "Search file contents with ripgrep. Files are ranked by match density. Returns path:line: text.",
+   "parameters": {
+    "additionalProperties": false,
+    "properties": {
+     "pattern": {
+      "type": "string"
+     },
+     "path": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null
+     },
+     "regex": {
+      "default": true,
+      "type": "boolean"
+     },
+     "context": {
+      "default": 0,
+      "maximum": 5,
+      "minimum": 0,
+      "type": "integer"
+     }
+    },
+    "required": [
+     "pattern"
+    ],
+    "type": "object"
+   }
+  }
+ },
+ {
+  "type": "function",
+  "function": {
+   "name": "glob",
+   "description": "List repository files whose path matches a glob pattern (at most 1000).",
+   "parameters": {
+    "additionalProperties": false,
+    "properties": {
+     "pattern": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "pattern"
+    ],
+    "type": "object"
+   }
+  }
+ },
+ {
+  "type": "function",
+  "function": {
+   "name": "read_file",
+   "description": "Read a 1-based inclusive line range of a file (at most 400 lines per call).",
+   "parameters": {
+    "additionalProperties": false,
+    "properties": {
+     "path": {
+      "type": "string"
+     },
+     "start_line": {
+      "default": 1,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "end_line": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null
+     }
+    },
+    "required": [
+     "path"
+    ],
+    "type": "object"
+   }
+  }
+ },
+ {
+  "type": "function",
+  "function": {
+   "name": "report",
+   "description": "Finish. Give the most relevant locations first, each as path, start_line, end_line (1-based, inclusive) and one line saying why, then a summary answering the brief and the gaps you could not establish. Call exactly once.",
+   "parameters": {
+    "$defs": {
+     "ReportHit": {
+      "additionalProperties": false,
+      "properties": {
+       "path": {
+        "type": "string"
+       },
+       "start_line": {
+        "type": "integer"
+       },
+       "end_line": {
+        "type": "integer"
+       },
+       "why": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "path",
+       "start_line",
+       "end_line",
+       "why"
+      ],
+      "type": "object"
+     }
+    },
+    "additionalProperties": false,
+    "properties": {
+     "results": {
+      "items": {
+       "$ref": "#/$defs/ReportHit"
+      },
+      "type": "array"
+     },
+     "summary": {
+      "type": "string"
+     },
+     "gaps": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array"
+     }
+    },
+    "required": [
+     "results",
+     "summary"
+    ],
+    "type": "object"
+   }
+  }
+ }
+]

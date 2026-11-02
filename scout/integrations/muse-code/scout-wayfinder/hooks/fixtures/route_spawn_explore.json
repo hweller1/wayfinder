@@ -1,0 +1,1 @@
+{"event": "PreToolUse", "matcher_input": "subagent_spawn", "cwd": "/", "stdin": {"hook_event_name": "PreToolUse", "tool_name": "subagent_spawn", "tool_input": {"command_id": "c2", "objective": "Where does the router produce a 405 Method Not Allowed response and how can a user customise it?", "role": "explorer"}, "session_id": "fixture-session", "cwd": "/"}}

@@ -1,0 +1,1 @@
+{"event": "UserPromptSubmit", "cwd": "/", "stdin": {"hook_event_name": "UserPromptSubmit", "prompt": "Where is the 405 handler?", "session_id": "fixture-session", "cwd": "/", "model": "muse-spark-1.3", "permission_mode": "default", "model_provider": "meta"}}

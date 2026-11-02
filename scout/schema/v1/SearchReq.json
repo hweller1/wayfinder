@@ -1,0 +1,99 @@
+{
+  "$defs": {
+    "SearchScope": {
+      "additionalProperties": false,
+      "description": "Whitelist of server-side filters; no client-supplied attribute names reach the store.",
+      "properties": {
+        "dir_tag": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dir Tag"
+        },
+        "ext_tag": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ext Tag"
+        },
+        "path_glob_enc": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Path Glob Enc"
+        }
+      },
+      "title": "SearchScope",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "branch_id": {
+      "pattern": "^[0-9a-f]{16,32}$",
+      "title": "Branch Id",
+      "type": "string"
+    },
+    "k": {
+      "default": 10,
+      "maximum": 30,
+      "minimum": 1,
+      "title": "K",
+      "type": "integer"
+    },
+    "overfetch": {
+      "default": 1,
+      "maximum": 5,
+      "minimum": 1,
+      "title": "Overfetch",
+      "type": "integer"
+    },
+    "query": {
+      "maxLength": 100000,
+      "minLength": 1,
+      "title": "Query",
+      "type": "string"
+    },
+    "repo_id": {
+      "pattern": "^[0-9a-f]{16,32}$",
+      "title": "Repo Id",
+      "type": "string"
+    },
+    "scope": {
+      "$ref": "#/$defs/SearchScope"
+    },
+    "tokens": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 32,
+      "title": "Tokens",
+      "type": "array"
+    }
+  },
+  "required": [
+    "repo_id",
+    "branch_id",
+    "query"
+  ],
+  "title": "SearchReq",
+  "type": "object"
+}

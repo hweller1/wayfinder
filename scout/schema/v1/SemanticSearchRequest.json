@@ -1,0 +1,45 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "k": {
+      "default": 10,
+      "maximum": 30,
+      "minimum": 1,
+      "title": "K",
+      "type": "integer"
+    },
+    "path_glob": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Path Glob"
+    },
+    "query": {
+      "title": "Query",
+      "type": "string"
+    },
+    "root": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Root"
+    }
+  },
+  "required": [
+    "query"
+  ],
+  "title": "SemanticSearchRequest",
+  "type": "object"
+}

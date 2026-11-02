@@ -1,0 +1,1 @@
+{"event": "SessionStart", "cwd": "/", "stdin": {"hook_event_name": "SessionStart", "source": "startup", "session_id": "fixture-session", "cwd": "/", "model": "muse-spark-1.3", "permission_mode": "default", "model_provider": "meta"}}

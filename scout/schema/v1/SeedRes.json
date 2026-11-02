@@ -1,0 +1,30 @@
+{
+  "properties": {
+    "complete": {
+      "default": true,
+      "title": "Complete",
+      "type": "boolean"
+    },
+    "jaccard": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Jaccard"
+    },
+    "seeded": {
+      "title": "Seeded",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "seeded"
+  ],
+  "title": "SeedRes",
+  "type": "object"
+}

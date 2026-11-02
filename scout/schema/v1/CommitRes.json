@@ -1,0 +1,71 @@
+{
+  "description": "The commit response is the resulting `IndexStatus` (design section 6).",
+  "properties": {
+    "commit": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Commit"
+    },
+    "coverage": {
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Coverage",
+      "type": "number"
+    },
+    "files": {
+      "default": 0,
+      "title": "Files",
+      "type": "integer"
+    },
+    "last_sync_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Last Sync At"
+    },
+    "schema_version": {
+      "default": "1.0",
+      "pattern": "^1\\.\\d+$",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "semantic_enabled": {
+      "title": "Semantic Enabled",
+      "type": "boolean"
+    },
+    "state": {
+      "enum": [
+        "ready",
+        "partial",
+        "absent"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "syncing": {
+      "default": false,
+      "title": "Syncing",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "state",
+    "coverage",
+    "semantic_enabled"
+  ],
+  "title": "CommitRes",
+  "type": "object"
+}

@@ -1,0 +1,19 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "root": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Root"
+    }
+  },
+  "title": "IndexStatusRequest",
+  "type": "object"
+}

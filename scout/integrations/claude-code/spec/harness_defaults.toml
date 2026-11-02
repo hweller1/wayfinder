@@ -1,0 +1,16 @@
+# Harness defaults of the retrieval spec (layer 2 of 3): what the scout plugin ships for Claude Code.
+# System defaults (layer 1) live in lib/scout_spec.py; the developer's .scout/spec.toml (layer 3) overrides both.
+# See docs/retrieval-spec.md.
+
+instructions = """\
+Prefer the project's own source (src/, lib/, pkg/, app/) over vendored, generated or third-party code.
+Treat tests as supporting evidence: report the test file that covers a change next to the code it exercises."""
+
+[delivery]
+session_context = true   # index description + examples as SessionStart context
+workflow_step = true     # UserPromptSubmit: "before reading or editing code, delegate to the search subagent"
+search_first = false     # PreToolUse: deny the main agent's Grep/Glob until its first delegation
+rewrite_explore = true   # built-in Explore calls are routed to scout-explorer when scout is ready
+
+[examples]
+mine = 3                 # past commits shown as "change description -> files touched"

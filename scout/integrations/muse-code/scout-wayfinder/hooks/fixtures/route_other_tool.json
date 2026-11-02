@@ -1,0 +1,1 @@
+{"event": "PreToolUse", "matcher_input": "read_file", "cwd": "/", "stdin": {"hook_event_name": "PreToolUse", "tool_name": "read_file", "tool_input": {"path": "README.md"}, "session_id": "fixture-session", "cwd": "/"}}

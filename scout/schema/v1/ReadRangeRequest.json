@@ -1,0 +1,44 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "end_line": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "End Line"
+    },
+    "path": {
+      "title": "Path",
+      "type": "string"
+    },
+    "root": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Root"
+    },
+    "start_line": {
+      "default": 1,
+      "minimum": 1,
+      "title": "Start Line",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "path"
+  ],
+  "title": "ReadRangeRequest",
+  "type": "object"
+}

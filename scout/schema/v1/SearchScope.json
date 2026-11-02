@@ -1,0 +1,44 @@
+{
+  "additionalProperties": false,
+  "description": "Whitelist of server-side filters; no client-supplied attribute names reach the store.",
+  "properties": {
+    "dir_tag": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dir Tag"
+    },
+    "ext_tag": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Ext Tag"
+    },
+    "path_glob_enc": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Path Glob Enc"
+    }
+  },
+  "title": "SearchScope",
+  "type": "object"
+}

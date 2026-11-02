@@ -1,0 +1,1 @@
+{"event": "PreToolUse", "matcher_input": "subagent_spawn", "cwd": "/", "stdin": {"hook_event_name": "PreToolUse", "tool_name": "subagent_spawn", "tool_input": {"command_id": "c1", "objective": "Fix the 405 handler and add a test", "role": "worker"}, "session_id": "fixture-session", "cwd": "/"}}

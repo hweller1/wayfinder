@@ -1,0 +1,45 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "base_branch_id": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9a-f]{16,32}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Base Branch Id"
+    },
+    "branch_id": {
+      "pattern": "^[0-9a-f]{16,32}$",
+      "title": "Branch Id",
+      "type": "string"
+    },
+    "expected_chunks": {
+      "minimum": 0,
+      "title": "Expected Chunks",
+      "type": "integer"
+    },
+    "repo_id": {
+      "pattern": "^[0-9a-f]{16,32}$",
+      "title": "Repo Id",
+      "type": "string"
+    },
+    "root": {
+      "title": "Root",
+      "type": "string"
+    }
+  },
+  "required": [
+    "repo_id",
+    "branch_id",
+    "root",
+    "expected_chunks"
+  ],
+  "title": "SyncBeginReq",
+  "type": "object"
+}

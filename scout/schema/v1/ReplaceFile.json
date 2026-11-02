@@ -1,0 +1,20 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "file_hash": {
+      "title": "File Hash",
+      "type": "string"
+    },
+    "file_id": {
+      "pattern": "^[0-9a-f]{16,32}$",
+      "title": "File Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "file_id",
+    "file_hash"
+  ],
+  "title": "ReplaceFile",
+  "type": "object"
+}

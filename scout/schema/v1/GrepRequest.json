@@ -1,0 +1,50 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "context": {
+      "default": 0,
+      "maximum": 5,
+      "minimum": 0,
+      "title": "Context",
+      "type": "integer"
+    },
+    "path": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Path"
+    },
+    "pattern": {
+      "title": "Pattern",
+      "type": "string"
+    },
+    "regex": {
+      "default": true,
+      "title": "Regex",
+      "type": "boolean"
+    },
+    "root": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Root"
+    }
+  },
+  "required": [
+    "pattern"
+  ],
+  "title": "GrepRequest",
+  "type": "object"
+}

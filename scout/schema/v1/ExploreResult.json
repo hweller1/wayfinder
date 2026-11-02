@@ -1,0 +1,243 @@
+{
+  "$defs": {
+    "Hit": {
+      "properties": {
+        "end_line": {
+          "title": "End Line",
+          "type": "integer"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Score"
+        },
+        "source": {
+          "enum": [
+            "semantic",
+            "grep",
+            "read"
+          ],
+          "title": "Source",
+          "type": "string"
+        },
+        "stale": {
+          "default": false,
+          "title": "Stale",
+          "type": "boolean"
+        },
+        "start_line": {
+          "minimum": 1,
+          "title": "Start Line",
+          "type": "integer"
+        },
+        "verified": {
+          "default": true,
+          "title": "Verified",
+          "type": "boolean"
+        },
+        "why": {
+          "maxLength": 300,
+          "title": "Why",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "start_line",
+        "end_line",
+        "why",
+        "source"
+      ],
+      "title": "Hit",
+      "type": "object"
+    },
+    "IndexStatus": {
+      "properties": {
+        "commit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Commit"
+        },
+        "coverage": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Coverage",
+          "type": "number"
+        },
+        "files": {
+          "default": 0,
+          "title": "Files",
+          "type": "integer"
+        },
+        "last_sync_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Last Sync At"
+        },
+        "schema_version": {
+          "default": "1.0",
+          "pattern": "^1\\.\\d+$",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "semantic_enabled": {
+          "title": "Semantic Enabled",
+          "type": "boolean"
+        },
+        "state": {
+          "enum": [
+            "ready",
+            "partial",
+            "absent"
+          ],
+          "title": "State",
+          "type": "string"
+        },
+        "syncing": {
+          "default": false,
+          "title": "Syncing",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "state",
+        "coverage",
+        "semantic_enabled"
+      ],
+      "title": "IndexStatus",
+      "type": "object"
+    },
+    "ModelTokens": {
+      "properties": {
+        "in": {
+          "title": "In",
+          "type": "integer"
+        },
+        "out": {
+          "title": "Out",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "in",
+        "out"
+      ],
+      "title": "ModelTokens",
+      "type": "object"
+    },
+    "Usage": {
+      "properties": {
+        "cost_usd": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cost Usd"
+        },
+        "model_tokens": {
+          "$ref": "#/$defs/ModelTokens"
+        },
+        "tool_calls": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Tool Calls",
+          "type": "object"
+        },
+        "turns": {
+          "title": "Turns",
+          "type": "integer"
+        },
+        "wall_ms": {
+          "title": "Wall Ms",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "turns",
+        "tool_calls",
+        "model_tokens",
+        "wall_ms"
+      ],
+      "title": "Usage",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "budget_exhausted": {
+      "default": false,
+      "title": "Budget Exhausted",
+      "type": "boolean"
+    },
+    "gaps": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Gaps",
+      "type": "array"
+    },
+    "index": {
+      "$ref": "#/$defs/IndexStatus"
+    },
+    "results": {
+      "items": {
+        "$ref": "#/$defs/Hit"
+      },
+      "title": "Results",
+      "type": "array"
+    },
+    "schema_version": {
+      "default": "1.0",
+      "pattern": "^1\\.\\d+$",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "summary": {
+      "maxLength": 1200,
+      "title": "Summary",
+      "type": "string"
+    },
+    "usage": {
+      "$ref": "#/$defs/Usage"
+    }
+  },
+  "required": [
+    "results",
+    "summary",
+    "gaps",
+    "index",
+    "usage"
+  ],
+  "title": "ExploreResult",
+  "type": "object"
+}

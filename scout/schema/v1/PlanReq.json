@@ -1,0 +1,31 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "branch_id": {
+      "pattern": "^[0-9a-f]{16,32}$",
+      "title": "Branch Id",
+      "type": "string"
+    },
+    "chunk_keys": {
+      "items": {
+        "pattern": "^[0-9a-f]{16,32}$",
+        "type": "string"
+      },
+      "maxItems": 2000,
+      "title": "Chunk Keys",
+      "type": "array"
+    },
+    "repo_id": {
+      "pattern": "^[0-9a-f]{16,32}$",
+      "title": "Repo Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "repo_id",
+    "branch_id",
+    "chunk_keys"
+  ],
+  "title": "PlanReq",
+  "type": "object"
+}

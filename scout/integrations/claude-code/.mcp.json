@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "scout": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/scripts/launch-scout.sh",
+      "args": ["mcp", "--tools", "explore,semantic_search,read_range,index_status", "--render-ceiling", "1500"],
+      "env": { "SCOUT_RENDER_MAX_TOKENS": "1200" }
+    }
+  }
+}

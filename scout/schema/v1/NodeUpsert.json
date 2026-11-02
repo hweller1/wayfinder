@@ -1,0 +1,25 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "children_enc": {
+      "title": "Children Enc",
+      "type": "string"
+    },
+    "id": {
+      "pattern": "^[0-9a-f]{16,32}$",
+      "title": "Id",
+      "type": "string"
+    },
+    "node_hash": {
+      "title": "Node Hash",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "node_hash",
+    "children_enc"
+  ],
+  "title": "NodeUpsert",
+  "type": "object"
+}

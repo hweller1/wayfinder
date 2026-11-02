@@ -1,0 +1,15 @@
+{
+  "host": "muse-code",
+  "min_version": "1.4.13",
+  "version_command": ["muse", "--version"],
+  "plugin": "scout-wayfinder",
+  "marketplace_source": "./integrations/muse-code",
+  "install_steps": [
+    ["{python}", "{integrations}/muse-code/install.py", "--demo-project", "{repo}"]
+  ],
+  "install_commands": [
+    "muse plugins marketplace add voyage-scout <path-to-voyage-scout>/integrations/muse-code",
+    "muse plugins install scout-wayfinder@voyage-scout",
+    "muse plugins approve scout-wayfinder"
+  ]
+}

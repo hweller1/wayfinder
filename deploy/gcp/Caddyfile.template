@@ -1,0 +1,19 @@
+# Rendered by install.sh into /etc/caddy/Caddyfile. {$SCOUT_HOSTNAME} is a DNS name that resolves to the VM's
+# static external IP. If you have no domain, use <ip-with-dashes>.sslip.io (for 34.1.2.3: 34-1-2-3.sslip.io);
+# Caddy obtains a Let's Encrypt certificate for it automatically on the first request (ports 80 and 443 must be
+# open to the internet for the ACME challenge).
+{$SCOUT_HOSTNAME} {
+	encode zstd gzip
+	reverse_proxy 127.0.0.1:8080 {
+		# /v1/chat streams keepalives while the model searches; do not buffer, do not time out a 2 to 3 minute call.
+		flush_interval -1
+		transport http {
+			response_header_timeout 15m
+			read_timeout 15m
+		}
+	}
+	# Only the gateway is public. vLLM listens on 127.0.0.1:8000 and is not proxied.
+	log {
+		output stdout
+	}
+}

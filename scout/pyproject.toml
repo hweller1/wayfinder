@@ -1,0 +1,141 @@
+[project]
+name = "scout"
+version = "0.1.0"
+description = "super-explore prototype: indexed semantic code exploration behind a gateway"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+  "pydantic>=2.9",
+  "cryptography==50.0.2",
+  "pathspec==1.1.1",
+  "httpx==0.28.1",
+  "keyring==25.7.0",
+  "watchfiles==1.3.0",
+  "mcp==2.3.0",
+  "tree-sitter==0.26.0",
+  "tree-sitter-python==0.25.0",
+  "tree-sitter-go==0.25.0",
+  "tree-sitter-javascript==0.25.0",
+  "tree-sitter-typescript==0.23.2",
+  "tree-sitter-java==0.23.5",
+  "tree-sitter-rust==0.24.2",
+  "tree-sitter-c==0.24.2",
+  "tree-sitter-cpp==0.23.4",
+  "tree-sitter-c-sharp==0.23.5",
+]
+
+[project.optional-dependencies]
+gateway = ["fastapi==0.162.0", "uvicorn", "turbopuffer==3.0.0", "voyageai==0.5.0", "modal==1.6.2"]
+daemon = ["fastapi==0.162.0", "uvicorn"]
+
+[dependency-groups]
+dev = [
+  "pytest==9.1.1",
+  "pytest-asyncio==1.4.1",
+  "hypothesis",
+  "ruff==0.17.2",
+  "pyright==1.1.414",
+  "import-linter",
+  "jsonschema",
+]
+
+[project.scripts]
+scout = "scout.surfaces.cli.main:main"
+scout-demo = "scout.demo.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/scout"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+extend-exclude = ["eval/*.py", "tests/fixtures/declaration_real"]  # eval: pre-existing top-level analysis scripts only (eval/harness, eval/parity are linted); declaration_real: verbatim llama.cpp sources
+
+[tool.ruff.format]
+exclude = ["*.md"]  # ruff 0.17 formats markdown code blocks; spec docs are not ours to reflow
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "S", "ASYNC", "SIM", "PT"]
+ignore = ["S101"]
+
+[tool.pyright]
+include = ["src", "tests"]
+pythonVersion = "3.12"
+typeCheckingMode = "standard"
+strict = ["src/scout/core"]
+exclude = ["eval/*.py", "tests/fixtures/declaration_real", "**/node_modules", "**/__pycache__", "**/.*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = "--strict-markers --ignore=tests/fixtures/declaration_real -m 'not live and not eval and not spike and not slow'"
+markers = [
+  "unit",
+  "contract",
+  "conformance",
+  "security",
+  "live: real turbopuffer/Voyage, needs keys",
+  "eval: 50-task harness / parity, needs GPU+spend",
+  "spike: Phase 0 GPU session",
+  "slow: > 3 s; skipped by make check, run by make check-all and every [VERIFY] checkpoint",
+]
+
+[tool.importlinter]
+root_package = "scout"
+include_external_packages = true
+
+[[tool.importlinter.contracts]]
+name = "1 layers: surfaces > wiring > adapters > core"
+type = "layers"
+layers = ["scout.demo", "scout.surfaces", "scout.wiring", "scout.adapters", "scout.core"]
+# `--profile demo`: wiring composes the demo lane through function-level imports in `build_demo_*` only
+# (the one upward edge; nothing else in wiring or below may import scout.demo).
+ignore_imports = [
+  "scout.wiring -> scout.demo.runtime",
+  "scout.wiring -> scout.demo.mcp_server",
+]
+
+[[tool.importlinter.contracts]]
+name = "2 core internal layers"
+type = "layers"
+layers = [
+  "scout.core.app",
+  "scout.core.service | scout.core.explore | scout.core.sync",
+  "scout.core.local | scout.core.crypto",
+  "scout.core.ports",
+  "scout.core.contracts",
+]
+
+[[tool.importlinter.contracts]]
+name = "3 core imports no host, vendor, transport, or OS-event module"
+type = "forbidden"
+source_modules = ["scout.core"]
+forbidden_modules = [
+  "scout.adapters", "scout.surfaces", "scout.wiring",
+  "mcp", "modal", "turbopuffer", "voyageai", "openai", "anthropic", "claude_agent_sdk",
+  "fastapi", "starlette", "uvicorn", "httpx", "requests", "aiohttp", "websockets",
+  "keyring", "watchfiles", "watchdog",
+]
+allow_indirect_imports = true
+
+[[tool.importlinter.contracts]]
+name = "4 only the gateway process uses VectorStore/Embedder adapters"
+type = "forbidden"
+source_modules = ["scout.surfaces.cli", "scout.surfaces.mcp", "scout.surfaces.daemon", "scout.surfaces.sdk"]
+forbidden_modules = ["scout.adapters.turbopuffer", "scout.adapters.voyage", "turbopuffer", "voyageai"]
+allow_indirect_imports = true   # wiring may import them lazily for the fake/embedded profile
+
+[[tool.importlinter.contracts]]
+name = "5 surfaces independent"
+type = "independence"
+modules = ["scout.surfaces.mcp", "scout.surfaces.cli", "scout.surfaces.daemon",
+           "scout.surfaces.sdk", "scout.surfaces.gateway_http"]
+
+[[tool.importlinter.contracts]]
+name = "6 vendor adapters independent"
+type = "independence"
+modules = ["scout.adapters.turbopuffer", "scout.adapters.voyage", "scout.adapters.openai_chat",
+           "scout.adapters.gateway_http", "scout.adapters.keychain", "scout.adapters.fs_local"]

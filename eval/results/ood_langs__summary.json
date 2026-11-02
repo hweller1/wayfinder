@@ -1,0 +1,5030 @@
+{
+  "protocol": "docs/ood_langs_eval.md",
+  "n_tasks_preregistered": 120,
+  "n_tasks_scored_universe": 120,
+  "excluded": {
+    "excluded_task_ids": [],
+    "checked": "2026-10-28 before any run: gh api repos/<repo>/commits/<base_commit> returned the sha and repos/<repo>.private == false for all 120 repo@commits",
+    "n_checked": 120,
+    "excluded": []
+  },
+  "validation": {
+    "v3_grep": {
+      "rows": 240,
+      "ok_rows": 240,
+      "errors": 0,
+      "error_messages": {},
+      "models": [
+        "wayfinder-v3"
+      ],
+      "weights": [
+        "/data/sft/v3_merged"
+      ],
+      "retain_reasoning": [
+        "True"
+      ],
+      "max_turns": [
+        40
+      ],
+      "max_seconds": [
+        3600
+      ],
+      "seeds": [
+        0,
+        1
+      ],
+      "sampling": [
+        "T0.85 top_p0.95 top_kNone ppNone thinkNone"
+      ],
+      "pairs_unique": true,
+      "per_seed_coverage": {
+        "0": {
+          "tasks_ok": 120,
+          "missing": [],
+          "n_missing": 0,
+          "unexpected": 0
+        },
+        "1": {
+          "tasks_ok": 120,
+          "missing": [],
+          "n_missing": 0,
+          "unexpected": 0
+        }
+      },
+      "turns_min_p50_max": [
+        4,
+        8,
+        20
+      ],
+      "wall_s_min_p50_max": [
+        163.32,
+        374.11,
+        917.77
+      ],
+      "n429": 0,
+      "n_retries": 0,
+      "with_reasoning_rate": 1.0,
+      "healthy": true
+    },
+    "v3_sem": {
+      "rows": 240,
+      "ok_rows": 240,
+      "errors": 0,
+      "error_messages": {},
+      "models": [
+        "wayfinder-v3"
+      ],
+      "weights": [
+        "/data/sft/v3_merged"
+      ],
+      "retain_reasoning": [
+        "True"
+      ],
+      "max_turns": [
+        40
+      ],
+      "max_seconds": [
+        3600
+      ],
+      "seeds": [
+        0,
+        1
+      ],
+      "sampling": [
+        "T0.85 top_p0.95 top_kNone ppNone thinkNone"
+      ],
+      "pairs_unique": true,
+      "per_seed_coverage": {
+        "0": {
+          "tasks_ok": 120,
+          "missing": [],
+          "n_missing": 0,
+          "unexpected": 0
+        },
+        "1": {
+          "tasks_ok": 120,
+          "missing": [],
+          "n_missing": 0,
+          "unexpected": 0
+        }
+      },
+      "turns_min_p50_max": [
+        4,
+        8,
+        17
+      ],
+      "wall_s_min_p50_max": [
+        142.23,
+        337.41,
+        841.91
+      ],
+      "n429": 0,
+      "n_retries": 0,
+      "with_reasoning_rate": 1.0,
+      "semantic_offered": 240,
+      "semantic_not_offered_reasons": {},
+      "rollouts_calling_semantic_search": 182,
+      "healthy": true
+    },
+    "a1_grep": {
+      "rows": 240,
+      "ok_rows": 240,
+      "errors": 0,
+      "error_messages": {},
+      "models": [
+        "a1"
+      ],
+      "weights": [
+        "/weights/Agents-A1-FP8"
+      ],
+      "retain_reasoning": [
+        "True"
+      ],
+      "max_turns": [
+        40
+      ],
+      "max_seconds": [
+        3600
+      ],
+      "seeds": [
+        0,
+        1
+      ],
+      "sampling": [
+        "T0.85 top_p0.95 top_k20 pp1.1 thinkTrue"
+      ],
+      "pairs_unique": true,
+      "per_seed_coverage": {
+        "0": {
+          "tasks_ok": 120,
+          "missing": [],
+          "n_missing": 0,
+          "unexpected": 0
+        },
+        "1": {
+          "tasks_ok": 120,
+          "missing": [],
+          "n_missing": 0,
+          "unexpected": 0
+        }
+      },
+      "turns_min_p50_max": [
+        1,
+        39,
+        40
+      ],
+      "wall_s_min_p50_max": [
+        9.05,
+        190.65,
+        563.7
+      ],
+      "n429": 0,
+      "n_retries": 0,
+      "with_reasoning_rate": 1.0,
+      "healthy": true
+    },
+    "a1_sem": {
+      "rows": 240,
+      "ok_rows": 240,
+      "errors": 0,
+      "error_messages": {},
+      "models": [
+        "a1"
+      ],
+      "weights": [
+        "/weights/Agents-A1-FP8"
+      ],
+      "retain_reasoning": [
+        "True"
+      ],
+      "max_turns": [
+        40
+      ],
+      "max_seconds": [
+        3600
+      ],
+      "seeds": [
+        0,
+        1
+      ],
+      "sampling": [
+        "T0.85 top_p0.95 top_k20 pp1.1 thinkTrue"
+      ],
+      "pairs_unique": true,
+      "per_seed_coverage": {
+        "0": {
+          "tasks_ok": 120,
+          "missing": [],
+          "n_missing": 0,
+          "unexpected": 0
+        },
+        "1": {
+          "tasks_ok": 120,
+          "missing": [],
+          "n_missing": 0,
+          "unexpected": 0
+        }
+      },
+      "turns_min_p50_max": [
+        8,
+        38,
+        40
+      ],
+      "wall_s_min_p50_max": [
+        100.0,
+        205.73,
+        508.21
+      ],
+      "n429": 0,
+      "n_retries": 0,
+      "with_reasoning_rate": 1.0,
+      "semantic_offered": 240,
+      "semantic_not_offered_reasons": {},
+      "rollouts_calling_semantic_search": 216,
+      "healthy": true
+    },
+    "base_grep": {
+      "rows": 240,
+      "ok_rows": 240,
+      "errors": 0,
+      "error_messages": {},
+      "models": [
+        "glimmer"
+      ],
+      "weights": [
+        "/weights/Muse-Glimmer-30B"
+      ],
+      "retain_reasoning": [
+        "True"
+      ],
+      "max_turns": [
+        40
+      ],
+      "max_seconds": [
+        3600
+      ],
+      "seeds": [
+        0,
+        1
+      ],
+      "sampling": [
+        "T0.85 top_p0.95 top_kNone ppNone thinkNone"
+      ],
+      "pairs_unique": true,
+      "per_seed_coverage": {
+        "0": {
+          "tasks_ok": 120,
+          "missing": [],
+          "n_missing": 0,
+          "unexpected": 0
+        },
+        "1": {
+          "tasks_ok": 120,
+          "missing": [],
+          "n_missing": 0,
+          "unexpected": 0
+        }
+      },
+      "turns_min_p50_max": [
+        1,
+        29,
+        40
+      ],
+      "wall_s_min_p50_max": [
+        12.86,
+        173.5,
+        356.23
+      ],
+      "n429": 0,
+      "n_retries": 0,
+      "with_reasoning_rate": 1.0,
+      "healthy": true
+    },
+    "base_sem": {
+      "rows": 240,
+      "ok_rows": 240,
+      "errors": 0,
+      "error_messages": {},
+      "models": [
+        "glimmer"
+      ],
+      "weights": [
+        "/weights/Muse-Glimmer-30B"
+      ],
+      "retain_reasoning": [
+        "True"
+      ],
+      "max_turns": [
+        40
+      ],
+      "max_seconds": [
+        3600
+      ],
+      "seeds": [
+        0,
+        1
+      ],
+      "sampling": [
+        "T0.85 top_p0.95 top_kNone ppNone thinkNone"
+      ],
+      "pairs_unique": true,
+      "per_seed_coverage": {
+        "0": {
+          "tasks_ok": 120,
+          "missing": [],
+          "n_missing": 0,
+          "unexpected": 0
+        },
+        "1": {
+          "tasks_ok": 120,
+          "missing": [],
+          "n_missing": 0,
+          "unexpected": 0
+        }
+      },
+      "turns_min_p50_max": [
+        1,
+        26,
+        40
+      ],
+      "wall_s_min_p50_max": [
+        7.38,
+        176.5,
+        353.39
+      ],
+      "n429": 0,
+      "n_retries": 0,
+      "with_reasoning_rate": 1.0,
+      "semantic_offered": 240,
+      "semantic_not_offered_reasons": {},
+      "rollouts_calling_semantic_search": 232,
+      "healthy": true
+    }
+  },
+  "parse_health": {
+    "v3_grep": {
+      "rollouts": 240,
+      "assistant_turns": 2063,
+      "tool_calls": 6485,
+      "no_tool_call_turns": 0,
+      "bad_json_args": 0,
+      "unknown_tool": 0,
+      "invalid_args": 8,
+      "rollouts_with_malformed": 5,
+      "rollouts_stopped_3_malformed": 0,
+      "rollouts_with_nudge": 0,
+      "leaked_tool_markup_in_content": 0,
+      "malformed_calls_total": 8,
+      "malformed_rate_per_call": 0.0012
+    },
+    "v3_sem": {
+      "rollouts": 240,
+      "assistant_turns": 1937,
+      "tool_calls": 6264,
+      "no_tool_call_turns": 1,
+      "bad_json_args": 0,
+      "unknown_tool": 0,
+      "invalid_args": 7,
+      "rollouts_with_malformed": 5,
+      "rollouts_stopped_3_malformed": 0,
+      "rollouts_with_nudge": 1,
+      "leaked_tool_markup_in_content": 0,
+      "malformed_calls_total": 7,
+      "malformed_rate_per_call": 0.0011
+    },
+    "a1_grep": {
+      "rollouts": 240,
+      "assistant_turns": 7819,
+      "tool_calls": 8432,
+      "no_tool_call_turns": 23,
+      "bad_json_args": 0,
+      "unknown_tool": 52,
+      "invalid_args": 27,
+      "rollouts_with_malformed": 57,
+      "rollouts_stopped_3_malformed": 4,
+      "rollouts_with_nudge": 21,
+      "leaked_tool_markup_in_content": 0,
+      "malformed_calls_total": 79,
+      "malformed_rate_per_call": 0.0094
+    },
+    "a1_sem": {
+      "rollouts": 240,
+      "assistant_turns": 7762,
+      "tool_calls": 8144,
+      "no_tool_call_turns": 19,
+      "bad_json_args": 0,
+      "unknown_tool": 0,
+      "invalid_args": 63,
+      "rollouts_with_malformed": 44,
+      "rollouts_stopped_3_malformed": 2,
+      "rollouts_with_nudge": 17,
+      "leaked_tool_markup_in_content": 0,
+      "malformed_calls_total": 63,
+      "malformed_rate_per_call": 0.0077
+    },
+    "base_grep": {
+      "rollouts": 240,
+      "assistant_turns": 6857,
+      "tool_calls": 7548,
+      "no_tool_call_turns": 0,
+      "bad_json_args": 0,
+      "unknown_tool": 31,
+      "invalid_args": 66,
+      "rollouts_with_malformed": 53,
+      "rollouts_stopped_3_malformed": 9,
+      "rollouts_with_nudge": 0,
+      "leaked_tool_markup_in_content": 0,
+      "malformed_calls_total": 97,
+      "malformed_rate_per_call": 0.0129
+    },
+    "base_sem": {
+      "rollouts": 240,
+      "assistant_turns": 6329,
+      "tool_calls": 7377,
+      "no_tool_call_turns": 0,
+      "bad_json_args": 0,
+      "unknown_tool": 9,
+      "invalid_args": 52,
+      "rollouts_with_malformed": 25,
+      "rollouts_stopped_3_malformed": 8,
+      "rollouts_with_nudge": 0,
+      "leaked_tool_markup_in_content": 0,
+      "malformed_calls_total": 61,
+      "malformed_rate_per_call": 0.0083
+    }
+  },
+  "arms": {
+    "v3_grep": {
+      "n_rollouts": 240,
+      "n_tasks": 120,
+      "recall_reported": {
+        "mean": 0.6861,
+        "ci95": [
+          0.6372,
+          0.7343
+        ],
+        "n_tasks": 120
+      },
+      "recall_at_5": {
+        "mean": 0.5812,
+        "ci95": [
+          0.5298,
+          0.6323
+        ],
+        "n_tasks": 120
+      },
+      "recall_at_7": {
+        "mean": 0.6547,
+        "ci95": [
+          0.6053,
+          0.7049
+        ],
+        "n_tasks": 120
+      },
+      "precision": {
+        "mean": 0.4356,
+        "ci95": [
+          0.3918,
+          0.4806
+        ],
+        "n_tasks": 120
+      },
+      "all_gold_reported": {
+        "mean": 0.3417,
+        "ci95": [
+          0.2667,
+          0.4208
+        ],
+        "n_tasks": 120
+      },
+      "turns": {
+        "mean": 8.5958,
+        "ci95": [
+          8.2375,
+          8.9792
+        ],
+        "n_tasks": 120,
+        "p50": 8.0
+      },
+      "tokens": {
+        "mean": 208727.55,
+        "ci95": [
+          191675.0625,
+          227092.6292
+        ],
+        "n_tasks": 120,
+        "p50": 170959.5
+      },
+      "ended_by_report": {
+        "mean": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "n_tasks": 120
+      },
+      "n_reported": {
+        "mean": 7.0333,
+        "ci95": [
+          6.6708,
+          7.3917
+        ],
+        "n_tasks": 120
+      },
+      "recall_touched": {
+        "mean": 0.8411,
+        "ci95": [
+          0.8008,
+          0.88
+        ],
+        "n_tasks": 120
+      },
+      "stop_reasons": {
+        "report": 240
+      },
+      "calls_per_turn": 3.143
+    },
+    "v3_sem": {
+      "n_rollouts": 240,
+      "n_tasks": 120,
+      "recall_reported": {
+        "mean": 0.6975,
+        "ci95": [
+          0.6488,
+          0.7452
+        ],
+        "n_tasks": 120
+      },
+      "recall_at_5": {
+        "mean": 0.5871,
+        "ci95": [
+          0.5333,
+          0.6402
+        ],
+        "n_tasks": 120
+      },
+      "recall_at_7": {
+        "mean": 0.6602,
+        "ci95": [
+          0.6084,
+          0.7105
+        ],
+        "n_tasks": 120
+      },
+      "precision": {
+        "mean": 0.4547,
+        "ci95": [
+          0.409,
+          0.5004
+        ],
+        "n_tasks": 120
+      },
+      "all_gold_reported": {
+        "mean": 0.3458,
+        "ci95": [
+          0.2708,
+          0.425
+        ],
+        "n_tasks": 120
+      },
+      "turns": {
+        "mean": 8.0708,
+        "ci95": [
+          7.7292,
+          8.4333
+        ],
+        "n_tasks": 120,
+        "p50": 8.0
+      },
+      "tokens": {
+        "mean": 197440.1458,
+        "ci95": [
+          180044.9208,
+          215693.9542
+        ],
+        "n_tasks": 120,
+        "p50": 169260.5
+      },
+      "ended_by_report": {
+        "mean": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "n_tasks": 120
+      },
+      "n_reported": {
+        "mean": 6.825,
+        "ci95": [
+          6.4542,
+          7.2
+        ],
+        "n_tasks": 120
+      },
+      "recall_touched": {
+        "mean": 0.8514,
+        "ci95": [
+          0.8127,
+          0.8884
+        ],
+        "n_tasks": 120
+      },
+      "stop_reasons": {
+        "report": 240
+      },
+      "calls_per_turn": 3.234
+    },
+    "a1_grep": {
+      "n_rollouts": 240,
+      "n_tasks": 120,
+      "recall_reported": {
+        "mean": 0.6133,
+        "ci95": [
+          0.5628,
+          0.6619
+        ],
+        "n_tasks": 120
+      },
+      "recall_at_5": {
+        "mean": 0.4984,
+        "ci95": [
+          0.4495,
+          0.548
+        ],
+        "n_tasks": 120
+      },
+      "recall_at_7": {
+        "mean": 0.5695,
+        "ci95": [
+          0.5191,
+          0.6189
+        ],
+        "n_tasks": 120
+      },
+      "precision": {
+        "mean": 0.399,
+        "ci95": [
+          0.3534,
+          0.4447
+        ],
+        "n_tasks": 120
+      },
+      "all_gold_reported": {
+        "mean": 0.2708,
+        "ci95": [
+          0.2042,
+          0.3417
+        ],
+        "n_tasks": 120
+      },
+      "turns": {
+        "mean": 32.5792,
+        "ci95": [
+          31.0667,
+          33.9917
+        ],
+        "n_tasks": 120,
+        "p50": 39.0
+      },
+      "tokens": {
+        "mean": 736929.3083,
+        "ci95": [
+          678059.5083,
+          796237.1625
+        ],
+        "n_tasks": 120,
+        "p50": 685807.0
+      },
+      "ended_by_report": {
+        "mean": 0.525,
+        "ci95": [
+          0.4542,
+          0.5958
+        ],
+        "n_tasks": 120
+      },
+      "n_reported": {
+        "mean": 7.2917,
+        "ci95": [
+          6.8167,
+          7.7542
+        ],
+        "n_tasks": 120
+      },
+      "recall_touched": {
+        "mean": 0.8007,
+        "ci95": [
+          0.756,
+          0.8407
+        ],
+        "n_tasks": 120
+      },
+      "stop_reasons": {
+        "turns": 114,
+        "report": 126
+      },
+      "calls_per_turn": 1.078
+    },
+    "a1_sem": {
+      "n_rollouts": 240,
+      "n_tasks": 120,
+      "recall_reported": {
+        "mean": 0.6509,
+        "ci95": [
+          0.6008,
+          0.7
+        ],
+        "n_tasks": 120
+      },
+      "recall_at_5": {
+        "mean": 0.5429,
+        "ci95": [
+          0.4919,
+          0.5927
+        ],
+        "n_tasks": 120
+      },
+      "recall_at_7": {
+        "mean": 0.5981,
+        "ci95": [
+          0.547,
+          0.6489
+        ],
+        "n_tasks": 120
+      },
+      "precision": {
+        "mean": 0.4383,
+        "ci95": [
+          0.3913,
+          0.4853
+        ],
+        "n_tasks": 120
+      },
+      "all_gold_reported": {
+        "mean": 0.3083,
+        "ci95": [
+          0.2333,
+          0.3833
+        ],
+        "n_tasks": 120
+      },
+      "turns": {
+        "mean": 32.3417,
+        "ci95": [
+          30.9292,
+          33.7
+        ],
+        "n_tasks": 120,
+        "p50": 37.5
+      },
+      "tokens": {
+        "mean": 765041.0125,
+        "ci95": [
+          706114.0292,
+          823689.9083
+        ],
+        "n_tasks": 120,
+        "p50": 727214.5
+      },
+      "ended_by_report": {
+        "mean": 0.5542,
+        "ci95": [
+          0.4833,
+          0.625
+        ],
+        "n_tasks": 120
+      },
+      "n_reported": {
+        "mean": 7.1292,
+        "ci95": [
+          6.6708,
+          7.5917
+        ],
+        "n_tasks": 120
+      },
+      "recall_touched": {
+        "mean": 0.8398,
+        "ci95": [
+          0.7994,
+          0.8767
+        ],
+        "n_tasks": 120
+      },
+      "stop_reasons": {
+        "report": 133,
+        "turns": 107
+      },
+      "calls_per_turn": 1.049
+    },
+    "base_grep": {
+      "n_rollouts": 240,
+      "n_tasks": 120,
+      "recall_reported": {
+        "mean": 0.5563,
+        "ci95": [
+          0.5048,
+          0.6079
+        ],
+        "n_tasks": 120
+      },
+      "recall_at_5": {
+        "mean": 0.5103,
+        "ci95": [
+          0.4593,
+          0.5632
+        ],
+        "n_tasks": 120
+      },
+      "recall_at_7": {
+        "mean": 0.5446,
+        "ci95": [
+          0.4938,
+          0.5968
+        ],
+        "n_tasks": 120
+      },
+      "precision": {
+        "mean": 0.4727,
+        "ci95": [
+          0.4228,
+          0.5241
+        ],
+        "n_tasks": 120
+      },
+      "all_gold_reported": {
+        "mean": 0.2125,
+        "ci95": [
+          0.15,
+          0.2833
+        ],
+        "n_tasks": 120
+      },
+      "turns": {
+        "mean": 28.5708,
+        "ci95": [
+          27.1083,
+          29.9958
+        ],
+        "n_tasks": 120,
+        "p50": 29.0
+      },
+      "tokens": {
+        "mean": 542467.85,
+        "ci95": [
+          490106.4208,
+          596273.7042
+        ],
+        "n_tasks": 120,
+        "p50": 477988.5
+      },
+      "ended_by_report": {
+        "mean": 0.8292,
+        "ci95": [
+          0.7667,
+          0.8875
+        ],
+        "n_tasks": 120
+      },
+      "n_reported": {
+        "mean": 5.3708,
+        "ci95": [
+          4.9375,
+          5.8
+        ],
+        "n_tasks": 120
+      },
+      "recall_touched": {
+        "mean": 0.7999,
+        "ci95": [
+          0.757,
+          0.8415
+        ],
+        "n_tasks": 120
+      },
+      "stop_reasons": {
+        "report": 199,
+        "turns": 41
+      },
+      "calls_per_turn": 1.101
+    },
+    "base_sem": {
+      "n_rollouts": 240,
+      "n_tasks": 120,
+      "recall_reported": {
+        "mean": 0.5861,
+        "ci95": [
+          0.5368,
+          0.6362
+        ],
+        "n_tasks": 120
+      },
+      "recall_at_5": {
+        "mean": 0.5319,
+        "ci95": [
+          0.4819,
+          0.5828
+        ],
+        "n_tasks": 120
+      },
+      "recall_at_7": {
+        "mean": 0.5668,
+        "ci95": [
+          0.517,
+          0.6175
+        ],
+        "n_tasks": 120
+      },
+      "precision": {
+        "mean": 0.508,
+        "ci95": [
+          0.4562,
+          0.5606
+        ],
+        "n_tasks": 120
+      },
+      "all_gold_reported": {
+        "mean": 0.2333,
+        "ci95": [
+          0.1625,
+          0.3083
+        ],
+        "n_tasks": 120
+      },
+      "turns": {
+        "mean": 26.3708,
+        "ci95": [
+          24.8208,
+          27.8708
+        ],
+        "n_tasks": 120,
+        "p50": 25.5
+      },
+      "tokens": {
+        "mean": 527039.0208,
+        "ci95": [
+          474700.6417,
+          582365.4667
+        ],
+        "n_tasks": 120,
+        "p50": 440480.5
+      },
+      "ended_by_report": {
+        "mean": 0.8625,
+        "ci95": [
+          0.8083,
+          0.9125
+        ],
+        "n_tasks": 120
+      },
+      "n_reported": {
+        "mean": 5.1833,
+        "ci95": [
+          4.775,
+          5.5875
+        ],
+        "n_tasks": 120
+      },
+      "recall_touched": {
+        "mean": 0.8306,
+        "ci95": [
+          0.7899,
+          0.8681
+        ],
+        "n_tasks": 120
+      },
+      "stop_reasons": {
+        "report": 207,
+        "turns": 33
+      },
+      "calls_per_turn": 1.166
+    }
+  },
+  "contrasts": {
+    "v3_minus_a1_grep": {
+      "recall_reported": {
+        "delta": 0.0727,
+        "ci95_task": [
+          0.0377,
+          0.1071
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.0365,
+          0.1077
+        ],
+        "n_repos": 111
+      },
+      "recall_at_5": {
+        "delta": 0.0828,
+        "ci95_task": [
+          0.047,
+          0.1189
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.0472,
+          0.1204
+        ],
+        "n_repos": 111
+      },
+      "recall_at_7": {
+        "delta": 0.0852,
+        "ci95_task": [
+          0.049,
+          0.1216
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.0477,
+          0.1235
+        ],
+        "n_repos": 111
+      },
+      "precision": {
+        "delta": 0.0366,
+        "ci95_task": [
+          0.0082,
+          0.0643
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.0086,
+          0.0643
+        ],
+        "n_repos": 111
+      },
+      "all_gold_reported": {
+        "delta": 0.0708,
+        "ci95_task": [
+          0.0083,
+          0.1333
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.0042,
+          0.1382
+        ],
+        "n_repos": 111
+      },
+      "turns": {
+        "delta": -23.9833,
+        "ci95_task": [
+          -25.3708,
+          -22.475
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -25.3697,
+          -22.5086
+        ],
+        "n_repos": 111
+      },
+      "tokens": {
+        "delta": -528201.7583,
+        "ci95_task": [
+          -580251.3875,
+          -475894.375
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -581311.7124,
+          -475763.4333
+        ],
+        "n_repos": 111
+      },
+      "ended_by_report": {
+        "delta": 0.475,
+        "ci95_task": [
+          0.4,
+          0.5458
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.4076,
+          0.5427
+        ],
+        "n_repos": 111
+      },
+      "n_reported": {
+        "delta": -0.2583,
+        "ci95_task": [
+          -0.6583,
+          0.1417
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -0.6333,
+          0.1283
+        ],
+        "n_repos": 111
+      },
+      "recall_touched": {
+        "delta": 0.0404,
+        "ci95_task": [
+          0.007,
+          0.0754
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.0071,
+          0.0757
+        ],
+        "n_repos": 111
+      }
+    },
+    "v3_minus_a1_sem": {
+      "recall_reported": {
+        "delta": 0.0467,
+        "ci95_task": [
+          0.0128,
+          0.0813
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.0137,
+          0.081
+        ],
+        "n_repos": 111
+      },
+      "recall_at_5": {
+        "delta": 0.0442,
+        "ci95_task": [
+          0.0072,
+          0.0812
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.0072,
+          0.082
+        ],
+        "n_repos": 111
+      },
+      "recall_at_7": {
+        "delta": 0.0622,
+        "ci95_task": [
+          0.0248,
+          0.1004
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.0264,
+          0.1007
+        ],
+        "n_repos": 111
+      },
+      "precision": {
+        "delta": 0.0164,
+        "ci95_task": [
+          -0.0145,
+          0.0457
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -0.0145,
+          0.0477
+        ],
+        "n_repos": 111
+      },
+      "all_gold_reported": {
+        "delta": 0.0375,
+        "ci95_task": [
+          -0.0208,
+          0.0958
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -0.0205,
+          0.0966
+        ],
+        "n_repos": 111
+      },
+      "turns": {
+        "delta": -24.2708,
+        "ci95_task": [
+          -25.4833,
+          -22.9958
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -25.4715,
+          -23.0299
+        ],
+        "n_repos": 111
+      },
+      "tokens": {
+        "delta": -567600.8667,
+        "ci95_task": [
+          -617400.4833,
+          -517780.6125
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -616774.6626,
+          -519371.0478
+        ],
+        "n_repos": 111
+      },
+      "ended_by_report": {
+        "delta": 0.4458,
+        "ci95_task": [
+          0.375,
+          0.5167
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.3729,
+          0.5171
+        ],
+        "n_repos": 111
+      },
+      "n_reported": {
+        "delta": -0.3042,
+        "ci95_task": [
+          -0.675,
+          0.075
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -0.6826,
+          0.0667
+        ],
+        "n_repos": 111
+      },
+      "recall_touched": {
+        "delta": 0.0116,
+        "ci95_task": [
+          -0.0146,
+          0.0398
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -0.0143,
+          0.0387
+        ],
+        "n_repos": 111
+      }
+    },
+    "v3_minus_base_grep": {
+      "recall_reported": {
+        "delta": 0.1298,
+        "ci95_task": [
+          0.0921,
+          0.1689
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.0919,
+          0.1685
+        ],
+        "n_repos": 111
+      },
+      "recall_at_5": {
+        "delta": 0.0709,
+        "ci95_task": [
+          0.0277,
+          0.1144
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.0269,
+          0.1159
+        ],
+        "n_repos": 111
+      },
+      "recall_at_7": {
+        "delta": 0.1101,
+        "ci95_task": [
+          0.0733,
+          0.1488
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.0722,
+          0.1499
+        ],
+        "n_repos": 111
+      },
+      "precision": {
+        "delta": -0.0371,
+        "ci95_task": [
+          -0.0672,
+          -0.0062
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -0.0673,
+          -0.0057
+        ],
+        "n_repos": 111
+      },
+      "all_gold_reported": {
+        "delta": 0.1292,
+        "ci95_task": [
+          0.0708,
+          0.1917
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.0702,
+          0.1942
+        ],
+        "n_repos": 111
+      },
+      "turns": {
+        "delta": -19.975,
+        "ci95_task": [
+          -21.2833,
+          -18.6083
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -21.3248,
+          -18.5943
+        ],
+        "n_repos": 111
+      },
+      "tokens": {
+        "delta": -333740.3,
+        "ci95_task": [
+          -380834.8958,
+          -288944.85
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -380749.9545,
+          -289598.072
+        ],
+        "n_repos": 111
+      },
+      "ended_by_report": {
+        "delta": 0.1708,
+        "ci95_task": [
+          0.1125,
+          0.2333
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.1134,
+          0.2328
+        ],
+        "n_repos": 111
+      },
+      "n_reported": {
+        "delta": 1.6625,
+        "ci95_task": [
+          1.3083,
+          2.0167
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          1.2949,
+          2.0292
+        ],
+        "n_repos": 111
+      },
+      "recall_touched": {
+        "delta": 0.0412,
+        "ci95_task": [
+          0.0079,
+          0.0768
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.0084,
+          0.075
+        ],
+        "n_repos": 111
+      }
+    },
+    "v3_minus_base_sem": {
+      "recall_reported": {
+        "delta": 0.1115,
+        "ci95_task": [
+          0.076,
+          0.1478
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.0769,
+          0.1453
+        ],
+        "n_repos": 111
+      },
+      "recall_at_5": {
+        "delta": 0.0551,
+        "ci95_task": [
+          0.0179,
+          0.0929
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.0174,
+          0.0919
+        ],
+        "n_repos": 111
+      },
+      "recall_at_7": {
+        "delta": 0.0935,
+        "ci95_task": [
+          0.0576,
+          0.1305
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.0585,
+          0.1278
+        ],
+        "n_repos": 111
+      },
+      "precision": {
+        "delta": -0.0533,
+        "ci95_task": [
+          -0.0815,
+          -0.0253
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -0.081,
+          -0.0255
+        ],
+        "n_repos": 111
+      },
+      "all_gold_reported": {
+        "delta": 0.1125,
+        "ci95_task": [
+          0.0583,
+          0.1708
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.0579,
+          0.1681
+        ],
+        "n_repos": 111
+      },
+      "turns": {
+        "delta": -18.3,
+        "ci95_task": [
+          -19.625,
+          -16.9208
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -19.5948,
+          -16.987
+        ],
+        "n_repos": 111
+      },
+      "tokens": {
+        "delta": -329598.875,
+        "ci95_task": [
+          -374491.8375,
+          -287058.8042
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -376790.9145,
+          -286852.3087
+        ],
+        "n_repos": 111
+      },
+      "ended_by_report": {
+        "delta": 0.1375,
+        "ci95_task": [
+          0.0875,
+          0.1917
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.089,
+          0.1901
+        ],
+        "n_repos": 111
+      },
+      "n_reported": {
+        "delta": 1.6417,
+        "ci95_task": [
+          1.2833,
+          2.0
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          1.2823,
+          1.9958
+        ],
+        "n_repos": 111
+      },
+      "recall_touched": {
+        "delta": 0.0208,
+        "ci95_task": [
+          -0.0064,
+          0.0507
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -0.0065,
+          0.0491
+        ],
+        "n_repos": 111
+      }
+    },
+    "a1_minus_base_grep": {
+      "recall_reported": {
+        "delta": 0.057,
+        "ci95_task": [
+          0.0095,
+          0.1051
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.0102,
+          0.1039
+        ],
+        "n_repos": 111
+      },
+      "recall_at_5": {
+        "delta": -0.0119,
+        "ci95_task": [
+          -0.059,
+          0.0363
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -0.0606,
+          0.0355
+        ],
+        "n_repos": 111
+      },
+      "recall_at_7": {
+        "delta": 0.0249,
+        "ci95_task": [
+          -0.0214,
+          0.0719
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -0.0221,
+          0.0729
+        ],
+        "n_repos": 111
+      },
+      "precision": {
+        "delta": -0.0737,
+        "ci95_task": [
+          -0.1082,
+          -0.0376
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -0.1091,
+          -0.0379
+        ],
+        "n_repos": 111
+      },
+      "all_gold_reported": {
+        "delta": 0.0583,
+        "ci95_task": [
+          -0.0083,
+          0.125
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -0.0124,
+          0.125
+        ],
+        "n_repos": 111
+      },
+      "turns": {
+        "delta": 4.0083,
+        "ci95_task": [
+          2.2375,
+          5.7667
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          2.2435,
+          5.8058
+        ],
+        "n_repos": 111
+      },
+      "tokens": {
+        "delta": 194461.4583,
+        "ci95_task": [
+          144108.7833,
+          243714.8125
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          142355.613,
+          245729.4628
+        ],
+        "n_repos": 111
+      },
+      "ended_by_report": {
+        "delta": -0.3042,
+        "ci95_task": [
+          -0.3792,
+          -0.2292
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -0.3782,
+          -0.2333
+        ],
+        "n_repos": 111
+      },
+      "n_reported": {
+        "delta": 1.9208,
+        "ci95_task": [
+          1.4917,
+          2.3542
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          1.5,
+          2.3443
+        ],
+        "n_repos": 111
+      },
+      "recall_touched": {
+        "delta": 0.0008,
+        "ci95_task": [
+          -0.0394,
+          0.0419
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -0.0383,
+          0.038
+        ],
+        "n_repos": 111
+      }
+    },
+    "a1_minus_base_sem": {
+      "recall_reported": {
+        "delta": 0.0648,
+        "ci95_task": [
+          0.0236,
+          0.1061
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.0253,
+          0.1045
+        ],
+        "n_repos": 111
+      },
+      "recall_at_5": {
+        "delta": 0.0109,
+        "ci95_task": [
+          -0.0346,
+          0.0565
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -0.0342,
+          0.0535
+        ],
+        "n_repos": 111
+      },
+      "recall_at_7": {
+        "delta": 0.0313,
+        "ci95_task": [
+          -0.0138,
+          0.0761
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -0.0142,
+          0.0756
+        ],
+        "n_repos": 111
+      },
+      "precision": {
+        "delta": -0.0696,
+        "ci95_task": [
+          -0.1062,
+          -0.0337
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -0.1059,
+          -0.0331
+        ],
+        "n_repos": 111
+      },
+      "all_gold_reported": {
+        "delta": 0.075,
+        "ci95_task": [
+          0.0083,
+          0.1417
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.0088,
+          0.141
+        ],
+        "n_repos": 111
+      },
+      "turns": {
+        "delta": 5.9708,
+        "ci95_task": [
+          4.4958,
+          7.4792
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          4.4402,
+          7.4576
+        ],
+        "n_repos": 111
+      },
+      "tokens": {
+        "delta": 238001.9917,
+        "ci95_task": [
+          182991.9083,
+          290475.2292
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          179471.7695,
+          294377.7009
+        ],
+        "n_repos": 111
+      },
+      "ended_by_report": {
+        "delta": -0.3083,
+        "ci95_task": [
+          -0.3792,
+          -0.2375
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -0.3802,
+          -0.2373
+        ],
+        "n_repos": 111
+      },
+      "n_reported": {
+        "delta": 1.9458,
+        "ci95_task": [
+          1.5542,
+          2.3458
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          1.5583,
+          2.3445
+        ],
+        "n_repos": 111
+      },
+      "recall_touched": {
+        "delta": 0.0091,
+        "ci95_task": [
+          -0.0252,
+          0.0446
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -0.0252,
+          0.0431
+        ],
+        "n_repos": 111
+      }
+    },
+    "v3_sem_minus_grep": {
+      "recall_reported": {
+        "delta": 0.0115,
+        "ci95_task": [
+          -0.0112,
+          0.0344
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -0.0117,
+          0.035
+        ],
+        "n_repos": 111
+      },
+      "turns": {
+        "delta": -0.525,
+        "ci95_task": [
+          -0.8583,
+          -0.2042
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -0.836,
+          -0.2094
+        ],
+        "n_repos": 111
+      },
+      "tokens": {
+        "delta": -11287.4042,
+        "ci95_task": [
+          -25252.4958,
+          2245.1833
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -24604.4545,
+          2235.3879
+        ],
+        "n_repos": 111
+      }
+    },
+    "a1_sem_minus_grep": {
+      "recall_reported": {
+        "delta": 0.0375,
+        "ci95_task": [
+          0.0033,
+          0.0717
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          0.004,
+          0.0708
+        ],
+        "n_repos": 111
+      },
+      "turns": {
+        "delta": -0.2375,
+        "ci95_task": [
+          -1.6167,
+          1.1458
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -1.6471,
+          1.1573
+        ],
+        "n_repos": 111
+      },
+      "tokens": {
+        "delta": 28111.7042,
+        "ci95_task": [
+          -17996.6292,
+          74114.6417
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -16745.9839,
+          73030.875
+        ],
+        "n_repos": 111
+      }
+    },
+    "base_sem_minus_grep": {
+      "recall_reported": {
+        "delta": 0.0298,
+        "ci95_task": [
+          -0.0097,
+          0.0694
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -0.0116,
+          0.0714
+        ],
+        "n_repos": 111
+      },
+      "turns": {
+        "delta": -2.2,
+        "ci95_task": [
+          -3.2042,
+          -1.1833
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -3.1709,
+          -1.1992
+        ],
+        "n_repos": 111
+      },
+      "tokens": {
+        "delta": -15428.8292,
+        "ci95_task": [
+          -53270.15,
+          21871.2875
+        ],
+        "n_tasks": 120,
+        "ci95_repo_cluster": [
+          -53906.3625,
+          23387.5254
+        ],
+        "n_repos": 111
+      }
+    }
+  },
+  "per_language": {
+    "C#": {
+      "n_tasks": 40,
+      "n_repos": 36,
+      "v3_grep_recall_reported": {
+        "mean": 0.6684,
+        "ci95": [
+          0.5832,
+          0.7498
+        ],
+        "n_tasks": 40
+      },
+      "v3_sem_recall_reported": {
+        "mean": 0.6749,
+        "ci95": [
+          0.6005,
+          0.7479
+        ],
+        "n_tasks": 40
+      },
+      "a1_grep_recall_reported": {
+        "mean": 0.5825,
+        "ci95": [
+          0.4929,
+          0.6712
+        ],
+        "n_tasks": 40
+      },
+      "a1_sem_recall_reported": {
+        "mean": 0.6556,
+        "ci95": [
+          0.5631,
+          0.7475
+        ],
+        "n_tasks": 40
+      },
+      "base_grep_recall_reported": {
+        "mean": 0.5211,
+        "ci95": [
+          0.4315,
+          0.6114
+        ],
+        "n_tasks": 40
+      },
+      "base_sem_recall_reported": {
+        "mean": 0.5602,
+        "ci95": [
+          0.4768,
+          0.6448
+        ],
+        "n_tasks": 40
+      },
+      "v3_minus_a1_grep": {
+        "delta": 0.0859,
+        "ci95_task": [
+          0.0348,
+          0.1402
+        ],
+        "n_tasks": 40
+      },
+      "v3_minus_a1_sem": {
+        "delta": 0.0193,
+        "ci95_task": [
+          -0.0305,
+          0.0711
+        ],
+        "n_tasks": 40
+      },
+      "v3_minus_base_grep": {
+        "delta": 0.1474,
+        "ci95_task": [
+          0.0676,
+          0.2298
+        ],
+        "n_tasks": 40
+      }
+    },
+    "Java/Kotlin": {
+      "n_tasks": 40,
+      "n_repos": 40,
+      "v3_grep_recall_reported": {
+        "mean": 0.6799,
+        "ci95": [
+          0.6002,
+          0.7579
+        ],
+        "n_tasks": 40
+      },
+      "v3_sem_recall_reported": {
+        "mean": 0.6843,
+        "ci95": [
+          0.5935,
+          0.7671
+        ],
+        "n_tasks": 40
+      },
+      "a1_grep_recall_reported": {
+        "mean": 0.5966,
+        "ci95": [
+          0.5123,
+          0.6787
+        ],
+        "n_tasks": 40
+      },
+      "a1_sem_recall_reported": {
+        "mean": 0.6278,
+        "ci95": [
+          0.5382,
+          0.7145
+        ],
+        "n_tasks": 40
+      },
+      "base_grep_recall_reported": {
+        "mean": 0.5517,
+        "ci95": [
+          0.4677,
+          0.6359
+        ],
+        "n_tasks": 40
+      },
+      "base_sem_recall_reported": {
+        "mean": 0.6161,
+        "ci95": [
+          0.5275,
+          0.7028
+        ],
+        "n_tasks": 40
+      },
+      "v3_minus_a1_grep": {
+        "delta": 0.0833,
+        "ci95_task": [
+          0.015,
+          0.1494
+        ],
+        "n_tasks": 40
+      },
+      "v3_minus_a1_sem": {
+        "delta": 0.0565,
+        "ci95_task": [
+          -0.0089,
+          0.1237
+        ],
+        "n_tasks": 40
+      },
+      "v3_minus_base_grep": {
+        "delta": 0.1282,
+        "ci95_task": [
+          0.0673,
+          0.189
+        ],
+        "n_tasks": 40
+      }
+    },
+    "Swift": {
+      "n_tasks": 40,
+      "n_repos": 38,
+      "v3_grep_recall_reported": {
+        "mean": 0.7099,
+        "ci95": [
+          0.6151,
+          0.797
+        ],
+        "n_tasks": 40
+      },
+      "v3_sem_recall_reported": {
+        "mean": 0.7334,
+        "ci95": [
+          0.6424,
+          0.8164
+        ],
+        "n_tasks": 40
+      },
+      "a1_grep_recall_reported": {
+        "mean": 0.6609,
+        "ci95": [
+          0.5773,
+          0.7401
+        ],
+        "n_tasks": 40
+      },
+      "a1_sem_recall_reported": {
+        "mean": 0.6692,
+        "ci95": [
+          0.5976,
+          0.74
+        ],
+        "n_tasks": 40
+      },
+      "base_grep_recall_reported": {
+        "mean": 0.5961,
+        "ci95": [
+          0.508,
+          0.6797
+        ],
+        "n_tasks": 40
+      },
+      "base_sem_recall_reported": {
+        "mean": 0.5819,
+        "ci95": [
+          0.4947,
+          0.6663
+        ],
+        "n_tasks": 40
+      },
+      "v3_minus_a1_grep": {
+        "delta": 0.049,
+        "ci95_task": [
+          -0.0123,
+          0.1068
+        ],
+        "n_tasks": 40
+      },
+      "v3_minus_a1_sem": {
+        "delta": 0.0642,
+        "ci95_task": [
+          0.0024,
+          0.1208
+        ],
+        "n_tasks": 40
+      },
+      "v3_minus_base_grep": {
+        "delta": 0.1138,
+        "ci95_task": [
+          0.0647,
+          0.166
+        ],
+        "n_tasks": 40
+      }
+    }
+  },
+  "per_repo": {
+    "v3_minus_a1_grep": {
+      "0Hyacinth0/Notch-Triage": {
+        "n_tasks": 2,
+        "language": "Swift",
+        "delta": 0.1875,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.8125
+      },
+      "0x96f/justty": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "Aspw-w/Krs": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.5,
+        "a1": 0.5
+      },
+      "BlackLabelHQ/SymphonyRecomp": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 0.5,
+        "a1": 0.3333
+      },
+      "Bn5prS/Photon_Gallery": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.4167,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.5833
+      },
+      "CyberGems/CyberWall": {
+        "n_tasks": 2,
+        "language": "C#",
+        "delta": 0.1964,
+        "result": "win",
+        "v3": 0.6071,
+        "a1": 0.4107
+      },
+      "Desert-Ant-Labs/desert-ant-core": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "DevTeam/dotnet-matrix": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.8333
+      },
+      "Dreamucxe/GameCore": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.625,
+        "a1": 0.625
+      },
+      "DualSpirits-Light/maisui-travel": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": -0.0625,
+        "result": "loss",
+        "v3": 0.5625,
+        "a1": 0.625
+      },
+      "ElDavoo/ylih": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": -0.0714,
+        "result": "loss",
+        "v3": 0.3571,
+        "a1": 0.4286
+      },
+      "Ferris-echo/FerrisPulse": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.8333
+      },
+      "FlowPeek/flowpeek": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0625,
+        "result": "win",
+        "v3": 0.5625,
+        "a1": 0.5
+      },
+      "GaBoron/AMLL-into-SPW": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.25,
+        "result": "win",
+        "v3": 0.75,
+        "a1": 0.5
+      },
+      "Jreese702/DS-Forever": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.4,
+        "result": "win",
+        "v3": 0.6,
+        "a1": 0.2
+      },
+      "KZCFG/AILSA-SubSwitch": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.25,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.75
+      },
+      "Kurashift/mihon-vienna": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.5,
+        "a1": 0.5
+      },
+      "Kyant0/AMDL": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": -0.0556,
+        "result": "loss",
+        "v3": 0.5556,
+        "a1": 0.6111
+      },
+      "Laufbursche42/tr-lb-edition": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 0.6111,
+        "a1": 0.4444
+      },
+      "Loecedas/SnapFind": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.625,
+        "result": "win",
+        "v3": 0.625,
+        "a1": 0.0
+      },
+      "Loopayeh/pkg-sender": {
+        "n_tasks": 2,
+        "language": "C#",
+        "delta": 0.0625,
+        "result": "win",
+        "v3": 0.6875,
+        "a1": 0.625
+      },
+      "MIAOKATZE/GT-Miao-Blueprint": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.8333
+      },
+      "Manan-Santoki/OpenShelf": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.125,
+        "result": "win",
+        "v3": 0.875,
+        "a1": 0.75
+      },
+      "Maxaccurate/ZestDrop": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.1429,
+        "result": "win",
+        "v3": 0.7143,
+        "a1": 0.5714
+      },
+      "Moonwalker1307/PdfPecker": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 0.7222,
+        "a1": 0.5556
+      },
+      "Nodibell/SwiftSci": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "P4R1H/ohman": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": -0.1667,
+        "result": "loss",
+        "v3": 0.6667,
+        "a1": 0.8333
+      },
+      "RoderickQiu/qtube-music": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": -0.5,
+        "result": "loss",
+        "v3": 0.0,
+        "a1": 0.5
+      },
+      "SakuraCordApp/SakuraCord": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.25,
+        "result": "win",
+        "v3": 0.875,
+        "a1": 0.625
+      },
+      "SamGu-NRX/Caret": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.3333,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.6667
+      },
+      "Sarg338/Homestead": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.0,
+        "a1": 0.0
+      },
+      "Shman4ik/pgNimbus": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0625,
+        "result": "win",
+        "v3": 0.5625,
+        "a1": 0.5
+      },
+      "So2K/UltraExplorer": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": -0.0625,
+        "result": "loss",
+        "v3": 0.5,
+        "a1": 0.5625
+      },
+      "SteveTheKiller/KillerShell": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.3333,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.6667
+      },
+      "Stratus-Security/Sift": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "SyHaqi/kiko": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.25,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.75
+      },
+      "TWJohnJohn20116/mc-auto-translation-tool": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": -0.6,
+        "result": "loss",
+        "v3": 0.4,
+        "a1": 1.0
+      },
+      "Tobi1chi/OpenRayneo": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0833,
+        "result": "win",
+        "v3": 0.8333,
+        "a1": 0.75
+      },
+      "Venipa/Borderless": {
+        "n_tasks": 2,
+        "language": "C#",
+        "delta": 0.0833,
+        "result": "win",
+        "v3": 0.6667,
+        "a1": 0.5833
+      },
+      "Viemean/qmtui": {
+        "n_tasks": 2,
+        "language": "C#",
+        "delta": -0.125,
+        "result": "loss",
+        "v3": 0.6667,
+        "a1": 0.7917
+      },
+      "Voicedrew11/verdite3": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": -0.125,
+        "result": "loss",
+        "v3": 0.625,
+        "a1": 0.75
+      },
+      "acorn-playground/macbeeb": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.5714,
+        "a1": 0.5714
+      },
+      "al3nkboot/mi5g-tv": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": -0.5,
+        "result": "loss",
+        "v3": 0.5,
+        "a1": 1.0
+      },
+      "allanlinallan/AI-Track-Splitter": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 0.8333,
+        "a1": 0.6667
+      },
+      "amiantos/lurker-ios": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "andrearicci93/vetro": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.4167,
+        "a1": 0.4167
+      },
+      "aoreshkov/oracle-forms-mcp": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.2857,
+        "result": "win",
+        "v3": 0.6429,
+        "a1": 0.3571
+      },
+      "aspollon/AFK-Realm": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.25,
+        "result": "win",
+        "v3": 0.75,
+        "a1": 0.5
+      },
+      "bddicken/parallax": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.125,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.875
+      },
+      "blendi-remade/agentcraft": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.3333,
+        "a1": 0.3333
+      },
+      "bojieli/DoNotType": {
+        "n_tasks": 3,
+        "language": "Swift",
+        "delta": 0.0863,
+        "result": "win",
+        "v3": 0.2827,
+        "a1": 0.1964
+      },
+      "btripp/openflight-mobile-kmp": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0833,
+        "result": "win",
+        "v3": 0.8333,
+        "a1": 0.75
+      },
+      "chasem-dev/sms-android": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.75,
+        "a1": 0.75
+      },
+      "chrisbanes/portico": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.1,
+        "result": "win",
+        "v3": 0.8,
+        "a1": 0.7
+      },
+      "chuanjianghe1024-cmd/FluentControl": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.5,
+        "a1": 0.5
+      },
+      "coryparrry/Intents": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": -0.1667,
+        "result": "loss",
+        "v3": 0.5,
+        "a1": 0.6667
+      },
+      "crimera/piko-ig-lite": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "davidsantanaalves/HyperBatteryMonitor": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.25,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.75
+      },
+      "dboudreau00/Xault-Wallet": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0625,
+        "result": "win",
+        "v3": 0.25,
+        "a1": 0.1875
+      },
+      "democard/xmu_assistant": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.3333,
+        "result": "win",
+        "v3": 0.3333,
+        "a1": 0.0
+      },
+      "dlsdgj/HoverExplorer": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.6667,
+        "a1": 0.6667
+      },
+      "doguyilmaz/battistics": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.25,
+        "result": "win",
+        "v3": 0.75,
+        "a1": 0.5
+      },
+      "dontpanicv/mycroft": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 0.5,
+        "a1": 0.3333
+      },
+      "dphmoblie/deepseek-harness-android": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.25,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.75
+      },
+      "eatenlamp/adbcaptain": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": -0.1,
+        "result": "loss",
+        "v3": 0.9,
+        "a1": 1.0
+      },
+      "glgen/UEBlueprintGraphViewer": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.75,
+        "a1": 0.75
+      },
+      "hqwuzhaoyi/TokenPulse": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": -0.5,
+        "result": "loss",
+        "v3": 0.5,
+        "a1": 1.0
+      },
+      "hxreborn/morphe-patches": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.6667,
+        "a1": 0.6667
+      },
+      "iron431/irons-artifice": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": -0.25,
+        "result": "loss",
+        "v3": 0.75,
+        "a1": 1.0
+      },
+      "jeremyaliparo/nitrous": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": -0.1667,
+        "result": "loss",
+        "v3": 0.6667,
+        "a1": 0.8333
+      },
+      "jiang225638/wechat-assistant": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.5,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.5
+      },
+      "jordanwoodson/lurk-morphe-patches": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.5,
+        "a1": 0.5
+      },
+      "katoaapps/openminilaunch": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "kuafuai/andee": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "kylebrowning/BLESwift": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": -0.125,
+        "result": "loss",
+        "v3": 0.5,
+        "a1": 0.625
+      },
+      "legendsteel11/Edgetree": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.3,
+        "result": "win",
+        "v3": 0.7,
+        "a1": 0.4
+      },
+      "mattt/preowned": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "microsoft/Zoomit-Mac": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.25,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.75
+      },
+      "mikker/Fst": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.875,
+        "a1": 0.875
+      },
+      "mozaiz/glass-tv-phone-remote": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.25,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.75
+      },
+      "msbluesnow/Cyclauncher": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.3,
+        "result": "win",
+        "v3": 0.9,
+        "a1": 0.6
+      },
+      "mstcgalis/scratchpad-launcher": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.2778,
+        "result": "win",
+        "v3": 0.8333,
+        "a1": 0.5556
+      },
+      "mustafakendiguzel/aso-workbench": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.125,
+        "result": "win",
+        "v3": 0.625,
+        "a1": 0.5
+      },
+      "naddi96/opengarmin": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0833,
+        "result": "win",
+        "v3": 0.5,
+        "a1": 0.4167
+      },
+      "nullifye/MiTV-Debloat": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.5,
+        "result": "win",
+        "v3": 0.8333,
+        "a1": 0.3333
+      },
+      "owngoal-dev/Inspector": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.7222,
+        "a1": 0.7222
+      },
+      "pengchujin/tower": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.6667,
+        "a1": 0.6667
+      },
+      "petit-software/ultra-swift": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 0.1667,
+        "a1": 0.0
+      },
+      "potatoQi/LumaRing": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": -0.1667,
+        "result": "loss",
+        "v3": 0.7778,
+        "a1": 0.9444
+      },
+      "ppixu/beamhook": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 0.5,
+        "a1": 0.3333
+      },
+      "ptrinh/viettelex": {
+        "n_tasks": 2,
+        "language": "Swift",
+        "delta": 0.375,
+        "result": "win",
+        "v3": 0.9375,
+        "a1": 0.5625
+      },
+      "rickgaiser/TiaMcp": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "ronadin2002/jev-cua": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.2,
+        "result": "win",
+        "v3": 0.8,
+        "a1": 0.6
+      },
+      "shadowofze/OfflineDAoC": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.0,
+        "a1": 0.0
+      },
+      "sheep-programmer/mobilegh": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.6667,
+        "a1": 0.6667
+      },
+      "shhivv/third-hand": {
+        "n_tasks": 2,
+        "language": "Swift",
+        "delta": 0.0625,
+        "result": "win",
+        "v3": 0.8264,
+        "a1": 0.7639
+      },
+      "shilapi/xcertplay": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.3333,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.6667
+      },
+      "sleeeppy/mochinotch": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.05,
+        "result": "win",
+        "v3": 0.45,
+        "a1": 0.4
+      },
+      "sofianeelhor/PKForge": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.1429,
+        "result": "win",
+        "v3": 0.4286,
+        "a1": 0.2857
+      },
+      "spkesDE/jellyfin-featured-plugin": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": -0.1667,
+        "result": "loss",
+        "v3": 0.6667,
+        "a1": 0.8333
+      },
+      "sql-bi/SQLBI-Whiteboard": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "sumimakito/Mac-Duo": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "thefraggle/songflip": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.0,
+        "a1": 0.0
+      },
+      "vogellacompany/eclipse-mcp-server": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.5,
+        "a1": 0.5
+      },
+      "voltura/voltura-air": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.125,
+        "a1": 0.125
+      },
+      "votrongdao/FlowX": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.125,
+        "result": "win",
+        "v3": 0.5,
+        "a1": 0.375
+      },
+      "wangliunian5/diplay-lite": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0833,
+        "result": "win",
+        "v3": 0.3333,
+        "a1": 0.25
+      },
+      "wxxsfxyzm/MiuiBackGestureHook": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 0.8333,
+        "a1": 0.6667
+      },
+      "xiarongwu123/AMD-DLSS-MU": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "zengtianli/WeChatUnrevoke": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.25,
+        "a1": 0.25
+      },
+      "zonble/zago": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": -0.3571,
+        "result": "loss",
+        "v3": 0.3571,
+        "a1": 0.7143
+      }
+    },
+    "v3_minus_a1_sem": {
+      "0Hyacinth0/Notch-Triage": {
+        "n_tasks": 2,
+        "language": "Swift",
+        "delta": 0.25,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.75
+      },
+      "0x96f/justty": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "Aspw-w/Krs": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.5,
+        "a1": 0.5
+      },
+      "BlackLabelHQ/SymphonyRecomp": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.6667,
+        "a1": 0.6667
+      },
+      "Bn5prS/Photon_Gallery": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.25,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.75
+      },
+      "CyberGems/CyberWall": {
+        "n_tasks": 2,
+        "language": "C#",
+        "delta": 0.1429,
+        "result": "win",
+        "v3": 0.6429,
+        "a1": 0.5
+      },
+      "Desert-Ant-Labs/desert-ant-core": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "DevTeam/dotnet-matrix": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "Dreamucxe/GameCore": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.1875,
+        "result": "win",
+        "v3": 0.75,
+        "a1": 0.5625
+      },
+      "DualSpirits-Light/maisui-travel": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0625,
+        "result": "win",
+        "v3": 0.5625,
+        "a1": 0.5
+      },
+      "ElDavoo/ylih": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": -0.0714,
+        "result": "loss",
+        "v3": 0.3571,
+        "a1": 0.4286
+      },
+      "Ferris-echo/FerrisPulse": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.8333,
+        "a1": 0.8333
+      },
+      "FlowPeek/flowpeek": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.5,
+        "a1": 0.5
+      },
+      "GaBoron/AMLL-into-SPW": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.25,
+        "result": "win",
+        "v3": 0.75,
+        "a1": 0.5
+      },
+      "Jreese702/DS-Forever": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.5,
+        "result": "win",
+        "v3": 0.8,
+        "a1": 0.3
+      },
+      "KZCFG/AILSA-SubSwitch": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "Kurashift/mihon-vienna": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.75,
+        "a1": 0.75
+      },
+      "Kyant0/AMDL": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": -0.2778,
+        "result": "loss",
+        "v3": 0.3333,
+        "a1": 0.6111
+      },
+      "Laufbursche42/tr-lb-edition": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0556,
+        "result": "win",
+        "v3": 0.5,
+        "a1": 0.4444
+      },
+      "Loecedas/SnapFind": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.125,
+        "result": "win",
+        "v3": 0.75,
+        "a1": 0.625
+      },
+      "Loopayeh/pkg-sender": {
+        "n_tasks": 2,
+        "language": "C#",
+        "delta": 0.0312,
+        "result": "win",
+        "v3": 0.7188,
+        "a1": 0.6875
+      },
+      "MIAOKATZE/GT-Miao-Blueprint": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "Manan-Santoki/OpenShelf": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.125,
+        "result": "win",
+        "v3": 0.875,
+        "a1": 0.75
+      },
+      "Maxaccurate/ZestDrop": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.6429,
+        "a1": 0.6429
+      },
+      "Moonwalker1307/PdfPecker": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.1111,
+        "result": "win",
+        "v3": 0.6667,
+        "a1": 0.5556
+      },
+      "Nodibell/SwiftSci": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.8333
+      },
+      "P4R1H/ohman": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.6667,
+        "a1": 0.6667
+      },
+      "RoderickQiu/qtube-music": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": -0.25,
+        "result": "loss",
+        "v3": 0.0,
+        "a1": 0.25
+      },
+      "SakuraCordApp/SakuraCord": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.25,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.75
+      },
+      "SamGu-NRX/Caret": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "Sarg338/Homestead": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.0,
+        "a1": 0.0
+      },
+      "Shman4ik/pgNimbus": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": -0.0625,
+        "result": "loss",
+        "v3": 0.375,
+        "a1": 0.4375
+      },
+      "So2K/UltraExplorer": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0625,
+        "result": "win",
+        "v3": 0.5625,
+        "a1": 0.5
+      },
+      "SteveTheKiller/KillerShell": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "Stratus-Security/Sift": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "SyHaqi/kiko": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "TWJohnJohn20116/mc-auto-translation-tool": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": -0.3,
+        "result": "loss",
+        "v3": 0.7,
+        "a1": 1.0
+      },
+      "Tobi1chi/OpenRayneo": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.6667,
+        "a1": 0.6667
+      },
+      "Venipa/Borderless": {
+        "n_tasks": 2,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.75,
+        "a1": 0.75
+      },
+      "Viemean/qmtui": {
+        "n_tasks": 2,
+        "language": "C#",
+        "delta": 0.0417,
+        "result": "win",
+        "v3": 0.9167,
+        "a1": 0.875
+      },
+      "Voicedrew11/verdite3": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.625,
+        "a1": 0.625
+      },
+      "acorn-playground/macbeeb": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.2143,
+        "result": "win",
+        "v3": 0.7143,
+        "a1": 0.5
+      },
+      "al3nkboot/mi5g-tv": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": -0.5,
+        "result": "loss",
+        "v3": 0.5,
+        "a1": 1.0
+      },
+      "allanlinallan/AI-Track-Splitter": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": -0.1667,
+        "result": "loss",
+        "v3": 0.75,
+        "a1": 0.9167
+      },
+      "amiantos/lurker-ios": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "andrearicci93/vetro": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": -0.0833,
+        "result": "loss",
+        "v3": 0.3333,
+        "a1": 0.4167
+      },
+      "aoreshkov/oracle-forms-mcp": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.2857,
+        "result": "win",
+        "v3": 0.6429,
+        "a1": 0.3571
+      },
+      "aspollon/AFK-Realm": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": -0.25,
+        "result": "loss",
+        "v3": 0.75,
+        "a1": 1.0
+      },
+      "bddicken/parallax": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.125,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.875
+      },
+      "blendi-remade/agentcraft": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.3333,
+        "a1": 0.3333
+      },
+      "bojieli/DoNotType": {
+        "n_tasks": 3,
+        "language": "Swift",
+        "delta": 0.2202,
+        "result": "win",
+        "v3": 0.5089,
+        "a1": 0.2887
+      },
+      "btripp/openflight-mobile-kmp": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.75,
+        "a1": 0.75
+      },
+      "chasem-dev/sms-android": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.125,
+        "result": "win",
+        "v3": 0.75,
+        "a1": 0.625
+      },
+      "chrisbanes/portico": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.3,
+        "result": "win",
+        "v3": 0.8,
+        "a1": 0.5
+      },
+      "chuanjianghe1024-cmd/FluentControl": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.125,
+        "result": "win",
+        "v3": 0.625,
+        "a1": 0.5
+      },
+      "coryparrry/Intents": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.6667,
+        "a1": 0.6667
+      },
+      "crimera/piko-ig-lite": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "davidsantanaalves/HyperBatteryMonitor": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "dboudreau00/Xault-Wallet": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.25,
+        "a1": 0.25
+      },
+      "democard/xmu_assistant": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.0,
+        "a1": 0.0
+      },
+      "dlsdgj/HoverExplorer": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.6667,
+        "a1": 0.6667
+      },
+      "doguyilmaz/battistics": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": -0.125,
+        "result": "loss",
+        "v3": 0.75,
+        "a1": 0.875
+      },
+      "dontpanicv/mycroft": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": -0.1667,
+        "result": "loss",
+        "v3": 0.3333,
+        "a1": 0.5
+      },
+      "dphmoblie/deepseek-harness-android": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "eatenlamp/adbcaptain": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.9,
+        "a1": 0.9
+      },
+      "glgen/UEBlueprintGraphViewer": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": -0.25,
+        "result": "loss",
+        "v3": 0.5,
+        "a1": 0.75
+      },
+      "hqwuzhaoyi/TokenPulse": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.75,
+        "a1": 0.75
+      },
+      "hxreborn/morphe-patches": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "iron431/irons-artifice": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.125,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.875
+      },
+      "jeremyaliparo/nitrous": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 0.6667,
+        "a1": 0.5
+      },
+      "jiang225638/wechat-assistant": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": -0.25,
+        "result": "loss",
+        "v3": 0.75,
+        "a1": 1.0
+      },
+      "jordanwoodson/lurk-morphe-patches": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.5,
+        "a1": 0.5
+      },
+      "katoaapps/openminilaunch": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "kuafuai/andee": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "kylebrowning/BLESwift": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.625,
+        "a1": 0.625
+      },
+      "legendsteel11/Edgetree": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.4,
+        "result": "win",
+        "v3": 0.7,
+        "a1": 0.3
+      },
+      "mattt/preowned": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "microsoft/Zoomit-Mac": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.125,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.875
+      },
+      "mikker/Fst": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.25,
+        "result": "win",
+        "v3": 0.875,
+        "a1": 0.625
+      },
+      "mozaiz/glass-tv-phone-remote": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.5,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.5
+      },
+      "msbluesnow/Cyclauncher": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.8,
+        "a1": 0.8
+      },
+      "mstcgalis/scratchpad-launcher": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.1111,
+        "result": "win",
+        "v3": 0.7778,
+        "a1": 0.6667
+      },
+      "mustafakendiguzel/aso-workbench": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.125,
+        "result": "win",
+        "v3": 0.625,
+        "a1": 0.5
+      },
+      "naddi96/opengarmin": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0833,
+        "result": "win",
+        "v3": 0.5,
+        "a1": 0.4167
+      },
+      "nullifye/MiTV-Debloat": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.5,
+        "result": "win",
+        "v3": 0.8333,
+        "a1": 0.3333
+      },
+      "owngoal-dev/Inspector": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 0.6667,
+        "a1": 0.5
+      },
+      "pengchujin/tower": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.6667,
+        "a1": 0.6667
+      },
+      "petit-software/ultra-swift": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0833,
+        "result": "win",
+        "v3": 0.1667,
+        "a1": 0.0833
+      },
+      "potatoQi/LumaRing": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 0.8333,
+        "a1": 0.6667
+      },
+      "ppixu/beamhook": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.3333,
+        "result": "win",
+        "v3": 0.6667,
+        "a1": 0.3333
+      },
+      "ptrinh/viettelex": {
+        "n_tasks": 2,
+        "language": "Swift",
+        "delta": 0.0625,
+        "result": "win",
+        "v3": 0.75,
+        "a1": 0.6875
+      },
+      "rickgaiser/TiaMcp": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "ronadin2002/jev-cua": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.8,
+        "a1": 0.8
+      },
+      "shadowofze/OfflineDAoC": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.0,
+        "a1": 0.0
+      },
+      "sheep-programmer/mobilegh": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": -0.1667,
+        "result": "loss",
+        "v3": 0.6667,
+        "a1": 0.8333
+      },
+      "shhivv/third-hand": {
+        "n_tasks": 2,
+        "language": "Swift",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 0.7639,
+        "a1": 0.5972
+      },
+      "shilapi/xcertplay": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.5,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.5
+      },
+      "sleeeppy/mochinotch": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.4,
+        "result": "win",
+        "v3": 0.65,
+        "a1": 0.25
+      },
+      "sofianeelhor/PKForge": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.2857,
+        "result": "win",
+        "v3": 0.4286,
+        "a1": 0.1429
+      },
+      "spkesDE/jellyfin-featured-plugin": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.6667,
+        "a1": 0.6667
+      },
+      "sql-bi/SQLBI-Whiteboard": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.25,
+        "result": "win",
+        "v3": 0.75,
+        "a1": 0.5
+      },
+      "sumimakito/Mac-Duo": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "thefraggle/songflip": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": -0.5,
+        "result": "loss",
+        "v3": 0.0,
+        "a1": 0.5
+      },
+      "vogellacompany/eclipse-mcp-server": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.25,
+        "result": "win",
+        "v3": 0.75,
+        "a1": 0.5
+      },
+      "voltura/voltura-air": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.25,
+        "a1": 0.25
+      },
+      "votrongdao/FlowX": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": -0.25,
+        "result": "loss",
+        "v3": 0.5,
+        "a1": 0.75
+      },
+      "wangliunian5/diplay-lite": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": -0.1667,
+        "result": "loss",
+        "v3": 0.25,
+        "a1": 0.4167
+      },
+      "wxxsfxyzm/MiuiBackGestureHook": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": -0.1667,
+        "result": "loss",
+        "v3": 0.6667,
+        "a1": 0.8333
+      },
+      "xiarongwu123/AMD-DLSS-MU": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "zengtianli/WeChatUnrevoke": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": -0.375,
+        "result": "loss",
+        "v3": 0.25,
+        "a1": 0.625
+      },
+      "zonble/zago": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": -0.2143,
+        "result": "loss",
+        "v3": 0.2143,
+        "a1": 0.4286
+      }
+    },
+    "v3_minus_base_grep": {
+      "0Hyacinth0/Notch-Triage": {
+        "n_tasks": 2,
+        "language": "Swift",
+        "delta": 0.375,
+        "result": "win",
+        "v3": 1.0,
+        "base": 0.625
+      },
+      "0x96f/justty": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.2,
+        "result": "win",
+        "v3": 1.0,
+        "base": 0.8
+      },
+      "Aspw-w/Krs": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.5,
+        "base": 0.5
+      },
+      "BlackLabelHQ/SymphonyRecomp": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 0.5,
+        "base": 0.3333
+      },
+      "Bn5prS/Photon_Gallery": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "base": 1.0
+      },
+      "CyberGems/CyberWall": {
+        "n_tasks": 2,
+        "language": "C#",
+        "delta": 0.3214,
+        "result": "win",
+        "v3": 0.6071,
+        "base": 0.2857
+      },
+      "Desert-Ant-Labs/desert-ant-core": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "base": 1.0
+      },
+      "DevTeam/dotnet-matrix": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "base": 1.0
+      },
+      "Dreamucxe/GameCore": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0625,
+        "result": "win",
+        "v3": 0.625,
+        "base": 0.5625
+      },
+      "DualSpirits-Light/maisui-travel": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0625,
+        "result": "win",
+        "v3": 0.5625,
+        "base": 0.5
+      },
+      "ElDavoo/ylih": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0714,
+        "result": "win",
+        "v3": 0.3571,
+        "base": 0.2857
+      },
+      "Ferris-echo/FerrisPulse": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.5,
+        "result": "win",
+        "v3": 1.0,
+        "base": 0.5
+      },
+      "FlowPeek/flowpeek": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.375,
+        "result": "win",
+        "v3": 0.5625,
+        "base": 0.1875
+      },
+      "GaBoron/AMLL-into-SPW": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.75,
+        "base": 0.75
+      },
+      "Jreese702/DS-Forever": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.4,
+        "result": "win",
+        "v3": 0.6,
+        "base": 0.2
+      },
+      "KZCFG/AILSA-SubSwitch": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "base": 1.0
+      },
+      "Kurashift/mihon-vienna": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": -0.25,
+        "result": "loss",
+        "v3": 0.5,
+        "base": 0.75
+      },
+      "Kyant0/AMDL": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.3889,
+        "result": "win",
+        "v3": 0.5556,
+        "base": 0.1667
+      },
+      "Laufbursche42/tr-lb-edition": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.2778,
+        "result": "win",
+        "v3": 0.6111,
+        "base": 0.3333
+      },
+      "Loecedas/SnapFind": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": -0.25,
+        "result": "loss",
+        "v3": 0.625,
+        "base": 0.875
+      },
+      "Loopayeh/pkg-sender": {
+        "n_tasks": 2,
+        "language": "C#",
+        "delta": 0.5625,
+        "result": "win",
+        "v3": 0.6875,
+        "base": 0.125
+      },
+      "MIAOKATZE/GT-Miao-Blueprint": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 1.0,
+        "base": 0.8333
+      },
+      "Manan-Santoki/OpenShelf": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.125,
+        "result": "win",
+        "v3": 0.875,
+        "base": 0.75
+      },
+      "Maxaccurate/ZestDrop": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.2143,
+        "result": "win",
+        "v3": 0.7143,
+        "base": 0.5
+      },
+      "Moonwalker1307/PdfPecker": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.3333,
+        "result": "win",
+        "v3": 0.7222,
+        "base": 0.3889
+      },
+      "Nodibell/SwiftSci": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "base": 1.0
+      },
+      "P4R1H/ohman": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": -0.1667,
+        "result": "loss",
+        "v3": 0.6667,
+        "base": 0.8333
+      },
+      "RoderickQiu/qtube-music": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.0,
+        "base": 0.0
+      },
+      "SakuraCordApp/SakuraCord": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.125,
+        "result": "win",
+        "v3": 0.875,
+        "base": 0.75
+      },
+      "SamGu-NRX/Caret": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.3333,
+        "result": "win",
+        "v3": 1.0,
+        "base": 0.6667
+      },
+      "Sarg338/Homestead": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.0,
+        "base": 0.0
+      },
+      "Shman4ik/pgNimbus": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.3125,
+        "result": "win",
+        "v3": 0.5625,
+        "base": 0.25
+      },
+      "So2K/UltraExplorer": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": -0.125,
+        "result": "loss",
+        "v3": 0.5,
+        "base": 0.625
+      },
+      "SteveTheKiller/KillerShell": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "base": 1.0
+      },
+      "Stratus-Security/Sift": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "base": 1.0
+      },
+      "SyHaqi/kiko": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "base": 1.0
+      },
+      "TWJohnJohn20116/mc-auto-translation-tool": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": -0.3,
+        "result": "loss",
+        "v3": 0.4,
+        "base": 0.7
+      },
+      "Tobi1chi/OpenRayneo": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 0.8333,
+        "base": 0.6667
+      },
+      "Venipa/Borderless": {
+        "n_tasks": 2,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.6667,
+        "base": 0.6667
+      },
+      "Viemean/qmtui": {
+        "n_tasks": 2,
+        "language": "C#",
+        "delta": -0.125,
+        "result": "loss",
+        "v3": 0.6667,
+        "base": 0.7917
+      },
+      "Voicedrew11/verdite3": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.375,
+        "result": "win",
+        "v3": 0.625,
+        "base": 0.25
+      },
+      "acorn-playground/macbeeb": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.2143,
+        "result": "win",
+        "v3": 0.5714,
+        "base": 0.3571
+      },
+      "al3nkboot/mi5g-tv": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.5,
+        "base": 0.5
+      },
+      "allanlinallan/AI-Track-Splitter": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.3333,
+        "result": "win",
+        "v3": 0.8333,
+        "base": 0.5
+      },
+      "amiantos/lurker-ios": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "base": 1.0
+      },
+      "andrearicci93/vetro": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 0.4167,
+        "base": 0.25
+      },
+      "aoreshkov/oracle-forms-mcp": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0714,
+        "result": "win",
+        "v3": 0.6429,
+        "base": 0.5714
+      },
+      "aspollon/AFK-Realm": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.5,
+        "result": "win",
+        "v3": 0.75,
+        "base": 0.25
+      },
+      "bddicken/parallax": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.25,
+        "result": "win",
+        "v3": 1.0,
+        "base": 0.75
+      },
+      "blendi-remade/agentcraft": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.3333,
+        "base": 0.3333
+      },
+      "bojieli/DoNotType": {
+        "n_tasks": 3,
+        "language": "Swift",
+        "delta": 0.0179,
+        "result": "win",
+        "v3": 0.2827,
+        "base": 0.2649
+      },
+      "btripp/openflight-mobile-kmp": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.8333,
+        "base": 0.8333
+      },
+      "chasem-dev/sms-android": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.125,
+        "result": "win",
+        "v3": 0.75,
+        "base": 0.625
+      },
+      "chrisbanes/portico": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.4,
+        "result": "win",
+        "v3": 0.8,
+        "base": 0.4
+      },
+      "chuanjianghe1024-cmd/FluentControl": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.125,
+        "result": "win",
+        "v3": 0.5,
+        "base": 0.375
+      },
+      "coryparrry/Intents": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": -0.1667,
+        "result": "loss",
+        "v3": 0.5,
+        "base": 0.6667
+      },
+      "crimera/piko-ig-lite": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "base": 1.0
+      },
+      "davidsantanaalves/HyperBatteryMonitor": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "base": 1.0
+      },
+      "dboudreau00/Xault-Wallet": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.25,
+        "base": 0.25
+      },
+      "democard/xmu_assistant": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 0.3333,
+        "base": 0.1667
+      },
+      "dlsdgj/HoverExplorer": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.6667,
+        "base": 0.6667
+      },
+      "doguyilmaz/battistics": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.125,
+        "result": "win",
+        "v3": 0.75,
+        "base": 0.625
+      },
+      "dontpanicv/mycroft": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": -0.1667,
+        "result": "loss",
+        "v3": 0.5,
+        "base": 0.6667
+      },
+      "dphmoblie/deepseek-harness-android": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "base": 1.0
+      },
+      "eatenlamp/adbcaptain": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.3,
+        "result": "win",
+        "v3": 0.9,
+        "base": 0.6
+      },
+      "glgen/UEBlueprintGraphViewer": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.25,
+        "result": "win",
+        "v3": 0.75,
+        "base": 0.5
+      },
+      "hqwuzhaoyi/TokenPulse": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.5,
+        "base": 0.5
+      },
+      "hxreborn/morphe-patches": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 0.6667,
+        "base": 0.5
+      },
+      "iron431/irons-artifice": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.375,
+        "result": "win",
+        "v3": 0.75,
+        "base": 0.375
+      },
+      "jeremyaliparo/nitrous": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 0.6667,
+        "base": 0.5
+      },
+      "jiang225638/wechat-assistant": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "base": 1.0
+      },
+      "jordanwoodson/lurk-morphe-patches": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.5,
+        "base": 0.5
+      },
+      "katoaapps/openminilaunch": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.5,
+        "result": "win",
+        "v3": 1.0,
+        "base": 0.5
+      },
+      "kuafuai/andee": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "base": 1.0
+      },
+      "kylebrowning/BLESwift": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.5,
+        "base": 0.5
+      },
+      "legendsteel11/Edgetree": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.6,
+        "result": "win",
+        "v3": 0.7,
+        "base": 0.1
+      },
+      "mattt/preowned": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.5,
+        "result": "win",
+        "v3": 1.0,
+        "base": 0.5
+      },
+      "microsoft/Zoomit-Mac": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "base": 1.0
+      },
+      "mikker/Fst": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.125,
+        "result": "win",
+        "v3": 0.875,
+        "base": 0.75
+      },
+      "mozaiz/glass-tv-phone-remote": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.5,
+        "result": "win",
+        "v3": 1.0,
+        "base": 0.5
+      },
+      "msbluesnow/Cyclauncher": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.1,
+        "result": "win",
+        "v3": 0.9,
+        "base": 0.8
+      },
+      "mstcgalis/scratchpad-launcher": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.1111,
+        "result": "win",
+        "v3": 0.8333,
+        "base": 0.7222
+      },
+      "mustafakendiguzel/aso-workbench": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.375,
+        "result": "win",
+        "v3": 0.625,
+        "base": 0.25
+      },
+      "naddi96/opengarmin": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": -0.1667,
+        "result": "loss",
+        "v3": 0.5,
+        "base": 0.6667
+      },
+      "nullifye/MiTV-Debloat": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.5,
+        "result": "win",
+        "v3": 0.8333,
+        "base": 0.3333
+      },
+      "owngoal-dev/Inspector": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.1111,
+        "result": "win",
+        "v3": 0.7222,
+        "base": 0.6111
+      },
+      "pengchujin/tower": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.6667,
+        "base": 0.6667
+      },
+      "petit-software/ultra-swift": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 0.1667,
+        "base": 0.0
+      },
+      "potatoQi/LumaRing": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.2222,
+        "result": "win",
+        "v3": 0.7778,
+        "base": 0.5556
+      },
+      "ppixu/beamhook": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": -0.1667,
+        "result": "loss",
+        "v3": 0.5,
+        "base": 0.6667
+      },
+      "ptrinh/viettelex": {
+        "n_tasks": 2,
+        "language": "Swift",
+        "delta": 0.0625,
+        "result": "win",
+        "v3": 0.9375,
+        "base": 0.875
+      },
+      "rickgaiser/TiaMcp": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.5,
+        "result": "win",
+        "v3": 1.0,
+        "base": 0.5
+      },
+      "ronadin2002/jev-cua": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.2,
+        "result": "win",
+        "v3": 0.8,
+        "base": 0.6
+      },
+      "shadowofze/OfflineDAoC": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.0,
+        "base": 0.0
+      },
+      "sheep-programmer/mobilegh": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.3333,
+        "result": "win",
+        "v3": 0.6667,
+        "base": 0.3333
+      },
+      "shhivv/third-hand": {
+        "n_tasks": 2,
+        "language": "Swift",
+        "delta": 0.1181,
+        "result": "win",
+        "v3": 0.8264,
+        "base": 0.7083
+      },
+      "shilapi/xcertplay": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 1.0,
+        "base": 0.8333
+      },
+      "sleeeppy/mochinotch": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.05,
+        "result": "win",
+        "v3": 0.45,
+        "base": 0.4
+      },
+      "sofianeelhor/PKForge": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.4286,
+        "base": 0.4286
+      },
+      "spkesDE/jellyfin-featured-plugin": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.6667,
+        "base": 0.6667
+      },
+      "sql-bi/SQLBI-Whiteboard": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.5,
+        "result": "win",
+        "v3": 1.0,
+        "base": 0.5
+      },
+      "sumimakito/Mac-Duo": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "base": 1.0
+      },
+      "thefraggle/songflip": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.0,
+        "base": 0.0
+      },
+      "vogellacompany/eclipse-mcp-server": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.5,
+        "base": 0.5
+      },
+      "voltura/voltura-air": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": -0.125,
+        "result": "loss",
+        "v3": 0.125,
+        "base": 0.25
+      },
+      "votrongdao/FlowX": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.5,
+        "base": 0.5
+      },
+      "wangliunian5/diplay-lite": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.25,
+        "result": "win",
+        "v3": 0.3333,
+        "base": 0.0833
+      },
+      "wxxsfxyzm/MiuiBackGestureHook": {
+        "n_tasks": 1,
+        "language": "Java/Kotlin",
+        "delta": 0.5,
+        "result": "win",
+        "v3": 0.8333,
+        "base": 0.3333
+      },
+      "xiarongwu123/AMD-DLSS-MU": {
+        "n_tasks": 1,
+        "language": "C#",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "base": 1.0
+      },
+      "zengtianli/WeChatUnrevoke": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.25,
+        "base": 0.25
+      },
+      "zonble/zago": {
+        "n_tasks": 1,
+        "language": "Swift",
+        "delta": 0.0714,
+        "result": "win",
+        "v3": 0.3571,
+        "base": 0.2857
+      }
+    }
+  },
+  "win_loss_by_repo": {
+    "v3_minus_a1_grep": {
+      "repos": {
+        "win": 57,
+        "loss": 19,
+        "tie": 35
+      },
+      "tasks": {
+        "win": 62,
+        "loss": 19,
+        "tie": 39
+      }
+    },
+    "v3_minus_a1_sem": {
+      "repos": {
+        "win": 44,
+        "loss": 20,
+        "tie": 47
+      },
+      "tasks": {
+        "win": 47,
+        "loss": 23,
+        "tie": 50
+      }
+    },
+    "v3_minus_base_grep": {
+      "repos": {
+        "win": 62,
+        "loss": 11,
+        "tie": 38
+      },
+      "tasks": {
+        "win": 67,
+        "loss": 13,
+        "tie": 40
+      }
+    }
+  },
+  "primary": {
+    "contrast": "v3 minus A1, grep arm, reported recall",
+    "delta": 0.0727,
+    "ci95_task": [
+      0.0377,
+      0.1071
+    ],
+    "n_tasks": 120,
+    "ci95_repo_cluster": [
+      0.0365,
+      0.1077
+    ],
+    "n_repos": 111,
+    "task_lower_gt_0": true,
+    "cluster_lower_gt_0": true,
+    "generalization_claim_holds": true
+  },
+  "semantic_indexed_subset": {
+    "n_tasks": 120,
+    "v3": {
+      "recall_reported": {
+        "mean": 0.6975,
+        "ci95": [
+          0.6488,
+          0.7452
+        ],
+        "n_tasks": 120
+      },
+      "recall_at_5": {
+        "mean": 0.5871,
+        "ci95": [
+          0.5333,
+          0.6402
+        ],
+        "n_tasks": 120
+      },
+      "precision": {
+        "mean": 0.4547,
+        "ci95": [
+          0.409,
+          0.5004
+        ],
+        "n_tasks": 120
+      },
+      "turns": {
+        "mean": 8.0708,
+        "ci95": [
+          7.7292,
+          8.4333
+        ],
+        "n_tasks": 120
+      }
+    },
+    "a1": {
+      "recall_reported": {
+        "mean": 0.6509,
+        "ci95": [
+          0.6008,
+          0.7
+        ],
+        "n_tasks": 120
+      },
+      "recall_at_5": {
+        "mean": 0.5429,
+        "ci95": [
+          0.4919,
+          0.5927
+        ],
+        "n_tasks": 120
+      },
+      "precision": {
+        "mean": 0.4383,
+        "ci95": [
+          0.3913,
+          0.4853
+        ],
+        "n_tasks": 120
+      },
+      "turns": {
+        "mean": 32.3417,
+        "ci95": [
+          30.9292,
+          33.7
+        ],
+        "n_tasks": 120
+      }
+    },
+    "base": {
+      "recall_reported": {
+        "mean": 0.5861,
+        "ci95": [
+          0.5368,
+          0.6362
+        ],
+        "n_tasks": 120
+      },
+      "recall_at_5": {
+        "mean": 0.5319,
+        "ci95": [
+          0.4819,
+          0.5828
+        ],
+        "n_tasks": 120
+      },
+      "precision": {
+        "mean": 0.508,
+        "ci95": [
+          0.4562,
+          0.5606
+        ],
+        "n_tasks": 120
+      },
+      "turns": {
+        "mean": 26.3708,
+        "ci95": [
+          24.8208,
+          27.8708
+        ],
+        "n_tasks": 120
+      }
+    },
+    "v3_minus_a1_recall_reported": {
+      "delta": 0.0467,
+      "ci95_task": [
+        0.0128,
+        0.0813
+      ],
+      "n_tasks": 120,
+      "ci95_repo_cluster": [
+        0.0137,
+        0.081
+      ],
+      "n_repos": 111
+    },
+    "v3_minus_base_recall_reported": {
+      "delta": 0.1115,
+      "ci95_task": [
+        0.076,
+        0.1478
+      ],
+      "n_tasks": 120,
+      "ci95_repo_cluster": [
+        0.0769,
+        0.1453
+      ],
+      "n_repos": 111
+    }
+  },
+  "reasoning_render_evidence": {
+    "v3": {
+      "turn_pairs_output_ge_300": 19,
+      "median_growth_over_output": 1.07,
+      "share_growth_ge_0.8x_output": 0.89,
+      "rollouts_with_reasoning_content": 480,
+      "rollouts": 480
+    },
+    "a1": {
+      "turn_pairs_output_ge_300": 465,
+      "median_growth_over_output": 1.04,
+      "share_growth_ge_0.8x_output": 0.99,
+      "rollouts_with_reasoning_content": 480,
+      "rollouts": 480
+    },
+    "base": {
+      "turn_pairs_output_ge_300": 56,
+      "median_growth_over_output": 1.07,
+      "share_growth_ge_0.8x_output": 0.98,
+      "rollouts_with_reasoning_content": 480,
+      "rollouts": 480
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "properties": {
+    "coverage": {
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Coverage",
+      "type": "number"
+    },
+    "ns_state": {
+      "enum": [
+        "absent",
+        "empty",
+        "populated"
+      ],
+      "title": "Ns State",
+      "type": "string"
+    },
+    "server_root": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Server Root"
+    }
+  },
+  "required": [
+    "ns_state",
+    "coverage"
+  ],
+  "title": "SyncBeginRes",
+  "type": "object"
+}

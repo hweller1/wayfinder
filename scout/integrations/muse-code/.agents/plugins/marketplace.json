@@ -1,0 +1,12 @@
+{
+  "name": "voyage-scout",
+  "interface": {"displayName": "voyage-scout"},
+  "plugins": [
+    {
+      "name": "scout-wayfinder",
+      "source": {"source": "local", "path": "./scout-wayfinder"},
+      "policy": {"installation": "AVAILABLE"},
+      "category": "Coding"
+    }
+  ]
+}

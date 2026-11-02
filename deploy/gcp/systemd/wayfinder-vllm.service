@@ -1,0 +1,22 @@
+[Unit]
+Description=wayfinder-glimmer (vLLM, localhost only)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=scout
+Group=scout
+# systemd reads the env file as root, so the service user never needs read access to the secrets.
+EnvironmentFile=/etc/scout/vllm.env
+Environment=PATH=/opt/wayfinder/vllm-venv/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Environment=VLLM_LOGGING_LEVEL=INFO
+WorkingDirectory=/opt/wayfinder
+ExecStart=/opt/wayfinder/vllm-venv/bin/python /opt/wayfinder/repo/deploy/gcp/vllm_args.py --exec
+Restart=on-failure
+RestartSec=20
+# Weight load plus compile on first start can take several minutes.
+TimeoutStartSec=1800
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target

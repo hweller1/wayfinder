@@ -1,0 +1,79 @@
+{
+  "additionalProperties": false,
+  "description": "OpenAI chat body subset plus `thinking` (-> chat_template_kwargs.enable_thinking).",
+  "properties": {
+    "max_tokens": {
+      "default": 4096,
+      "maximum": 32768,
+      "minimum": 1,
+      "title": "Max Tokens",
+      "type": "integer"
+    },
+    "messages": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "maxItems": 1000,
+      "minItems": 1,
+      "title": "Messages",
+      "type": "array"
+    },
+    "presence_penalty": {
+      "default": 1.1,
+      "maximum": 2.0,
+      "minimum": -2.0,
+      "title": "Presence Penalty",
+      "type": "number"
+    },
+    "temperature": {
+      "default": 0.85,
+      "maximum": 2.0,
+      "minimum": 0.0,
+      "title": "Temperature",
+      "type": "number"
+    },
+    "thinking": {
+      "default": true,
+      "title": "Thinking",
+      "type": "boolean"
+    },
+    "tool_choice": {
+      "default": "auto",
+      "enum": [
+        "auto",
+        "required",
+        "none"
+      ],
+      "title": "Tool Choice",
+      "type": "string"
+    },
+    "tools": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "maxItems": 64,
+      "title": "Tools",
+      "type": "array"
+    },
+    "top_k": {
+      "default": 20,
+      "minimum": -1,
+      "title": "Top K",
+      "type": "integer"
+    },
+    "top_p": {
+      "default": 0.95,
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Top P",
+      "type": "number"
+    }
+  },
+  "required": [
+    "messages"
+  ],
+  "title": "ChatReq",
+  "type": "object"
+}

@@ -1,0 +1,18 @@
+{
+  "properties": {
+    "embedded_tokens": {
+      "title": "Embedded Tokens",
+      "type": "integer"
+    },
+    "written": {
+      "title": "Written",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "written",
+    "embedded_tokens"
+  ],
+  "title": "EmbedRes",
+  "type": "object"
+}

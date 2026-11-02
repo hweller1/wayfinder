@@ -1,0 +1,49 @@
+{
+  "additionalProperties": false,
+  "description": "Page `page` (0-based) of `pages` of the client's leaf-hash proof set. Page 0 carries the match\ndecision and must come first; the proofs only take effect once every page has arrived (until then the\nseeded namespace returns no search hits at all). Pages may be re-sent and may arrive in any order after\npage 0; a repo with at most 5k files is one request (`page=0, pages=1`).",
+  "properties": {
+    "branch_id": {
+      "pattern": "^[0-9a-f]{16,32}$",
+      "title": "Branch Id",
+      "type": "string"
+    },
+    "minhash_b64": {
+      "title": "Minhash B64",
+      "type": "string"
+    },
+    "page": {
+      "default": 0,
+      "exclusiveMaximum": 20,
+      "minimum": 0,
+      "title": "Page",
+      "type": "integer"
+    },
+    "pages": {
+      "default": 1,
+      "maximum": 20,
+      "minimum": 1,
+      "title": "Pages",
+      "type": "integer"
+    },
+    "proofs": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 5000,
+      "title": "Proofs",
+      "type": "array"
+    },
+    "repo_id": {
+      "pattern": "^[0-9a-f]{16,32}$",
+      "title": "Repo Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "repo_id",
+    "branch_id",
+    "minhash_b64"
+  ],
+  "title": "SeedReq",
+  "type": "object"
+}

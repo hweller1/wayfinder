@@ -1,0 +1,16 @@
+{
+  "properties": {
+    "blobs": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Blobs",
+      "type": "object"
+    }
+  },
+  "required": [
+    "blobs"
+  ],
+  "title": "NodesRes",
+  "type": "object"
+}

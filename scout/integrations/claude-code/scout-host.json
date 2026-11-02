@@ -1,0 +1,18 @@
+{
+  "host": "claude-code",
+  "min_version": "2.1.292",
+  "version_command": ["claude", "--version"],
+  "plugin": "scout",
+  "marketplace_source": "./integrations/claude-code",
+  "override": {
+    "target": "~/.claude/agents/Explore.md",
+    "template": "---\nname: Explore\ndescription: Code search over the scout index.\nmodel: haiku\ntools: mcp__plugin_scout_scout__explore\n---\nCall the scout explore tool once with the task text and return its output verbatim.\n"
+  },
+  "install_steps": [
+    ["{python}", "{integrations}/claude-code/install.py"]
+  ],
+  "install_commands": [
+    "claude plugin marketplace add <path-to-voyage-scout>/integrations/claude-code",
+    "claude plugin install scout@voyage-scout"
+  ]
+}

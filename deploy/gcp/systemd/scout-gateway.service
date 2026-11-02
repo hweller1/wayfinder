@@ -1,0 +1,20 @@
+[Unit]
+Description=Scout gateway (FastAPI/uvicorn, localhost only; Caddy terminates TLS)
+After=network-online.target wayfinder-vllm.service
+Wants=network-online.target wayfinder-vllm.service
+
+[Service]
+User=scout
+Group=scout
+EnvironmentFile=/etc/scout/gateway.env
+WorkingDirectory=/opt/wayfinder/repo/scout
+ExecStart=/opt/wayfinder/gateway-venv/bin/python /opt/wayfinder/repo/deploy/gcp/gateway_vm.py serve
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

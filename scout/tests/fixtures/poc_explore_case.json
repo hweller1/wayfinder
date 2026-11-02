@@ -1,0 +1,35 @@
+{
+  "repo": "repo_small",
+  "chat_script": [
+    {
+      "tool_calls": [{"id": "c1", "name": "grep", "arguments": {"pattern": "getUserSession"}}],
+      "tokens_in": 120,
+      "tokens_out": 12
+    },
+    {
+      "tool_calls": [
+        {"id": "c2", "name": "read_file", "arguments": {"path": "src/auth/session.py", "start_line": 6, "end_line": 12}}
+      ],
+      "tokens_in": 240,
+      "tokens_out": 18
+    },
+    {
+      "tool_calls": [
+        {
+          "id": "c3",
+          "name": "report",
+          "arguments": {
+            "results": [
+              {"path": "src/auth/session.py", "start_line": 6, "end_line": 12, "why": "defines getUserSession"},
+              {"path": "src/handlers/login.py", "start_line": 4, "end_line": 6, "why": "calls it on login"}
+            ],
+            "summary": "getUserSession is defined in src/auth/session.py and used by the login handler.",
+            "gaps": []
+          }
+        }
+      ],
+      "tokens_in": 360,
+      "tokens_out": 40
+    }
+  ]
+}

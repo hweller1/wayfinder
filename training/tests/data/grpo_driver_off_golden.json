@@ -1,0 +1,234 @@
+{
+ "ctl": [
+  [
+   "cut_step",
+   0
+  ],
+  [
+   "batch_0",
+   {
+    "items": [
+     {
+      "adv": 0.969417,
+      "n_loss": 100,
+      "n_tokens": 1000,
+      "path": "/gdata/x/rollouts/t030-0-0.npz",
+      "rid": "t030-0-0"
+     },
+     {
+      "adv": -0.403744,
+      "n_loss": 101,
+      "n_tokens": 1001,
+      "path": "/gdata/x/rollouts/t030-0-1.npz",
+      "rid": "t030-0-1"
+     },
+     {
+      "adv": -1.452714,
+      "n_loss": 102,
+      "n_tokens": 1002,
+      "path": "/gdata/x/rollouts/t030-0-2.npz",
+      "rid": "t030-0-2"
+     },
+     {
+      "adv": 0.887041,
+      "n_loss": 103,
+      "n_tokens": 1003,
+      "path": "/gdata/x/rollouts/t030-0-3.npz",
+      "rid": "t030-0-3"
+     },
+     {
+      "adv": 0.969417,
+      "n_loss": 100,
+      "n_tokens": 1000,
+      "path": "/gdata/x/rollouts/t032-0-0.npz",
+      "rid": "t032-0-0"
+     },
+     {
+      "adv": -0.403744,
+      "n_loss": 101,
+      "n_tokens": 1001,
+      "path": "/gdata/x/rollouts/t032-0-1.npz",
+      "rid": "t032-0-1"
+     },
+     {
+      "adv": -1.452714,
+      "n_loss": 102,
+      "n_tokens": 1002,
+      "path": "/gdata/x/rollouts/t032-0-2.npz",
+      "rid": "t032-0-2"
+     },
+     {
+      "adv": 0.887041,
+      "n_loss": 103,
+      "n_tokens": 1003,
+      "path": "/gdata/x/rollouts/t032-0-3.npz",
+      "rid": "t032-0-3"
+     }
+    ]
+   }
+  ],
+  [
+   "stop",
+   true
+  ]
+ ],
+ "files": [
+  "rollouts.jsonl",
+  "state.json",
+  "steps.jsonl",
+  "tasks_step0.json"
+ ],
+ "jobs": [
+  {
+   "seeds": [
+    100000,
+    100001,
+    100002,
+    100003
+   ],
+   "step": 0,
+   "task": {
+    "base_commit": "c",
+    "category": "c",
+    "gold_files": [
+     "g1",
+     "g2"
+    ],
+    "question": "q",
+    "repo": "o/r",
+    "task_id": "t030"
+   },
+   "version": 0
+  },
+  {
+   "seeds": [
+    100000,
+    100001,
+    100002,
+    100003
+   ],
+   "step": 0,
+   "task": {
+    "base_commit": "c",
+    "category": "c",
+    "gold_files": [
+     "g1",
+     "g2"
+    ],
+    "question": "q",
+    "repo": "o/r",
+    "task_id": "t032"
+   },
+   "version": 0
+  }
+ ],
+ "line": {
+  "eval_usd": 0.0,
+  "monitor": {
+   "n_reported": 2.0,
+   "precision": 0.5417,
+   "recall_at_5": 0.625,
+   "recall_at_7": 0.625
+  },
+  "pool": "test-pool",
+  "rollout": {
+   "all_gold": 0.5,
+   "all_gold_window": 0.5,
+   "chain_tokens": 1001.5,
+   "diag": {
+    "adv_share": {
+     "ag": 0.1288,
+     "no_report": 0.0,
+     "r5": 0.6583,
+     "r8": 0.18,
+     "tiebreak": 0.0329
+    },
+    "group_std": {
+     "max": 0.607,
+     "mean": 0.607,
+     "median": 0.607,
+     "min": 0.607,
+     "n": 2,
+     "n_below_0.001": 0,
+     "n_below_floor": 0,
+     "p25": 0.607,
+     "p75": 0.607
+    },
+    "n_groups_signal": 2,
+    "n_reported_hist": {
+     "1": 2,
+     "2": 4,
+     "3": 2
+    },
+    "recall_by_n_reported": {
+     "0-2": {
+      "n": 6,
+      "recall_at_5": 0.5
+     },
+     "10+": {
+      "n": 0,
+      "recall_at_5": null
+     },
+     "3-4": {
+      "n": 2,
+      "recall_at_5": 1.0
+     },
+     "5": {
+      "n": 0,
+      "recall_at_5": null
+     },
+     "6-7": {
+      "n": 0,
+      "recall_at_5": null
+     },
+     "8-9": {
+      "n": 0,
+      "recall_at_5": null
+     }
+    },
+    "tiebreak_mean": 0.0125
+   },
+   "f1": 0.575,
+   "file_cost": 0.0,
+   "groups": 2,
+   "kept_groups": 2,
+   "kept_rollouts": 8,
+   "loss_tokens_per_rollout": 101.5,
+   "n_infra_errors": 0,
+   "n_reported": 2.0,
+   "n_rollouts": 8,
+   "precision": 0.54167,
+   "recall_at_5": 0.625,
+   "recall_at_7": 0.625,
+   "recall_reported": 0.625,
+   "recall_touched": 0.5,
+   "repeats": 0.0,
+   "report_chars": 10.0,
+   "report_rate": 1.0,
+   "reward": 0.88176,
+   "short_groups": 0,
+   "tokens_in": 5.0,
+   "turns": 9.5,
+   "wall_s": 1.0,
+   "zero_var_groups": 0
+  },
+  "step": 0,
+  "train": {
+   "clip_frac": 0.0,
+   "gnorm": 1.0,
+   "kl": 0.0,
+   "step": 0,
+   "train_s": 1.0
+  },
+  "version_sampled": 0
+ },
+ "state": {
+  "est_usd": 0,
+  "eval_usd": 0.0,
+  "next_step": 1,
+  "pool_switches": [],
+  "stop_reason": "completed",
+  "train_usd": 0
+ },
+ "tasks_step0": "[\"t030\", \"t032\"]"
+}

@@ -1,0 +1,147 @@
+{
+  "$defs": {
+    "ReplaceFile": {
+      "additionalProperties": false,
+      "properties": {
+        "file_hash": {
+          "title": "File Hash",
+          "type": "string"
+        },
+        "file_id": {
+          "pattern": "^[0-9a-f]{16,32}$",
+          "title": "File Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "file_id",
+        "file_hash"
+      ],
+      "title": "ReplaceFile",
+      "type": "object"
+    },
+    "WireRow": {
+      "additionalProperties": false,
+      "description": "One sealed chunk row (no vector: the gateway fills it from the embed cache).",
+      "properties": {
+        "chunk_key": {
+          "pattern": "^[0-9a-f]{16,32}$",
+          "title": "Chunk Key",
+          "type": "string"
+        },
+        "dir_tags": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 64,
+          "title": "Dir Tags",
+          "type": "array"
+        },
+        "ext_tag": {
+          "title": "Ext Tag",
+          "type": "string"
+        },
+        "file_hash": {
+          "title": "File Hash",
+          "type": "string"
+        },
+        "file_id": {
+          "pattern": "^[0-9a-f]{16,32}$",
+          "title": "File Id",
+          "type": "string"
+        },
+        "id": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "loc_enc": {
+          "title": "Loc Enc",
+          "type": "string"
+        },
+        "path_enc": {
+          "title": "Path Enc",
+          "type": "string"
+        },
+        "tokens": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Tokens",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "file_id",
+        "path_enc",
+        "ext_tag",
+        "dir_tags",
+        "file_hash",
+        "chunk_key",
+        "loc_enc",
+        "tokens"
+      ],
+      "title": "WireRow",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "branch_id": {
+      "pattern": "^[0-9a-f]{16,32}$",
+      "title": "Branch Id",
+      "type": "string"
+    },
+    "delete_files": {
+      "items": {
+        "pattern": "^[0-9a-f]{16,32}$",
+        "type": "string"
+      },
+      "maxItems": 500,
+      "title": "Delete Files",
+      "type": "array"
+    },
+    "replace": {
+      "items": {
+        "$ref": "#/$defs/ReplaceFile"
+      },
+      "maxItems": 500,
+      "title": "Replace",
+      "type": "array"
+    },
+    "repo_id": {
+      "pattern": "^[0-9a-f]{16,32}$",
+      "title": "Repo Id",
+      "type": "string"
+    },
+    "rows": {
+      "items": {
+        "$ref": "#/$defs/WireRow"
+      },
+      "maxItems": 2000,
+      "title": "Rows",
+      "type": "array"
+    },
+    "texts": {
+      "maxProperties": 2000,
+      "patternProperties": {
+        "^[0-9a-f]{16,32}$": {
+          "type": "string"
+        }
+      },
+      "title": "Texts",
+      "type": "object"
+    }
+  },
+  "required": [
+    "repo_id",
+    "branch_id",
+    "texts",
+    "rows"
+  ],
+  "title": "EmbedReq",
+  "type": "object"
+}

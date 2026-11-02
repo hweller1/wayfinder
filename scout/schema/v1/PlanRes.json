@@ -1,0 +1,16 @@
+{
+  "properties": {
+    "missing": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing",
+      "type": "array"
+    }
+  },
+  "required": [
+    "missing"
+  ],
+  "title": "PlanRes",
+  "type": "object"
+}

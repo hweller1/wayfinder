@@ -1,0 +1,18 @@
+{
+  "properties": {
+    "key_id": {
+      "title": "Key Id",
+      "type": "string"
+    },
+    "tenant": {
+      "title": "Tenant",
+      "type": "string"
+    }
+  },
+  "required": [
+    "tenant",
+    "key_id"
+  ],
+  "title": "TenantInfo",
+  "type": "object"
+}

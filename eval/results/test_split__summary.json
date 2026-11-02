@@ -1,0 +1,3421 @@
+{
+  "protocol": "docs/test_split_eval.md",
+  "n_tasks_preregistered": 152,
+  "n_tasks_scored_universe": 152,
+  "excluded": {
+    "excluded_task_ids": [],
+    "checked": "2026-10-28 before any run: git ls-remote HEAD on all 31 test repos and gh api commits/<sha> on all 151 repo@commits succeeded; none excluded",
+    "excluded": []
+  },
+  "validation": {
+    "v3_grep": {
+      "rows": 304,
+      "ok_rows": 304,
+      "errors": 0,
+      "error_messages": {},
+      "models": [
+        "wayfinder-v3"
+      ],
+      "weights": [
+        "/data/sft/v3_merged"
+      ],
+      "retain_reasoning": [
+        "True"
+      ],
+      "max_turns": [
+        40
+      ],
+      "max_seconds": [
+        3600
+      ],
+      "seeds": [
+        0,
+        1
+      ],
+      "sampling": [
+        "T0.85 top_p0.95 top_kNone ppNone thinkNone"
+      ],
+      "pairs_unique": true,
+      "per_seed_coverage": {
+        "0": {
+          "tasks_ok": 152,
+          "missing": [],
+          "n_missing": 0,
+          "unexpected": 0
+        },
+        "1": {
+          "tasks_ok": 152,
+          "missing": [],
+          "n_missing": 0,
+          "unexpected": 0
+        }
+      },
+      "turns_min_p50_max": [
+        5,
+        8,
+        26
+      ],
+      "wall_s_min_p50_max": [
+        164.65,
+        395.54,
+        2199.43
+      ],
+      "n429": 0,
+      "n_retries": 0,
+      "with_reasoning_rate": 1.0,
+      "healthy": true
+    },
+    "v3_sem": {
+      "rows": 304,
+      "ok_rows": 304,
+      "errors": 0,
+      "error_messages": {},
+      "models": [
+        "wayfinder-v3"
+      ],
+      "weights": [
+        "/data/sft/v3_merged"
+      ],
+      "retain_reasoning": [
+        "True"
+      ],
+      "max_turns": [
+        40
+      ],
+      "max_seconds": [
+        3600
+      ],
+      "seeds": [
+        0,
+        1
+      ],
+      "sampling": [
+        "T0.85 top_p0.95 top_kNone ppNone thinkNone"
+      ],
+      "pairs_unique": true,
+      "per_seed_coverage": {
+        "0": {
+          "tasks_ok": 152,
+          "missing": [],
+          "n_missing": 0,
+          "unexpected": 0
+        },
+        "1": {
+          "tasks_ok": 152,
+          "missing": [],
+          "n_missing": 0,
+          "unexpected": 0
+        }
+      },
+      "turns_min_p50_max": [
+        3,
+        8,
+        30
+      ],
+      "wall_s_min_p50_max": [
+        134.35,
+        379.46,
+        1798.79
+      ],
+      "n429": 0,
+      "n_retries": 0,
+      "with_reasoning_rate": 1.0,
+      "semantic_offered": 272,
+      "semantic_not_offered_reasons": {
+        "no index for repo@commit (state=absent, coverage=0.0)": 32
+      },
+      "rollouts_calling_semantic_search": 214,
+      "healthy": true
+    },
+    "a1_grep": {
+      "rows": 304,
+      "ok_rows": 304,
+      "errors": 0,
+      "error_messages": {},
+      "models": [
+        "a1"
+      ],
+      "weights": [
+        "/weights/Agents-A1-FP8"
+      ],
+      "retain_reasoning": [
+        "True"
+      ],
+      "max_turns": [
+        40
+      ],
+      "max_seconds": [
+        3600
+      ],
+      "seeds": [
+        0,
+        1
+      ],
+      "sampling": [
+        "T0.85 top_p0.95 top_k20 pp1.1 thinkTrue"
+      ],
+      "pairs_unique": true,
+      "per_seed_coverage": {
+        "0": {
+          "tasks_ok": 152,
+          "missing": [],
+          "n_missing": 0,
+          "unexpected": 0
+        },
+        "1": {
+          "tasks_ok": 152,
+          "missing": [],
+          "n_missing": 0,
+          "unexpected": 0
+        }
+      },
+      "turns_min_p50_max": [
+        1,
+        40,
+        40
+      ],
+      "wall_s_min_p50_max": [
+        7.36,
+        180.68,
+        494.96
+      ],
+      "n429": 0,
+      "n_retries": 0,
+      "with_reasoning_rate": 1.0,
+      "healthy": true
+    },
+    "a1_sem": {
+      "rows": 304,
+      "ok_rows": 304,
+      "errors": 0,
+      "error_messages": {},
+      "models": [
+        "a1"
+      ],
+      "weights": [
+        "/weights/Agents-A1-FP8"
+      ],
+      "retain_reasoning": [
+        "True"
+      ],
+      "max_turns": [
+        40
+      ],
+      "max_seconds": [
+        3600
+      ],
+      "seeds": [
+        0,
+        1
+      ],
+      "sampling": [
+        "T0.85 top_p0.95 top_k20 pp1.1 thinkTrue"
+      ],
+      "pairs_unique": true,
+      "per_seed_coverage": {
+        "0": {
+          "tasks_ok": 152,
+          "missing": [],
+          "n_missing": 0,
+          "unexpected": 0
+        },
+        "1": {
+          "tasks_ok": 152,
+          "missing": [],
+          "n_missing": 0,
+          "unexpected": 0
+        }
+      },
+      "turns_min_p50_max": [
+        1,
+        38,
+        40
+      ],
+      "wall_s_min_p50_max": [
+        5.99,
+        196.44,
+        479.56
+      ],
+      "n429": 0,
+      "n_retries": 0,
+      "with_reasoning_rate": 1.0,
+      "semantic_offered": 272,
+      "semantic_not_offered_reasons": {
+        "no index for repo@commit (state=absent, coverage=0.0)": 32
+      },
+      "rollouts_calling_semantic_search": 262,
+      "healthy": true
+    },
+    "base_grep": {
+      "rows": 304,
+      "ok_rows": 304,
+      "errors": 0,
+      "error_messages": {},
+      "models": [
+        "glimmer"
+      ],
+      "weights": [
+        "/weights/Muse-Glimmer-30B"
+      ],
+      "retain_reasoning": [
+        "True"
+      ],
+      "max_turns": [
+        40
+      ],
+      "max_seconds": [
+        3600
+      ],
+      "seeds": [
+        0,
+        1
+      ],
+      "sampling": [
+        "T0.85 top_p0.95 top_kNone ppNone thinkNone"
+      ],
+      "pairs_unique": true,
+      "per_seed_coverage": {
+        "0": {
+          "tasks_ok": 152,
+          "missing": [],
+          "n_missing": 0,
+          "unexpected": 0
+        },
+        "1": {
+          "tasks_ok": 152,
+          "missing": [],
+          "n_missing": 0,
+          "unexpected": 0
+        }
+      },
+      "turns_min_p50_max": [
+        2,
+        33,
+        40
+      ],
+      "wall_s_min_p50_max": [
+        14.23,
+        183.73,
+        478.03
+      ],
+      "n429": 0,
+      "n_retries": 0,
+      "with_reasoning_rate": 1.0,
+      "healthy": true
+    },
+    "base_sem": {
+      "rows": 304,
+      "ok_rows": 304,
+      "errors": 0,
+      "error_messages": {},
+      "models": [
+        "glimmer"
+      ],
+      "weights": [
+        "/weights/Muse-Glimmer-30B"
+      ],
+      "retain_reasoning": [
+        "True"
+      ],
+      "max_turns": [
+        40
+      ],
+      "max_seconds": [
+        3600
+      ],
+      "seeds": [
+        0,
+        1
+      ],
+      "sampling": [
+        "T0.85 top_p0.95 top_kNone ppNone thinkNone"
+      ],
+      "pairs_unique": true,
+      "per_seed_coverage": {
+        "0": {
+          "tasks_ok": 152,
+          "missing": [],
+          "n_missing": 0,
+          "unexpected": 0
+        },
+        "1": {
+          "tasks_ok": 152,
+          "missing": [],
+          "n_missing": 0,
+          "unexpected": 0
+        }
+      },
+      "turns_min_p50_max": [
+        1,
+        29,
+        40
+      ],
+      "wall_s_min_p50_max": [
+        8.01,
+        181.85,
+        545.53
+      ],
+      "n429": 0,
+      "n_retries": 0,
+      "with_reasoning_rate": 1.0,
+      "semantic_offered": 272,
+      "semantic_not_offered_reasons": {
+        "no index for repo@commit (state=absent, coverage=0.0)": 32
+      },
+      "rollouts_calling_semantic_search": 269,
+      "healthy": true
+    }
+  },
+  "parse_health": {
+    "v3_grep": {
+      "rollouts": 304,
+      "assistant_turns": 2806,
+      "tool_calls": 8450,
+      "no_tool_call_turns": 5,
+      "bad_json_args": 0,
+      "unknown_tool": 0,
+      "invalid_args": 33,
+      "rollouts_with_malformed": 26,
+      "rollouts_stopped_3_malformed": 0,
+      "rollouts_with_nudge": 1,
+      "leaked_tool_markup_in_content": 0,
+      "malformed_calls_total": 33,
+      "malformed_rate_per_call": 0.0039
+    },
+    "v3_sem": {
+      "rollouts": 304,
+      "assistant_turns": 2637,
+      "tool_calls": 8169,
+      "no_tool_call_turns": 6,
+      "bad_json_args": 0,
+      "unknown_tool": 0,
+      "invalid_args": 20,
+      "rollouts_with_malformed": 19,
+      "rollouts_stopped_3_malformed": 1,
+      "rollouts_with_nudge": 3,
+      "leaked_tool_markup_in_content": 0,
+      "malformed_calls_total": 20,
+      "malformed_rate_per_call": 0.0024
+    },
+    "a1_grep": {
+      "rollouts": 304,
+      "assistant_turns": 10530,
+      "tool_calls": 11067,
+      "no_tool_call_turns": 12,
+      "bad_json_args": 0,
+      "unknown_tool": 51,
+      "invalid_args": 52,
+      "rollouts_with_malformed": 68,
+      "rollouts_stopped_3_malformed": 2,
+      "rollouts_with_nudge": 12,
+      "leaked_tool_markup_in_content": 0,
+      "malformed_calls_total": 103,
+      "malformed_rate_per_call": 0.0093
+    },
+    "a1_sem": {
+      "rollouts": 304,
+      "assistant_turns": 9950,
+      "tool_calls": 10522,
+      "no_tool_call_turns": 10,
+      "bad_json_args": 0,
+      "unknown_tool": 12,
+      "invalid_args": 89,
+      "rollouts_with_malformed": 62,
+      "rollouts_stopped_3_malformed": 3,
+      "rollouts_with_nudge": 10,
+      "leaked_tool_markup_in_content": 0,
+      "malformed_calls_total": 101,
+      "malformed_rate_per_call": 0.0096
+    },
+    "base_grep": {
+      "rollouts": 304,
+      "assistant_turns": 9426,
+      "tool_calls": 10141,
+      "no_tool_call_turns": 0,
+      "bad_json_args": 0,
+      "unknown_tool": 62,
+      "invalid_args": 259,
+      "rollouts_with_malformed": 110,
+      "rollouts_stopped_3_malformed": 26,
+      "rollouts_with_nudge": 0,
+      "leaked_tool_markup_in_content": 0,
+      "malformed_calls_total": 321,
+      "malformed_rate_per_call": 0.0317
+    },
+    "base_sem": {
+      "rollouts": 304,
+      "assistant_turns": 8608,
+      "tool_calls": 9565,
+      "no_tool_call_turns": 0,
+      "bad_json_args": 0,
+      "unknown_tool": 23,
+      "invalid_args": 249,
+      "rollouts_with_malformed": 79,
+      "rollouts_stopped_3_malformed": 31,
+      "rollouts_with_nudge": 0,
+      "leaked_tool_markup_in_content": 0,
+      "malformed_calls_total": 272,
+      "malformed_rate_per_call": 0.0284
+    }
+  },
+  "arms": {
+    "v3_grep": {
+      "n_rollouts": 304,
+      "n_tasks": 152,
+      "recall_reported": {
+        "mean": 0.5186,
+        "ci95": [
+          0.467,
+          0.5694
+        ],
+        "n_tasks": 152
+      },
+      "recall_at_5": {
+        "mean": 0.4655,
+        "ci95": [
+          0.414,
+          0.5171
+        ],
+        "n_tasks": 152
+      },
+      "recall_at_7": {
+        "mean": 0.4972,
+        "ci95": [
+          0.4451,
+          0.5489
+        ],
+        "n_tasks": 152
+      },
+      "precision": {
+        "mean": 0.4047,
+        "ci95": [
+          0.3638,
+          0.4462
+        ],
+        "n_tasks": 152
+      },
+      "all_gold_reported": {
+        "mean": 0.2204,
+        "ci95": [
+          0.1612,
+          0.2862
+        ],
+        "n_tasks": 152
+      },
+      "turns": {
+        "mean": 9.2303,
+        "ci95": [
+          8.7993,
+          9.6875
+        ],
+        "n_tasks": 152,
+        "p50": 8.0
+      },
+      "tokens": {
+        "mean": 245992.7434,
+        "ci95": [
+          221574.9474,
+          272716.6513
+        ],
+        "n_tasks": 152,
+        "p50": 198948.5
+      },
+      "ended_by_report": {
+        "mean": 0.9934,
+        "ci95": [
+          0.9803,
+          1.0
+        ],
+        "n_tasks": 152
+      },
+      "n_reported": {
+        "mean": 6.6316,
+        "ci95": [
+          6.2237,
+          7.0296
+        ],
+        "n_tasks": 152
+      },
+      "recall_touched": {
+        "mean": 0.6588,
+        "ci95": [
+          0.6106,
+          0.7065
+        ],
+        "n_tasks": 152
+      },
+      "stop_reasons": {
+        "report": 302,
+        "context": 2
+      },
+      "calls_per_turn": 3.011
+    },
+    "v3_sem": {
+      "n_rollouts": 304,
+      "n_tasks": 152,
+      "recall_reported": {
+        "mean": 0.5207,
+        "ci95": [
+          0.4677,
+          0.5759
+        ],
+        "n_tasks": 152
+      },
+      "recall_at_5": {
+        "mean": 0.4649,
+        "ci95": [
+          0.4121,
+          0.5194
+        ],
+        "n_tasks": 152
+      },
+      "recall_at_7": {
+        "mean": 0.5051,
+        "ci95": [
+          0.453,
+          0.56
+        ],
+        "n_tasks": 152
+      },
+      "precision": {
+        "mean": 0.4128,
+        "ci95": [
+          0.3684,
+          0.4576
+        ],
+        "n_tasks": 152
+      },
+      "all_gold_reported": {
+        "mean": 0.2434,
+        "ci95": [
+          0.1776,
+          0.3092
+        ],
+        "n_tasks": 152
+      },
+      "turns": {
+        "mean": 8.6743,
+        "ci95": [
+          8.2763,
+          9.0987
+        ],
+        "n_tasks": 152,
+        "p50": 8.0
+      },
+      "tokens": {
+        "mean": 226225.9539,
+        "ci95": [
+          205191.6546,
+          249091.8026
+        ],
+        "n_tasks": 152,
+        "p50": 191387.5
+      },
+      "ended_by_report": {
+        "mean": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "n_tasks": 152
+      },
+      "n_reported": {
+        "mean": 6.5395,
+        "ci95": [
+          6.1546,
+          6.9243
+        ],
+        "n_tasks": 152
+      },
+      "recall_touched": {
+        "mean": 0.6612,
+        "ci95": [
+          0.6112,
+          0.7105
+        ],
+        "n_tasks": 152
+      },
+      "stop_reasons": {
+        "report": 304
+      },
+      "calls_per_turn": 3.098
+    },
+    "a1_grep": {
+      "n_rollouts": 304,
+      "n_tasks": 152,
+      "recall_reported": {
+        "mean": 0.4388,
+        "ci95": [
+          0.3907,
+          0.4877
+        ],
+        "n_tasks": 152
+      },
+      "recall_at_5": {
+        "mean": 0.3653,
+        "ci95": [
+          0.3187,
+          0.412
+        ],
+        "n_tasks": 152
+      },
+      "recall_at_7": {
+        "mean": 0.4036,
+        "ci95": [
+          0.355,
+          0.453
+        ],
+        "n_tasks": 152
+      },
+      "precision": {
+        "mean": 0.3402,
+        "ci95": [
+          0.2992,
+          0.3817
+        ],
+        "n_tasks": 152
+      },
+      "all_gold_reported": {
+        "mean": 0.1743,
+        "ci95": [
+          0.1217,
+          0.2303
+        ],
+        "n_tasks": 152
+      },
+      "turns": {
+        "mean": 34.6382,
+        "ci95": [
+          33.5757,
+          35.6579
+        ],
+        "n_tasks": 152,
+        "p50": 40.0
+      },
+      "tokens": {
+        "mean": 766002.0263,
+        "ci95": [
+          716839.8783,
+          814457.2599
+        ],
+        "n_tasks": 152,
+        "p50": 726730.5
+      },
+      "ended_by_report": {
+        "mean": 0.4441,
+        "ci95": [
+          0.3816,
+          0.5033
+        ],
+        "n_tasks": 152
+      },
+      "n_reported": {
+        "mean": 7.2599,
+        "ci95": [
+          6.8355,
+          7.6842
+        ],
+        "n_tasks": 152
+      },
+      "recall_touched": {
+        "mean": 0.5907,
+        "ci95": [
+          0.5401,
+          0.6394
+        ],
+        "n_tasks": 152
+      },
+      "stop_reasons": {
+        "report": 135,
+        "turns": 167,
+        "context": 2
+      },
+      "calls_per_turn": 1.051
+    },
+    "a1_sem": {
+      "n_rollouts": 304,
+      "n_tasks": 152,
+      "recall_reported": {
+        "mean": 0.4563,
+        "ci95": [
+          0.4081,
+          0.5057
+        ],
+        "n_tasks": 152
+      },
+      "recall_at_5": {
+        "mean": 0.3892,
+        "ci95": [
+          0.3421,
+          0.4375
+        ],
+        "n_tasks": 152
+      },
+      "recall_at_7": {
+        "mean": 0.4258,
+        "ci95": [
+          0.3773,
+          0.4753
+        ],
+        "n_tasks": 152
+      },
+      "precision": {
+        "mean": 0.3704,
+        "ci95": [
+          0.3264,
+          0.4153
+        ],
+        "n_tasks": 152
+      },
+      "all_gold_reported": {
+        "mean": 0.1711,
+        "ci95": [
+          0.1217,
+          0.227
+        ],
+        "n_tasks": 152
+      },
+      "turns": {
+        "mean": 32.7303,
+        "ci95": [
+          31.5526,
+          33.875
+        ],
+        "n_tasks": 152,
+        "p50": 38.0
+      },
+      "tokens": {
+        "mean": 726742.3849,
+        "ci95": [
+          679153.1184,
+          774376.9441
+        ],
+        "n_tasks": 152,
+        "p50": 724151.0
+      },
+      "ended_by_report": {
+        "mean": 0.5559,
+        "ci95": [
+          0.4934,
+          0.6184
+        ],
+        "n_tasks": 152
+      },
+      "n_reported": {
+        "mean": 6.8388,
+        "ci95": [
+          6.4276,
+          7.2434
+        ],
+        "n_tasks": 152
+      },
+      "recall_touched": {
+        "mean": 0.624,
+        "ci95": [
+          0.5738,
+          0.6733
+        ],
+        "n_tasks": 152
+      },
+      "stop_reasons": {
+        "report": 169,
+        "turns": 135
+      },
+      "calls_per_turn": 1.057
+    },
+    "base_grep": {
+      "n_rollouts": 304,
+      "n_tasks": 152,
+      "recall_reported": {
+        "mean": 0.4279,
+        "ci95": [
+          0.3756,
+          0.4799
+        ],
+        "n_tasks": 152
+      },
+      "recall_at_5": {
+        "mean": 0.3838,
+        "ci95": [
+          0.3353,
+          0.4337
+        ],
+        "n_tasks": 152
+      },
+      "recall_at_7": {
+        "mean": 0.41,
+        "ci95": [
+          0.3596,
+          0.4617
+        ],
+        "n_tasks": 152
+      },
+      "precision": {
+        "mean": 0.4087,
+        "ci95": [
+          0.3592,
+          0.4578
+        ],
+        "n_tasks": 152
+      },
+      "all_gold_reported": {
+        "mean": 0.1612,
+        "ci95": [
+          0.1053,
+          0.2204
+        ],
+        "n_tasks": 152
+      },
+      "turns": {
+        "mean": 31.0066,
+        "ci95": [
+          29.7664,
+          32.2171
+        ],
+        "n_tasks": 152,
+        "p50": 33.0
+      },
+      "tokens": {
+        "mean": 625094.1776,
+        "ci95": [
+          574665.0691,
+          676896.6678
+        ],
+        "n_tasks": 152,
+        "p50": 567374.5
+      },
+      "ended_by_report": {
+        "mean": 0.7105,
+        "ci95": [
+          0.648,
+          0.7697
+        ],
+        "n_tasks": 152
+      },
+      "n_reported": {
+        "mean": 5.7632,
+        "ci95": [
+          5.3289,
+          6.2105
+        ],
+        "n_tasks": 152
+      },
+      "recall_touched": {
+        "mean": 0.6083,
+        "ci95": [
+          0.5553,
+          0.6603
+        ],
+        "n_tasks": 152
+      },
+      "stop_reasons": {
+        "report": 216,
+        "turns": 88
+      },
+      "calls_per_turn": 1.076
+    },
+    "base_sem": {
+      "n_rollouts": 304,
+      "n_tasks": 152,
+      "recall_reported": {
+        "mean": 0.4422,
+        "ci95": [
+          0.3918,
+          0.4954
+        ],
+        "n_tasks": 152
+      },
+      "recall_at_5": {
+        "mean": 0.4082,
+        "ci95": [
+          0.3591,
+          0.4598
+        ],
+        "n_tasks": 152
+      },
+      "recall_at_7": {
+        "mean": 0.4282,
+        "ci95": [
+          0.3781,
+          0.4804
+        ],
+        "n_tasks": 152
+      },
+      "precision": {
+        "mean": 0.4308,
+        "ci95": [
+          0.3844,
+          0.4772
+        ],
+        "n_tasks": 152
+      },
+      "all_gold_reported": {
+        "mean": 0.1842,
+        "ci95": [
+          0.1283,
+          0.2467
+        ],
+        "n_tasks": 152
+      },
+      "turns": {
+        "mean": 28.3158,
+        "ci95": [
+          26.9539,
+          29.6711
+        ],
+        "n_tasks": 152,
+        "p50": 29.0
+      },
+      "tokens": {
+        "mean": 566411.8125,
+        "ci95": [
+          515966.1316,
+          619453.5724
+        ],
+        "n_tasks": 152,
+        "p50": 509286.5
+      },
+      "ended_by_report": {
+        "mean": 0.8158,
+        "ci95": [
+          0.7664,
+          0.8651
+        ],
+        "n_tasks": 152
+      },
+      "n_reported": {
+        "mean": 5.3849,
+        "ci95": [
+          4.9901,
+          5.7928
+        ],
+        "n_tasks": 152
+      },
+      "recall_touched": {
+        "mean": 0.6301,
+        "ci95": [
+          0.5802,
+          0.6794
+        ],
+        "n_tasks": 152
+      },
+      "stop_reasons": {
+        "report": 248,
+        "turns": 56
+      },
+      "calls_per_turn": 1.111
+    }
+  },
+  "contrasts": {
+    "v3_minus_a1_grep": {
+      "recall_reported": {
+        "delta": 0.0797,
+        "ci95_task": [
+          0.0488,
+          0.1117
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.0534,
+          0.1106
+        ],
+        "n_repos": 31
+      },
+      "recall_at_5": {
+        "delta": 0.1003,
+        "ci95_task": [
+          0.0685,
+          0.134
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.0719,
+          0.1317
+        ],
+        "n_repos": 31
+      },
+      "recall_at_7": {
+        "delta": 0.0936,
+        "ci95_task": [
+          0.061,
+          0.1277
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.07,
+          0.1194
+        ],
+        "n_repos": 31
+      },
+      "precision": {
+        "delta": 0.0646,
+        "ci95_task": [
+          0.0326,
+          0.0979
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.0324,
+          0.0949
+        ],
+        "n_repos": 31
+      },
+      "all_gold_reported": {
+        "delta": 0.0461,
+        "ci95_task": [
+          0.0066,
+          0.0855
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.0142,
+          0.0826
+        ],
+        "n_repos": 31
+      },
+      "turns": {
+        "delta": -25.4079,
+        "ci95_task": [
+          -26.4342,
+          -24.3586
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -26.2968,
+          -24.2597
+        ],
+        "n_repos": 31
+      },
+      "tokens": {
+        "delta": -520009.2829,
+        "ci95_task": [
+          -567002.9836,
+          -475540.8783
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -569302.4299,
+          -457898.1889
+        ],
+        "n_repos": 31
+      },
+      "ended_by_report": {
+        "delta": 0.5493,
+        "ci95_task": [
+          0.4836,
+          0.6151
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.4776,
+          0.625
+        ],
+        "n_repos": 31
+      },
+      "n_reported": {
+        "delta": -0.6283,
+        "ci95_task": [
+          -1.0526,
+          -0.1974
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -1.16,
+          -0.0925
+        ],
+        "n_repos": 31
+      },
+      "recall_touched": {
+        "delta": 0.0681,
+        "ci95_task": [
+          0.0353,
+          0.102
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.0395,
+          0.1046
+        ],
+        "n_repos": 31
+      }
+    },
+    "v3_minus_a1_sem": {
+      "recall_reported": {
+        "delta": 0.0644,
+        "ci95_task": [
+          0.0333,
+          0.0948
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.0197,
+          0.1027
+        ],
+        "n_repos": 31
+      },
+      "recall_at_5": {
+        "delta": 0.0758,
+        "ci95_task": [
+          0.0516,
+          0.101
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.0466,
+          0.0993
+        ],
+        "n_repos": 31
+      },
+      "recall_at_7": {
+        "delta": 0.0793,
+        "ci95_task": [
+          0.0533,
+          0.1061
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.0446,
+          0.1109
+        ],
+        "n_repos": 31
+      },
+      "precision": {
+        "delta": 0.0424,
+        "ci95_task": [
+          0.0119,
+          0.0741
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.0056,
+          0.0714
+        ],
+        "n_repos": 31
+      },
+      "all_gold_reported": {
+        "delta": 0.0724,
+        "ci95_task": [
+          0.0362,
+          0.1118
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.0283,
+          0.1143
+        ],
+        "n_repos": 31
+      },
+      "turns": {
+        "delta": -24.0559,
+        "ci95_task": [
+          -25.1908,
+          -22.8816
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -25.6103,
+          -22.2667
+        ],
+        "n_repos": 31
+      },
+      "tokens": {
+        "delta": -500516.4309,
+        "ci95_task": [
+          -542799.2336,
+          -459023.0395
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -552077.0191,
+          -443026.4266
+        ],
+        "n_repos": 31
+      },
+      "ended_by_report": {
+        "delta": 0.4441,
+        "ci95_task": [
+          0.3816,
+          0.5066
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.3691,
+          0.5161
+        ],
+        "n_repos": 31
+      },
+      "n_reported": {
+        "delta": -0.2993,
+        "ci95_task": [
+          -0.7072,
+          0.1086
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -0.8813,
+          0.2385
+        ],
+        "n_repos": 31
+      },
+      "recall_touched": {
+        "delta": 0.0371,
+        "ci95_task": [
+          0.013,
+          0.0629
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.0023,
+          0.0742
+        ],
+        "n_repos": 31
+      }
+    },
+    "v3_minus_base_grep": {
+      "recall_reported": {
+        "delta": 0.0907,
+        "ci95_task": [
+          0.0637,
+          0.1196
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.0554,
+          0.1246
+        ],
+        "n_repos": 31
+      },
+      "recall_at_5": {
+        "delta": 0.0818,
+        "ci95_task": [
+          0.0576,
+          0.1073
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.0528,
+          0.1088
+        ],
+        "n_repos": 31
+      },
+      "recall_at_7": {
+        "delta": 0.0872,
+        "ci95_task": [
+          0.0625,
+          0.114
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.0559,
+          0.1156
+        ],
+        "n_repos": 31
+      },
+      "precision": {
+        "delta": -0.004,
+        "ci95_task": [
+          -0.0384,
+          0.031
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -0.0376,
+          0.034
+        ],
+        "n_repos": 31
+      },
+      "all_gold_reported": {
+        "delta": 0.0592,
+        "ci95_task": [
+          0.0296,
+          0.0954
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.02,
+          0.0974
+        ],
+        "n_repos": 31
+      },
+      "turns": {
+        "delta": -21.7763,
+        "ci95_task": [
+          -22.852,
+          -20.6875
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -22.9448,
+          -20.4593
+        ],
+        "n_repos": 31
+      },
+      "tokens": {
+        "delta": -379101.4342,
+        "ci95_task": [
+          -421025.2467,
+          -338774.2007
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -431535.0726,
+          -327577.9029
+        ],
+        "n_repos": 31
+      },
+      "ended_by_report": {
+        "delta": 0.2829,
+        "ci95_task": [
+          0.2237,
+          0.3454
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.2149,
+          0.3378
+        ],
+        "n_repos": 31
+      },
+      "n_reported": {
+        "delta": 0.8684,
+        "ci95_task": [
+          0.3849,
+          1.3257
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.4872,
+          1.2406
+        ],
+        "n_repos": 31
+      },
+      "recall_touched": {
+        "delta": 0.0504,
+        "ci95_task": [
+          0.0255,
+          0.0764
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.029,
+          0.0744
+        ],
+        "n_repos": 31
+      }
+    },
+    "v3_minus_base_sem": {
+      "recall_reported": {
+        "delta": 0.0785,
+        "ci95_task": [
+          0.0473,
+          0.1095
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.0266,
+          0.1184
+        ],
+        "n_repos": 31
+      },
+      "recall_at_5": {
+        "delta": 0.0567,
+        "ci95_task": [
+          0.0275,
+          0.0859
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.0171,
+          0.0878
+        ],
+        "n_repos": 31
+      },
+      "recall_at_7": {
+        "delta": 0.077,
+        "ci95_task": [
+          0.0452,
+          0.1089
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.0284,
+          0.114
+        ],
+        "n_repos": 31
+      },
+      "precision": {
+        "delta": -0.018,
+        "ci95_task": [
+          -0.0493,
+          0.0136
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -0.0475,
+          0.0126
+        ],
+        "n_repos": 31
+      },
+      "all_gold_reported": {
+        "delta": 0.0592,
+        "ci95_task": [
+          0.023,
+          0.0987
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.0129,
+          0.0946
+        ],
+        "n_repos": 31
+      },
+      "turns": {
+        "delta": -19.6414,
+        "ci95_task": [
+          -20.875,
+          -18.3914
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -20.9787,
+          -17.9921
+        ],
+        "n_repos": 31
+      },
+      "tokens": {
+        "delta": -340185.8586,
+        "ci95_task": [
+          -384406.7401,
+          -298136.4243
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -407124.9593,
+          -278421.6084
+        ],
+        "n_repos": 31
+      },
+      "ended_by_report": {
+        "delta": 0.1842,
+        "ci95_task": [
+          0.1382,
+          0.2368
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.125,
+          0.2411
+        ],
+        "n_repos": 31
+      },
+      "n_reported": {
+        "delta": 1.1546,
+        "ci95_task": [
+          0.7533,
+          1.5526
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.66,
+          1.6135
+        ],
+        "n_repos": 31
+      },
+      "recall_touched": {
+        "delta": 0.0311,
+        "ci95_task": [
+          0.0041,
+          0.0575
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -0.0021,
+          0.0615
+        ],
+        "n_repos": 31
+      }
+    },
+    "a1_minus_base_grep": {
+      "recall_reported": {
+        "delta": 0.011,
+        "ci95_task": [
+          -0.0208,
+          0.0421
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -0.025,
+          0.0412
+        ],
+        "n_repos": 31
+      },
+      "recall_at_5": {
+        "delta": -0.0185,
+        "ci95_task": [
+          -0.0489,
+          0.0112
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -0.0521,
+          0.0133
+        ],
+        "n_repos": 31
+      },
+      "recall_at_7": {
+        "delta": -0.0064,
+        "ci95_task": [
+          -0.0377,
+          0.0237
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -0.0407,
+          0.0209
+        ],
+        "n_repos": 31
+      },
+      "precision": {
+        "delta": -0.0685,
+        "ci95_task": [
+          -0.1074,
+          -0.0297
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -0.1027,
+          -0.027
+        ],
+        "n_repos": 31
+      },
+      "all_gold_reported": {
+        "delta": 0.0132,
+        "ci95_task": [
+          -0.023,
+          0.0493
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -0.0303,
+          0.0444
+        ],
+        "n_repos": 31
+      },
+      "turns": {
+        "delta": 3.6316,
+        "ci95_task": [
+          2.2895,
+          5.023
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          2.2067,
+          5.2075
+        ],
+        "n_repos": 31
+      },
+      "tokens": {
+        "delta": 140907.8487,
+        "ci95_task": [
+          93996.8191,
+          188516.9539
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          89941.4206,
+          193126.6835
+        ],
+        "n_repos": 31
+      },
+      "ended_by_report": {
+        "delta": -0.2664,
+        "ci95_task": [
+          -0.3454,
+          -0.1875
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -0.3705,
+          -0.1692
+        ],
+        "n_repos": 31
+      },
+      "n_reported": {
+        "delta": 1.4967,
+        "ci95_task": [
+          0.9408,
+          2.0296
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.933,
+          2.0414
+        ],
+        "n_repos": 31
+      },
+      "recall_touched": {
+        "delta": -0.0176,
+        "ci95_task": [
+          -0.046,
+          0.0101
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -0.051,
+          0.0116
+        ],
+        "n_repos": 31
+      }
+    },
+    "a1_minus_base_sem": {
+      "recall_reported": {
+        "delta": 0.014,
+        "ci95_task": [
+          -0.0198,
+          0.0465
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -0.0321,
+          0.0513
+        ],
+        "n_repos": 31
+      },
+      "recall_at_5": {
+        "delta": -0.0191,
+        "ci95_task": [
+          -0.048,
+          0.0104
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -0.0515,
+          0.0107
+        ],
+        "n_repos": 31
+      },
+      "recall_at_7": {
+        "delta": -0.0024,
+        "ci95_task": [
+          -0.0345,
+          0.0297
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -0.0457,
+          0.0342
+        ],
+        "n_repos": 31
+      },
+      "precision": {
+        "delta": -0.0604,
+        "ci95_task": [
+          -0.0944,
+          -0.026
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -0.0941,
+          -0.0222
+        ],
+        "n_repos": 31
+      },
+      "all_gold_reported": {
+        "delta": -0.0132,
+        "ci95_task": [
+          -0.0461,
+          0.0164
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -0.0436,
+          0.0142
+        ],
+        "n_repos": 31
+      },
+      "turns": {
+        "delta": 4.4145,
+        "ci95_task": [
+          2.9934,
+          5.8553
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          2.2239,
+          6.7867
+        ],
+        "n_repos": 31
+      },
+      "tokens": {
+        "delta": 160330.5724,
+        "ci95_task": [
+          112715.7796,
+          207989.7566
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          81386.3943,
+          236108.2162
+        ],
+        "n_repos": 31
+      },
+      "ended_by_report": {
+        "delta": -0.2599,
+        "ci95_task": [
+          -0.3257,
+          -0.1908
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -0.3387,
+          -0.1818
+        ],
+        "n_repos": 31
+      },
+      "n_reported": {
+        "delta": 1.4539,
+        "ci95_task": [
+          1.0,
+          1.9046
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          0.8711,
+          2.044
+        ],
+        "n_repos": 31
+      },
+      "recall_touched": {
+        "delta": -0.0061,
+        "ci95_task": [
+          -0.0377,
+          0.0242
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -0.0504,
+          0.0377
+        ],
+        "n_repos": 31
+      }
+    },
+    "v3_sem_minus_grep": {
+      "recall_reported": {
+        "delta": 0.0021,
+        "ci95_task": [
+          -0.015,
+          0.0192
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -0.0191,
+          0.018
+        ],
+        "n_repos": 31
+      },
+      "turns": {
+        "delta": -0.5559,
+        "ci95_task": [
+          -0.8717,
+          -0.25
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -0.8691,
+          -0.2267
+        ],
+        "n_repos": 31
+      },
+      "tokens": {
+        "delta": -19766.7895,
+        "ci95_task": [
+          -34487.5987,
+          -5654.1809
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -33683.7891,
+          -5025.2624
+        ],
+        "n_repos": 31
+      }
+    },
+    "a1_sem_minus_grep": {
+      "recall_reported": {
+        "delta": 0.0174,
+        "ci95_task": [
+          -0.0115,
+          0.0478
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -0.0086,
+          0.0478
+        ],
+        "n_repos": 31
+      },
+      "turns": {
+        "delta": -1.9079,
+        "ci95_task": [
+          -3.1414,
+          -0.7007
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -3.1879,
+          -0.6768
+        ],
+        "n_repos": 31
+      },
+      "tokens": {
+        "delta": -39259.6414,
+        "ci95_task": [
+          -85377.0921,
+          6778.6414
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -78717.1031,
+          3730.3051
+        ],
+        "n_repos": 31
+      }
+    },
+    "base_sem_minus_grep": {
+      "recall_reported": {
+        "delta": 0.0144,
+        "ci95_task": [
+          -0.0137,
+          0.0435
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -0.0159,
+          0.0498
+        ],
+        "n_repos": 31
+      },
+      "turns": {
+        "delta": -2.6908,
+        "ci95_task": [
+          -3.8026,
+          -1.5691
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -3.8125,
+          -1.5296
+        ],
+        "n_repos": 31
+      },
+      "tokens": {
+        "delta": -58682.3651,
+        "ci95_task": [
+          -94994.102,
+          -22721.5296
+        ],
+        "n_tasks": 152,
+        "ci95_repo_cluster": [
+          -94546.8664,
+          -24217.1608
+        ],
+        "n_repos": 31
+      }
+    }
+  },
+  "per_language": {
+    "TypeScript/JS": {
+      "n_tasks": 38,
+      "n_repos": 8,
+      "v3_grep_recall_reported": {
+        "mean": 0.4371,
+        "ci95": [
+          0.3354,
+          0.5396
+        ],
+        "n_tasks": 38
+      },
+      "v3_sem_recall_reported": {
+        "mean": 0.4704,
+        "ci95": [
+          0.3643,
+          0.5813
+        ],
+        "n_tasks": 38
+      },
+      "a1_grep_recall_reported": {
+        "mean": 0.3692,
+        "ci95": [
+          0.2832,
+          0.4597
+        ],
+        "n_tasks": 38
+      },
+      "a1_sem_recall_reported": {
+        "mean": 0.4189,
+        "ci95": [
+          0.3248,
+          0.5152
+        ],
+        "n_tasks": 38
+      },
+      "base_grep_recall_reported": {
+        "mean": 0.3149,
+        "ci95": [
+          0.2281,
+          0.4046
+        ],
+        "n_tasks": 38
+      },
+      "base_sem_recall_reported": {
+        "mean": 0.3617,
+        "ci95": [
+          0.2625,
+          0.465
+        ],
+        "n_tasks": 38
+      },
+      "v3_minus_a1_grep": {
+        "delta": 0.068,
+        "ci95_task": [
+          0.0165,
+          0.122
+        ],
+        "n_tasks": 38
+      },
+      "v3_minus_a1_sem": {
+        "delta": 0.0515,
+        "ci95_task": [
+          0.0108,
+          0.0927
+        ],
+        "n_tasks": 38
+      },
+      "v3_minus_base_grep": {
+        "delta": 0.1222,
+        "ci95_task": [
+          0.0667,
+          0.1821
+        ],
+        "n_tasks": 38
+      }
+    },
+    "Python": {
+      "n_tasks": 35,
+      "n_repos": 10,
+      "v3_grep_recall_reported": {
+        "mean": 0.5626,
+        "ci95": [
+          0.4558,
+          0.673
+        ],
+        "n_tasks": 35
+      },
+      "v3_sem_recall_reported": {
+        "mean": 0.5481,
+        "ci95": [
+          0.4269,
+          0.6665
+        ],
+        "n_tasks": 35
+      },
+      "a1_grep_recall_reported": {
+        "mean": 0.4536,
+        "ci95": [
+          0.3459,
+          0.561
+        ],
+        "n_tasks": 35
+      },
+      "a1_sem_recall_reported": {
+        "mean": 0.4732,
+        "ci95": [
+          0.3714,
+          0.5781
+        ],
+        "n_tasks": 35
+      },
+      "base_grep_recall_reported": {
+        "mean": 0.4774,
+        "ci95": [
+          0.3702,
+          0.586
+        ],
+        "n_tasks": 35
+      },
+      "base_sem_recall_reported": {
+        "mean": 0.4564,
+        "ci95": [
+          0.3543,
+          0.561
+        ],
+        "n_tasks": 35
+      },
+      "v3_minus_a1_grep": {
+        "delta": 0.109,
+        "ci95_task": [
+          0.0358,
+          0.19
+        ],
+        "n_tasks": 35
+      },
+      "v3_minus_a1_sem": {
+        "delta": 0.0749,
+        "ci95_task": [
+          0.0141,
+          0.1362
+        ],
+        "n_tasks": 35
+      },
+      "v3_minus_base_grep": {
+        "delta": 0.0852,
+        "ci95_task": [
+          0.0469,
+          0.1297
+        ],
+        "n_tasks": 35
+      }
+    },
+    "Rust": {
+      "n_tasks": 24,
+      "n_repos": 3,
+      "v3_grep_recall_reported": {
+        "mean": 0.5122,
+        "ci95": [
+          0.3884,
+          0.6364
+        ],
+        "n_tasks": 24
+      },
+      "v3_sem_recall_reported": {
+        "mean": 0.5208,
+        "ci95": [
+          0.3991,
+          0.6424
+        ],
+        "n_tasks": 24
+      },
+      "a1_grep_recall_reported": {
+        "mean": 0.4738,
+        "ci95": [
+          0.3682,
+          0.5825
+        ],
+        "n_tasks": 24
+      },
+      "a1_sem_recall_reported": {
+        "mean": 0.5022,
+        "ci95": [
+          0.3991,
+          0.6022
+        ],
+        "n_tasks": 24
+      },
+      "base_grep_recall_reported": {
+        "mean": 0.448,
+        "ci95": [
+          0.3327,
+          0.5627
+        ],
+        "n_tasks": 24
+      },
+      "base_sem_recall_reported": {
+        "mean": 0.4411,
+        "ci95": [
+          0.3335,
+          0.5479
+        ],
+        "n_tasks": 24
+      },
+      "v3_minus_a1_grep": {
+        "delta": 0.0385,
+        "ci95_task": [
+          -0.0195,
+          0.0975
+        ],
+        "n_tasks": 24
+      },
+      "v3_minus_a1_sem": {
+        "delta": 0.0186,
+        "ci95_task": [
+          -0.0333,
+          0.0734
+        ],
+        "n_tasks": 24
+      },
+      "v3_minus_base_grep": {
+        "delta": 0.0642,
+        "ci95_task": [
+          0.0055,
+          0.1213
+        ],
+        "n_tasks": 24
+      }
+    },
+    "Go": {
+      "n_tasks": 19,
+      "n_repos": 6,
+      "v3_grep_recall_reported": {
+        "mean": 0.5118,
+        "ci95": [
+          0.3733,
+          0.6535
+        ],
+        "n_tasks": 19
+      },
+      "v3_sem_recall_reported": {
+        "mean": 0.491,
+        "ci95": [
+          0.3516,
+          0.6359
+        ],
+        "n_tasks": 19
+      },
+      "a1_grep_recall_reported": {
+        "mean": 0.4524,
+        "ci95": [
+          0.3268,
+          0.5901
+        ],
+        "n_tasks": 19
+      },
+      "a1_sem_recall_reported": {
+        "mean": 0.4491,
+        "ci95": [
+          0.3286,
+          0.5803
+        ],
+        "n_tasks": 19
+      },
+      "base_grep_recall_reported": {
+        "mean": 0.4332,
+        "ci95": [
+          0.2949,
+          0.5893
+        ],
+        "n_tasks": 19
+      },
+      "base_sem_recall_reported": {
+        "mean": 0.4414,
+        "ci95": [
+          0.3084,
+          0.5823
+        ],
+        "n_tasks": 19
+      },
+      "v3_minus_a1_grep": {
+        "delta": 0.0594,
+        "ci95_task": [
+          -0.0117,
+          0.1401
+        ],
+        "n_tasks": 19
+      },
+      "v3_minus_a1_sem": {
+        "delta": 0.0419,
+        "ci95_task": [
+          -0.0149,
+          0.0995
+        ],
+        "n_tasks": 19
+      },
+      "v3_minus_base_grep": {
+        "delta": 0.0785,
+        "ci95_task": [
+          0.0346,
+          0.1274
+        ],
+        "n_tasks": 19
+      }
+    },
+    "C/C++": {
+      "n_tasks": 16,
+      "n_repos": 2,
+      "v3_grep_recall_reported": {
+        "mean": 0.4499,
+        "ci95": [
+          0.3255,
+          0.5781
+        ],
+        "n_tasks": 16
+      },
+      "v3_sem_recall_reported": {
+        "mean": 0.4834,
+        "ci95": [
+          0.3333,
+          0.6381
+        ],
+        "n_tasks": 16
+      },
+      "a1_grep_recall_reported": {
+        "mean": 0.3665,
+        "ci95": [
+          0.2379,
+          0.5099
+        ],
+        "n_tasks": 16
+      },
+      "a1_sem_recall_reported": {
+        "mean": 0.2737,
+        "ci95": [
+          0.1723,
+          0.3833
+        ],
+        "n_tasks": 16
+      },
+      "base_grep_recall_reported": {
+        "mean": 0.356,
+        "ci95": [
+          0.2194,
+          0.4957
+        ],
+        "n_tasks": 16
+      },
+      "base_sem_recall_reported": {
+        "mean": 0.3823,
+        "ci95": [
+          0.244,
+          0.5265
+        ],
+        "n_tasks": 16
+      },
+      "v3_minus_a1_grep": {
+        "delta": 0.0833,
+        "ci95_task": [
+          -0.0126,
+          0.1842
+        ],
+        "n_tasks": 16
+      },
+      "v3_minus_a1_sem": {
+        "delta": 0.2097,
+        "ci95_task": [
+          0.1144,
+          0.3198
+        ],
+        "n_tasks": 16
+      },
+      "v3_minus_base_grep": {
+        "delta": 0.0939,
+        "ci95_task": [
+          -0.0275,
+          0.2215
+        ],
+        "n_tasks": 16
+      }
+    },
+    "Java/Kotlin": {
+      "n_tasks": 6,
+      "n_repos": 2,
+      "v3_grep_recall_reported": {
+        "mean": 0.8333,
+        "ci95": [
+          0.6667,
+          1.0
+        ],
+        "n_tasks": 6
+      },
+      "v3_sem_recall_reported": {
+        "mean": 0.75,
+        "ci95": [
+          0.4167,
+          1.0
+        ],
+        "n_tasks": 6
+      },
+      "a1_grep_recall_reported": {
+        "mean": 0.75,
+        "ci95": [
+          0.4167,
+          1.0
+        ],
+        "n_tasks": 6
+      },
+      "a1_sem_recall_reported": {
+        "mean": 0.8333,
+        "ci95": [
+          0.5,
+          1.0
+        ],
+        "n_tasks": 6
+      },
+      "base_grep_recall_reported": {
+        "mean": 0.8333,
+        "ci95": [
+          0.5,
+          1.0
+        ],
+        "n_tasks": 6
+      },
+      "base_sem_recall_reported": {
+        "mean": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "n_tasks": 6
+      },
+      "v3_minus_a1_grep": {
+        "delta": 0.0833,
+        "ci95_task": [
+          -0.1667,
+          0.3333
+        ],
+        "n_tasks": 6
+      },
+      "v3_minus_a1_sem": {
+        "delta": -0.0833,
+        "ci95_task": [
+          -0.5,
+          0.25
+        ],
+        "n_tasks": 6
+      },
+      "v3_minus_base_grep": {
+        "delta": 0.0,
+        "ci95_task": [
+          -0.25,
+          0.25
+        ],
+        "n_tasks": 6
+      }
+    },
+    "Other": {
+      "n_tasks": 14,
+      "n_repos": 5,
+      "v3_grep_recall_reported": {
+        "mean": 0.5934,
+        "ci95": [
+          0.426,
+          0.756
+        ],
+        "n_tasks": 14
+      },
+      "v3_sem_recall_reported": {
+        "mean": 0.5736,
+        "ci95": [
+          0.4037,
+          0.744
+        ],
+        "n_tasks": 14
+      },
+      "a1_grep_recall_reported": {
+        "mean": 0.4621,
+        "ci95": [
+          0.3042,
+          0.6398
+        ],
+        "n_tasks": 14
+      },
+      "a1_sem_recall_reported": {
+        "mean": 0.4933,
+        "ci95": [
+          0.325,
+          0.6671
+        ],
+        "n_tasks": 14
+      },
+      "base_grep_recall_reported": {
+        "mean": 0.477,
+        "ci95": [
+          0.3056,
+          0.6637
+        ],
+        "n_tasks": 14
+      },
+      "base_sem_recall_reported": {
+        "mean": 0.458,
+        "ci95": [
+          0.3098,
+          0.6282
+        ],
+        "n_tasks": 14
+      },
+      "v3_minus_a1_grep": {
+        "delta": 0.1313,
+        "ci95_task": [
+          0.0348,
+          0.2485
+        ],
+        "n_tasks": 14
+      },
+      "v3_minus_a1_sem": {
+        "delta": 0.0803,
+        "ci95_task": [
+          -0.0274,
+          0.1879
+        ],
+        "n_tasks": 14
+      },
+      "v3_minus_base_grep": {
+        "delta": 0.1164,
+        "ci95_task": [
+          0.0337,
+          0.2109
+        ],
+        "n_tasks": 14
+      }
+    }
+  },
+  "per_repo": {
+    "v3_minus_a1_grep": {
+      "Alaa91H/NexaFlow": {
+        "n_tasks": 3,
+        "language": "Java/Kotlin",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 0.8333,
+        "a1": 0.6667
+      },
+      "CodebuffAI/freebuff": {
+        "n_tasks": 1,
+        "language": "TypeScript/JS",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.0,
+        "a1": 0.0
+      },
+      "Gentleman-Programming/gentle-ai": {
+        "n_tasks": 1,
+        "language": "Go",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.0833,
+        "a1": 0.0833
+      },
+      "MagicStack/uvloop": {
+        "n_tasks": 2,
+        "language": "Python",
+        "delta": -0.0109,
+        "result": "loss",
+        "v3": 0.5326,
+        "a1": 0.5435
+      },
+      "Shopify/roast": {
+        "n_tasks": 2,
+        "language": "Other",
+        "delta": 0.4583,
+        "result": "win",
+        "v3": 0.7917,
+        "a1": 0.3333
+      },
+      "agno-agi/agno": {
+        "n_tasks": 5,
+        "language": "Python",
+        "delta": 0.0657,
+        "result": "win",
+        "v3": 0.2563,
+        "a1": 0.1907
+      },
+      "amatya-aditya/obsidian-rss-dashboard": {
+        "n_tasks": 6,
+        "language": "TypeScript/JS",
+        "delta": 0.0194,
+        "result": "win",
+        "v3": 0.3111,
+        "a1": 0.2917
+      },
+      "anthropics/claude-agent-sdk-python": {
+        "n_tasks": 15,
+        "language": "Python",
+        "delta": 0.1059,
+        "result": "win",
+        "v3": 0.647,
+        "a1": 0.5411
+      },
+      "benbalter/jekyll-remote-theme": {
+        "n_tasks": 1,
+        "language": "Other",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "centrifugal/centrifugo": {
+        "n_tasks": 5,
+        "language": "Go",
+        "delta": -0.0443,
+        "result": "loss",
+        "v3": 0.2757,
+        "a1": 0.32
+      },
+      "cypress-io/eslint-plugin-cypress": {
+        "n_tasks": 1,
+        "language": "TypeScript/JS",
+        "delta": -0.2,
+        "result": "loss",
+        "v3": 0.0,
+        "a1": 0.2
+      },
+      "facebook/fbthrift": {
+        "n_tasks": 15,
+        "language": "C/C++",
+        "delta": 0.0533,
+        "result": "win",
+        "v3": 0.3961,
+        "a1": 0.3428
+      },
+      "fossasia/eventyay": {
+        "n_tasks": 6,
+        "language": "Python",
+        "delta": 0.0703,
+        "result": "win",
+        "v3": 0.3568,
+        "a1": 0.2866
+      },
+      "h4ckf0r0day/obscura": {
+        "n_tasks": 15,
+        "language": "Rust",
+        "delta": 0.036,
+        "result": "win",
+        "v3": 0.6018,
+        "a1": 0.5658
+      },
+      "home-assistant-libs/pychromecast": {
+        "n_tasks": 2,
+        "language": "Python",
+        "delta": -0.0833,
+        "result": "loss",
+        "v3": 0.6667,
+        "a1": 0.75
+      },
+      "joshsymonds/nix-config": {
+        "n_tasks": 1,
+        "language": "Python",
+        "delta": 0.5,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.5
+      },
+      "m1k1o/neko": {
+        "n_tasks": 8,
+        "language": "Go",
+        "delta": 0.1417,
+        "result": "win",
+        "v3": 0.7312,
+        "a1": 0.5896
+      },
+      "meta-pytorch/monarch": {
+        "n_tasks": 3,
+        "language": "Rust",
+        "delta": -0.0333,
+        "result": "loss",
+        "v3": 0.3333,
+        "a1": 0.3667
+      },
+      "oauth2-proxy/oauth2-proxy": {
+        "n_tasks": 4,
+        "language": "Go",
+        "delta": 0.1623,
+        "result": "win",
+        "v3": 0.5585,
+        "a1": 0.3962
+      },
+      "openstack/devstack": {
+        "n_tasks": 1,
+        "language": "Python",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "pear-devs/pear-desktop": {
+        "n_tasks": 2,
+        "language": "TypeScript/JS",
+        "delta": 0.0625,
+        "result": "win",
+        "v3": 0.5833,
+        "a1": 0.5208
+      },
+      "rive-app/rive-ios": {
+        "n_tasks": 6,
+        "language": "C/C++",
+        "delta": 0.1965,
+        "result": "win",
+        "v3": 0.4679,
+        "a1": 0.2713
+      },
+      "slatedb/slatedb": {
+        "n_tasks": 8,
+        "language": "Rust",
+        "delta": 0.048,
+        "result": "win",
+        "v3": 0.4583,
+        "a1": 0.4103
+      },
+      "snowflakedb/snowflake-cli": {
+        "n_tasks": 1,
+        "language": "Python",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 0.1667,
+        "a1": 0.0
+      },
+      "southleft/figma-console-mcp": {
+        "n_tasks": 15,
+        "language": "TypeScript/JS",
+        "delta": 0.073,
+        "result": "win",
+        "v3": 0.5862,
+        "a1": 0.5132
+      },
+      "streetsidesoftware/cspell": {
+        "n_tasks": 4,
+        "language": "TypeScript/JS",
+        "delta": 0.1804,
+        "result": "win",
+        "v3": 0.6643,
+        "a1": 0.4839
+      },
+      "symfony/twig-bundle": {
+        "n_tasks": 6,
+        "language": "Other",
+        "delta": 0.0736,
+        "result": "win",
+        "v3": 0.6028,
+        "a1": 0.5292
+      },
+      "unoplatform/uno": {
+        "n_tasks": 1,
+        "language": "Other",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "weifuwan/yak-ops": {
+        "n_tasks": 3,
+        "language": "Java/Kotlin",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.8333,
+        "a1": 0.8333
+      },
+      "yangeorget/nucs": {
+        "n_tasks": 1,
+        "language": "Python",
+        "delta": 1.0,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.0
+      },
+      "z0r0z/tacit": {
+        "n_tasks": 8,
+        "language": "TypeScript/JS",
+        "delta": 0.0281,
+        "result": "win",
+        "v3": 0.1826,
+        "a1": 0.1545
+      }
+    },
+    "v3_minus_a1_sem": {
+      "Alaa91H/NexaFlow": {
+        "n_tasks": 3,
+        "language": "Java/Kotlin",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 0.8333,
+        "a1": 0.6667
+      },
+      "CodebuffAI/freebuff": {
+        "n_tasks": 1,
+        "language": "TypeScript/JS",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.0,
+        "a1": 0.0
+      },
+      "Gentleman-Programming/gentle-ai": {
+        "n_tasks": 1,
+        "language": "Go",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.0833,
+        "a1": 0.0833
+      },
+      "MagicStack/uvloop": {
+        "n_tasks": 2,
+        "language": "Python",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.5217,
+        "a1": 0.5217
+      },
+      "Shopify/roast": {
+        "n_tasks": 2,
+        "language": "Other",
+        "delta": 0.25,
+        "result": "win",
+        "v3": 0.75,
+        "a1": 0.5
+      },
+      "agno-agi/agno": {
+        "n_tasks": 5,
+        "language": "Python",
+        "delta": 0.0583,
+        "result": "win",
+        "v3": 0.23,
+        "a1": 0.1716
+      },
+      "amatya-aditya/obsidian-rss-dashboard": {
+        "n_tasks": 6,
+        "language": "TypeScript/JS",
+        "delta": 0.0028,
+        "result": "win",
+        "v3": 0.325,
+        "a1": 0.3222
+      },
+      "anthropics/claude-agent-sdk-python": {
+        "n_tasks": 15,
+        "language": "Python",
+        "delta": 0.1386,
+        "result": "win",
+        "v3": 0.664,
+        "a1": 0.5255
+      },
+      "benbalter/jekyll-remote-theme": {
+        "n_tasks": 1,
+        "language": "Other",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "centrifugal/centrifugo": {
+        "n_tasks": 5,
+        "language": "Go",
+        "delta": -0.0557,
+        "result": "loss",
+        "v3": 0.2557,
+        "a1": 0.3114
+      },
+      "cypress-io/eslint-plugin-cypress": {
+        "n_tasks": 1,
+        "language": "TypeScript/JS",
+        "delta": -0.2,
+        "result": "loss",
+        "v3": 0.0,
+        "a1": 0.2
+      },
+      "facebook/fbthrift": {
+        "n_tasks": 15,
+        "language": "C/C++",
+        "delta": 0.1548,
+        "result": "win",
+        "v3": 0.4453,
+        "a1": 0.2905
+      },
+      "fossasia/eventyay": {
+        "n_tasks": 6,
+        "language": "Python",
+        "delta": -0.0972,
+        "result": "loss",
+        "v3": 0.2825,
+        "a1": 0.3797
+      },
+      "h4ckf0r0day/obscura": {
+        "n_tasks": 15,
+        "language": "Rust",
+        "delta": 0.0452,
+        "result": "win",
+        "v3": 0.6274,
+        "a1": 0.5822
+      },
+      "home-assistant-libs/pychromecast": {
+        "n_tasks": 2,
+        "language": "Python",
+        "delta": -0.0833,
+        "result": "loss",
+        "v3": 0.6667,
+        "a1": 0.75
+      },
+      "joshsymonds/nix-config": {
+        "n_tasks": 1,
+        "language": "Python",
+        "delta": 0.5,
+        "result": "win",
+        "v3": 1.0,
+        "a1": 0.5
+      },
+      "m1k1o/neko": {
+        "n_tasks": 8,
+        "language": "Go",
+        "delta": 0.1,
+        "result": "win",
+        "v3": 0.7604,
+        "a1": 0.6604
+      },
+      "meta-pytorch/monarch": {
+        "n_tasks": 3,
+        "language": "Rust",
+        "delta": 0.1333,
+        "result": "win",
+        "v3": 0.3333,
+        "a1": 0.2
+      },
+      "oauth2-proxy/oauth2-proxy": {
+        "n_tasks": 4,
+        "language": "Go",
+        "delta": 0.0186,
+        "result": "win",
+        "v3": 0.5097,
+        "a1": 0.4911
+      },
+      "openstack/devstack": {
+        "n_tasks": 1,
+        "language": "Python",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "pear-devs/pear-desktop": {
+        "n_tasks": 2,
+        "language": "TypeScript/JS",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.5833,
+        "a1": 0.5833
+      },
+      "rive-app/rive-ios": {
+        "n_tasks": 6,
+        "language": "C/C++",
+        "delta": 0.3012,
+        "result": "win",
+        "v3": 0.4301,
+        "a1": 0.1289
+      },
+      "slatedb/slatedb": {
+        "n_tasks": 8,
+        "language": "Rust",
+        "delta": 0.0084,
+        "result": "win",
+        "v3": 0.436,
+        "a1": 0.4276
+      },
+      "snowflakedb/snowflake-cli": {
+        "n_tasks": 1,
+        "language": "Python",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.0,
+        "a1": 0.0
+      },
+      "southleft/figma-console-mcp": {
+        "n_tasks": 15,
+        "language": "TypeScript/JS",
+        "delta": 0.0986,
+        "result": "win",
+        "v3": 0.6374,
+        "a1": 0.5388
+      },
+      "streetsidesoftware/cspell": {
+        "n_tasks": 4,
+        "language": "TypeScript/JS",
+        "delta": 0.1268,
+        "result": "win",
+        "v3": 0.6821,
+        "a1": 0.5554
+      },
+      "symfony/twig-bundle": {
+        "n_tasks": 6,
+        "language": "Other",
+        "delta": 0.0028,
+        "result": "win",
+        "v3": 0.575,
+        "a1": 0.5722
+      },
+      "unoplatform/uno": {
+        "n_tasks": 1,
+        "language": "Other",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "weifuwan/yak-ops": {
+        "n_tasks": 3,
+        "language": "Java/Kotlin",
+        "delta": -0.3333,
+        "result": "loss",
+        "v3": 0.6667,
+        "a1": 1.0
+      },
+      "yangeorget/nucs": {
+        "n_tasks": 1,
+        "language": "Python",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "a1": 1.0
+      },
+      "z0r0z/tacit": {
+        "n_tasks": 8,
+        "language": "TypeScript/JS",
+        "delta": -0.0017,
+        "result": "loss",
+        "v3": 0.1835,
+        "a1": 0.1852
+      }
+    },
+    "v3_minus_base_grep": {
+      "Alaa91H/NexaFlow": {
+        "n_tasks": 3,
+        "language": "Java/Kotlin",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 0.8333,
+        "base": 0.6667
+      },
+      "CodebuffAI/freebuff": {
+        "n_tasks": 1,
+        "language": "TypeScript/JS",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.0,
+        "base": 0.0
+      },
+      "Gentleman-Programming/gentle-ai": {
+        "n_tasks": 1,
+        "language": "Go",
+        "delta": 0.0417,
+        "result": "win",
+        "v3": 0.0833,
+        "base": 0.0417
+      },
+      "MagicStack/uvloop": {
+        "n_tasks": 2,
+        "language": "Python",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.5326,
+        "base": 0.5326
+      },
+      "Shopify/roast": {
+        "n_tasks": 2,
+        "language": "Other",
+        "delta": 0.125,
+        "result": "win",
+        "v3": 0.7917,
+        "base": 0.6667
+      },
+      "agno-agi/agno": {
+        "n_tasks": 5,
+        "language": "Python",
+        "delta": 0.0833,
+        "result": "win",
+        "v3": 0.2563,
+        "base": 0.173
+      },
+      "amatya-aditya/obsidian-rss-dashboard": {
+        "n_tasks": 6,
+        "language": "TypeScript/JS",
+        "delta": 0.0194,
+        "result": "win",
+        "v3": 0.3111,
+        "base": 0.2917
+      },
+      "anthropics/claude-agent-sdk-python": {
+        "n_tasks": 15,
+        "language": "Python",
+        "delta": 0.12,
+        "result": "win",
+        "v3": 0.647,
+        "base": 0.527
+      },
+      "benbalter/jekyll-remote-theme": {
+        "n_tasks": 1,
+        "language": "Other",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "base": 1.0
+      },
+      "centrifugal/centrifugo": {
+        "n_tasks": 5,
+        "language": "Go",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.2757,
+        "base": 0.2757
+      },
+      "cypress-io/eslint-plugin-cypress": {
+        "n_tasks": 1,
+        "language": "TypeScript/JS",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.0,
+        "base": 0.0
+      },
+      "facebook/fbthrift": {
+        "n_tasks": 15,
+        "language": "C/C++",
+        "delta": 0.0275,
+        "result": "win",
+        "v3": 0.3961,
+        "base": 0.3686
+      },
+      "fossasia/eventyay": {
+        "n_tasks": 6,
+        "language": "Python",
+        "delta": 0.0999,
+        "result": "win",
+        "v3": 0.3568,
+        "base": 0.2569
+      },
+      "h4ckf0r0day/obscura": {
+        "n_tasks": 15,
+        "language": "Rust",
+        "delta": 0.0947,
+        "result": "win",
+        "v3": 0.6018,
+        "base": 0.5071
+      },
+      "home-assistant-libs/pychromecast": {
+        "n_tasks": 2,
+        "language": "Python",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.6667,
+        "base": 0.6667
+      },
+      "joshsymonds/nix-config": {
+        "n_tasks": 1,
+        "language": "Python",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "base": 1.0
+      },
+      "m1k1o/neko": {
+        "n_tasks": 8,
+        "language": "Go",
+        "delta": 0.0688,
+        "result": "win",
+        "v3": 0.7312,
+        "base": 0.6625
+      },
+      "meta-pytorch/monarch": {
+        "n_tasks": 3,
+        "language": "Rust",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 0.3333,
+        "base": 0.3333
+      },
+      "oauth2-proxy/oauth2-proxy": {
+        "n_tasks": 4,
+        "language": "Go",
+        "delta": 0.189,
+        "result": "win",
+        "v3": 0.5585,
+        "base": 0.3695
+      },
+      "openstack/devstack": {
+        "n_tasks": 1,
+        "language": "Python",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "base": 1.0
+      },
+      "pear-devs/pear-desktop": {
+        "n_tasks": 2,
+        "language": "TypeScript/JS",
+        "delta": 0.0417,
+        "result": "win",
+        "v3": 0.5833,
+        "base": 0.5417
+      },
+      "rive-app/rive-ios": {
+        "n_tasks": 6,
+        "language": "C/C++",
+        "delta": 0.2354,
+        "result": "win",
+        "v3": 0.4679,
+        "base": 0.2325
+      },
+      "slatedb/slatedb": {
+        "n_tasks": 8,
+        "language": "Rust",
+        "delta": 0.0401,
+        "result": "win",
+        "v3": 0.4583,
+        "base": 0.4182
+      },
+      "snowflakedb/snowflake-cli": {
+        "n_tasks": 1,
+        "language": "Python",
+        "delta": 0.1667,
+        "result": "win",
+        "v3": 0.1667,
+        "base": 0.0
+      },
+      "southleft/figma-console-mcp": {
+        "n_tasks": 15,
+        "language": "TypeScript/JS",
+        "delta": 0.1727,
+        "result": "win",
+        "v3": 0.5862,
+        "base": 0.4135
+      },
+      "streetsidesoftware/cspell": {
+        "n_tasks": 4,
+        "language": "TypeScript/JS",
+        "delta": 0.3631,
+        "result": "win",
+        "v3": 0.6643,
+        "base": 0.3012
+      },
+      "symfony/twig-bundle": {
+        "n_tasks": 6,
+        "language": "Other",
+        "delta": 0.1944,
+        "result": "win",
+        "v3": 0.6028,
+        "base": 0.4083
+      },
+      "unoplatform/uno": {
+        "n_tasks": 1,
+        "language": "Other",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "base": 1.0
+      },
+      "weifuwan/yak-ops": {
+        "n_tasks": 3,
+        "language": "Java/Kotlin",
+        "delta": -0.1667,
+        "result": "loss",
+        "v3": 0.8333,
+        "base": 1.0
+      },
+      "yangeorget/nucs": {
+        "n_tasks": 1,
+        "language": "Python",
+        "delta": 0.0,
+        "result": "tie",
+        "v3": 1.0,
+        "base": 1.0
+      },
+      "z0r0z/tacit": {
+        "n_tasks": 8,
+        "language": "TypeScript/JS",
+        "delta": 0.0293,
+        "result": "win",
+        "v3": 0.1826,
+        "base": 0.1533
+      }
+    }
+  },
+  "win_loss_by_repo": {
+    "v3_minus_a1_grep": {
+      "repos": {
+        "win": 20,
+        "loss": 5,
+        "tie": 6
+      },
+      "tasks": {
+        "win": 71,
+        "loss": 30,
+        "tie": 51
+      }
+    },
+    "v3_minus_a1_sem": {
+      "repos": {
+        "win": 16,
+        "loss": 6,
+        "tie": 9
+      },
+      "tasks": {
+        "win": 66,
+        "loss": 28,
+        "tie": 58
+      }
+    },
+    "v3_minus_base_grep": {
+      "repos": {
+        "win": 19,
+        "loss": 1,
+        "tie": 11
+      },
+      "tasks": {
+        "win": 76,
+        "loss": 13,
+        "tie": 63
+      }
+    }
+  },
+  "primary": {
+    "contrast": "v3 minus A1, grep arm, reported recall",
+    "delta": 0.0797,
+    "ci95_task": [
+      0.0488,
+      0.1117
+    ],
+    "n_tasks": 152,
+    "ci95_repo_cluster": [
+      0.0534,
+      0.1106
+    ],
+    "n_repos": 31,
+    "task_lower_gt_0": true,
+    "cluster_lower_gt_0": true,
+    "generalization_claim_holds": true
+  },
+  "semantic_indexed_subset": {
+    "n_tasks": 136,
+    "v3": {
+      "recall_reported": {
+        "mean": 0.5255,
+        "ci95": [
+          0.4678,
+          0.5828
+        ],
+        "n_tasks": 136
+      },
+      "recall_at_5": {
+        "mean": 0.4751,
+        "ci95": [
+          0.4185,
+          0.532
+        ],
+        "n_tasks": 136
+      },
+      "precision": {
+        "mean": 0.4192,
+        "ci95": [
+          0.3709,
+          0.4673
+        ],
+        "n_tasks": 136
+      },
+      "turns": {
+        "mean": 8.4743,
+        "ci95": [
+          8.1029,
+          8.875
+        ],
+        "n_tasks": 136
+      }
+    },
+    "a1": {
+      "recall_reported": {
+        "mean": 0.4706,
+        "ci95": [
+          0.4184,
+          0.5241
+        ],
+        "n_tasks": 136
+      },
+      "recall_at_5": {
+        "mean": 0.402,
+        "ci95": [
+          0.3502,
+          0.4547
+        ],
+        "n_tasks": 136
+      },
+      "precision": {
+        "mean": 0.3816,
+        "ci95": [
+          0.3351,
+          0.4281
+        ],
+        "n_tasks": 136
+      },
+      "turns": {
+        "mean": 32.9338,
+        "ci95": [
+          31.7316,
+          34.0919
+        ],
+        "n_tasks": 136
+      }
+    },
+    "base": {
+      "recall_reported": {
+        "mean": 0.449,
+        "ci95": [
+          0.3952,
+          0.5044
+        ],
+        "n_tasks": 136
+      },
+      "recall_at_5": {
+        "mean": 0.4151,
+        "ci95": [
+          0.363,
+          0.4691
+        ],
+        "n_tasks": 136
+      },
+      "precision": {
+        "mean": 0.4301,
+        "ci95": [
+          0.3823,
+          0.4797
+        ],
+        "n_tasks": 136
+      },
+      "turns": {
+        "mean": 27.8529,
+        "ci95": [
+          26.4007,
+          29.2978
+        ],
+        "n_tasks": 136
+      }
+    },
+    "v3_minus_a1_recall_reported": {
+      "delta": 0.055,
+      "ci95_task": [
+        0.0221,
+        0.0862
+      ],
+      "n_tasks": 136,
+      "ci95_repo_cluster": [
+        0.0092,
+        0.0952
+      ],
+      "n_repos": 29
+    },
+    "v3_minus_base_recall_reported": {
+      "delta": 0.0766,
+      "ci95_task": [
+        0.0427,
+        0.1107
+      ],
+      "n_tasks": 136,
+      "ci95_repo_cluster": [
+        0.0186,
+        0.12
+      ],
+      "n_repos": 29
+    }
+  },
+  "reasoning_render_evidence": {
+    "v3": {
+      "turn_pairs_output_ge_300": 29,
+      "median_growth_over_output": 1.17,
+      "share_growth_ge_0.8x_output": 0.97,
+      "rollouts_with_reasoning_content": 608,
+      "rollouts": 608
+    },
+    "a1": {
+      "turn_pairs_output_ge_300": 574,
+      "median_growth_over_output": 1.05,
+      "share_growth_ge_0.8x_output": 0.98,
+      "rollouts_with_reasoning_content": 608,
+      "rollouts": 608
+    },
+    "base": {
+      "turn_pairs_output_ge_300": 85,
+      "median_growth_over_output": 1.06,
+      "share_growth_ge_0.8x_output": 0.99,
+      "rollouts_with_reasoning_content": 608,
+      "rollouts": 608
+    }
+  }
+}

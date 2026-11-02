@@ -1,0 +1,7 @@
+{
+  "name": "scout",
+  "version": "0.2.0",
+  "description": "scout code search for Claude Code: Explore is routed to scout-explorer, which sweeps the repo with Wayfinder over an encrypted voyage-code index, then verifies every range by reading it. Slash commands to index, check status, search and switch model.",
+  "author": { "name": "Henry Weller" },
+  "keywords": ["explore", "search", "scout", "wayfinder", "mcp", "code-search"]
+}

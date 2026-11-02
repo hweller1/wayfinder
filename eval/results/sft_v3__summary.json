@@ -1,0 +1,1308 @@
+{
+  "base": {
+    "n_rollouts": 100,
+    "n_tasks": 50,
+    "recall_reported": {
+      "mean": 0.2456,
+      "ci95": [
+        0.1769,
+        0.3179
+      ]
+    },
+    "all_gold_reported": {
+      "mean": 0.02,
+      "ci95": [
+        0.0,
+        0.06
+      ]
+    },
+    "recall_touched": {
+      "mean": 0.4633,
+      "ci95": [
+        0.3684,
+        0.5585
+      ]
+    },
+    "all_gold_touched": {
+      "mean": 0.15,
+      "ci95": [
+        0.06,
+        0.25
+      ]
+    },
+    "reported_before_cap": {
+      "mean": 0.21,
+      "ci95": [
+        0.12,
+        0.3
+      ]
+    },
+    "turns": {
+      "mean": 37.36,
+      "ci95": [
+        35.81,
+        38.7
+      ],
+      "p50": 40.0
+    },
+    "tokens": {
+      "mean": 821495.55,
+      "ci95": [
+        739775.97,
+        902461.74
+      ],
+      "p50": 845448.0
+    },
+    "calls_per_turn": {
+      "mean": 1.1445,
+      "ci95": [
+        1.0777,
+        1.2278
+      ]
+    },
+    "turn_latency_s": {
+      "mean": 5.6277,
+      "ci95": [
+        5.2491,
+        6.0388
+      ]
+    },
+    "wall_s": {
+      "mean": 202.8721,
+      "ci95": [
+        191.5096,
+        214.7023
+      ],
+      "p50": 189.9
+    },
+    "stop_reasons": {
+      "report": 21,
+      "turns": 79
+    },
+    "semantic_calls_mean": null
+  },
+  "teacher_stageB": {
+    "n_rollouts": 98,
+    "n_tasks": 49,
+    "recall_reported": {
+      "mean": 0.4401,
+      "ci95": [
+        0.3544,
+        0.5293
+      ]
+    },
+    "all_gold_reported": {
+      "mean": 0.102,
+      "ci95": [
+        0.0306,
+        0.1939
+      ]
+    },
+    "recall_touched": {
+      "mean": 0.5527,
+      "ci95": [
+        0.4645,
+        0.6422
+      ]
+    },
+    "all_gold_touched": {
+      "mean": 0.1939,
+      "ci95": [
+        0.0918,
+        0.3061
+      ]
+    },
+    "reported_before_cap": {
+      "mean": 0.949,
+      "ci95": [
+        0.8878,
+        0.9898
+      ]
+    },
+    "turns": {
+      "mean": 11.5102,
+      "ci95": [
+        10.0306,
+        13.1735
+      ],
+      "p50": 9.5
+    },
+    "tokens": {
+      "mean": 388422.6531,
+      "ci95": [
+        307544.7449,
+        478855.9286
+      ],
+      "p50": 270939.0
+    },
+    "calls_per_turn": {
+      "mean": 3.0516,
+      "ci95": [
+        2.9252,
+        3.1753
+      ]
+    },
+    "turn_latency_s": {
+      "mean": 30.2857,
+      "ci95": [
+        28.2157,
+        32.7526
+      ]
+    },
+    "wall_s": {
+      "mean": 329.341,
+      "ci95": [
+        295.1341,
+        368.5641
+      ],
+      "p50": 277.9
+    },
+    "stop_reasons": {
+      "report": 93,
+      "context": 3,
+      "turns": 2
+    },
+    "semantic_calls_mean": null
+  },
+  "validation": {
+    "grep": {
+      "file": "sft_v3_grep.jsonl",
+      "rows": 100,
+      "ok_rows": 100,
+      "errors": 0,
+      "tasks": 50,
+      "models": [
+        "wayfinder-v3"
+      ],
+      "turns_min_med_max": [
+        5,
+        11,
+        40
+      ],
+      "wall_s_med": 395.51,
+      "healthy": true
+    },
+    "sem": {
+      "file": "sft_v3_sem.jsonl",
+      "rows": 100,
+      "ok_rows": 100,
+      "errors": 0,
+      "tasks": 50,
+      "models": [
+        "wayfinder-v3"
+      ],
+      "turns_min_med_max": [
+        5,
+        11,
+        39
+      ],
+      "wall_s_med": 386.97,
+      "healthy": true
+    }
+  },
+  "v1_grep": {
+    "n_rollouts": 99,
+    "n_tasks": 50,
+    "recall_reported": {
+      "mean": 0.3446,
+      "ci95": [
+        0.265,
+        0.4269
+      ]
+    },
+    "all_gold_reported": {
+      "mean": 0.05,
+      "ci95": [
+        0.0,
+        0.11
+      ]
+    },
+    "recall_touched": {
+      "mean": 0.5163,
+      "ci95": [
+        0.4239,
+        0.609
+      ]
+    },
+    "all_gold_touched": {
+      "mean": 0.17,
+      "ci95": [
+        0.08,
+        0.27
+      ]
+    },
+    "reported_before_cap": {
+      "mean": 0.35,
+      "ci95": [
+        0.24,
+        0.47
+      ]
+    },
+    "turns": {
+      "mean": 23.07,
+      "ci95": [
+        20.76,
+        25.29
+      ],
+      "p50": 24
+    },
+    "tokens": {
+      "mean": 864916.97,
+      "ci95": [
+        760065.18,
+        969111.83
+      ],
+      "p50": 848249
+    },
+    "calls_per_turn": {
+      "mean": 3.503,
+      "ci95": [
+        3.1832,
+        3.8372
+      ]
+    },
+    "turn_latency_s": {
+      "mean": 34.5564,
+      "ci95": [
+        30.9966,
+        38.412
+      ]
+    },
+    "wall_s": {
+      "mean": 674.234,
+      "ci95": [
+        612.9535,
+        734.0957
+      ],
+      "p50": 801.8
+    },
+    "stop_reasons": {
+      "context": 5,
+      "turns": 15,
+      "report": 34,
+      "seconds": 45
+    },
+    "semantic_calls_mean": null
+  },
+  "v2b_grep": {
+    "n_rollouts": 100,
+    "n_tasks": 50,
+    "recall_reported": {
+      "mean": 0.3625,
+      "ci95": [
+        0.2794,
+        0.4468
+      ]
+    },
+    "all_gold_reported": {
+      "mean": 0.05,
+      "ci95": [
+        0.0,
+        0.11
+      ]
+    },
+    "recall_touched": {
+      "mean": 0.5125,
+      "ci95": [
+        0.4185,
+        0.6035
+      ]
+    },
+    "all_gold_touched": {
+      "mean": 0.16,
+      "ci95": [
+        0.07,
+        0.26
+      ]
+    },
+    "reported_before_cap": {
+      "mean": 0.95,
+      "ci95": [
+        0.89,
+        0.99
+      ]
+    },
+    "turns": {
+      "mean": 13.79,
+      "ci95": [
+        12.03,
+        15.76
+      ],
+      "p50": 11.0
+    },
+    "tokens": {
+      "mean": 489625.71,
+      "ci95": [
+        395980.69,
+        590641.51
+      ],
+      "p50": 365147.5
+    },
+    "calls_per_turn": {
+      "mean": 3.2158,
+      "ci95": [
+        3.0813,
+        3.3363
+      ]
+    },
+    "turn_latency_s": {
+      "mean": 34.8942,
+      "ci95": [
+        32.7072,
+        37.0536
+      ]
+    },
+    "wall_s": {
+      "mean": 451.8496,
+      "ci95": [
+        406.106,
+        499.8074
+      ],
+      "p50": 429.4
+    },
+    "stop_reasons": {
+      "context": 3,
+      "report": 95,
+      "turns": 2
+    },
+    "semantic_calls_mean": null
+  },
+  "v2b_sem": {
+    "n_rollouts": 100,
+    "n_tasks": 50,
+    "recall_reported": {
+      "mean": 0.3823,
+      "ci95": [
+        0.2961,
+        0.4688
+      ]
+    },
+    "all_gold_reported": {
+      "mean": 0.09,
+      "ci95": [
+        0.02,
+        0.17
+      ]
+    },
+    "recall_touched": {
+      "mean": 0.5193,
+      "ci95": [
+        0.432,
+        0.604
+      ]
+    },
+    "all_gold_touched": {
+      "mean": 0.14,
+      "ci95": [
+        0.06,
+        0.24
+      ]
+    },
+    "reported_before_cap": {
+      "mean": 0.99,
+      "ci95": [
+        0.97,
+        1.0
+      ]
+    },
+    "turns": {
+      "mean": 12.36,
+      "ci95": [
+        11.22,
+        13.61
+      ],
+      "p50": 11.0
+    },
+    "tokens": {
+      "mean": 428384.38,
+      "ci95": [
+        363966.66,
+        498788.05
+      ],
+      "p50": 350298.5
+    },
+    "calls_per_turn": {
+      "mean": 3.3182,
+      "ci95": [
+        3.1855,
+        3.4529
+      ]
+    },
+    "turn_latency_s": {
+      "mean": 33.0489,
+      "ci95": [
+        31.1839,
+        34.9926
+      ]
+    },
+    "wall_s": {
+      "mean": 393.5616,
+      "ci95": [
+        363.8448,
+        424.5341
+      ],
+      "p50": 388.2
+    },
+    "stop_reasons": {
+      "report": 99,
+      "context": 1
+    },
+    "semantic_calls_mean": null
+  },
+  "v3_grep": {
+    "n_rollouts": 100,
+    "n_tasks": 50,
+    "recall_reported": {
+      "mean": 0.3956,
+      "ci95": [
+        0.3137,
+        0.4816
+      ]
+    },
+    "all_gold_reported": {
+      "mean": 0.08,
+      "ci95": [
+        0.02,
+        0.16
+      ]
+    },
+    "recall_touched": {
+      "mean": 0.549,
+      "ci95": [
+        0.462,
+        0.6364
+      ]
+    },
+    "all_gold_touched": {
+      "mean": 0.19,
+      "ci95": [
+        0.09,
+        0.3
+      ]
+    },
+    "reported_before_cap": {
+      "mean": 0.97,
+      "ci95": [
+        0.92,
+        1.0
+      ]
+    },
+    "turns": {
+      "mean": 12.23,
+      "ci95": [
+        10.85,
+        13.77
+      ],
+      "p50": 11.0
+    },
+    "tokens": {
+      "mean": 423334.95,
+      "ci95": [
+        349118.09,
+        508220.85
+      ],
+      "p50": 345324.0
+    },
+    "calls_per_turn": {
+      "mean": 3.1807,
+      "ci95": [
+        3.0681,
+        3.2909
+      ]
+    },
+    "turn_latency_s": {
+      "mean": 36.199,
+      "ci95": [
+        34.4607,
+        37.9895
+      ]
+    },
+    "wall_s": {
+      "mean": 430.3301,
+      "ci95": [
+        385.8568,
+        479.6163
+      ],
+      "p50": 395.4
+    },
+    "stop_reasons": {
+      "context": 2,
+      "report": 97,
+      "turns": 1
+    },
+    "semantic_calls_mean": null
+  },
+  "v3_sem": {
+    "n_rollouts": 100,
+    "n_tasks": 50,
+    "recall_reported": {
+      "mean": 0.4146,
+      "ci95": [
+        0.334,
+        0.4965
+      ]
+    },
+    "all_gold_reported": {
+      "mean": 0.06,
+      "ci95": [
+        0.01,
+        0.13
+      ]
+    },
+    "recall_touched": {
+      "mean": 0.5537,
+      "ci95": [
+        0.4655,
+        0.642
+      ]
+    },
+    "all_gold_touched": {
+      "mean": 0.19,
+      "ci95": [
+        0.1,
+        0.29
+      ]
+    },
+    "reported_before_cap": {
+      "mean": 0.98,
+      "ci95": [
+        0.94,
+        1.0
+      ]
+    },
+    "turns": {
+      "mean": 12.76,
+      "ci95": [
+        11.23,
+        14.45
+      ],
+      "p50": 11.0
+    },
+    "tokens": {
+      "mean": 450567.65,
+      "ci95": [
+        367923.52,
+        541917.29
+      ],
+      "p50": 339957.0
+    },
+    "calls_per_turn": {
+      "mean": 3.2171,
+      "ci95": [
+        3.0881,
+        3.3472
+      ]
+    },
+    "turn_latency_s": {
+      "mean": 37.279,
+      "ci95": [
+        34.5028,
+        40.5761
+      ]
+    },
+    "wall_s": {
+      "mean": 450.0714,
+      "ci95": [
+        403.3987,
+        500.4448
+      ],
+      "p50": 386.5
+    },
+    "stop_reasons": {
+      "context": 2,
+      "report": 98
+    },
+    "semantic_calls_mean": null
+  },
+  "v3_grep_minus_base": {
+    "recall_reported": {
+      "delta": 0.15,
+      "ci95": [
+        0.0956,
+        0.2093
+      ],
+      "n_tasks": 50
+    },
+    "all_gold_reported": {
+      "delta": 0.06,
+      "ci95": [
+        0.01,
+        0.13
+      ],
+      "n_tasks": 50
+    },
+    "recall_touched": {
+      "delta": 0.0857,
+      "ci95": [
+        0.0449,
+        0.1282
+      ],
+      "n_tasks": 50
+    },
+    "all_gold_touched": {
+      "delta": 0.04,
+      "ci95": [
+        0.0,
+        0.09
+      ],
+      "n_tasks": 50
+    },
+    "reported_before_cap": {
+      "delta": 0.76,
+      "ci95": [
+        0.66,
+        0.85
+      ],
+      "n_tasks": 50
+    },
+    "turns": {
+      "delta": -25.13,
+      "ci95": [
+        -26.91,
+        -23.25
+      ],
+      "n_tasks": 50
+    },
+    "tokens": {
+      "delta": -398160.6,
+      "ci95": [
+        -468579.95,
+        -324138.07
+      ],
+      "n_tasks": 50
+    },
+    "calls_per_turn": {
+      "delta": 2.0362,
+      "ci95": [
+        1.9041,
+        2.1621
+      ],
+      "n_tasks": 50
+    },
+    "turn_latency_s": {
+      "delta": 30.5713,
+      "ci95": [
+        28.8947,
+        32.2416
+      ],
+      "n_tasks": 50
+    },
+    "wall_s": {
+      "delta": 227.458,
+      "ci95": [
+        184.1345,
+        273.7346
+      ],
+      "n_tasks": 50
+    }
+  },
+  "v3_sem_minus_base": {
+    "recall_reported": {
+      "delta": 0.169,
+      "ci95": [
+        0.1172,
+        0.2245
+      ],
+      "n_tasks": 50
+    },
+    "all_gold_reported": {
+      "delta": 0.04,
+      "ci95": [
+        0.0,
+        0.09
+      ],
+      "n_tasks": 50
+    },
+    "recall_touched": {
+      "delta": 0.0904,
+      "ci95": [
+        0.0509,
+        0.1331
+      ],
+      "n_tasks": 50
+    },
+    "all_gold_touched": {
+      "delta": 0.04,
+      "ci95": [
+        0.01,
+        0.08
+      ],
+      "n_tasks": 50
+    },
+    "reported_before_cap": {
+      "delta": 0.77,
+      "ci95": [
+        0.67,
+        0.86
+      ],
+      "n_tasks": 50
+    },
+    "turns": {
+      "delta": -24.6,
+      "ci95": [
+        -26.47,
+        -22.68
+      ],
+      "n_tasks": 50
+    },
+    "tokens": {
+      "delta": -370927.9,
+      "ci95": [
+        -448656.34,
+        -293341.87
+      ],
+      "n_tasks": 50
+    },
+    "calls_per_turn": {
+      "delta": 2.0726,
+      "ci95": [
+        1.9252,
+        2.2228
+      ],
+      "n_tasks": 50
+    },
+    "turn_latency_s": {
+      "delta": 31.6513,
+      "ci95": [
+        28.9947,
+        34.7973
+      ],
+      "n_tasks": 50
+    },
+    "wall_s": {
+      "delta": 247.1993,
+      "ci95": [
+        200.5669,
+        296.2854
+      ],
+      "n_tasks": 50
+    }
+  },
+  "v2b_grep_minus_base": {
+    "recall_reported": {
+      "delta": 0.1169,
+      "ci95": [
+        0.0722,
+        0.1674
+      ],
+      "n_tasks": 50
+    },
+    "all_gold_reported": {
+      "delta": 0.03,
+      "ci95": [
+        0.0,
+        0.08
+      ],
+      "n_tasks": 50
+    },
+    "recall_touched": {
+      "delta": 0.0493,
+      "ci95": [
+        0.0123,
+        0.0871
+      ],
+      "n_tasks": 50
+    },
+    "all_gold_touched": {
+      "delta": 0.01,
+      "ci95": [
+        -0.02,
+        0.04
+      ],
+      "n_tasks": 50
+    },
+    "reported_before_cap": {
+      "delta": 0.74,
+      "ci95": [
+        0.64,
+        0.83
+      ],
+      "n_tasks": 50
+    },
+    "turns": {
+      "delta": -23.57,
+      "ci95": [
+        -25.67,
+        -21.34
+      ],
+      "n_tasks": 50
+    },
+    "tokens": {
+      "delta": -331869.84,
+      "ci95": [
+        -414116.96,
+        -246760.49
+      ],
+      "n_tasks": 50
+    },
+    "calls_per_turn": {
+      "delta": 2.0713,
+      "ci95": [
+        1.941,
+        2.1911
+      ],
+      "n_tasks": 50
+    },
+    "turn_latency_s": {
+      "delta": 29.2665,
+      "ci95": [
+        27.1206,
+        31.4056
+      ],
+      "n_tasks": 50
+    },
+    "wall_s": {
+      "delta": 248.9775,
+      "ci95": [
+        200.6036,
+        299.2843
+      ],
+      "n_tasks": 50
+    }
+  },
+  "v2b_sem_minus_base": {
+    "recall_reported": {
+      "delta": 0.1367,
+      "ci95": [
+        0.0859,
+        0.194
+      ],
+      "n_tasks": 50
+    },
+    "all_gold_reported": {
+      "delta": 0.07,
+      "ci95": [
+        0.01,
+        0.15
+      ],
+      "n_tasks": 50
+    },
+    "recall_touched": {
+      "delta": 0.0561,
+      "ci95": [
+        0.0255,
+        0.0901
+      ],
+      "n_tasks": 50
+    },
+    "all_gold_touched": {
+      "delta": -0.01,
+      "ci95": [
+        -0.04,
+        0.02
+      ],
+      "n_tasks": 50
+    },
+    "reported_before_cap": {
+      "delta": 0.78,
+      "ci95": [
+        0.68,
+        0.87
+      ],
+      "n_tasks": 50
+    },
+    "turns": {
+      "delta": -25.0,
+      "ci95": [
+        -26.56,
+        -23.31
+      ],
+      "n_tasks": 50
+    },
+    "tokens": {
+      "delta": -393111.17,
+      "ci95": [
+        -461589.35,
+        -324269.25
+      ],
+      "n_tasks": 50
+    },
+    "calls_per_turn": {
+      "delta": 2.1737,
+      "ci95": [
+        2.0421,
+        2.3036
+      ],
+      "n_tasks": 50
+    },
+    "turn_latency_s": {
+      "delta": 27.4212,
+      "ci95": [
+        25.6531,
+        29.306
+      ],
+      "n_tasks": 50
+    },
+    "wall_s": {
+      "delta": 190.6895,
+      "ci95": [
+        158.6862,
+        223.9009
+      ],
+      "n_tasks": 50
+    }
+  },
+  "v3_grep_prd15": {
+    "reported_recall_delta (primary)": {
+      "delta": 0.15,
+      "ci95": [
+        0.0956,
+        0.2093
+      ],
+      "n_tasks": 50,
+      "pass": true,
+      "target_ge_0.10": true
+    },
+    "reported_before_cap_ge_0.80": {
+      "value": 0.97,
+      "base": 0.21,
+      "pass": true
+    },
+    "turns_p50_le_20": {
+      "value": 11.0,
+      "base": 40.0,
+      "pass": true
+    },
+    "touched_recall_guardrail": {
+      "delta": 0.0857,
+      "ci95": [
+        0.0449,
+        0.1282
+      ],
+      "n_tasks": 50,
+      "pass": true
+    },
+    "tokens_down_ge_30pct": {
+      "down": 0.4847,
+      "pass": true
+    }
+  },
+  "v3_grep_minus_teacher": {
+    "recall_reported": {
+      "delta": -0.0364,
+      "ci95": [
+        -0.0728,
+        -0.0043
+      ],
+      "n_tasks": 49
+    },
+    "all_gold_reported": {
+      "delta": -0.0204,
+      "ci95": [
+        -0.0612,
+        0.0
+      ],
+      "n_tasks": 49
+    },
+    "recall_touched": {
+      "delta": 0.0075,
+      "ci95": [
+        -0.0288,
+        0.0377
+      ],
+      "n_tasks": 49
+    },
+    "all_gold_touched": {
+      "delta": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "n_tasks": 49
+    },
+    "reported_before_cap": {
+      "delta": 0.0204,
+      "ci95": [
+        0.0,
+        0.051
+      ],
+      "n_tasks": 49
+    },
+    "turns": {
+      "delta": 0.7245,
+      "ci95": [
+        -0.3673,
+        1.7551
+      ],
+      "n_tasks": 49
+    },
+    "tokens": {
+      "delta": 36882.9184,
+      "ci95": [
+        -22977.6633,
+        92847.6327
+      ],
+      "n_tasks": 49
+    },
+    "calls_per_turn": {
+      "delta": 0.1277,
+      "ci95": [
+        0.0144,
+        0.2408
+      ],
+      "n_tasks": 49
+    },
+    "turn_latency_s": {
+      "delta": 5.8659,
+      "ci95": [
+        3.3913,
+        7.9951
+      ],
+      "n_tasks": 49
+    },
+    "wall_s": {
+      "delta": 100.2566,
+      "ci95": [
+        66.8873,
+        133.779
+      ],
+      "n_tasks": 49
+    }
+  },
+  "v3_grep_minus_v2b_grep": {
+    "recall_reported": {
+      "delta": 0.0331,
+      "ci95": [
+        -0.0031,
+        0.0718
+      ],
+      "n_tasks": 50
+    },
+    "all_gold_reported": {
+      "delta": 0.03,
+      "ci95": [
+        0.0,
+        0.08
+      ],
+      "n_tasks": 50
+    },
+    "recall_touched": {
+      "delta": 0.0364,
+      "ci95": [
+        -0.0036,
+        0.0759
+      ],
+      "n_tasks": 50
+    },
+    "all_gold_touched": {
+      "delta": 0.03,
+      "ci95": [
+        0.0,
+        0.07
+      ],
+      "n_tasks": 50
+    },
+    "reported_before_cap": {
+      "delta": 0.02,
+      "ci95": [
+        0.0,
+        0.05
+      ],
+      "n_tasks": 50
+    },
+    "turns": {
+      "delta": -1.56,
+      "ci95": [
+        -2.92,
+        -0.32
+      ],
+      "n_tasks": 50
+    },
+    "tokens": {
+      "delta": -66290.76,
+      "ci95": [
+        -139864.42,
+        -790.68
+      ],
+      "n_tasks": 50
+    },
+    "calls_per_turn": {
+      "delta": -0.0351,
+      "ci95": [
+        -0.1458,
+        0.0776
+      ],
+      "n_tasks": 50
+    },
+    "turn_latency_s": {
+      "delta": 1.3049,
+      "ci95": [
+        -1.2911,
+        3.9179
+      ],
+      "n_tasks": 50
+    },
+    "wall_s": {
+      "delta": -21.5195,
+      "ci95": [
+        -74.3525,
+        31.8245
+      ],
+      "n_tasks": 50
+    }
+  },
+  "v3_sem_minus_v2b_sem": {
+    "recall_reported": {
+      "delta": 0.0323,
+      "ci95": [
+        0.0052,
+        0.06
+      ],
+      "n_tasks": 50
+    },
+    "all_gold_reported": {
+      "delta": -0.03,
+      "ci95": [
+        -0.08,
+        0.0
+      ],
+      "n_tasks": 50
+    },
+    "recall_touched": {
+      "delta": 0.0343,
+      "ci95": [
+        0.0055,
+        0.063
+      ],
+      "n_tasks": 50
+    },
+    "all_gold_touched": {
+      "delta": 0.05,
+      "ci95": [
+        0.01,
+        0.09
+      ],
+      "n_tasks": 50
+    },
+    "reported_before_cap": {
+      "delta": -0.01,
+      "ci95": [
+        -0.03,
+        0.0
+      ],
+      "n_tasks": 50
+    },
+    "turns": {
+      "delta": 0.4,
+      "ci95": [
+        -1.03,
+        1.87
+      ],
+      "n_tasks": 50
+    },
+    "tokens": {
+      "delta": 22183.27,
+      "ci95": [
+        -47327.73,
+        95139.12
+      ],
+      "n_tasks": 50
+    },
+    "calls_per_turn": {
+      "delta": -0.1011,
+      "ci95": [
+        -0.2486,
+        0.0492
+      ],
+      "n_tasks": 50
+    },
+    "turn_latency_s": {
+      "delta": 4.2301,
+      "ci95": [
+        1.2111,
+        7.698
+      ],
+      "n_tasks": 50
+    },
+    "wall_s": {
+      "delta": 56.5098,
+      "ci95": [
+        15.5229,
+        98.8133
+      ],
+      "n_tasks": 50
+    }
+  },
+  "v3_sem_minus_grep": {
+    "recall_reported": {
+      "delta": 0.0189,
+      "ci95": [
+        -0.0069,
+        0.0454
+      ],
+      "n_tasks": 50
+    },
+    "all_gold_reported": {
+      "delta": -0.02,
+      "ci95": [
+        -0.06,
+        0.02
+      ],
+      "n_tasks": 50
+    },
+    "recall_touched": {
+      "delta": 0.0047,
+      "ci95": [
+        -0.0209,
+        0.0317
+      ],
+      "n_tasks": 50
+    },
+    "all_gold_touched": {
+      "delta": 0.0,
+      "ci95": [
+        -0.03,
+        0.03
+      ],
+      "n_tasks": 50
+    },
+    "reported_before_cap": {
+      "delta": 0.01,
+      "ci95": [
+        0.0,
+        0.03
+      ],
+      "n_tasks": 50
+    },
+    "turns": {
+      "delta": 0.53,
+      "ci95": [
+        -0.92,
+        1.89
+      ],
+      "n_tasks": 50
+    },
+    "tokens": {
+      "delta": 27232.7,
+      "ci95": [
+        -38178.43,
+        90818.04
+      ],
+      "n_tasks": 50
+    },
+    "calls_per_turn": {
+      "delta": 0.0364,
+      "ci95": [
+        -0.0932,
+        0.1755
+      ],
+      "n_tasks": 50
+    },
+    "turn_latency_s": {
+      "delta": 1.08,
+      "ci95": [
+        -1.4603,
+        3.8575
+      ],
+      "n_tasks": 50
+    },
+    "wall_s": {
+      "delta": 19.7413,
+      "ci95": [
+        -14.2362,
+        54.4611
+      ],
+      "n_tasks": 50
+    }
+  }
+}

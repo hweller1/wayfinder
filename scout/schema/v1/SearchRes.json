@@ -1,0 +1,58 @@
+{
+  "$defs": {
+    "WireHit": {
+      "properties": {
+        "chunk_key": {
+          "title": "Chunk Key",
+          "type": "string"
+        },
+        "file_hash": {
+          "title": "File Hash",
+          "type": "string"
+        },
+        "loc_enc": {
+          "title": "Loc Enc",
+          "type": "string"
+        },
+        "path_enc": {
+          "title": "Path Enc",
+          "type": "string"
+        },
+        "score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Score"
+        }
+      },
+      "required": [
+        "path_enc",
+        "loc_enc",
+        "chunk_key",
+        "file_hash"
+      ],
+      "title": "WireHit",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "hits": {
+      "items": {
+        "$ref": "#/$defs/WireHit"
+      },
+      "title": "Hits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "hits"
+  ],
+  "title": "SearchRes",
+  "type": "object"
+}

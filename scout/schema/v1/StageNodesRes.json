@@ -1,0 +1,18 @@
+{
+  "properties": {
+    "page": {
+      "title": "Page",
+      "type": "integer"
+    },
+    "staged": {
+      "title": "Staged",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "page",
+    "staged"
+  ],
+  "title": "StageNodesRes",
+  "type": "object"
+}
