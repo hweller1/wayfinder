@@ -2,7 +2,7 @@
 # ruff: noqa: S603, S607, E501, SIM105  (fixed argv: git; no shell)
 """The retrieval spec of the scout Claude Code plugin: three layers, one resolved result.
 
-Layers, later overrides earlier (docs/retrieval-spec.md):
+Layers, later overrides earlier (the retrieval spec, not in this release):
   1 system defaults   built in below (`SYSTEM`): 5 results per search, skip vendored code, lockfiles and
                       minified files at query time, search opens at 80% indexed;
   2 harness defaults  `spec/harness_defaults.toml`, shipped by the plugin: instructions, the delivery toggles,

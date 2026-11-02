@@ -1,0 +1,11 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Test constants and one docstring that the generic-api-key rule matches; none is a credential."
+targetRules = ["generic-api-key"]
+paths = [
+  '''scout/tests/unit/test_make_secrets\.py''',
+  '''scout/tests/unit/test_crypto_keys_ids\.py''',
+  '''training/wayfinder/opd/score\.py''',
+]

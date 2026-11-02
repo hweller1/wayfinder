@@ -1,6 +1,6 @@
 """Muse Code and the retrieval spec: stock vs spec-only vs spec + Scout, on the cc50 TUNE tasks.
 
-Pre-registered in wayfinder `docs/muse_scout_plan.md` before any run. Calibration-scale evidence, not a result.
+Pre-registered in wayfinder the Muse Scout study plan (not in this release) before any run. Calibration-scale evidence, not a result.
 
 Arms, one headless `muse exec --json` session each, all with the same free-parent prompt (`arms.CC_PROMPT`),
 the same brief, the host's default parent model, `--disable-write --disable-shell` (retrieval only), and an

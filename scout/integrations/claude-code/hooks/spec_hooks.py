@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # ruff: noqa: E501
-"""Retrieval-spec hooks (docs/retrieval-spec.md): `spec_hooks.py <session_start|prompt|pretool>`.
+"""Retrieval-spec hooks (the retrieval spec, not in this release): `spec_hooks.py <session_start|prompt|pretool>`.
 
   session_start  SessionStart: resolve the spec (writes `<git-path scout>/spec_resolved.json`, which the scout
                  core reads), then add instructions + index description + examples as additionalContext.

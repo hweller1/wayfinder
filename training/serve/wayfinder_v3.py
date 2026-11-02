@@ -115,7 +115,7 @@ VLLM_ARGS = [
     "--host", "0.0.0.0",
 ]  # fmt: skip
 
-SAMPLING = {"temperature": 0.85, "top_p": 0.95}  # the SFT eval protocol (docs/sft_v3_eval.md)
+SAMPLING = {"temperature": 0.85, "top_p": 0.95}  # the SFT eval protocol (the SFT v3 write-up, not in this release)
 
 # --------------------------------------------------------------------------------------------------
 # vLLM startup-log phase timing

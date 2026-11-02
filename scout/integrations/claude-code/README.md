@@ -11,7 +11,7 @@ Install: [INSTALL.md](INSTALL.md).
 
 ## Why a hybrid subagent
 
-The design follows the measurements in `docs/scout_vs_explore.md`:
+The design follows the measurements in the Scout-versus-Explore study write-up (not in this release):
 
 - **Replacing Explore with a relay lost recall.** A Haiku shim that makes one scout call scored 0.403 file
   recall@12, against 0.490 for the built-in Sonnet Explore. The shim could not check scout's answer or follow
@@ -64,7 +64,7 @@ is logged to `${CLAUDE_PLUGIN_DATA}/hook.log` with lane, target and reason; the 
 `SCOUT_EXPLORE_MODE` overrides the setting for a session.
 
 `/scout:model v3|a1` chooses the gateway profile per project: `glimmer` (alias of the profile id `v3`, which still works) is wayfinder-glimmer on `scout-gateway`, a1 is
-Agents-A1-35B on `scout-gateway-a1`. Both use the same keys and the same index. wayfinder-qwen is not yet served, so there is no `qwen` profile. Routing, warm-up, `/scout:index`
+Agents-A1-35B on `scout-gateway-a1`. Both use the same keys and the same index. Routing, warm-up, `/scout:index`
 and `/scout:status` pick up the change at once, and it warms the new model in the background. The MCP server
 that is already running keeps its gateway until it restarts: run `/mcp`, select `plugin:scout:scout` and
 choose Reconnect, or start a new session; the launcher then exports the profile's `SCOUT_GATEWAY_URL`. An

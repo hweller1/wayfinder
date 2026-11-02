@@ -1,6 +1,6 @@
 # scout product status (2026-10-28)
 
-This document says what works today in voyage-scout, how to install and run it for each host, how the hosted gateway is operated, and what is still missing. The spec of record is `docs/PRD.md`; task state is in `specs/super-explore/tasks.md`. Numbers here come from runs in this repository (artifacts under `artifacts/live/` and `artifacts/eval/`). The eval ran on 2026-10-27; its result is in the section below and in `docs/scout_vs_explore.md`.
+This document says what works today in voyage-scout, how to install and run it for each host, how the hosted gateway is operated, and what is still missing. The spec of record is `docs/PRD.md`; task state is in `specs/super-explore/tasks.md`. Numbers here come from runs in this repository (artifacts under `artifacts/live/` and `artifacts/eval/`). The eval ran on 2026-10-27; its result is in the section below and in the Scout-versus-Explore study write-up (not in this release).
 
 ## What works
 
@@ -63,7 +63,7 @@ The live smoke, `scripts/smoke_claude_plugin.py`, runs headless `claude -p` with
 - With the gateway unreachable, the SessionStart probe recorded it, the hook fell through, and built-in Explore answered in 9 s.
 - `/scout:status`, `/scout:model a1|v3`, `/scout:mode fast|hybrid`, `/scout:index` (27 files, about $0.01) and `/scout:find` all worked.
 
-**Calibration (Addendum C of `docs/scout_vs_explore.md`, 5 tasks, A1 gateway).** `hybrid_a1` scored recall@12 0.167, against 0.436 for built-in Explore in the same pass and 0.085 for the A1 relay `super_a1`. The pre-registered gate therefore failed and no 50-task run was made.
+**Calibration (Addendum C of the Scout-versus-Explore study write-up (not in this release), 5 tasks, A1 gateway).** `hybrid_a1` scored recall@12 0.167, against 0.436 for built-in Explore in the same pass and 0.085 for the A1 relay `super_a1`. The pre-registered gate therefore failed and no 50-task run was made.
 
 Verification on the same model doubled recall over the relay. But the subagent mostly Grepped instead of reading (0.6 reads per session), returned short lists (6.2 files), and took about 145 s, mostly in the A1 explore call. The agent file was tightened afterwards to make Read the verification step; that version is untested. **Calibration on wayfinder-glimmer (Addendum D, 5 tasks).** After wayfinder-glimmer was fixed, the subagent was revised:
 
@@ -209,14 +209,6 @@ start.
 cold start, and later calls succeeded. The 4xx is probably the upstream proxy timing out, and it is not
 diagnosed.
 
-Spend:
-
-- Meta API: about $4 at the Spark list price ($1.25 in, $0.15 cached, $4.25 out per M). That is 10.1M input
-  `wayfinder-a1-35b` were not redeployed and scale to zero on their 600 s window.
-- turbopuffer namespaces created: `scout_dev_demo_musemux`, the dev-tenant and eval-tenant namespaces of the
-  gorilla/mux clone, and the five eval repos. Deleting them with `ops/ns_janitor.py` is left to the author; the
-  janitor call was blocked in this session.
-
 Muse sends any code the agent reads to Meta, so index and read public repositories only. Muse filters the
 environment of plugin hooks and MCP servers (measured: `HOME`, `PATH`, `MUSE_PLUGIN_*` and little else), so the
 plugin reads its settings from `scout.env` in its data dir. Keys come from `scout login` or a key file and are
@@ -235,7 +227,7 @@ Exposed tools: `explore`, `semantic_search`, `grep`, `read_range`, `index_status
 
 ## Gateway
 
-The gateway is one CPU ASGI app on Modal (workspace myworkspace), `deploy/modal/gateway.py`, at `https://scout-gateway.example.com`. `GET /v1/healthz` is unauthenticated and returns `{"ok":true,...}`; everything else needs `Authorization: Bearer <scout key>`. It scales to zero, so the first request after idle takes a few seconds (7.7 s in the smoke).
+The gateway is one CPU ASGI app on Modal, `deploy/modal/gateway.py`, at `https://scout-gateway.example.com`. `GET /v1/healthz` is unauthenticated and returns `{"ok":true,...}`; everything else needs `Authorization: Bearer <scout key>`. It scales to zero, so the first request after idle takes a few seconds (7.7 s in the smoke).
 
 Operations:
 
@@ -246,7 +238,7 @@ Operations:
 
 ## Known gaps
 
-The trust boundary is as stated in the PRD: turbopuffer never sees plaintext, but the gateway operator can read chunk text in transit and unwrap `K_team`. Embeddings can be partly inverted, and deterministic path encryption shows which rows share a path segment. The README trust-boundary section (task 11.10) is not written.
+The trust boundary is as stated in the PRD: the index (turbopuffer) never holds code, but chunk text passes through the gateway and Voyage's embedding API to be embedded, so the gateway operator can read it in transit and unwrap `K_team`. Embeddings can be partly inverted, and deterministic path encryption shows which rows share a path segment. The README trust-boundary section (task 11.10) is not written.
 
 Open work, in rough order of consequence:
 
@@ -256,12 +248,12 @@ Open work, in rough order of consequence:
 4. OpenCode, Codex, Cursor and generic integration directories are missing. Muse Code is verified in both lanes on gorilla/mux. It has a 5-task calibration but no powered eval.
 5. The headless Claude smoke needs a logged-in `claude` and a dev key in `~/.config/scout/live-smoke-keys.txt`; it cannot run in CI. The demo-lane cases need `gomux` indexed under `~/.scout-demo`.
 6. `scout init` finds `integrations/` only next to a source checkout. Packaging them into the wheel is not done.
-7. The demo lane leaves `scout_dev_demo_*` namespaces in turbopuffer (see `docs/demo_smoke.md`); delete them with the janitor when finished. The tenant `cache` and `meta` namespaces persist by design.
+7. The demo lane leaves `scout_dev_demo_*` namespaces in turbopuffer (see the demo smoke-test notes (not in this release)); delete them with the janitor when finished. The tenant `cache` and `meta` namespaces persist by design.
 8. No PR exists and CI has not run; many `tasks.md` boxes are unchecked because the author marks them, not because the work is missing.
 
 ## Eval result (2026-10-27)
 
-Full write-up: `docs/scout_vs_explore.md` (pre-registered in a66e4a2 before the full run; rows and statistics in `artifacts/eval/`). Setup: 50 public held-out tasks in 10 repos, headless `claude -p` (Sonnet 5.5 parent through an LLM API gateway, isolated config dirs), three arms: built-in Explore, super-explore on wayfinder-glimmer, super-explore on A1-35B. Metric: file recall@12 of the Explore handback, paired by task, 10,000-resample task bootstrap.
+Full write-up: the Scout-versus-Explore study write-up (not in this release) (pre-registered in a66e4a2 before the full run; rows and statistics in `artifacts/eval/`). Setup: 50 public held-out tasks in 10 repos, headless `claude -p` (Sonnet 5.5 parent through an LLM API gateway, isolated config dirs), three arms: built-in Explore, super-explore on wayfinder-glimmer, super-explore on A1-35B. Metric: file recall@12 of the Explore handback, paired by task, 10,000-resample task bootstrap.
 
 | Arm | recall@12 [95% CI] | wall s (median) | session cost |
 |---|---|---|---|
@@ -273,11 +265,11 @@ The pre-registered contrast, wayfinder-glimmer minus built-in Explore, is -0.086
 
 ### Augment arm (2026-10-27, later the same day)
 
-Addendum A of `docs/scout_vs_explore.md` (pre-registered in cc5b3f7) tested scout as a tool for the built-in Explore instead of a replacement: arm `augment_v3`, the same 50 tasks, built-in Explore with `scout mcp --tools explore,semantic_search` attached and nothing rewritten or blocked. Result: recall@12 0.485 [0.401, 0.566] against 0.490 for built-in Explore alone, paired difference -0.005 [-0.041, +0.030] (cluster CI [-0.039, +0.031]), no difference; wall time 35 s and cost $0.093 per session, both within noise of built-in Explore. The reason is that the subagent never called a scout tool in any of the 50 sessions (it used Grep, Bash, Read and Glob, 5.3 calls per task), also not with the tool schemas loaded eagerly on three probe tasks. When told explicitly to call `explore` it did and the call took about 2 minutes. So the open question has a narrow answer: left to choose, Explore prefers its own fast search; whether scout helps an Explore that is instructed to use it is untested. The harness gained the arm (`eval/harness/arms.py`, usage statistics in `report.py`);
+Addendum A of the Scout-versus-Explore study write-up (not in this release) (pre-registered in cc5b3f7) tested scout as a tool for the built-in Explore instead of a replacement: arm `augment_v3`, the same 50 tasks, built-in Explore with `scout mcp --tools explore,semantic_search` attached and nothing rewritten or blocked. Result: recall@12 0.485 [0.401, 0.566] against 0.490 for built-in Explore alone, paired difference -0.005 [-0.041, +0.030] (cluster CI [-0.039, +0.031]), no difference; wall time 35 s and cost $0.093 per session, both within noise of built-in Explore. The reason is that the subagent never called a scout tool in any of the 50 sessions (it used Grep, Bash, Read and Glob, 5.3 calls per task), also not with the tool schemas loaded eagerly on three probe tasks. When told explicitly to call `explore` it did and the call took about 2 minutes. So the open question has a narrow answer: left to choose, Explore prefers its own fast search; whether scout helps an Explore that is instructed to use it is untested. The harness gained the arm (`eval/harness/arms.py`, usage statistics in `report.py`);
 
 ### GRPO arm a step-20 as the scout model (2026-10-28)
 
-Addendum B of `docs/scout_vs_explore.md` (pre-registered in b6132e5) reran the replace setup with a new candidate checkpoint, `super_grpo_a20` (merged `/data/grpo/a/s20_merged`, served by `wayfinder/serve/wayfinder_v3.py` under the app name `wayfinder-a20-serve`, behind `scout-gateway-a20`), on the same 50 tasks. Primary contrast against `super_v3` on handback recall@12: -0.034 [-0.087, +0.016] (cluster CI [-0.082, +0.014]), no difference, point estimate negative. recall@12 is 0.370 [0.299, 0.441] against 0.403 for wayfinder-glimmer and 0.490 for built-in Explore (a20 minus built-in Explore -0.120 [-0.187, -0.058]). The handback is the longest of any arm (10.2 files against 9.6 for wayfinder-glimmer) with lower precision at 12 (0.268 against 0.299), and recall@5 and recall@7 are not above wayfinder-glimmer, so the dev-eval gain looks like longer reports, not better retrieval. All-gold fell to 0.02 from 0.10. Wall time 152 s median, session cost $0.042. `wayfinder-a20-serve` back at zero containers, `scout_eval_*` namespaces deleted and verified empty. The default model stays wayfinder-v3.
+Addendum B of the Scout-versus-Explore study write-up (not in this release) (pre-registered in b6132e5) reran the replace setup with a new candidate checkpoint, `super_grpo_a20` (merged `/data/grpo/a/s20_merged`, served by `wayfinder/serve/wayfinder_v3.py` under the app name `wayfinder-a20-serve`, behind `scout-gateway-a20`), on the same 50 tasks. Primary contrast against `super_v3` on handback recall@12: -0.034 [-0.087, +0.016] (cluster CI [-0.082, +0.014]), no difference, point estimate negative. recall@12 is 0.370 [0.299, 0.441] against 0.403 for wayfinder-glimmer and 0.490 for built-in Explore (a20 minus built-in Explore -0.120 [-0.187, -0.058]). The handback is the longest of any arm (10.2 files against 9.6 for wayfinder-glimmer) with lower precision at 12 (0.268 against 0.299), and recall@5 and recall@7 are not above wayfinder-glimmer, so the dev-eval gain looks like longer reports, not better retrieval. All-gold fell to 0.02 from 0.10. Wall time 152 s median, session cost $0.042. `wayfinder-a20-serve` back at zero containers, `scout_eval_*` namespaces deleted and verified empty. The default model stays wayfinder-v3.
 
 ## Backfill to 12 files (2026-10-28)
 

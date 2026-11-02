@@ -1,6 +1,6 @@
 """Latency decomposition of cc_scout_spec vs cc_explore_spec (cc50 full run). CPU only, read-only on inputs.
 
-    python3 scripts/scout_latency_profile.py            # prints the numbers used in docs/scout_latency_profile.md
+    python3 scripts/scout_latency_profile.py            # prints the numbers used in the latency profile write-up (not in this release)
     python3 scripts/scout_latency_profile.py --fig      # also writes docs/figures/s11b_latency.png
 """
 import glob

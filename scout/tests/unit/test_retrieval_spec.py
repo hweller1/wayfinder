@@ -1,5 +1,5 @@
 # ruff: noqa: S603, S607, E501  (fixed argv in tests; long fixture lines)
-"""The retrieval spec (docs/retrieval-spec.md): parsing, three-layer precedence, the index-description
+"""The retrieval spec (the retrieval spec, not in this release): parsing, three-layer precedence, the index-description
 generator, the example miner and its leak guard, the Claude Code hooks, and the core's use of the spec
 (prompt addendum, exclude/boost/recency filters, k, index off)."""
 

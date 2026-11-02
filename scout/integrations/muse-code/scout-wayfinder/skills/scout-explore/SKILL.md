@@ -31,7 +31,7 @@ them, and do not drop or reorder its entries because you did not open them yours
 
 ## The retrieval spec
 
-The session may carry the repository's retrieval spec (`.scout/spec.toml`, `docs/retrieval-spec.md`): its
+The session may carry the repository's retrieval spec (`.scout/spec.toml`, the retrieval spec (not in this release)): its
 instructions, an index description and examples of past changes. Follow the instructions, and word the objective
 with the description's package names and the examples' vocabulary. A reminder on each prompt says to delegate
 before reading or editing code; until you have delegated, a first `search` may be denied with the same pointer.

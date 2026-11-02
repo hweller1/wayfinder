@@ -44,7 +44,7 @@ CODER_MODEL_ID = "opus-5.5-medium"
 PRICE_KEY = "claude-opus-5-5"
 CONDITIONS = ("none", "oracle", "glimmer_base", "a1_35b_scout", "spark_teacher", "wayfinder_v2a", "wayfinder_v2b", "wayfinder_v3", "v3", "a1", "sonnet", "gpt")
 SUB_ARM = {"glimmer_base": "scout", "a1_35b_scout": "scout", "spark_teacher": "scout", "wayfinder_v2a": "scout", "wayfinder_v2b": "scout", "wayfinder_v3": "scout",
-           "v3": "scout", "a1": "scout", "sonnet": "scout", "gpt": "scout"}   # final E2E (docs/e2e_final_plan.md) adds v3, a1, sonnet, gpt      # search conditions (scout explore loop, grep-only)
+           "v3": "scout", "a1": "scout", "sonnet": "scout", "gpt": "scout"}   # final E2E (the end-to-end final study plan, not in this release) adds v3, a1, sonnet, gpt      # search conditions (scout explore loop, grep-only)
 SUB_DIRNAME = {c: c for c in SUB_ARM}  # dir under SUB/<wording>
 BLOCKED_MSG = "not available: search is handled by the search assistant"
 MAX_TOOL_CALLS = 60

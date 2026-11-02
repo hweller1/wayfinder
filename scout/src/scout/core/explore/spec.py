@@ -1,4 +1,4 @@
-"""The resolved retrieval spec as the core sees it (docs/retrieval-spec.md).
+"""The resolved retrieval spec as the core sees it (the retrieval spec, not in this release).
 
 The Claude Code plugin (or any host) resolves the three layers (system defaults, harness defaults, the repo's
 `.scout/spec.toml`) and writes `<state_dir>/spec_resolved.json`. The core only reads that file, per call, so

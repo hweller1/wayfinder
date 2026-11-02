@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # ruff: noqa: E501
-"""Retrieval-spec hooks for Muse Code (docs/retrieval-spec.md): `spec_hooks.py <session_start|prompt|pretool>`.
+"""Retrieval-spec hooks for Muse Code (the retrieval spec, not in this release): `spec_hooks.py <session_start|prompt|pretool>`.
 
 The Muse twin of integrations/claude-code/hooks/spec_hooks.py. Both read ONE spec: `lib/scout_spec.py` here is
 a byte-identical copy of the Claude Code plugin's file (the bundle is installed on its own, so it cannot import

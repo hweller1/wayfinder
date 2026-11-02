@@ -6,7 +6,7 @@ The code runs on Modal (GPU jobs) and Hugging Face; the launchers need your own 
 
 ## What the model is
 
-LoRA supervised fine-tuning on the language model only (rank 64, alpha 128, all attention and MLP projections), merged into the base weights in fp32 and saved as bf16, so serving needs no LoRA support. 1,383 examples (1,350 Muse Spark Open teacher trajectories and 33 Agents-A1-35B trajectories), 41.56M tokens, 7.02M assistant tokens, 344 tasks from 153 public repositories. Only assistant tokens carry loss. 2 epochs, learning rate 5e-5 with cosine decay, 5 warmup steps, packed rows of up to 49,152 tokens, 4x H200 data parallel, 478 steps, about 3 hours, seed 0. One run; the results describe this checkpoint, not the recipe. Write-up: [../docs/results/sft_v3_eval.md](../docs/results/sft_v3_eval.md) (the model is "v3" there and in file names).
+LoRA supervised fine-tuning on the language model only (rank 64, alpha 128, all attention and MLP projections), merged into the base weights in fp32 and saved as bf16, so serving needs no LoRA support. 1,383 examples (1,350 Muse Spark Open teacher trajectories and 33 Agents-A1-35B trajectories), 41.56M tokens, 7.02M assistant tokens, 344 tasks from 153 public repositories. Only assistant tokens carry loss. 2 epochs, learning rate 5e-5 with cosine decay, 5 warmup steps, packed rows of up to 49,152 tokens, 4x H200 data parallel, 478 steps, about 3 hours, seed 0. One run; the results describe this checkpoint, not the recipe. Write-up: the SFT v3 write-up (not in this release) (the model is "v3" there and in file names).
 
 ## Pipeline, in order
 
@@ -16,13 +16,13 @@ LoRA supervised fine-tuning on the language model only (rank 64, alpha 128, all 
 | Index the repositories | `wayfinder/rollout/index_app.py` | Builds the same encrypted voyage-code-4 index Scout uses, so rollouts can call `semantic_search` |
 | Serve the teacher | `serve/spark_open.py`, `serve/spark_client.py`, `serve/spark_download.py` | Muse Spark Open 816B-A42B (NVFP4) with vLLM on 8x B200 as an ephemeral Modal app, several replicas in parallel |
 | Roll out the teacher | `wayfinder/rollout/modal_app.py`, `run.py`, `chat.py`, `nudges.py` | Runs Scout's own explore loop (grep, glob, read_file, semantic_search, report), up to 40 turns, temperature 0.85, top_p 0.95, with the teacher's reasoning retained between turns |
-| Filter and convert | `wayfinder/sft/convert_teacher.py`, `convert_teacher_modal.py`, `convert.py` (Agents-A1 transcripts) | Keeps runs that found every gold file, opened every file they reported, called `report` within budget, stayed under the task's p75 turn count and 49,152 tokens, deduped on task and seed; the evaluation tasks are excluded. Funnel in `docs/results/sft_v3_eval.md` |
+| Filter and convert | `wayfinder/sft/convert_teacher.py`, `convert_teacher_modal.py`, `convert.py` (Agents-A1 transcripts) | Keeps runs that found every gold file, opened every file they reported, called `report` within budget, stayed under the task's p75 turn count and 49,152 tokens, deduped on task and seed; the evaluation tasks are excluded. Funnel in the SFT v3 write-up (not in this release) |
 | Train | `wayfinder/sft/train_v1.py` (launcher, `--gpu h200x4`), `train.py` | LoRA with packed sequences, flash-attention 3, gradient checkpointing |
 | Merge | `wayfinder/rollout/sft_merge_app.py` | fp32 merge of the 416 LoRA modules, saved as bf16 |
 | Release | `release/stage.py`, `release/publish.py` | Stages weights with the license files and the "Built with Muse Spark Open" notice, checks the folder, uploads to the Hub (private by default) |
 | Serve | `serve/wayfinder_v3.py` (Modal), [../deploy/gcp](../deploy/gcp) (one A100 VM) | vLLM 0.32.0 with the `muse_glimmer` tool-call and reasoning parsers and the checkpoint's own chat template |
 
-Experiments beyond SFT, with write-ups in [../docs/results/](../docs/results/): GRPO with verifiable rewards on top of the SFT checkpoint (`wayfinder/grpo`, `scripts/grpo`, `docs/results/grpo.md`) and on-policy distillation (`wayfinder/opd`). Neither produced the released model.
+Experiments beyond SFT, with write-ups in [../docs/results/](../docs/results/): GRPO with verifiable rewards on top of the SFT checkpoint (`wayfinder/grpo`, `scripts/grpo`, the GRPO write-up (not in this release)) and on-policy distillation (`wayfinder/opd`). Neither produced the released model.
 
 ## The teacher trajectories are not published
 

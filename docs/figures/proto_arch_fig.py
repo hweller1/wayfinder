@@ -49,7 +49,7 @@ arrow((44, 78), (71, 78), GREEN); label(57.5, 82.5, "explore", GREEN)
 arrow((44, 62), (71, 62), GREEN); label(57.5, 66.5, "chunks (sync)", GREEN)
 arrow((103, 72), (130.5, 72), BLUE, both=True); label(117, 76.5, "vectors", BLUE)
 arrow((103, 56), (130.5, 40), BLUE); label(120, 53, "embed", BLUE)
-ax.text(80, 8, "Code is chunked on the laptop. Chunk text is embedded in transit and never stored; the index holds vectors and encrypted paths.",
-        ha="center", va="center", fontsize=17, color=MUTED)
+ax.text(80, 7, "Chunk text goes through the gateway to Voyage to be embedded.\nOur index stores only vectors, keyed hashes and encrypted paths, never code.",
+        ha="center", va="center", fontsize=15, color=MUTED)
 fig.savefig(OUT, dpi=100, facecolor=BG)
 print(OUT)

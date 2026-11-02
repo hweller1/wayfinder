@@ -1,6 +1,6 @@
 # Harness defaults of the retrieval spec (layer 2 of 3): what the scout plugin ships for Claude Code.
 # System defaults (layer 1) live in lib/scout_spec.py; the developer's .scout/spec.toml (layer 3) overrides both.
-# See docs/retrieval-spec.md.
+# See the retrieval spec (not in this release).
 
 instructions = """\
 Prefer the project's own source (src/, lib/, pkg/, app/) over vendored, generated or third-party code.

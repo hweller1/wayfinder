@@ -1,6 +1,6 @@
 # Muse Code with Scout: calibration results
 
-This is a calibration-scale result for the retrieval spec and the Scout plugin on Muse Code 1.4.14, run on 2026-10-31 under the pre-registered plan in `docs/muse_scout_plan.md` (committed as b01640a before any arm run). On the 26 TUNE tasks, one seed, Scout did not find more of the right files than stock Muse Code: recall@12 was 0.525 with Scout against 0.600 for stock, a paired difference of -0.075 [-0.140, -0.010], and the run took about three times as long. The spec itself worked as a delivery mechanism: stock Muse delegated in 0 of 26 runs and both spec arms in 26 of 26, and Scout's `explore` was called in all 26 Scout runs. This does not confirm or refute anything beyond these tasks; the intervals are wide and CONFIRM was not touched.
+This is a calibration-scale result for the retrieval spec and the Scout plugin on Muse Code 1.4.14, run on 2026-10-31 under the pre-registered plan in the Muse Scout study plan (not in this release) (committed as b01640a before any arm run). On the 26 TUNE tasks, one seed, Scout did not find more of the right files than stock Muse Code: recall@12 was 0.525 with Scout against 0.600 for stock, a paired difference of -0.075 [-0.140, -0.010], and the run took about three times as long. The spec itself worked as a delivery mechanism: stock Muse delegated in 0 of 26 runs and both spec arms in 26 of 26, and Scout's `explore` was called in all 26 Scout runs. This does not confirm or refute anything beyond these tasks; the intervals are wide and CONFIRM was not touched.
 
 ## Setup as run
 
@@ -8,7 +8,7 @@ The tasks are the 26 TUNE tasks of `data/cc_scout_hillclimb_split.json` (the bri
 
 ## Calibration (first 5 tasks, all three arms)
 
-The calibration gates were met: 15 of 15 rows valid, Scout called in 5 of 5 Scout rows, stock rows carried no plugin and no spec output, and the projected full-run cost was well under the caps. The 5 rows are part of the 26.
+The calibration gates were met: 15 of 15 rows valid, Scout called in 5 of 5 Scout rows, stock rows carried no plugin and no spec output, and the projected full-run cost was acceptable. The 5 rows are part of the 26.
 
 | Arm | recall@12 | precision@12 | delegated | Scout called | wall median s | Muse $/run |
 |---|---|---|---|---|---|---|
@@ -24,7 +24,7 @@ The calibration gates were met: 15 of 15 rows valid, Scout called in 5 of 5 Scou
 | muse_explore_spec | 26 | 0.394 | 0.566 | 0.333 | 16.7 | 26/26 | 0/26 | 77 (109) | n/a | 0.249 |
 | muse_scout_spec | 26 | 0.396 | 0.525 | 0.384 | 10.5 | 26/26 | 26/26 | 189 (231) | 126.2 | 0.237 |
 
-Wall seconds are end to end per session at width 2. Modal GPU dollars are not per call (see the cost table) and Voyage dollars were zero.
+Wall seconds are end to end per session at width 2. Modal GPU dollars are not per call and Voyage dollars were zero.
 
 Paired contrasts, task bootstrap with 10,000 resamples (seed 20261025), 95% interval:
 
@@ -41,7 +41,7 @@ Scout is behind stock Muse on recall@12 and the interval excludes zero (-0.075 [
 
 The spec's delivery did what it was built to do: 0 of 26 stock runs delegated and 26 of 26 spec runs did, with no search denial needed (the workflow step alone was enough). What delegation changed was where the work happens. The stock parent made 32.5 tool calls and read 864 thousand input tokens; with Scout the parent made 16.2 calls and read 397 thousand, and the explorer child 7.9 calls and 115 thousand. That is why the Muse API estimate per run is lower with Scout ($0.237) than stock ($0.334), and also lower than the spec-only arm ($0.249), whose general-purpose child makes 26.7 calls on the parent's model.
 
-The cost is time. The median Scout session took 189 s against 65 s for stock and 77 s for the spec-only arm, and the `explore` call alone had a median of 126 s on a warm wayfinder-glimmer under width-2 load. This is the same direction as the Claude Code study (`docs/spec_hillclimb.md`), where Scout did not beat built-in Explore with the same spec and was about five times slower.
+The cost is time. The median Scout session took 189 s against 65 s for stock and 77 s for the spec-only arm, and the `explore` call alone had a median of 126 s on a warm wayfinder-glimmer under width-2 load. This is the same direction as the Claude Code study (the spec hill-climb write-up, not in this release), where Scout did not beat built-in Explore with the same spec and was about five times slower.
 
 ## Per task
 
@@ -76,7 +76,7 @@ The cost is time. The median Scout session took 189 s against 65 s for stock and
 
 ## What these numbers do not say
 
-One seed and 26 tasks. A second seed was not run: the original cap did not cover it and the plan forbids extra gateway spend without the author's approval. The parent here is Muse's default model at high effort, not the low-effort setting of the earlier 5-task Muse calibration and not the Sonnet 5.5 parent of the Claude Code studies, so absolute values do not transfer. Muse has no Explore subagent, so the spec-only arm delegates to `general-purpose` on the parent's model and is not an exact twin of the Claude Code `cc_explore_spec` arm. `--disable-write --disable-shell` removes shell grep in every arm. Recall is scored on the parent's reported list. The mined examples describe earlier commits of the same repository, which gives both spec arms a vocabulary hint stock does not have. Concurrency (width 2 on one H100) moves Scout's wall time. There is no coding-outcome metric.
+One seed and 26 tasks. A second seed was not run. The parent here is Muse's default model at high effort, not the low-effort setting of the earlier 5-task Muse calibration and not the Sonnet 5.5 parent of the Claude Code studies, so absolute values do not transfer. Muse has no Explore subagent, so the spec-only arm delegates to `general-purpose` on the parent's model and is not an exact twin of the Claude Code `cc_explore_spec` arm. `--disable-write --disable-shell` removes shell grep in every arm. Recall is scored on the parent's reported list. The mined examples describe earlier commits of the same repository, which gives both spec arms a vocabulary hint stock does not have. Concurrency (width 2 on one H100) moves Scout's wall time. There is no coding-outcome metric.
 
 ## Cost (separate units)
 

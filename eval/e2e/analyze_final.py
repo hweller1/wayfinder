@@ -1,4 +1,4 @@
-"""Analysis per docs/e2e_final_plan.md (+Addendum 1). python3 eval/e2e/analyze_final.py clean|v4 -> runs/final/results_<set>.json
+"""Analysis per the end-to-end final study plan (not in this release) (+Addendum 1). python3 eval/e2e/analyze_final.py clean|v4 -> runs/final/results_<set>.json
 Unit = task (seeds 2,3 averaged). Primary: each subagent minus none, exact paired sign-flip (two-sided, on task mean diffs), task bootstrap 95% CI, Holm over 4.
 Secondary (descriptive, MDE at achieved n, alpha .05 power .8 paired): v3-a1, sonnet-v3, gpt-v3, oracle minus each. Gold recall of handed files, pass by all-gold handed."""
 import json, sys, itertools, random, math, glob

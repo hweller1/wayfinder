@@ -1,4 +1,4 @@
-"""Confirmation set for GRPO run f1 (pre-registered in docs/grpo.md before the run launched): the 83 held-out E2E v4 tasks, SEARCH ONLY (no coder),
+"""Confirmation set for GRPO run f1 (pre-registered in the GRPO write-up (not in this release) before the run launched): the 83 held-out E2E v4 tasks, SEARCH ONLY (no coder),
 grep arm, seeds 1 and 2, retain on, max_turns 40, max_seconds 3600. Candidate (f1 prompt line) vs v3 vs A1, plus the v3+line control.
 
     python3 scripts/score_confirm_f1.py --candidate s20   -> artifacts/grpo/confirm/summary.json + stdout tables

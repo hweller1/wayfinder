@@ -1,6 +1,6 @@
 """Optimizer-state persistence, the lr schedule with its re-warm, and the per-update guard. Pure torch + stdlib (CPU-testable).
 
-Why (docs/grpo.md, run f1): arm b diverged after a resume because the adapter came back but AdamW's moments did not. A fresh AdamW's first
+Why (the GRPO write-up, not in this release, run f1): arm b diverged after a resume because the adapter came back but AdamW's moments did not. A fresh AdamW's first
 steps move every parameter by about lr (bias-corrected m/sqrt(v) is +-1), which on a policy that already sits at the edge of the trust region
 is a large unplanned jump (KL 966 in arm a's last logged step). So:
 

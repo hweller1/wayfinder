@@ -1,6 +1,6 @@
 # Final E2E coding eval: results
 
-Run 2026-10-30 to 10-31 under `docs/e2e_final_plan.md` (pre-registered, including Addendum 1). The question is whether a better search subagent raises the pass rate of a fixed coder on tasks it cannot solve without finding the code. The design is the handed-files design of `docs/e2e_eval.md`: Opus 5.5 (medium, via an LLM API gateway) has no search tools, `read_file` opens only the files the subagent returned, and the held-out tests are absent from its sandbox and asserted so. The diff is scored in a separate Modal sandbox against the held-out tests (pass means every fail-to-pass test passes and no regression-set test fails). Code is in `eval/e2e/` (`final_*.py`, `run_coder.py`, `analyze_final.py`), rows are in `eval/e2e/runs/final/`, and the figure is `docs/figures/s12_e2e.png`. Raw transcripts sit next to the rows and are gitignored.
+Run 2026-10-30 to 10-31 under the end-to-end final study plan (not in this release) (pre-registered, including Addendum 1). The question is whether a better search subagent raises the pass rate of a fixed coder on tasks it cannot solve without finding the code. The design is the handed-files design of the end-to-end study protocol (not in this release): Opus 5.5 (medium, via an LLM API gateway) has no search tools, `read_file` opens only the files the subagent returned, and the held-out tests are absent from its sandbox and asserted so. The diff is scored in a separate Modal sandbox against the held-out tests (pass means every fail-to-pass test passes and no regression-set test fails). Code is in `eval/e2e/` (`final_*.py`, `run_coder.py`, `analyze_final.py`), rows are in `eval/e2e/runs/final/`, and the figure is `docs/figures/s12_e2e.png`. Raw transcripts sit next to the rows and are gitignored.
 
 ## Headline
 
@@ -36,7 +36,7 @@ The v4 blind-screen rows (`none` seeds 0 and 1, `oracle` seed 0) were copied fro
 
 - Coder: all 105 reused rows record `opus-5.5-medium`, the same the LLM gateway backend id. The caps (60 tool calls, 400k prompt tokens) are unchanged in code, and 104 of 105 rows ended by `done`.
 - Issue text: the `task_text` in every reused row equals `issue_text` in `tasks_v4.json` (105 of 105).
-- Handed files: `condition_block` and `allowlist_for` for `none` and `oracle` are unchanged between the old commit and now. The only code differences are the extra subagent conditions, the manifest loader and the spend/disk guard.
+- Handed files: `condition_block` and `allowlist_for` for `none` and `oracle` are unchanged between the old commit and now. The only code differences are the extra subagent conditions, the manifest loader and a resource guard.
 - Sandbox and scorer: the diff of `modal_sandbox.py`, `score.py` and `gate.py` against the old commit contains only TypeScript branches and an app-name override. The Go, Python and Rust paths, the cache volume and the fail-to-pass plus regression-set rule are the same.
 
 ## Results
@@ -98,16 +98,7 @@ Frontier subagents hand over more of the gold set (recall 0.84 to 0.85 against 0
 
 ### Robustness: all oracle-solvable tasks
 
-The plan calls for the same contrasts on all oracle-solvable tasks regardless of the blind screen. The reported runs exist only on headroom tasks (seeds 2 and 3 were run only there, to hold the the LLM gateway and Modal caps), so this robustness analysis could not be run on additional tasks and is not reported. This is a deviation from the plan: the tasks dropped because `none` passed the screen (7 clean, 2 v4) have no subagent rows.
-
-## Cost
-
-| Item | Amount |
-|---|---|
-| Modal sandboxes (CPU) | about $17 recorded in row fields, excluding the reused v4 screen rows |
-| Modal serving (wayfinder-glimmer, A1 on H100, scaled to zero after use) | not metered per container here; estimated from run wall time at about $10 to $15 |
-| Voyage indexing (repo@commits of the first 11 clean tasks, the v4 headroom commits, and later clean headroom commits) | about $9.7 of embeddings at the $0.18 per million token estimate ($3.78 for the first 11 clean tasks, $5.92 for the rest), logged in `artifacts/index_costs/final_e2e_*`. This is Voyage spend, not Modal GPU |
-
+The plan calls for the same contrasts on all oracle-solvable tasks regardless of the blind screen. The reported runs exist only on headroom tasks (seeds 2 and 3 were run only there, to limit cost), so this robustness analysis could not be run on additional tasks and is not reported. This is a deviation from the plan: the tasks dropped because `none` passed the screen (7 clean, 2 v4) have no subagent rows.
 
 ## Deviations and caveats
 
@@ -116,7 +107,7 @@ The plan calls for the same contrasts on all oracle-solvable tasks regardless of
 - v4 reuse of earlier screen rows, and the v4 task clustering in `kara` (16 of 34), are described above.
 - A1 returned `UPSTREAM_TIMEOUT` on 9 of 68 first-pass v4 rollouts at 24-way concurrency; those were rerun at concurrency 10 and the reruns are the rows reported. One wayfinder-glimmer clean-set search run was lost to a Modal preemption and rerun. These are infrastructure retries, not selection.
 - The search conditions run on the 40-turn scout loop with grep and semantic search; the semantic index was present for every task (state ready, coverage 1.0). Sonnet and GPT seeds only label the rows (the API does not take a seed).
-- A killed batch of coder shards and an accidental unscoped launch (stopped within seconds, no rows or spend recorded for non-headroom tasks) are in the logs under `artifacts/ops/e2e_final_*`.
+- A killed batch of coder shards and an accidental unscoped launch (stopped within seconds, no rows recorded for non-headroom tasks) are in the logs under `artifacts/ops/e2e_final_*`.
 - Seeds 0 and 1 were screening only and are not reported as results.
 
 ## Coordinator robustness check (2026-10-30 23:10 PT, post hoc, descriptive)

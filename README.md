@@ -14,7 +14,7 @@ Submission to the Meta hackathon, "Build for Your World" track, startup track, r
 
 **2. Cost: the parent agent reads less.** In Muse Code with Scout, the parent read **397K input tokens per task against 864K for stock Muse Code**, and the run cost about **$0.24 against $0.33** (26 tasks, 1 seed, a list-price estimate from run tokens, not an invoice). Source: [docs/results/muse_scout_results.md](docs/results/muse_scout_results.md). The $0.24 does not include the GPU that serves wayfinder-glimmer.
 
-**3. Privacy: your code is never stored.** The index holds only `voyage-code-4` vectors, keyed hashes and encrypted paths and line ranges. A security test runs the full client flow against a recording store and checks that no path segment, identifier or 20-byte source window reaches it, and that three planted leaks are caught: [scout/tests/security/test_no_plaintext.py](scout/tests/security/test_no_plaintext.py). Source: [docs/scout/PRODUCT_STATUS.md](docs/scout/PRODUCT_STATUS.md). The trust boundary matters, so read it: chunk text does pass through the gateway (and to the Voyage API) while it is embedded, the gateway operator can read it in transit, embeddings can be partly inverted, and encrypting paths deterministically shows which rows share a path segment. "Never stored" describes the index, not the transit, and Voyage's data-retention setting for the account that embeds the code applies to what it receives. Use public code until you have confirmed that setting.
+**3. Privacy: our index never stores your code.** The index (turbopuffer) holds only `voyage-code-4` vectors, keyed hashes and encrypted paths and line ranges, never code. A security test runs the full client flow against a recording store and checks that no path segment, identifier or 20-byte source window reaches it, and that three planted leaks are caught: [scout/tests/security/test_no_plaintext.py](scout/tests/security/test_no_plaintext.py). Source: [docs/scout/PRODUCT_STATUS.md](docs/scout/PRODUCT_STATUS.md). The trust boundary matters, so read it: chunk text does pass through the gateway and on to Voyage's embedding API to be embedded, and the gateway operator can read it in transit. We make no claim that Voyage retains nothing, and its data-retention setting for the account that embeds the code applies to what it receives. Embeddings can be partly inverted, and encrypting paths deterministically shows which rows share a path segment. Use public code until you have confirmed the retention setting.
 
 ## Architecture
 
@@ -24,11 +24,25 @@ The laptop chunks files, encrypts paths and line ranges, and hashes identifiers;
 
 ## What was built during the event and what was not
 
-The event ran October 26 to November 4, 2026. Only work from the event counts, so here is the line, file by file from Git history ([RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md) has the lists).
+The event ran October 26 to November 4, 2026. Only work from the event counts, so this section says what existed the day before. `scout/` descends from a repository whose history starts on October 25, 2026: 42 commits that day, then 167 more from October 26 to November 1 (this release keeps part of that tree). Of the 408 `scout/` files in this repository, 131 were first added on October 25. The table is derived from `git log` of that repository: first-add date per file, and commits and lines changed (added plus deleted, in the files kept here) from October 26 on. "Files" is files kept in this release; "line counts" compare the October 25 snapshot with the release.
 
-**Started before October 26.** `scout/` descends from a repository whose history starts on October 25, 2026, the day before the event: 42 commits that set up the specification, the package scaffold and the first versions of the typed contracts and wire schemas (38 of the 40 JSON schemas), the port interfaces and in-memory fakes, the local file layer (ignore rules, `grep`, `glob`, `read_file`), the first explore loop and prompts, first versions of the CLI, daemon, MCP and gateway HTTP surfaces and of the Voyage, turbopuffer, OpenAI-compatible chat and keychain adapters, and the first 36 files under `tests/`. 132 of the 414 `scout/` files in this repository were first added in those commits. Many were extended during the event.
+| Component (`scout/`) | State on Oct 25 | Work during the event |
+|---|---|---|
+| Wire schemas (`schema/v1`) | 38 of 40 JSON schemas generated | 2 added; 5 commits, 214 lines changed |
+| Typed contracts, port interfaces, local file layer (`grep`, `glob`, `read_file`, ignore rules), `app.py` facade (21 files) | All 21 files existed (about 1,400 lines) | Small edits: 13 commits, 308 lines changed |
+| Explore loop and prompts (`core/explore`, 12 files) | 9 files, about 790 lines: loop, tools, profiles, budget, candidates, render, two prompts | 3 files added (`backfill.py`, `semantic.py`, `spec.py`); 6 commits, 859 lines changed; about 1,550 lines now |
+| Adapters (26 files) | 12 files, about 540 lines: in-memory fakes for chat, clock, filesystem, gateway and store, plus empty packages for the Voyage, turbopuffer, keychain, OpenAI-compatible chat and gateway HTTP adapters | The real adapters: 17 commits, 2,443 lines changed; about 2,760 lines now |
+| Encryption (`core/crypto`, 8 files) | An empty package | Written during the event: keys, path and row encryption, tokens, scope, MinHash; about 880 lines |
+| Sync engine and teammate seed (`core/sync`, 8 files) | An empty package | Written during the event; about 2,320 lines |
+| Gateway service (`core/service`, 10 files) | An empty package | Written during the event: auth, tenants, indexing, search, chat; about 1,710 lines |
+| CLI, daemon, MCP and gateway HTTP surfaces, SDK (15 files) | Empty packages for the four surfaces, plus a 167-line `sdk.py` | Written during the event: 12 commits, 2,013 lines changed; about 2,130 lines now |
+| Wiring, package root and demo runtime (11 files) | `wiring.py` (83 lines) and the package init | The 9-file demo runtime added; `wiring.py` grew to 551 lines; 18 commits, 1,635 lines changed |
+| Muse Code and Claude Code plugins (`integrations/`, 53 files) | None | All event work: 22 commits, 6,564 lines changed |
+| Evaluation harness (`eval/harness`, 16 files) | None | All event work: 17 commits, 2,851 lines changed |
+| Tests (174 files) | 35 files, about 2,850 lines: unit tests for the contracts, explore loop, fakes, local tools and wire schemas, a proof-of-concept contract test, the small fixture repository | 139 files added, including the security, conformance and live suites, the declaration fixtures and the service, sync and crypto tests; 95 commits, 36,452 lines changed (fixtures and golden files are about 10,000 of those) |
+| Build, scripts, ops, deploy (14 files) | `Makefile`, `pyproject.toml`, `uv.lock`, schema generator, namespace janitor | 9 files added, including the Modal gateway app: 20 commits, 1,361 lines changed |
 
-**Built during the event (Oct 26 on).** All of `training/` and `eval/` (that repository's history starts October 26), and in `scout/`: the encryption layer (keys, path and row encryption), the sync engine and teammate seed, the gateway service (auth, tenants, indexing, search, chat), the Muse Code plugin and the Claude Code plugin (53 files), the retrieval spec and its delivery to both hosts, the demo runtime, the evaluation harness, most of the test suite (139 of the 175 files under `tests/`, fixtures included), and the GCP deployment kit in [deploy/gcp](deploy/gcp). The model, the training recipe, the held-out evaluations, the end-to-end study and the Muse Code study are all event work.
+Everything outside `scout/` is event work: all of `training/` and `eval/` (their history starts on October 26) and the GCP deployment kit in [deploy/gcp](deploy/gcp). The model, the training recipe, the held-out evaluations, the end-to-end study and the Muse Code study are event work. [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md) lists the October 25 files.
 
 **Existing things this work uses and does not claim.** Muse Glimmer 30B (the base model) and Muse Spark Open (the teacher), Agents-A1-35B and its public transcripts, the `voyage-code-4` embedding model and API, turbopuffer, vLLM, Muse Code and Claude Code, and a pre-existing private benchmark of coding tasks from public repositories, from which the training pool and the held-out sets were drawn. Some evaluation and mining scripts here are adapted from tooling for that benchmark. The benchmark, its task records, and the teacher trajectories are not included.
 
@@ -40,7 +54,7 @@ The event ran October 26 to November 4, 2026. Only work from the event counts, s
 | `training/` | The SFT recipe for wayfinder-glimmer (`wayfinder/sft`), the rollout harness and rubric (`wayfinder/rollout`, `wayfinder/rubric.py`), data-build scripts, the GRPO and on-policy-distillation experiments (`wayfinder/grpo`, `wayfinder/opd`), the Modal serving app used for the evaluations, model release scripts, and tests. [training/README.md](training/README.md) |
 | `eval/` | Scorers, the end-to-end coding study code (`eval/e2e`), and result summaries (`eval/results`), with no raw transcripts. [eval/README.md](eval/README.md) |
 | `deploy/gcp/` | wayfinder-glimmer and the Scout gateway on one A100 VM: scripts, systemd units, Caddy, secrets handling, health checks, tests |
-| `docs/` | `docs/results/` (result write-ups), `docs/scout/` (retrieval spec, product status, Claude Code study), `docs/demo.md` (the Muse Code side-by-side runbook), `docs/MODEL_CARD.md` |
+| `docs/` | `docs/results/` (three result write-ups), `docs/scout/` (product status and the Claude Code study), `docs/demo.md` (the Muse Code side-by-side runbook), `docs/MODEL_CARD.md` |
 | `licenses/`, `LICENSE`, `NOTICE` | Apache-2.0 for this code; Muse Glimmer and Muse Spark Open license files and obligations |
 
 ## How to run
@@ -98,7 +112,7 @@ wayfinder-glimmer closes about two thirds of the gap between Agents-A1-35B and S
 | Muse Code + spec, built-in search | 0.566 | 0.333 | 16.7 | n/a | 77 | 0.249 |
 | Muse Code + spec + Scout (wayfinder-glimmer) | 0.525 | 0.384 | 10.5 | 397K | 189 | 0.237 |
 
-**Other results**, in [docs/results/](docs/results/): the pre-registered test split (152 tasks, 31 repositories: wayfinder-glimmer 0.519 reported recall against 0.439 for Agents-A1-35B and 0.428 for the untrained base), languages with little training data (120 tasks, 111 repositories), the SFT iterations, and the GRPO experiments.
+**Other results.** On the pre-registered test split (152 tasks, 31 repositories), wayfinder-glimmer reached 0.519 reported recall against 0.439 for Agents-A1-35B and 0.428 for the untrained base. Summary files for this and the other evaluations are in `eval/results/`; the write-ups for the test split, the languages with little training data, the SFT iterations and the GRPO experiments are not included.
 
 ## Limitations
 
@@ -113,5 +127,3 @@ wayfinder-glimmer closes about two thirds of the gap between Agents-A1-35B and S
 ## License and notices
 
 Code: Apache-2.0 ([LICENSE](LICENSE)). wayfinder-glimmer is a Muse Spark Open derivative: Muse Glimmer 30B is Apache-2.0 with Meta's usage policy, and the Muse Spark Open license adds conditions (the license and usage policy travel with the weights, "Built with Muse Spark Open" is displayed by any product that uses the model, and Model-as-a-Service above US$20M revenue needs a Meta agreement). Agents-A1-35B (Apache-2.0) contributed 33 of 1,383 training examples. The license files are in [licenses/](licenses/) and [NOTICE](NOTICE) lists every obligation. The Spark Open teacher trajectories used for training are not published.
-
-Next: wayfinder-qwen, a second model on a different open base, is in progress and is not part of this release.

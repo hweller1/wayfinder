@@ -1,4 +1,4 @@
-"""Search subagents for the FINAL E2E COPY (docs/e2e_final_plan.md; v3/a1 only, semantic auto). Original docstring: wayfinder E2E coding track: scout's explore loop (product profile, grep/glob/read_file/report) run on
+"""Search subagents for the FINAL E2E COPY (the end-to-end final study plan, not in this release; v3/a1 only, semantic auto). Original docstring: wayfinder E2E coding track: scout's explore loop (product profile, grep/glob/read_file/report) run on
 Modal for the round-3 headroom tasks, one record per (task, seed) in search/issue/<condition>/<slug>_s<seed>.json, the format
 run_coder.py reads. The coder (Opus 5.5 medium) later sees only what these records contain, exactly as in round 3.
 

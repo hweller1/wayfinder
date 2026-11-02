@@ -185,7 +185,7 @@ class CompatChat(OpenAIChat):
         self.capture: Any = None
         self.retain_reasoning = retain_reasoning
         #  message keys under which retained reasoning is resent. vLLM 0.32.0 (renderers/chat_utils.py) reads only `reasoning` and drops
-        #  `reasoning_content`, so a Qwen3.6 run sets ("reasoning_content", "reasoning"); the default is the pre-existing behaviour.
+        #  `reasoning_content`, so a run against such a server sets ("reasoning_content", "reasoning"); the default is the pre-existing behaviour.
         self.reasoning_keys: tuple[str, ...] = ("reasoning_content",)
         self._last_messages: list[dict[str, Any]] | None = None
         self._msg_log: list[dict[str, Any]] = []

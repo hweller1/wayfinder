@@ -1,4 +1,4 @@
-"""Contamination probe for the v4 secondary set (docs/e2e_final_plan.md, Addendum 1.2). Copy of contam_probe.py's probe_one, reading issue text
+"""Contamination probe for the v4 secondary set (the end-to-end final study plan, not in this release, Addendum 1.2). Copy of contam_probe.py's probe_one, reading issue text
 and gold non-test paths from the manifest + env records, ledger eval/e2e/gateway_spend_final.jsonl. Skips tasks that already carry `probe`.
   python3 eval/e2e/final_probe.py <manifest.json> <out.json> [workers]   (run via final_env.py for LLM_GATEWAY_API_KEY)"""
 import json, sys, os, fcntl, time, threading

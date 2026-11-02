@@ -42,7 +42,7 @@ HYBRID_BF = "hybrid_v3_bf"  # hybrid_v3 with the in-code backfill to 12 files (A
 RELAY_BF = "super_v3_bf"  # super_v3 (pure Haiku relay) with the in-code backfill (Addendum E)
 HYBRIDS = (HYBRID, HYBRID_A1, HYBRID_BF)
 CC_EXPLORE, CC_SCOUT, CC_SCOUT_ONLY = "cc_explore", "cc_scout", "cc_scout_only"  # free-parent arms (practical prototype)
-CC_EXPLORE_SPEC, CC_SCOUT_SPEC = "cc_explore_spec", "cc_scout_spec"  # retrieval-spec arms (docs/retrieval-spec.md)
+CC_EXPLORE_SPEC, CC_SCOUT_SPEC = "cc_explore_spec", "cc_scout_spec"  # retrieval-spec arms (the retrieval spec, not in this release)
 SPEC_ARMS = (CC_EXPLORE_SPEC, CC_SCOUT_SPEC)
 CC_ARMS = (CC_EXPLORE, CC_SCOUT, CC_SCOUT_ONLY, *SPEC_ARMS)
 NO_SCOUT_ARMS = (CC_EXPLORE, CC_EXPLORE_SPEC)  # no scout key, gateway or sync
@@ -129,7 +129,7 @@ def _build_spec_only_plugin(dst: Path) -> Path:
 GUIDANCE = ("When you report, list only files you have evidence for (you read them, or a search returned them), "
             "ranked most relevant first; aim for the 5 to 8 most relevant files and leave out the rest.")
 # Hill-climb variants (wayfinder docs/spec_hillclimb_plan.md): name -> (base arm, spec-file overrides by table).
-# Every override is a documented option of the retrieval spec (docs/retrieval-spec.md), not an eval hook.
+# Every override is a documented option of the retrieval spec (the retrieval spec, not in this release), not an eval hook.
 VARIANTS: dict[str, tuple[str, dict[str, dict]]] = {
     "base": (CC_SCOUT_SPEC, {}),
     "h_verbatim": (CC_SCOUT_SPEC, {"delivery": {"handoff": "verbatim"}}),

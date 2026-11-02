@@ -82,7 +82,7 @@ CONDS = {
                               top_p=0.95, top_k=0, presence_penalty=0.0, vllm_extensions=False, extra_body=None, tpm=0, concurrency=14,
                               prices=[1.25, 4.25, 0.15], weights_dir=f"/data/sft/{v}_merged", max_seconds=3600,
                               note=f"SFT {v} (Wayfinder, LoRA merged into Muse-Glimmer-30B), vLLM 0.32.0 on 1x H100 in the same container; "
-                                   "max_seconds 3600 and concurrency 14 as in the v2 dev eval (docs/sft_v2_eval.md)") for v in ("v2a", "v2b", "v3")},
+                                   "max_seconds 3600 and concurrency 14 as in the v2 dev eval (the SFT v2 write-up, not in this release)") for v in ("v2a", "v2b", "v3")},
     "glimmer_base": dict(model="glimmer", key_env=None, auth="Bearer", base_url="http://127.0.0.1:8000/v1", temperature=0.85,
                          top_p=0.95, top_k=0, presence_penalty=0.0, vllm_extensions=False, extra_body=None, tpm=0, concurrency=34,
                          prices=[1.25, 4.25, 0.15], note="untrained Muse-Glimmer-30B, vLLM 0.32.0 on 1x H100 in the same container"),

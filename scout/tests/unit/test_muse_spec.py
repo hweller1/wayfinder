@@ -1,5 +1,5 @@
 # ruff: noqa: S603, S607, E501  (fixed argv in tests; long fixture lines)
-"""The retrieval spec on Muse Code (docs/retrieval-spec.md): one shared implementation, delivered through
+"""The retrieval spec on Muse Code (the retrieval spec, not in this release): one shared implementation, delivered through
 Muse's SessionStart context, UserPromptSubmit workflow step, PreToolUse search-first policy and the explorer
 agent description. Hooks run as subprocesses with a scratch HOME and plugin data dir (no network, no Muse)."""
 

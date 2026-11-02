@@ -1,5 +1,5 @@
 {
-  "protocol": "docs/ood_langs_eval.md",
+  "protocol": "the out-of-distribution languages protocol, not in this release",
   "n_tasks_preregistered": 120,
   "n_tasks_scored_universe": 120,
   "excluded": {

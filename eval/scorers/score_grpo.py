@@ -9,7 +9,7 @@ wayfinder-grpo-<run>-s<step> on every row, retain_reasoning true. References (re
 v4 grep/sem artifacts/sft_v4/sft_v4_{grep,sem}.jsonl.
 Agents-A1-35B (the competing model, owner 2026-10-27: every checkpoint must be validated against it) is a fourth reference, "a1":
 artifacts/a1_baseline/sft_a1_{grep,sem}.jsonl from wayfinder/rollout/a1_eval_app.py (same tasks, scout product prompt, nudge, tools, retain on,
-max_turns 40, max_seconds 3600; A1's own sampling and parser flags; see docs/a1_baseline.md). Every healthy checkpoint arm gets `vs_a1` paired deltas
+max_turns 40, max_seconds 3600; A1's own sampling and parser flags; see the Agents-A1 baseline write-up (not in this release)). Every healthy checkpoint arm gets `vs_a1` paired deltas
 (checkpoint minus A1, same arm) next to `vs_v3`; the printed table shows reported recall, touched recall, turns and tokens against both.
 """
 from __future__ import annotations
@@ -81,7 +81,7 @@ def deltas(a: list[dict], b: list[dict]) -> dict:
     return out
 
 
-# ---- release gate (pre-registered in docs/grpo.md before the f1 run launched; do not edit the thresholds after results exist) ----
+# ---- release gate (pre-registered in the GRPO write-up (not in this release) before the f1 run launched; do not edit the thresholds after results exist) ----
 PAD_MAX = 1.0  # run rk: dev n_reported must not exceed v3's (same arm) by more than this (absolute check at every dev eval)
 GATE_SEM_FLOOR = -0.03  # "sem not worse": point delta >= 0 and CI lower bound >= this
 

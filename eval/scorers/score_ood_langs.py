@@ -1,4 +1,4 @@
-"""Score Run B (out-of-domain languages) exactly as pre-registered in docs/ood_langs_eval.md. A copy of scripts/score_test_split.py with the task
+"""Score Run B (out-of-domain languages) exactly as pre-registered in the out-of-distribution languages protocol (not in this release). A copy of scripts/score_test_split.py with the task
 set (data/ood_langs_tasks.json), directory (artifacts/ood_langs) and language groups changed; metrics, CIs and the primary contrast are unchanged.
 
     python3 scripts/score_ood_langs.py   -> artifacts/ood_langs/summary.json, rows/*.jsonl.gz, score.txt (stdout)
@@ -251,7 +251,7 @@ def main() -> None:
     lang_of = {t: lang_group(v["language"]) for t, v in tasks.items()}
     raw = {(m, a): load_arm(m, a) for m in MODELS for a in ARMS}
     rows = {k: [r for r in ok_of(v) if r["task_id"] in tasks] for k, v in raw.items()}
-    out: dict = {"protocol": "docs/ood_langs_eval.md", "n_tasks_preregistered": len(test), "n_tasks_scored_universe": len(tasks), "excluded": excl,
+    out: dict = {"protocol": "the out-of-distribution languages protocol, not in this release", "n_tasks_preregistered": len(test), "n_tasks_scored_universe": len(tasks), "excluded": excl,
                  "validation": {}, "parse_health": {}, "arms": {}, "contrasts": {}, "per_language": {}, "per_repo": {}, "win_loss_by_repo": {}}
     for (m, a), rs in raw.items():
         if rs:
