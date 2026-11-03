@@ -119,6 +119,147 @@ def test_env_overrides_apply_at_deploy_time(monkeypatch: pytest.MonkeyPatch) -> 
     assert (mod.MIN_CONTAINERS, mod.MAX_CONTAINERS, mod.APP_NAME, mod.URL_LABEL) == (1, 2, "my-glimmer", "my-glimmer")
 
 
+# --- serve_qwen.py and qwen_proxy.py ------------------------------------------------------------------
+
+# Copied from the app that served the published qwen results (wayfinder_qwen.py `VLLM_ARGS`), with the served name
+# `wayfinder-qwen` in place of the internal one. Do not import it from anywhere: this list is the contract.
+REFERENCE_QWEN_VLLM_ARGS = [
+    "--served-model-name", "wayfinder-qwen",
+    "--quantization", "fp8",
+    "--max-model-len", "65536",
+    "--gpu-memory-utilization", "0.92",
+    "--enable-prefix-caching",
+    "--language-model-only",
+    "--enable-auto-tool-choice",
+    "--tool-call-parser", "qwen3_coder",
+    "--reasoning-parser", "qwen3",
+    "--override-generation-config", '{"temperature": 0.85, "top_p": 0.95, "top_k": 20}',
+    "--speculative-config", '{"method": "qwen3_next_mtp", "num_speculative_tokens": 2}',
+    "--max-num-seqs", "32",
+    "--host", "0.0.0.0",
+]  # fmt: skip
+
+
+@pytest.fixture
+def qwen(monkeypatch: pytest.MonkeyPatch):
+    pytest.importorskip("modal")
+    return _load("serve_qwen", monkeypatch)
+
+
+def test_qwen_module_imports_without_modal_credentials(qwen) -> None:
+    assert qwen.app.name == "wayfinder-qwen-serve"
+    assert qwen.SECRET_NAME == "wayfinder-qwen-key"
+    assert qwen.MODEL_ID == "hweller1/wayfinder-qwen-35b-a3b"
+    assert qwen.SERVED_NAME == "wayfinder-qwen"
+
+
+def test_qwen_vllm_flags_equal_the_reference_app(qwen) -> None:
+    assert qwen.VLLM_ARGS == REFERENCE_QWEN_VLLM_ARGS
+    assert qwen.VLLM_VERSION == "0.32.0"
+    assert "--chat-template" not in qwen.VLLM_ARGS  # the checkpoint's own template
+    assert "--dtype" not in qwen.VLLM_ARGS  # online FP8, as measured
+    assert qwen.SAMPLING == {"temperature": 0.85, "top_p": 0.95, "top_k": 20}
+
+
+def test_qwen_vllm_runs_on_the_internal_port_and_the_proxy_owns_the_public_one(qwen) -> None:
+    cmd = qwen.vllm_command("/models/wayfinder-qwen-35b-a3b")
+    assert cmd[:3] == ["vllm", "serve", "/models/wayfinder-qwen-35b-a3b"]
+    assert cmd[3:-2] == REFERENCE_QWEN_VLLM_ARGS
+    assert cmd[-2:] == ["--port", str(qwen.UPSTREAM_PORT)]
+    assert (qwen.PORT, qwen.UPSTREAM_PORT) == (8000, 8001)
+    assert "--api-key" not in cmd  # the key never travels on a command line
+    assert (qwen.MIN_CONTAINERS, qwen.MAX_CONTAINERS, qwen.SCALEDOWN_S) == (0, 1, 600)
+
+
+def test_qwen_source_text_contract() -> None:
+    text = (MODAL_DIR / "serve_qwen.py").read_text()
+    assert 'gpu="H100"' in text
+    assert "nvidia/cuda:12.9.1-devel-ubuntu22.04" in text
+    assert 'f"vllm=={VLLM_VERSION}"' in text
+    assert "snapshot_download(MODEL_ID" in text
+    assert 'secrets=[modal.Secret.from_name(SECRET_NAME)]' in text
+    assert "hmac.compare_digest" in text  # the warm endpoint checks the bearer key
+    assert "class Qwen:" in text and '"Qwen")' in text and "@modal.web_server(port=PORT" in text
+    assert 'label=f"{URL_LABEL}-warm"' in text
+    assert "qwen_proxy.py" in text
+    for needle in ("/Users/", "wayfinder-v3", "wayfinder-data", "wayfinder-weights", "wayfinder-cache", "qwen-replica",
+                   "A1_API_KEY", "V3_", "muse_glimmer", "VLLM_API_KEY"):
+        assert needle not in text, needle
+
+
+def test_qwen_env_overrides_apply_at_deploy_time(monkeypatch: pytest.MonkeyPatch) -> None:
+    pytest.importorskip("modal")
+    _load("serve_qwen", monkeypatch)
+    monkeypatch.setenv("WAYFINDER_MIN_CONTAINERS", "1")
+    monkeypatch.setenv("WAYFINDER_APP_NAME", "my-qwen")
+    spec = importlib.util.spec_from_file_location("serve_qwen_env", MODAL_DIR / "serve_qwen.py")
+    assert spec and spec.loader
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    assert (mod.MIN_CONTAINERS, mod.APP_NAME, mod.URL_LABEL) == (1, "my-qwen", "my-qwen")
+
+
+def _load_proxy(monkeypatch: pytest.MonkeyPatch, key: str = "proxy-canary-key"):
+    for mod in ("httpx", "starlette", "uvicorn"):
+        pytest.importorskip(mod)
+    monkeypatch.setenv("WAYFINDER_API_KEY", key)
+    spec = importlib.util.spec_from_file_location("qwen_proxy", MODAL_DIR / "qwen_proxy.py")
+    assert spec and spec.loader
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def test_proxy_enforces_the_key_and_forwards_only_the_allow_list(monkeypatch: pytest.MonkeyPatch) -> None:
+    import httpx
+    from starlette.testclient import TestClient
+
+    proxy = _load_proxy(monkeypatch)
+    seen: list[httpx.Request] = []
+
+    def upstream(request: httpx.Request) -> httpx.Response:
+        seen.append(request)
+        return httpx.Response(200, stream=httpx.ByteStream(b'{"ok": true}'))  # streamed, as vLLM replies
+
+    proxy.client = httpx.AsyncClient(transport=httpx.MockTransport(upstream), base_url=proxy.UPSTREAM)
+    web = TestClient(proxy.app)
+    good = {"Authorization": "Bearer proxy-canary-key"}
+    assert web.post("/v1/chat/completions", json={"messages": []}).status_code == 401
+    assert web.post("/v1/chat/completions", json={"messages": []}, headers={"Authorization": "Bearer wrong"}).status_code == 401
+    assert not seen  # nothing reached vLLM without the key
+    assert web.get("/metrics", headers=good).status_code == 404
+    assert web.get("/server_info", headers=good).status_code == 404
+    assert not seen
+    assert web.get("/health").status_code == 200  # health needs no key
+    assert web.get("/v1/models", headers=good).status_code == 200
+    assert [r.url.path for r in seen] == ["/health", "/v1/models"]
+
+
+def test_proxy_renames_reasoning_content_to_reasoning(monkeypatch: pytest.MonkeyPatch) -> None:
+    import httpx
+    from starlette.testclient import TestClient
+
+    proxy = _load_proxy(monkeypatch)
+    bodies: list[dict] = []
+
+    def upstream(request: httpx.Request) -> httpx.Response:
+        bodies.append(json.loads(request.content))
+        return httpx.Response(200, stream=httpx.ByteStream(b'{"ok": true}'))  # streamed, as vLLM replies
+
+    proxy.client = httpx.AsyncClient(transport=httpx.MockTransport(upstream), base_url=proxy.UPSTREAM)
+    web = TestClient(proxy.app)
+    msgs = [
+        {"role": "user", "content": "q"},
+        {"role": "assistant", "content": None, "reasoning_content": "thought one"},
+        {"role": "assistant", "content": None, "reasoning": "kept", "reasoning_content": "dropped"},
+    ]
+    r = web.post("/v1/chat/completions", json={"messages": msgs}, headers={"Authorization": "Bearer proxy-canary-key"})
+    assert r.status_code == 200
+    out = bodies[0]["messages"]
+    assert out[1] == {"role": "assistant", "content": None, "reasoning": "thought one"}
+    assert out[2]["reasoning"] == "kept" and "reasoning_content" not in out[2]  # an explicit `reasoning` wins
+
+
 # --- make_secrets.py ----------------------------------------------------------------------------------
 
 SHIM = """#!/usr/bin/env python3

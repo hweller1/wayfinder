@@ -53,7 +53,7 @@ Everything outside `scout/` is event work: all of `training/` and `eval/` (their
 | `scout/` | The Scout client, gateway, MCP server, CLI, Claude Code and Muse Code plugins, wire schemas, tests (offline suite plus live tests that need keys), and the evaluation harness for the plugin studies (`scout/eval/harness`) |
 | `training/` | The SFT recipe for wayfinder-glimmer (`wayfinder/sft`), the rollout harness and rubric (`wayfinder/rollout`, `wayfinder/rubric.py`), data-build scripts, the GRPO and on-policy-distillation experiments (`wayfinder/grpo`, `wayfinder/opd`), the Modal serving app used for the evaluations, model release scripts, and tests. [training/README.md](training/README.md) |
 | `eval/` | Scorers, the end-to-end coding study code (`eval/e2e`), and result summaries (`eval/results`), with no raw transcripts. [eval/README.md](eval/README.md) |
-| `deploy/modal/` | wayfinder-glimmer on your own Modal account (`serve_glimmer.py`), the secrets helper (`make_secrets.py`), tests; the gateway app is `scout/deploy/modal/gateway.py` |
+| `deploy/modal/` | wayfinder-glimmer on your own Modal account (`serve_glimmer.py`), wayfinder-qwen (`serve_qwen.py` and its key proxy `qwen_proxy.py`), the secrets helper (`make_secrets.py`), tests; the gateway app is `scout/deploy/modal/gateway.py` |
 | `deploy/gcp/` | wayfinder-glimmer and the Scout gateway on one A100 VM: scripts, systemd units, Caddy, secrets handling, health checks, tests |
 | `docs/` | `docs/results/` (three result write-ups), `docs/scout/` (product status and the Claude Code study), `docs/demo.md` (the Muse Code side-by-side runbook), `docs/MODEL_CARD.md` |
 | `licenses/`, `LICENSE`, `NOTICE` | Apache-2.0 for this code; Muse Glimmer and Muse Spark Open license files and obligations |
@@ -194,6 +194,18 @@ wayfinder-glimmer closes about two thirds of the gap between Agents-A1-35B and S
 | Muse Code + spec + Scout (wayfinder-glimmer) | 0.525 | 0.384 | 10.5 | 397K | 189 | 0.237 |
 
 **Other results.** On the pre-registered test split (152 tasks, 31 repositories), wayfinder-glimmer reached 0.519 reported recall against 0.439 for Agents-A1-35B and 0.428 for the untrained base. Summary files for this and the other evaluations are in `eval/results/`; the write-ups for the test split, the languages with little training data, the SFT iterations and the GRPO experiments are not included.
+
+## wayfinder-qwen: the faster model
+
+**Built with Muse Spark Open.** wayfinder-qwen ([hweller1/wayfinder-qwen-35b-a3b](https://huggingface.co/hweller1/wayfinder-qwen-35b-a3b)) is Qwen3.6-35B-A3B post-trained on the same 1,383 examples with the same recipe as wayfinder-glimmer. Its model card is [docs/MODEL_CARD_QWEN.md](docs/MODEL_CARD_QWEN.md); serve it on Modal with [deploy/modal/serve_qwen.py](deploy/modal/serve_qwen.py) (`modal deploy deploy/modal/serve_qwen.py`, same steps as wayfinder-glimmer, FP8 on one H100). It is a Muse Spark Open Derivative, and the license terms are in [NOTICE](NOTICE).
+
+| | wayfinder-qwen | wayfinder-glimmer |
+|---|---|---|
+| Held-out reported recall, grep (200 tasks, 2 seeds) | 0.415 [0.377, 0.452] | 0.452 [0.412, 0.491] |
+| Held-out reported recall, semantic (200 tasks, 2 seeds) | 0.427 [0.388, 0.465] | 0.446 [0.406, 0.484] |
+| Median time per search, one stream, one H100 (12 tasks) | 19.7 s with multi-token prediction, 43.5 s without | 175.4 s (bf16) |
+
+It trails wayfinder-glimmer on retrieval (-0.036 [-0.055, -0.018] on the grep arm) and, inside Muse Code, reached recall@12 of 0.496 against 0.600 for stock Muse Code (26 tasks, 1 seed). The held-out recall was measured with multi-token prediction off, and the 12-task timing is a small sample. Pass rate in the end-to-end study matched wayfinder-glimmer (0.868 on both, 34 tasks, 68 runs). Details and caveats are in the model card.
 
 ## Limitations
 

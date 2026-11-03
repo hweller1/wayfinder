@@ -13,7 +13,7 @@ About 970 files after pruning: `scout/` 408 tracked files (of which 72 are the l
 | `scout` full default suite (`uv run pytest -q`, no network, live/eval/spike deselected) | 2089 passed, 5 skipped, 120 deselected. Same as before |
 | `deploy/gcp/tests` | 16 passed. Same as before |
 | `training/tests` | 161 passed, 6 skipped. Same as before |
-| `deploy/modal/tests` (added 2026-11-02, offline: vLLM flags equal the reference app's, module imports without Modal credentials, secrets helper writes no value to stdout) | 14 passed |
+| `deploy/modal/tests` (added 2026-11-02, offline: vLLM flags equal the reference apps' for glimmer and qwen, modules import without Modal credentials, the qwen key proxy enforces the key and renames `reasoning_content`, secrets helper writes no value to stdout) | 21 passed |
 | gitleaks 8.30.1, `--no-git` on the working tree | 3 hits, all false positives: a test constant (`k-other-1234567890`) in `scout/tests/unit/test_make_secrets.py`, hex test vectors in `scout/tests/unit/test_crypto_keys_ids.py`, and a docstring in `training/wayfinder/opd/score.py` that the generic-api-key rule matches. `.gitleaks.toml` allowlists those three files for that rule only. The synthetic fixture PEM and the fixture `.env` were not flagged |
 | gitleaks, git history | Run on the final commit; see the report that came with it |
 | Sensitive-term grep (`/Users/`, Modal workspace name, internal gateway URL, mongodb.com, 10gen, Glean, docs.google, PRFAQ, customer names, unreleased model names) | Clean |
