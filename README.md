@@ -18,7 +18,7 @@ Submission to the Meta hackathon, "Build for Your World" track, startup track, r
 
 ## Architecture
 
-![Scout architecture](docs/figures/s_proto_arch.png)
+![Scout architecture](docs/figures/architecture.png)
 
 The laptop chunks files, encrypts paths and line ranges, and hashes identifiers; the gateway embeds chunk text with `voyage-code-4` and writes vectors and ciphertext to turbopuffer; searches combine local `grep`/`read` on the laptop with semantic search over the index. The gateway also runs the chat loop against wayfinder-glimmer, served by vLLM on Modal ([deploy/modal](deploy/modal)) or on the same VM ([deploy/gcp](deploy/gcp)). One scout key authenticates a client; tenants are isolated by key.
 
