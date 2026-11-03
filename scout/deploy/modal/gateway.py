@@ -1,28 +1,29 @@
-"""Modal deployment of the scout gateway (design section 6): one CPU ASGI app, the single auth point.
+"""Modal deployment of the Scout gateway: one CPU ASGI app, the single auth point. Runs on your own Modal account.
 
-    modal deploy deploy/modal/gateway.py                        # https://scout-gateway.example.com
+Set up first (repository root): the secrets, then the model app, see the README section "Run on Modal (your own
+account)". `deploy/modal/make_secrets.py` creates the one secret this app needs, `scout-gateway`.
+
+    cd scout
+    modal deploy deploy/modal/gateway.py                        # prints https://<workspace>--scout-gateway-api.modal.run
     modal run deploy/modal/gateway.py::issue_key --tenant dev   # prints a scout key once; stores its tag only
 
-Chat model switch (deploy-time, env on the machine running `modal deploy`):
-    SCOUT_LLM_PROFILE=v3 (default)  wayfinder-v3 (Muse-Glimmer-30B SFT, app wayfinder-v3-serve). The Modal
-        secret `scout-llm-v3` is listed last and overrides SCOUT_LLM_URL, API_KEY, MODEL and SAMPLING.
-    SCOUT_LLM_PROFILE=a1  Agents-A1-35B, exactly what `scout-gateway` holds (the original path).
-    SCOUT_LLM_PROFILE=a20  the Wayfinder GRPO arm a step-20 checkpoint (app wayfinder-a20-serve). The Modal
-        secret `scout-llm-a20` (create with `ops/make_secrets.py --llm-a20`) is listed last, as for v3:
-        `SCOUT_GATEWAY_APP=scout-gateway-a20 SCOUT_LLM_PROFILE=a20 modal deploy ...`.
-    SCOUT_GATEWAY_APP=<name>  deploy under another app name (default `scout-gateway`), for a second gateway
-        on the other model: `SCOUT_GATEWAY_APP=scout-gateway-a1 SCOUT_LLM_PROFILE=a1 modal deploy ...`.
-Keys, tenants and the index live in turbopuffer and the shared Dict, so every gateway app accepts the same
-scout keys and sees the same repos. Create `scout-llm-v3` with `ops/make_secrets.py --llm-v3`.
+The key is printed once and cannot be recovered; give it to one person or machine (`scout login --key <key>`).
+Run `issue_key` again with another `--tenant` name for each team member; tenants cannot see each other's index.
 
-The app holds every vendor credential (turbopuffer, Voyage, the chat upstream) in the Modal secrets
-`scout-gateway` and `scout-llm`; a client needs only a scout key. It scales to zero (`min_containers=0`): the
-first request after idle pays a container start (a few seconds), the idle app costs nothing. `scout-gateway`
-is listed last so its values win over `scout-llm` when both define the chat upstream variables.
+The Modal secret `scout-gateway` holds every vendor credential: TURBOPUFFER_API_KEY, VOYAGE_API_KEY,
+SCOUT_MASTER_KEY, SCOUT_PEPPER, SCOUT_KEYS_NS and the chat upstream SCOUT_LLM_URL / SCOUT_LLM_API_KEY /
+SCOUT_LLM_MODEL / SCOUT_LLM_SAMPLING (your `deploy/modal/serve_glimmer.py` endpoint). A client needs only a scout
+key. To point the gateway at another OpenAI-compatible model, recreate the secret with other SCOUT_LLM_* values.
+`SCOUT_GATEWAY_APP=<name>` deploys under another app name (default `scout-gateway`), for a second gateway.
+
+The app scales to zero (`min_containers=0`): the first request after idle pays a container start (a few
+seconds), and the idle app costs nothing. The gateway's `/v1/warm` calls the model's `-warm` endpoint, derived
+from SCOUT_LLM_URL.
 
 Key records and idempotency replays live in a Modal Dict (a cache only: the keys namespace in turbopuffer is
 authoritative, row ids and the root CAS keep a lost replay entry correct). The deploy builds a wheel of this
-repo and installs it in the image, so the deployed code is the code in this working tree.
+repo with `uv build` (install uv first) and installs it in the image, so the deployed code is the code in this
+working tree.
 """
 
 import contextlib
@@ -45,9 +46,6 @@ KEY_PREFIX = "key:"
 IDEM_PREFIX = "idem:"
 
 
-LLM_PROFILE = os.environ.get("SCOUT_LLM_PROFILE", "v3").strip().lower()
-if LLM_PROFILE not in ("v3", "a1", "a20"):
-    raise SystemExit("SCOUT_LLM_PROFILE must be v3, a1 or a20")
 APP_NAME = os.environ.get("SCOUT_GATEWAY_APP", "scout-gateway")
 
 
@@ -69,11 +67,9 @@ def _build_wheel() -> Path:
 
 
 def _image() -> modal.Image:
-    # The profile and app name are baked into the image env: the container re-imports this file without the
-    # deploy-time environment and must declare the same secrets and app as the deploy did.
-    base = modal.Image.debian_slim(python_version="3.12").env(
-        {"SCOUT_LLM_PROFILE": LLM_PROFILE, "SCOUT_GATEWAY_APP": APP_NAME}
-    )
+    # The app name is baked into the image env: the container re-imports this file without the deploy-time
+    # environment and must declare the same app as the deploy did.
+    base = modal.Image.debian_slim(python_version="3.12").env({"SCOUT_GATEWAY_APP": APP_NAME})
     if not modal.is_local():
         return base  # the container's image is already built; nothing to add at runtime
     wheel = _build_wheel()
@@ -83,12 +79,7 @@ def _image() -> modal.Image:
 
 app = modal.App(APP_NAME)
 image = _image()
-# `scout-gateway` holds the A1 chat upstream; the v3 profile appends `scout-llm-v3`, which wins on overlap.
-secrets = [modal.Secret.from_name("scout-llm"), modal.Secret.from_name("scout-gateway")]
-if LLM_PROFILE == "v3":
-    secrets.append(modal.Secret.from_name("scout-llm-v3"))
-elif LLM_PROFILE == "a20":
-    secrets.append(modal.Secret.from_name("scout-llm-a20"))
+secrets = [modal.Secret.from_name("scout-gateway")]
 
 
 class DictKeyCache:

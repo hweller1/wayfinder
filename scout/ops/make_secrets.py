@@ -1,5 +1,9 @@
 """Create the Modal secrets `scout-gateway` and `scout-llm` (task 8.7). Never prints a secret value.
 
+This is the helper of the author's original deployment (profiles, A1 and a step-20 arm). To run on your own Modal
+account use `deploy/modal/make_secrets.py` at the repository root, which creates the one secret the public
+`gateway.py` reads.
+
     set -a; . ./.env; set +a; uv run python ops/make_secrets.py [--force]
 
 `scout-gateway` (the single auth point's credentials): TURBOPUFFER_API_KEY and VOYAGE_API_KEY (process env,

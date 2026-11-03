@@ -1,6 +1,6 @@
 # Run wayfinder-glimmer and the Scout gateway on one GCP VM
 
-This kit puts the model and the gateway on a single `a2-ultragpu-1g` (1x A100 80 GB) so the demo needs no Modal. Nothing in this repository creates a cloud resource by itself: `create_vm.sh` prints its commands unless you run it with `CONFIRM=yes`, and the scripts here were written and checked offline only (see "What was and was not tested").
+This kit puts the model and the gateway on a single `a2-ultragpu-1g` (1x A100 80 GB) as an alternative to the Modal path in `deploy/modal`. Nothing in this repository creates a cloud resource by itself: `create_vm.sh` prints its commands unless you run it with `CONFIRM=yes`, and the scripts here were written and checked offline only (see "What was and was not tested").
 
 ```
 laptop (Muse Code / Claude Code + Scout plugin)

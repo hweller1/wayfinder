@@ -20,7 +20,7 @@ Submission to the Meta hackathon, "Build for Your World" track, startup track, r
 
 ![Scout architecture](docs/figures/s_proto_arch.png)
 
-The laptop chunks files, encrypts paths and line ranges, and hashes identifiers; the gateway embeds chunk text with `voyage-code-4` and writes vectors and ciphertext to turbopuffer; searches combine local `grep`/`read` on the laptop with semantic search over the index. The gateway also runs the chat loop against wayfinder-glimmer, served by vLLM on the same VM in the demo deployment ([deploy/gcp](deploy/gcp)). One scout key authenticates a client; tenants are isolated by key.
+The laptop chunks files, encrypts paths and line ranges, and hashes identifiers; the gateway embeds chunk text with `voyage-code-4` and writes vectors and ciphertext to turbopuffer; searches combine local `grep`/`read` on the laptop with semantic search over the index. The gateway also runs the chat loop against wayfinder-glimmer, served by vLLM on Modal ([deploy/modal](deploy/modal)) or on the same VM ([deploy/gcp](deploy/gcp)). One scout key authenticates a client; tenants are isolated by key.
 
 ## What was built during the event and what was not
 
@@ -42,7 +42,7 @@ The event ran October 26 to November 4, 2026. Only work from the event counts, s
 | Tests (174 files) | 35 files, about 2,850 lines: unit tests for the contracts, explore loop, fakes, local tools and wire schemas, a proof-of-concept contract test, the small fixture repository | 139 files added, including the security, conformance and live suites, the declaration fixtures and the service, sync and crypto tests; 95 commits, 36,452 lines changed (fixtures and golden files are about 10,000 of those) |
 | Build, scripts, ops, deploy (14 files) | `Makefile`, `pyproject.toml`, `uv.lock`, schema generator, namespace janitor | 9 files added, including the Modal gateway app: 20 commits, 1,361 lines changed |
 
-Everything outside `scout/` is event work: all of `training/` and `eval/` (their history starts on October 26) and the GCP deployment kit in [deploy/gcp](deploy/gcp). The model, the training recipe, the held-out evaluations, the end-to-end study and the Muse Code study are event work. [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md) lists the October 25 files.
+Everything outside `scout/` is event work: all of `training/` and `eval/` (their history starts on October 26) and the deployment kits in [deploy/modal](deploy/modal) and [deploy/gcp](deploy/gcp). The model, the training recipe, the held-out evaluations, the end-to-end study and the Muse Code study are event work. [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md) lists the October 25 files.
 
 **Existing things this work uses and does not claim.** Muse Glimmer 30B (the base model) and Muse Spark Open (the teacher), Agents-A1-35B and its public transcripts, the `voyage-code-4` embedding model and API, turbopuffer, vLLM, Muse Code and Claude Code, and a pre-existing private benchmark of coding tasks from public repositories, from which the training pool and the held-out sets were drawn. Some evaluation and mining scripts here are adapted from tooling for that benchmark. The benchmark, its task records, and the teacher trajectories are not included.
 
@@ -53,26 +53,107 @@ Everything outside `scout/` is event work: all of `training/` and `eval/` (their
 | `scout/` | The Scout client, gateway, MCP server, CLI, Claude Code and Muse Code plugins, wire schemas, tests (offline suite plus live tests that need keys), and the evaluation harness for the plugin studies (`scout/eval/harness`) |
 | `training/` | The SFT recipe for wayfinder-glimmer (`wayfinder/sft`), the rollout harness and rubric (`wayfinder/rollout`, `wayfinder/rubric.py`), data-build scripts, the GRPO and on-policy-distillation experiments (`wayfinder/grpo`, `wayfinder/opd`), the Modal serving app used for the evaluations, model release scripts, and tests. [training/README.md](training/README.md) |
 | `eval/` | Scorers, the end-to-end coding study code (`eval/e2e`), and result summaries (`eval/results`), with no raw transcripts. [eval/README.md](eval/README.md) |
+| `deploy/modal/` | wayfinder-glimmer on your own Modal account (`serve_glimmer.py`), the secrets helper (`make_secrets.py`), tests; the gateway app is `scout/deploy/modal/gateway.py` |
 | `deploy/gcp/` | wayfinder-glimmer and the Scout gateway on one A100 VM: scripts, systemd units, Caddy, secrets handling, health checks, tests |
 | `docs/` | `docs/results/` (three result write-ups), `docs/scout/` (product status and the Claude Code study), `docs/demo.md` (the Muse Code side-by-side runbook), `docs/MODEL_CARD.md` |
 | `licenses/`, `LICENSE`, `NOTICE` | Apache-2.0 for this code; Muse Glimmer and Muse Spark Open license files and obligations |
 
 ## How to run
 
-Everything below that touches a cloud service needs your own keys. Nothing needs Modal.
+Everything below that touches a cloud service needs your own keys and your own account. There are two ways to serve the model and the gateway: Modal (first) and one GCP VM (second).
 
 **Tests (offline).**
 
 ```bash
 cd scout && uv sync --frozen --extra gateway
 uv run pytest -q                                            # contract, unit, conformance and security tests; no network
-uv run python -m pytest ../deploy/gcp/tests -q              # the GCP kit's offline checks
+uv run python -m pytest ../deploy/gcp/tests ../deploy/modal/tests -q   # the deployment kits' offline checks
 cd ../training && PYTHONPATH=.:../scout/src python3 -m pytest tests -q
 ```
 
-**Serve the model and the gateway** on one A100 80 GB VM: [deploy/gcp/README.md](deploy/gcp/README.md). It installs vLLM 0.32.0, serves `hweller1/wayfinder-glimmer-30b` as `wayfinder-glimmer` with the `muse_glimmer` tool-call and reasoning parsers, runs the gateway under uvicorn behind Caddy (HTTPS), and keeps vLLM on localhost. To serve the model alone: the command in [docs/MODEL_CARD.md](docs/MODEL_CARD.md).
+### Option 1: Run on Modal (your own account)
 
-**Use Scout from Muse Code or Claude Code.** Set `SCOUT_GATEWAY_URL` to your gateway and `scout login` with a key from `gateway_vm.py issue-key`; then `scout sync --wait` in a checkout and install the plugin: [scout/integrations/muse-code/INSTALL.md](scout/integrations/muse-code/INSTALL.md), [scout/integrations/claude-code/README.md](scout/integrations/claude-code/README.md). The side-by-side demo is [docs/demo.md](docs/demo.md); the pane and VM scripts are `scout/scripts/demo_panes.sh` and `demo_warm.sh`.
+This deploys two apps in your Modal workspace: wayfinder-glimmer on one H100 ([deploy/modal/serve_glimmer.py](deploy/modal/serve_glimmer.py)) and the Scout gateway on a small CPU container ([scout/deploy/modal/gateway.py](scout/deploy/modal/gateway.py)). Both scale to zero when idle. The Modal path is written and tested offline; it has not been deployed from a fresh account (see [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md)), so expect to read a Modal error or two the first time.
+
+**Cost.** While the H100 is warm it bills about $3.95 per hour. When the app has scaled to zero (after 10 idle minutes by default) it costs nothing, and the gateway's CPU container is a small fraction of that. The first request after idle waits several minutes while a container starts and vLLM loads the model; the very first start also downloads about 60 GB of weights and compiles kernels, and takes longer. Embedding is billed by Voyage, about $1.72 per million lines indexed. `max_containers` is 1, so the GPU bill cannot exceed one H100.
+
+**1. Prerequisites.** A [Modal](https://modal.com) account with GPU access (H100), [uv](https://docs.astral.sh/uv/), Python 3.12, and:
+
+```bash
+uv tool install modal && modal setup          # logs the CLI in to your workspace
+modal profile list                            # note the workspace name, used below as <workspace>
+export VOYAGE_API_KEY=...                     # https://dash.voyageai.com
+export TURBOPUFFER_API_KEY=...                # https://turbopuffer.com
+```
+
+**2. Create the secrets.** One command creates `wayfinder-glimmer-key` (the model's bearer key) and `scout-gateway` (your Voyage and turbopuffer keys, a newly generated master key and pepper, and the model's URL and key). Values go through a 0600 temporary file, never on a command line or to the terminal.
+
+```bash
+python3 deploy/modal/make_secrets.py --workspace <workspace>
+```
+
+The generated keys are kept in `~/.config/scout/modal-keys.json` (mode 0600), so a re-run keeps them. Back that file up: the master key and pepper decide whether a gateway can read an index it wrote earlier. The script refuses to overwrite an existing secret without `--force`. If you deploy into a non-default Modal environment, pass the URL that step 3 prints with `--llm-url` instead of `--workspace`.
+
+**3. Deploy the model app.** From the repository root. No Hugging Face token is needed; the weights are public.
+
+```bash
+modal deploy deploy/modal/serve_glimmer.py
+```
+
+It serves `hweller1/wayfinder-glimmer-30b` as `wayfinder-glimmer` (vLLM 0.32.0, the flags of every published result, a `/warm` endpoint) at `https://<workspace>--wayfinder-glimmer-serve.modal.run`. Nothing starts until the first request. Weights and compile caches are kept in two Modal Volumes. Knobs (environment variables at deploy time): `WAYFINDER_MIN_CONTAINERS` (0), `WAYFINDER_MAX_CONTAINERS` (1), `WAYFINDER_SCALEDOWN_S` (600).
+
+**4. Deploy the gateway.**
+
+```bash
+cd scout
+modal deploy deploy/modal/gateway.py
+```
+
+The deploy builds a wheel of this checkout with uv and prints the gateway URL, `https://<workspace>--scout-gateway-api.modal.run`. That is your `SCOUT_GATEWAY_URL`.
+
+**5. Issue a Scout key.** Still in `scout/`:
+
+```bash
+modal run deploy/modal/gateway.py::issue_key --tenant me
+```
+
+It prints `tenant=me` and `key=...` once; the gateway stores only a tag of the key, so save it now. Run it again with another `--tenant` for each person; tenants cannot see each other's index.
+
+**6. Install the plugin and point it at your gateway.** Install the scout CLI and a plugin, with the key from step 5:
+
+```bash
+export SCOUT_GATEWAY_URL=https://<workspace>--scout-gateway-api.modal.run
+uv tool install ./scout && scout login --key <scout key>
+export SCOUT_INTEGRATIONS_DIR=$PWD/scout/integrations      # where `scout init` finds the plugins
+scout init --muse-code          # or: scout init --claude-code
+```
+
+Details: [scout/integrations/muse-code/INSTALL.md](scout/integrations/muse-code/INSTALL.md), [scout/integrations/claude-code/README.md](scout/integrations/claude-code/README.md). Keep `SCOUT_GATEWAY_URL` exported in the shell that starts Muse Code or Claude Code.
+
+**7. Warm up.** The plugin's session hook does this for you, but you can do it by hand: `scout warm --trigger` starts the model loading and returns in about a second, and `scout warm` waits until the model answers and prints how long that took (several minutes from zero). To check the model endpoint directly without printing the key:
+
+```bash
+KEY=$(python3 -c 'import json,os;print(json.load(open(os.path.expanduser("~/.config/scout/modal-keys.json")))["WAYFINDER_API_KEY"])')
+curl -s -m 5 -H "Authorization: Bearer $KEY" https://<workspace>--wayfinder-glimmer-serve-warm.modal.run
+```
+
+**8. First search.** In a checkout, build the index, then ask for a search:
+
+```bash
+cd /path/to/your/repo
+scout sync --wait                                # embeds the code with voyage-code-4 (the Voyage cost above)
+scout explore "where is the retry backoff computed?" --text
+```
+
+Then start Muse Code or Claude Code in the same checkout; "explore" tasks go to the Scout subagent. Index public code until you have confirmed the Voyage data-retention setting (see Privacy above).
+
+**Stop paying.** Nothing to do: the apps scale to zero. To stop a warm GPU at once, `modal app stop wayfinder-glimmer-serve`; to remove everything, stop both apps and delete the Volumes `wayfinder-glimmer-weights` and `wayfinder-glimmer-cache`.
+
+### Option 2: one GCP VM
+
+Serve the model and the gateway on one A100 80 GB VM: [deploy/gcp/README.md](deploy/gcp/README.md). The kit was written and tested offline only; it has not been run on a real VM. It installs vLLM 0.32.0, serves `hweller1/wayfinder-glimmer-30b` as `wayfinder-glimmer` with the `muse_glimmer` tool-call and reasoning parsers, runs the gateway under uvicorn behind Caddy (HTTPS), and keeps vLLM on localhost. To serve the model alone: the command in [docs/MODEL_CARD.md](docs/MODEL_CARD.md).
+
+**Use Scout from Muse Code or Claude Code with a GCP gateway.** Set `SCOUT_GATEWAY_URL` to your gateway and `scout login` with a key from `gateway_vm.py issue-key`; then `scout sync --wait` in a checkout and install the plugin as in step 6 above. The side-by-side demo is [docs/demo.md](docs/demo.md); the pane and VM scripts are `scout/scripts/demo_panes.sh` and `demo_warm.sh`.
 
 **Train and evaluate.** [training/README.md](training/README.md) (the recipe, and how to regenerate the teacher data) and [eval/README.md](eval/README.md).
 
@@ -121,7 +202,7 @@ wayfinder-glimmer closes about two thirds of the gap between Agents-A1-35B and S
 - **Held-out retrieval is behind the frontier.** wayfinder-glimmer 0.45 reported recall against Sonnet 5.5 (high) 0.53, GPT-6.1 Sol 0.58 and Agents-A1-35B 0.31, on 200 tasks from 47 repositories never seen in training. The semantic index added no recall for this model.
 - **The outcome result is narrow.** One coder model, 34 tasks dominated by one repository, searchers near the ceiling, and a stricter primary set that yielded 4 tasks. It supports "any searcher helps a lot when the coder cannot find the code unaided", not a ranking of searchers.
 - **One training run, one seed.** The model card lists the remaining caveats (English only, public repositories only, thin Swift, C# and Java/Kotlin data, license of the underlying code not cleared task by task).
-- **Not rehearsed on GCP.** The deployment kit was written and tested offline. The demo numbers were measured on Modal H100s.
+- **Not rehearsed on a fresh account or on GCP.** Both deployment kits were written and tested offline. The demo numbers were measured on Modal H100s, with the app in `training/serve/wayfinder_v3.py` (GPU memory snapshots on, which `deploy/modal/serve_glimmer.py` leaves out, so its cold start is likely longer than the 2 to 3 minutes measured).
 - **Task manifests are not included.** The training and evaluation task records derive from a pre-event private benchmark; the scorers and harnesses are here, the records are not. `eval/results/eval_repos_license.csv` lists the repositories and their licenses.
 
 ## License and notices

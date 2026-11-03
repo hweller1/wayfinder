@@ -1,7 +1,7 @@
 """Task 8.5: static checks of `deploy/`. FR-G4, AC-9.4, FR-G2.
 
 No Modal call is made: the module is read as text and compiled. `modal` is a deploy-only import, the only
-Modal secrets are `scout-gateway` and `scout-llm`, and `asa-run-creds` never appears under `deploy/`.
+Modal secret is `scout-gateway`, and `asa-run-creds` never appears under `deploy/`.
 """
 
 import ast
@@ -15,7 +15,7 @@ REPO = Path(__file__).resolve().parents[2]
 DEPLOY = REPO / "deploy"
 SRC = REPO / "src" / "scout"
 GATEWAY = DEPLOY / "modal" / "gateway.py"
-ALLOWED_SECRETS = {"scout-gateway", "scout-llm", "scout-llm-v3", "scout-llm-a20"}
+ALLOWED_SECRETS = {"scout-gateway"}
 
 
 def _text_files(root: Path) -> list[Path]:
@@ -46,7 +46,7 @@ def test_modal_is_imported_only_under_deploy() -> None:
     assert re.search(r"^import modal$", GATEWAY.read_text(), re.M)
 
 
-def test_secret_names_are_the_gateway_llm_and_model_secrets() -> None:
+def test_the_only_secret_is_scout_gateway() -> None:
     text = GATEWAY.read_text()
     used = set(re.findall(r'modal\.Secret\.from_name\(\s*"([^"]+)"', text))
     assert used == ALLOWED_SECRETS
