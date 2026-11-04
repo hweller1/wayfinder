@@ -24,16 +24,16 @@ LoRA supervised fine-tuning on the language model only (rank 64, alpha 128, all 
 
 Experiments beyond SFT, with write-ups in [../docs/results/](../docs/results/): GRPO with verifiable rewards on top of the SFT checkpoint (`wayfinder/grpo`, `scripts/grpo`, the GRPO write-up (not in this release)) and on-policy distillation (`wayfinder/opd`). Neither produced the released model.
 
-## The teacher trajectories are not published
+## The teacher trajectories
 
-The SFT data is outputs of Muse Spark Open. This repository releases code and the model, not those trajectories (the license permits it; we chose to keep the release small and to avoid republishing a teacher's outputs). To regenerate comparable data you need your own access to the Muse Spark Open weights (the repository is gated on Hugging Face), a Modal account with 8x B200 or H200 capacity, and a task pool:
+The SFT data is outputs of Muse Spark Open. This repository releases code and the model; the trajectories are a separate gated dataset (access by request, manual approval): [hweller1/wayfinder-training-data](https://huggingface.co/datasets/hweller1/wayfinder-training-data), with the Muse Spark Open license files. To regenerate comparable data you need your own access to the Muse Spark Open weights (the repository is gated on Hugging Face), a Modal account with 8x B200 or H200 capacity, and a task pool:
 
 1. Build a pool of tasks (a repository at a commit, a plain-language question, the gold files it touches) from public repositories whose licenses you accept, and split by repository (`scripts/dataprep`).
 2. Index each repository (`wayfinder/rollout/index_app.py`) with your Voyage and turbopuffer keys.
 3. Start teacher replicas (`modal run serve/spark_open.py`, with `SPARK_REPLICA` suffixes for more than one) and roll out (`wayfinder/rollout/modal_app.py`); keep every row.
 4. Convert and filter with `wayfinder/sft/convert_teacher_modal.py` using the filters above, then train with `wayfinder/sft/train_v1.py`.
 
-The task records used for the released model derive from a pre-event private benchmark and are not included either. `../eval/results/eval_repos_license.csv` lists the repositories of the evaluation sets with their licenses.
+The task records are not a separate file; the request, repository and gold files of each task are inside the gated trajectories, and the tasks were drawn from public repositories only. `../eval/results/eval_repos_license.csv` lists the repositories of the evaluation sets with their licenses.
 
 ## Tests
 

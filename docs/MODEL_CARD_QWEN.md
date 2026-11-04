@@ -24,7 +24,7 @@ tags:
 
 wayfinder-qwen is Qwen3.6-35B-A3B (35B parameters, 3B active per token) post-trained with LoRA supervised fine-tuning, merged into the base weights, to work as a code-search subagent. A coding agent hands it a brief such as "where does the router decide that a request matches a route with path variables?". The model plans, searches an unfamiliar repository with `grep`, `glob` and `read_file`, optionally calls `semantic_search` over a voyage-code-4 vector index, and returns a ranked list of `path:start-end` ranges with a one-line reason each, a summary and the gaps it could not establish. The parent agent reads that report instead of searching itself.
 
-The weights are bf16 safetensors (26 shards) with the config, tokenizer and chat template of Qwen3.6-35B-A3B unchanged. This repository is a weights release: it holds no training data, trajectories or task text. The training data is not released. A gated release (access by request) is planned.
+The weights are bf16 safetensors (26 shards) with the config, tokenizer and chat template of Qwen3.6-35B-A3B unchanged. This repository is a weights release: it holds no training data, trajectories or task text. The training data is a separate gated dataset (access by request, manual approval): [hweller1/wayfinder-training-data](https://huggingface.co/datasets/hweller1/wayfinder-training-data). It holds 1,372 of the 1,383 examples (11 were removed before release: 8 from an AGPL-3.0 repository and 3 generated through a third-party host).
 
 ## Latest results
 
@@ -120,7 +120,7 @@ At inference time the Scout pipeline can refine the model's list. After the mode
 - Schedule: 2 epochs (460 steps of 6 documents), learning rate 5e-5 with cosine decay to 10%, 5 warmup steps, one document per sequence (no packing, because the recurrent layers would leak state between packed documents), 4x H200, 88 minutes.
 - Single training run (seed 0). Results describe this checkpoint, not the recipe. A second variant that upweighted examples where semantic search found a gold file grep had missed was trained and evaluated on the development set only. It was no better and is not released.
 
-The trajectories and task text are not in this repository. The training data is not released. A gated release (access by request) is planned.
+The trajectories and task text are not in this repository. They are in the gated dataset [hweller1/wayfinder-training-data](https://huggingface.co/datasets/hweller1/wayfinder-training-data) (access by request, manual approval; 1,372 of the 1,383 examples). Training tasks were drawn from public repositories only.
 
 ## Task shapes it was trained on
 

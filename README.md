@@ -77,7 +77,7 @@ Cost is about 43 percent lower and Muse Code reads about half the tokens. Precis
 - Wayfinder finds fewer files than Muse Code alone on some tasks. On excalidraw it did worse in 4 of 5 batch runs. It follows the wording of the task, and the right files are not always named like it.
 - Wayfinder is slower in wall time.
 - The demo video shows the best of five runs per task, picked after seeing them. The 26-task numbers above are the representative ones.
-- Task records are not included, because they derive from a private benchmark. The scorers and harnesses are in `eval/`.
+- The task records are not a separate file; they are inside the gated training-data trajectories (tasks drawn from public repositories only). The scorers and harnesses are in `eval/`.
 
 ## Try it
 

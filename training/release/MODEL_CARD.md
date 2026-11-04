@@ -23,7 +23,7 @@ tags:
 
 wayfinder-glimmer is Muse Glimmer 30B post-trained (LoRA supervised fine-tuning, merged into the base weights) to work as a code-search subagent. A coding agent hands it a brief such as "where does the router decide that a request matches a route with path variables?". The model plans, searches an unfamiliar repository with `grep`, `glob` and `read_file`, optionally calls `semantic_search` over a voyage-code-4 vector index, and returns a ranked list of `path:start-end` ranges with a one-line reason each, a summary and the gaps it could not establish. The parent agent reads that report instead of searching itself.
 
-The weights are bf16 safetensors with the config, tokenizer and chat template of Muse Glimmer 30B unchanged. This repository is a weights release: no training data, trajectories or task text are included.
+The weights are bf16 safetensors with the config, tokenizer and chat template of Muse Glimmer 30B unchanged. This repository is a weights release: no training data, trajectories or task text are included (see the gated dataset [hweller1/wayfinder-training-data](https://huggingface.co/datasets/hweller1/wayfinder-training-data)).
 
 ## Serving
 
@@ -86,7 +86,7 @@ Out of scope:
 - Schedule: 2 epochs, learning rate 5e-5 with cosine decay, packed rows of up to 49,152 tokens, 4x H200, about 3 hours.
 - Single training run (seed 0). Results describe this checkpoint, not the recipe.
 
-The trajectories and task text are not published.
+The trajectories and task text are released as a gated dataset (access by request): [hweller1/wayfinder-training-data](https://huggingface.co/datasets/hweller1/wayfinder-training-data). It holds 1,372 of the 1,383 examples.
 
 ## Evaluation
 
