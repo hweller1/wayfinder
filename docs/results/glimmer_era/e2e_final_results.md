@@ -1,3 +1,5 @@
+This is the first-model write-up (wayfinder-glimmer, Muse Glimmer 30B). It is kept for provenance and is not part of the final wayfinder-qwen results; see ../README.md.
+
 # Final E2E coding eval: results
 
 Run 2026-10-30 to 10-31 under the end-to-end final study plan (not in this release) (pre-registered, including Addendum 1). The question is whether a better search subagent raises the pass rate of a fixed coder on tasks it cannot solve without finding the code. The design is the handed-files design of the end-to-end study protocol (not in this release): Opus 5.5 (medium, via an LLM API gateway) has no search tools, `read_file` opens only the files the subagent returned, and the held-out tests are absent from its sandbox and asserted so. The diff is scored in a separate Modal sandbox against the held-out tests (pass means every fail-to-pass test passes and no regression-set test fails). Code is in `eval/e2e/` (`final_*.py`, `run_coder.py`, `analyze_final.py`), rows are in `eval/e2e/runs/final/`, and the figure is `docs/figures/s12_e2e.png`. Raw transcripts sit next to the rows and are gitignored.
@@ -6,7 +8,7 @@ Run 2026-10-30 to 10-31 under the end-to-end final study plan (not in this relea
 
 The primary clean set reached only **4 headroom tasks** (2 Go, 2 TypeScript). At that size nothing is resolved: no subagent differs from `none` after Holm correction, and the minimum detectable effects are 0.35 or larger. The secondary v4 set (34 headroom tasks) shows a large, unambiguous lift from any subagent over no search (about +0.8) and no resolvable difference between the four subagents. The v4 set is separate and is never pooled with the clean set. It is dominated by one repository (16 of 34 tasks are from `karalang/kara`), so its effective sample is smaller than 34, and the comparison among subagents there sits close to the oracle ceiling (0.97).
 
-![Pass rate by condition](../figures/s12_e2e.png)
+![Pass rate by condition](../../figures/s12_e2e.png)
 
 ## Funnel
 

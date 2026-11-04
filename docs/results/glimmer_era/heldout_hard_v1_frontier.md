@@ -1,3 +1,5 @@
+This is the first-model write-up (wayfinder-glimmer, Muse Glimmer 30B). It is kept for provenance and is not part of the final wayfinder-qwen results; see ../README.md.
+
 # Held-out hard v1: wayfinder-glimmer and A1 against Sonnet 5.5 and GPT-6.1 Sol
 
 This document adds two frontier models to the one-time evaluation in the held-out hard v1 protocol (not in this release). Sonnet 5.5 (reasoning effort high) and GPT-6.1 Sol (default reasoning) were run through the LLM gateway inside scout's own explore loop on `data/heldout_hard_v1.json` (200 tasks, 47 repositories), so their rows compare directly with the wayfinder-glimmer and A1 rows. The author approved the run on 2026-10-30.

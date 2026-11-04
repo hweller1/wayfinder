@@ -1,4 +1,4 @@
-This is the full deployment runbook moved out of the README. It covers wayfinder-glimmer and the Scout gateway; wayfinder-qwen is served the same way with `deploy/modal/serve_qwen.py` (see [MODEL_CARD_QWEN.md](MODEL_CARD_QWEN.md)). Relative links below were written for the repository root, so open files from there.
+This is the full deployment runbook moved out of the README. It covers wayfinder-glimmer and the Scout gateway; wayfinder-qwen is served the same way with `deploy/modal/serve_qwen.py` (see [MODEL_CARD_QWEN.md](MODEL_CARD_QWEN.md)).
 
 # How to run (wayfinder-glimmer, Modal and GCP)
 
@@ -15,7 +15,7 @@ cd ../training && PYTHONPATH=.:../scout/src python3 -m pytest tests -q
 
 ## Option 1: Run on Modal (your own account)
 
-This deploys two apps in your Modal workspace: wayfinder-glimmer on one H100 ([deploy/modal/serve_glimmer.py](deploy/modal/serve_glimmer.py)) and the Scout gateway on a small CPU container ([scout/deploy/modal/gateway.py](scout/deploy/modal/gateway.py)). Both scale to zero when idle. The Modal path is written and tested offline; it has not been deployed from a fresh account (see [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md)), so expect to read a Modal error or two the first time.
+This deploys two apps in your Modal workspace: wayfinder-glimmer on one H100 ([deploy/modal/serve_glimmer.py](../deploy/modal/serve_glimmer.py)) and the Scout gateway on a small CPU container ([scout/deploy/modal/gateway.py](../scout/deploy/modal/gateway.py)). Both scale to zero when idle. The Modal path is written and tested offline; it has not been deployed from a fresh account (see [RELEASE_CHECKLIST.md](../RELEASE_CHECKLIST.md)), so expect to read a Modal error or two the first time.
 
 **Cost.** While the H100 is warm it bills about $3.95 per hour. When the app has scaled to zero (after 10 idle minutes by default) it costs nothing, and the gateway's CPU container is a small fraction of that. The first request after idle waits several minutes while a container starts and vLLM loads the model; the very first start also downloads about 60 GB of weights and compiles kernels, and takes longer. Embedding is billed by Voyage, about $1.72 per million lines indexed. `max_containers` is 1, so the GPU bill cannot exceed one H100.
 
@@ -70,7 +70,7 @@ export SCOUT_INTEGRATIONS_DIR=$PWD/scout/integrations      # where `scout init` 
 scout init --muse-code          # or: scout init --claude-code
 ```
 
-Details: [scout/integrations/muse-code/INSTALL.md](scout/integrations/muse-code/INSTALL.md), [scout/integrations/claude-code/README.md](scout/integrations/claude-code/README.md). Keep `SCOUT_GATEWAY_URL` exported in the shell that starts Muse Code or Claude Code.
+Details: [scout/integrations/muse-code/INSTALL.md](../scout/integrations/muse-code/INSTALL.md), [scout/integrations/claude-code/README.md](../scout/integrations/claude-code/README.md). Keep `SCOUT_GATEWAY_URL` exported in the shell that starts Muse Code or Claude Code.
 
 **7. Warm up.** The plugin's session hook does this for you, but you can do it by hand: `scout warm --trigger` starts the model loading and returns in about a second, and `scout warm` waits until the model answers and prints how long that took (several minutes from zero). To check the model endpoint directly without printing the key:
 
@@ -93,8 +93,8 @@ Then start Muse Code or Claude Code in the same checkout; "explore" tasks go to 
 
 ## Option 2: one GCP VM
 
-Serve the model and the gateway on one A100 80 GB VM: [deploy/gcp/README.md](deploy/gcp/README.md). The kit was written and tested offline only; it has not been run on a real VM. It installs vLLM 0.32.0, serves `hweller1/wayfinder-glimmer-30b` as `wayfinder-glimmer` with the `muse_glimmer` tool-call and reasoning parsers, runs the gateway under uvicorn behind Caddy (HTTPS), and keeps vLLM on localhost. To serve the model alone: the command in [docs/MODEL_CARD.md](docs/MODEL_CARD.md).
+Serve the model and the gateway on one A100 80 GB VM: [deploy/gcp/README.md](../deploy/gcp/README.md). The kit was written and tested offline only; it has not been run on a real VM. It installs vLLM 0.32.0, serves `hweller1/wayfinder-glimmer-30b` as `wayfinder-glimmer` with the `muse_glimmer` tool-call and reasoning parsers, runs the gateway under uvicorn behind Caddy (HTTPS), and keeps vLLM on localhost. To serve the model alone: the command in [docs/MODEL_CARD.md](MODEL_CARD.md).
 
-**Use Scout from Muse Code or Claude Code with a GCP gateway.** Set `SCOUT_GATEWAY_URL` to your gateway and `scout login` with a key from `gateway_vm.py issue-key`; then `scout sync --wait` in a checkout and install the plugin as in step 6 above. The side-by-side demo is [docs/demo.md](docs/demo.md); the pane and VM scripts are `scout/scripts/demo_panes.sh` and `demo_warm.sh`.
+**Use Scout from Muse Code or Claude Code with a GCP gateway.** Set `SCOUT_GATEWAY_URL` to your gateway and `scout login` with a key from `gateway_vm.py issue-key`; then `scout sync --wait` in a checkout and install the plugin as in step 6 above. The side-by-side demo is [docs/demo.md](demo.md); the pane and VM scripts are `scout/scripts/demo_panes.sh` and `demo_warm.sh`.
 
-**Train and evaluate.** [training/README.md](training/README.md) (the recipe, and how to regenerate the teacher data) and [eval/README.md](eval/README.md).
+**Train and evaluate.** [training/README.md](../training/README.md) (the recipe, and how to regenerate the teacher data) and [eval/README.md](../eval/README.md).

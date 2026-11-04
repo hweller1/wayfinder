@@ -6,4 +6,4 @@
 
 In the Scout plugin, `/scout:model glimmer` is an alias for the `v3` profile. Only the display name changed; ids were left alone because renaming them would break existing result rows and scorers. Other things named "v3" are not the model: task ids with the `v3__` prefix, RL pool v3, `hard_v3`, SFT data such as `teacher_v3`, and arms such as `super_v3`. SFT iterations v1, v2a, v2b and v4 keep their names.
 
-The result documents in `docs/results/` are historical records written during the event and use these ids.
+The write-ups in `docs/results/glimmer_era/` are historical records written during the event and use these ids. The final results page is `docs/results/README.md` and covers wayfinder-qwen only.

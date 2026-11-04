@@ -1,3 +1,5 @@
+This is the first-model write-up (wayfinder-glimmer, Muse Glimmer 30B). It is kept for provenance and is not part of the final wayfinder-qwen results; see ../README.md.
+
 # Muse Code with Scout: calibration results
 
 This is a calibration-scale result for the retrieval spec and the Scout plugin on Muse Code 1.4.14, run on 2026-10-31 under the pre-registered plan in the Muse Scout study plan (not in this release) (committed as b01640a before any arm run). On the 26 TUNE tasks, one seed, Scout did not find more of the right files than stock Muse Code: recall@12 was 0.525 with Scout against 0.600 for stock, a paired difference of -0.075 [-0.140, -0.010], and the run took about three times as long. The spec itself worked as a delivery mechanism: stock Muse delegated in 0 of 26 runs and both spec arms in 26 of 26, and Scout's `explore` was called in all 26 Scout runs. This does not confirm or refute anything beyond these tasks; the intervals are wide and CONFIRM was not touched.

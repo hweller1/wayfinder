@@ -17,6 +17,8 @@ tags:
   - muse
 ---
 
+This is the first-model write-up (wayfinder-glimmer, Muse Glimmer 30B). It is kept for provenance and is not part of the final wayfinder-qwen results; see [README.md](../README.md). The final model is wayfinder-qwen: [MODEL_CARD_QWEN.md](MODEL_CARD_QWEN.md).
+
 # wayfinder-glimmer
 
 **Built with Muse Spark Open.**

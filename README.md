@@ -43,7 +43,7 @@ The rerank adds +0.038 [+0.023, +0.054]; the whole cascade adds +0.117 [+0.095, 
 | GPT-6.1 Sol, run without the cascade | 0.853 |
 | Agents-A1-35B, run without the cascade | 0.853 |
 
-Search lifts the pass rate by about 0.8 over no search. The differences between searchers are not resolved. The other searchers were run on 2026-11-02 without the cascade. Earlier write-up: [docs/results/e2e_final_results.md](docs/results/e2e_final_results.md).
+Search lifts the pass rate by about 0.8 over no search. The differences between searchers are not resolved. The other searchers were run on 2026-11-02 without the cascade. Full results page: [docs/results/README.md](docs/results/README.md).
 
 **Search benchmark.** Same 200 tasks, grep arm. Reported recall is the share of right files in the model's final report. Cost is per search task.
 
@@ -54,7 +54,7 @@ Search lifts the pass rate by about 0.8 over no search. The differences between 
 | Sonnet 5.5 high | 0.529 | $0.120 |
 | GPT-6.1 Sol | 0.580 | $0.062 (rate unconfirmed) |
 
-With the cascade, wayfinder-qwen reaches recall@12 of 0.531, level with Sonnet and a little under GPT. The lists have different lengths, so this is not a like-for-like comparison. On recall@5 it trails the frontier models. Details: [docs/results/heldout_hard_v1_frontier.md](docs/results/heldout_hard_v1_frontier.md).
+With the cascade, wayfinder-qwen reaches recall@12 of 0.531, level with Sonnet and a little under GPT. The lists have different lengths, so this is not a like-for-like comparison. On recall@5 it trails the frontier models. Details: [docs/results/README.md](docs/results/README.md).
 
 **Inside Muse Code.** 26 tasks, one run each, default configuration.
 
