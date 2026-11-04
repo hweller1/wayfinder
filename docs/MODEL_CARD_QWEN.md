@@ -293,7 +293,7 @@ Hypothesis about the losses, offline and exploratory, not a tested claim: the ta
 
 ## Limitations
 
-- Retrieval is below frontier models in the same loop (see the search benchmark in the GitHub repository), and the model ends by calling `report` on 0.96 of grep-arm rollouts.
+- Retrieval is below frontier models in the same loop: on the same 200 held-out tasks (grep arm) the model's own list reaches recall 0.415 against 0.529 for Sonnet 5.5 and 0.580 for GPT-6.1 Sol (the cascade lifts recall@12 to 0.531 with a longer list, so that is not a like-for-like comparison), and the model ends by calling `report` on 0.96 of grep-arm rollouts.
 - In Muse Code, recall@12 is 0.496 against 0.600 for stock Muse Code without Scout (26 tasks, one seed), and the Scout path is slower than stock end to end (118 s against 65 s median).
 - Whether thinking was on in every `explore` call of the Muse Code run was not verified from a trace; the run left thinking at the Qwen template default instead of setting it per request as the held-out harness does. Treat that part of the Muse Code result as unconfirmed.
 - The held-out numbers were produced with MTP off, and the speed numbers and the end-to-end and Muse Code results with MTP on. Quality with MTP on has not been measured on the held-out set.
