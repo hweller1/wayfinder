@@ -24,9 +24,27 @@ tags:
 
 wayfinder-qwen is Qwen3.6-35B-A3B (35B parameters, 3B active per token) post-trained with LoRA supervised fine-tuning, merged into the base weights, to work as a code-search subagent. A coding agent hands it a brief such as "where does the router decide that a request matches a route with path variables?". The model plans, searches an unfamiliar repository with `grep`, `glob` and `read_file`, optionally calls `semantic_search` over a voyage-code-4 vector index, and returns a ranked list of `path:start-end` ranges with a one-line reason each, a summary and the gaps it could not establish. The parent agent reads that report instead of searching itself.
 
-It is the faster sibling of [wayfinder-glimmer](https://huggingface.co/hweller1/wayfinder-glimmer-30b), trained on the same examples with the same recipe. On a single H100 and a single stream it finishes a search in about 20 to 44 seconds where wayfinder-glimmer takes about 175 seconds. In exchange its retrieval is a little weaker: on the 200-task held-out set its reported recall is 0.036 below wayfinder-glimmer on the grep arm. See Evaluation and Limitations before choosing between them.
+The weights are bf16 safetensors (26 shards) with the config, tokenizer and chat template of Qwen3.6-35B-A3B unchanged. This repository is a weights release: it holds no training data, trajectories or task text. The training data is not released. A gated release (access by request) is planned.
 
-The weights are bf16 safetensors (26 shards) with the config, tokenizer and chat template of Qwen3.6-35B-A3B unchanged. This repository is a weights release: it holds no training data, trajectories or task text. The training data is available on request as a gated dataset, [hweller1/wayfinder-training-data](https://huggingface.co/hweller1/wayfinder-training-data) (link placeholder: **not yet published**, it will not resolve until the release is approved).
+## Latest results
+
+The full pipeline has three steps. First, the model searches the repository with its own tools and reports a ranked list of files. Second, one hybrid search (voyage-code-4 vectors plus BM25 on hashed identifiers, top 100 chunks rolled up to files) is merged with the model's list by reciprocal rank fusion. Third, Voyage rerank-3 reorders positions 6 to 40 with the instruction "Rank source files a developer must edit or test for this change", and the first 5 are kept as they are.
+
+Recall@12 on 200 held-out tasks (47 repositories never seen in training, 2 seeds per task, task as the unit):
+
+| Step | Recall@12 |
+|---|---|
+| 1. The model's own list | 0.414 |
+| 2. After the hybrid merge | 0.493 |
+| 3. After the rerank | 0.531 |
+
+The whole cascade adds +0.117 [+0.095, +0.140], paired by task. Recall@5 moves from 0.336 to 0.345, which is not significant, so these data show no gain at the top of the list. The list gets longer, and precision@12 falls from 0.416 to 0.303. The cascade adds about 0.4 s per search.
+
+These are properties of the Scout pipeline around the weights, which needs the voyage-code-4 index and the rerank call. The weights alone give the 0.414 line.
+
+Coding pass rate (34 tasks from 8 repositories, 2 seeds, a coder with no search tools that can open only the files it is handed): 0.824 [0.71, 0.93] with wayfinder-qwen and the cascade, against 0.074 with no search and 0.971 when handed the right files. Three other searchers (Sonnet 5.5 high, GPT-6.1 Sol and Agents-A1-35B) scored 0.85 to 0.87 in an earlier run without the cascade. The differences between searchers are unresolved on 34 tasks, and 16 of the tasks come from one repository.
+
+Inside Muse Code (26 tasks from 18 repositories, one run per task, main agent muse-spark-1.3-contributor), adding Wayfinder cut cost per task from $0.342 to $0.195 and the tokens the main agent reads from 887K to 441K. The right files found and precision@12 are the same within noise (recall@12 0.590 to 0.536, difference -0.053 [-0.127, +0.015]). Recall@5 is lower, and the median search is about 25 s slower. The claim is cost and tokens, not better accuracy.
 
 ## Serving
 
@@ -75,7 +93,7 @@ The tool schemas and system prompt used in training and evaluation come from the
 
 ## Intended use
 
-Use it as the explore or search subagent under a stronger parent model, inside a harness that executes its tool calls and offers the five tools (`grep`, `glob`, `read_file`, `semantic_search`, `report`). Its output is a list of leads for the parent to verify. Choose it over wayfinder-glimmer when latency or GPU cost per search matters more than the last few points of recall.
+Use it as the explore or search subagent under a stronger parent model, inside a harness that executes its tool calls and offers the five tools (`grep`, `glob`, `read_file`, `semantic_search`, `report`). Its output is a list of leads for the parent to verify. It suits cases where latency and GPU cost per search matter.
 
 Out of scope:
 
@@ -92,17 +110,17 @@ Tasks are mined from real commits in public repositories. The commit subject lin
 
 Qwen3.6-35B-A3B was then fine-tuned on those examples with LoRA supervised fine-tuning: rank 64, alpha 128, on the attention projections, the linear-attention projections and the shared expert of every MoE block (250 modules, 76.7M trainable parameters; the routed experts and the router are frozen), assistant-only loss, 2 epochs at learning rate 5e-5, 460 steps of 6 documents, 4x H200 data parallel, 88 minutes of wall time, then merged into the base weights. This is one training run with one seed. The recipe was not ablated: no run varied the data, rank or schedule against the released one, apart from the dev-set-only variant described under Training.
 
-At inference time the Scout pipeline can refine the model's list. After the model reports, one hybrid search (voyage-code-4 vectors plus BM25) is merged with its list, and a Voyage rerank-3 pass reorders positions 6 to 40. On the 200 held-out tasks (47 repositories, two seeds) recall@12 goes from 0.414 for the model's own list to 0.493 after the hybrid merge and 0.531 after the rerank (+0.117 [+0.095, +0.139], paired by task). This is a property of the Scout pipeline and not of the weights alone: the same weights without the cascade score the first number. It also lengthens the list, so precision@12 falls from 0.416 to 0.303. It was measured in its own run of the held-out tasks, so it is not directly comparable to the reported-recall table under Evaluation.
+At inference time the Scout pipeline can refine the model's list. After the model reports, one hybrid search (voyage-code-4 vectors plus BM25) is merged with its list, and a Voyage rerank-3 pass reorders positions 6 to 40. On the 200 held-out tasks (47 repositories, two seeds) recall@12 goes from 0.414 for the model's own list to 0.493 after the hybrid merge and 0.531 after the rerank (+0.117 [+0.095, +0.140], paired by task). This is a property of the Scout pipeline and not of the weights alone: the same weights without the cascade score the first number. It also lengthens the list, so precision@12 falls from 0.416 to 0.303. It was measured in its own run of the held-out tasks, so it is not directly comparable to the reported-recall table under Evaluation.
 
 ## Training
 
 - Base model: Qwen3.6-35B-A3B (`Qwen/Qwen3.6-35B-A3B`, Apache-2.0), a hybrid of Gated DeltaNet and gated-attention layers with 256 routed experts per MoE layer.
 - Method: LoRA supervised fine-tuning, rank 64, alpha 128, on the attention projections of the 10 gated-attention layers, the `in_proj_qkv`, `in_proj_z` and `out_proj` projections of the 30 Gated DeltaNet layers, and the shared expert of all 40 MoE blocks (250 modules, 76.7M trainable parameters). The 256 routed experts and the router are frozen. The adapter was merged into the base shards and saved as bf16, so serving needs no LoRA support.
-- Data: the same 1,383 examples as wayfinder-glimmer, re-rendered with the official Qwen3.6 chat template and not re-selected (47.2M tokens, 6.9M of them assistant tokens, all carrying loss; every assistant turn keeps its reasoning). They come from 344 tasks in public repositories, all from the training split, none from the test, development or held-out sets. The tasks come from 153 of the 244 repositories in the training split. Of those 244, 242 are under permissive licenses (MIT 129, Apache-2.0 98, BSD-3-Clause 12, BSD-2-Clause 2, ISC 1), one is AGPL-3.0 and one is no longer on GitHub, so its license could not be checked (GitHub license API, 2026-11-02; list in `eval/results/train_repos_license.csv` in the GitHub repository). The 344 tasks are not listed in this release, so these counts cover the whole training split, and either of those two repositories may be among the 153. 1,350 examples are Muse Spark Open teacher trajectories (1,347 from self-hosted replicas of the open weights, 3 from a third-party host of the same open weights; none from the Meta API) and 33 are Agents-A1-35B trajectories. Only runs that found every gold file, opened every file they reported and called `report` in time were kept.
+- Data: 1,383 examples rendered with the official Qwen3.6 chat template (47.2M tokens, 6.9M of them assistant tokens, all carrying loss; every assistant turn keeps its reasoning). They come from 344 tasks in public repositories, all from the training split, none from the test, development or held-out sets. The tasks come from 153 of the 244 repositories in the training split. Of those 244, 242 are under permissive licenses (MIT 129, Apache-2.0 98, BSD-3-Clause 12, BSD-2-Clause 2, ISC 1), one is AGPL-3.0 and one is no longer on GitHub, so its license could not be checked (GitHub license API, 2026-11-02; list in `eval/results/train_repos_license.csv` in the GitHub repository). The 344 tasks are not listed in this release, so these counts cover the whole training split, and either of those two repositories may be among the 153. 1,350 examples are Muse Spark Open teacher trajectories (1,347 from self-hosted replicas of the open weights, 3 from a third-party host of the same open weights; none from the Meta API) and 33 are Agents-A1-35B trajectories. Only runs that found every gold file, opened every file they reported and called `report` in time were kept.
 - Schedule: 2 epochs (460 steps of 6 documents), learning rate 5e-5 with cosine decay to 10%, 5 warmup steps, one document per sequence (no packing, because the recurrent layers would leak state between packed documents), 4x H200, 88 minutes.
 - Single training run (seed 0). Results describe this checkpoint, not the recipe. A second variant that upweighted examples where semantic search found a gold file grep had missed was trained and evaluated on the development set only. It was no better and is not released.
 
-The trajectories and task text are not in this repository. They are planned as a gated dataset that users must request access to (not yet published; see the link at the top of this card).
+The trajectories and task text are not in this repository. The training data is not released. A gated release (access by request) is planned.
 
 ## Task shapes it was trained on
 
@@ -161,10 +179,9 @@ Two seeds per task, so 400 rollouts per arm and 800 in total, with no errors. Ru
 | Model | Reported recall, grep | Reported recall, with semantic search | Recall@5, grep | Turns per task (grep) | Ended by report (grep) |
 |---|---|---|---|---|---|
 | wayfinder-qwen | 0.415 [0.377, 0.452] | 0.427 [0.388, 0.465] | 0.335 [0.301, 0.368] | 9.5 | 0.96 |
-| wayfinder-glimmer, same tasks | 0.452 [0.412, 0.491] | 0.446 [0.406, 0.484] | 0.360 [0.324, 0.399] | 9.9 | 1.00 |
 | Agents-A1-35B, same tasks | 0.313 [0.280, 0.348] | 0.352 [0.319, 0.387] | 0.247 [0.217, 0.279] | 34.1 | 0.47 |
 
-Paired by task, wayfinder-qwen minus wayfinder-glimmer on reported recall: -0.036 [-0.055, -0.018] on the grep arm (the repository-cluster interval, [-0.054, -0.019], agrees) and -0.018 [-0.037, -0.000] with semantic search. Minus Agents-A1: +0.102 [+0.078, +0.127] on the grep arm and +0.075 [+0.051, +0.098] with semantic search. The all-gold rate (every gold file in the report) is 0.07 on the grep arm against 0.10 for wayfinder-glimmer. The malformed tool-call rate was 0.05% of calls, and no tool markup leaked into message content.
+Paired by task, wayfinder-qwen minus Agents-A1: +0.102 [+0.078, +0.127] on the grep arm and +0.075 [+0.051, +0.098] with semantic search. The all-gold rate (every gold file in the report) is 0.07 on the grep arm. The malformed tool-call rate was 0.05% of calls, and no tool markup leaked into message content.
 
 On a 50-task development set with two seeds (the gate before the held-out run, so a selection set), reported recall was 0.375 [0.293, 0.458] on the grep arm and 0.385 [0.305, 0.468] with semantic search.
 
@@ -176,11 +193,10 @@ On a 50-task development set with two seeds (the gate before the held-out run, s
 |---|---|---|---|---|
 | wayfinder-qwen, FP8, MTP on (2 draft tokens) | 19.7 s | 2.1 s (6.6 s) | 9.5 | 286 tok/s |
 | wayfinder-qwen, FP8, MTP off | 43.5 s | 3.6 s (9.7 s) | 10.5 | 185 tok/s |
-| wayfinder-glimmer, bf16 | 175.4 s | 13.2 s (36.3 s) | 10.0 | 41 tok/s |
 
-Reported recall on these 12 tasks was 0.20 with MTP on, 0.19 with it off and 0.23 for wayfinder-glimmer. With n=12 no inference is drawn from that.
+Reported recall on these 12 tasks was 0.20 with MTP on and 0.19 with it off. With n=12 no inference is drawn from that.
 
-At a concurrency of 14 on the held-out set, GPU cost per rollout at the H100 list price of $3.95 per hour (vLLM load included) was $0.0150 on the grep arm and $0.0144 with semantic search for wayfinder-qwen, against $0.0294 and $0.0281 for wayfinder-glimmer (400 rollouts per arm).
+At a concurrency of 14 on the held-out set, GPU cost per rollout at the H100 list price of $3.95 per hour (vLLM load included) was $0.0150 on the grep arm and $0.0144 with semantic search (400 rollouts per arm).
 
 ### End to end: pass rate of a coding agent handed the searcher's files
 
@@ -190,10 +206,9 @@ At a concurrency of 14 on the held-out set, GPU cost per rollout at the H100 lis
 |---|---|
 | No search | 0.07 (5 of 68) |
 | wayfinder-qwen | 0.87 (59 of 68) |
-| wayfinder-glimmer | 0.87 (59 of 68) |
 | Gold files (ceiling) | 0.97 (66 of 68) |
 
-wayfinder-qwen lifts the pass rate by +0.794 [+0.676, +0.897] over no search; the lift survives a repository-cluster bootstrap ([+0.595, +0.871]). Against wayfinder-glimmer the difference is 0.000 [-0.044, +0.044], so a pass-rate difference larger than about 0.06 between the two is excluded on these tasks. The files handed over contained 0.73 of the gold files on average (wayfinder-glimmer 0.75). Caveat: the set is concentrated, with 16 of the 34 tasks from one repository, so the effective sample is closer to 8 repositories, and the searchers sit near the ceiling. A separate, stricter task set reached only 4 usable tasks (8 runs): wayfinder-qwen passed 2 of 8 against 1 of 8 with no search, and nothing was resolved there. This arm was added after the other conditions were reported.
+wayfinder-qwen lifts the pass rate by +0.794 [+0.676, +0.897] over no search; the lift survives a repository-cluster bootstrap ([+0.595, +0.871]). The files handed over contained 0.73 of the gold files on average. Caveat: the set is concentrated, with 16 of the 34 tasks from one repository, so the effective sample is closer to 8 repositories, and the searchers sit near the ceiling. A separate, stricter task set reached only 4 usable tasks (8 runs): wayfinder-qwen passed 2 of 8 against 1 of 8 with no search, and nothing was resolved there. This run did not use the cascade; the cascade run (0.824 [0.71, 0.93], 34 tasks, 2 seeds) is under Latest results.
 
 ### Inside Muse Code: 26 tasks, one seed
 
@@ -202,10 +217,9 @@ wayfinder-qwen as the chat model behind a Scout `explore` call in Muse Code, on 
 | Arm | Recall@5 | Recall@12 | Precision@12 | Files reported | Median session |
 |---|---|---|---|---|---|
 | Stock Muse Code, no Scout | 0.413 | 0.600 | 0.381 | 15.0 | 65 s |
-| Scout with wayfinder-glimmer | 0.396 | 0.525 | 0.384 | 10.5 | 189 s |
 | Scout with wayfinder-qwen | 0.358 | 0.496 | 0.365 | 10.9 | 118 s |
 
-wayfinder-qwen is below stock Muse Code on recall@12: -0.104 [-0.163, -0.051] (the repository-cluster interval also excludes zero). Part of that gap is report length (10.9 files against 15.0), and precision@12 is level. Against wayfinder-glimmer the difference is -0.029 [-0.090, +0.025], which does not separate from zero at this size. The median `explore` call took 44.8 s with wayfinder-qwen and 126.2 s with wayfinder-glimmer, under different serving setups (FP8 with MTP against bf16 without it), so that ratio is not like for like. A Scout search with wayfinder-qwen is still about 1.8 times slower than stock Muse Code on these tasks.
+wayfinder-qwen is below stock Muse Code on recall@12: -0.104 [-0.163, -0.051] (the repository-cluster interval also excludes zero). Part of that gap is report length (10.9 files against 15.0), and precision@12 is level. A Scout search with wayfinder-qwen is still about 1.8 times slower than stock Muse Code on these tasks.
 
 ## Where it does well and where it does not
 
@@ -279,14 +293,14 @@ Hypothesis about the losses, offline and exploratory, not a tested claim: the ta
 
 ## Limitations
 
-- Retrieval is below wayfinder-glimmer: -0.036 [-0.055, -0.018] reported recall on the grep arm of the 200-task held-out set, a smaller but borderline gap with semantic search (-0.018 [-0.037, -0.000]), a lower all-gold rate, and it ends by calling `report` slightly less often (0.96 against 1.00). It is also below frontier models in the same loop (see the wayfinder-glimmer card).
+- Retrieval is below frontier models in the same loop (see the search benchmark in the GitHub repository), and the model ends by calling `report` on 0.96 of grep-arm rollouts.
 - In Muse Code, recall@12 is 0.496 against 0.600 for stock Muse Code without Scout (26 tasks, one seed), and the Scout path is slower than stock end to end (118 s against 65 s median).
 - Whether thinking was on in every `explore` call of the Muse Code run was not verified from a trace; the run left thinking at the Qwen template default instead of setting it per request as the held-out harness does. Treat that part of the Muse Code result as unconfirmed.
 - The held-out numbers were produced with MTP off, and the speed numbers and the end-to-end and Muse Code results with MTP on. Quality with MTP on has not been measured on the held-out set.
-- The speed figures come from 12 tasks. The wayfinder-glimmer comparison in the Muse Code run mixes model and serving differences.
+- The speed figures come from 12 tasks.
 - The semantic index adds no separable recall: +0.012 over the grep arm on the held-out set, not distinguishable from zero.
 - All evaluations used FP8 online quantization. Other precisions and engines were not tested.
-- Only the shared expert and attention projections were trained. Routed-expert LoRA, a second seed and other recipes were not tried, and the gap to wayfinder-glimmer has no tested explanation.
+- Only the shared expert and attention projections were trained. Routed-expert LoRA, a second seed and other recipes were not tried.
 - English-only task wording. Evaluated on public repositories only. Performance on private or unusual codebases is unknown.
 - This is one training run; Swift, C# and Java/Kotlin are thin in the training data.
 - Trained on public code whose individual licenses were not cleared task by task.
@@ -315,6 +329,9 @@ Meta claims no ownership of outputs generated by the model. The software and out
 ```
 
 - Code, evaluation and serving harness: https://github.com/hweller1/wayfinder
-- Sibling model: https://huggingface.co/hweller1/wayfinder-glimmer-30b
 - Voyage AI: https://www.voyageai.com
 - Base model: Qwen3.6-35B-A3B, Alibaba Cloud. Teacher: Muse Spark Open 816B-A42B, Meta Platforms, Inc.
+
+## Related models
+
+The first model trained with the same recipe, [wayfinder-glimmer](https://huggingface.co/hweller1/wayfinder-glimmer-30b) (Muse Glimmer 30B base), is a separate repository and is not part of the final results.
