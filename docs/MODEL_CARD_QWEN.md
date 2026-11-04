@@ -26,7 +26,7 @@ wayfinder-qwen is Qwen3.6-35B-A3B (35B parameters, 3B active per token) post-tra
 
 It is the faster sibling of [wayfinder-glimmer](https://huggingface.co/hweller1/wayfinder-glimmer-30b), trained on the same examples with the same recipe. On a single H100 and a single stream it finishes a search in about 20 to 44 seconds where wayfinder-glimmer takes about 175 seconds. In exchange its retrieval is a little weaker: on the 200-task held-out set its reported recall is 0.036 below wayfinder-glimmer on the grep arm. See Evaluation and Limitations before choosing between them.
 
-The weights are bf16 safetensors (26 shards) with the config, tokenizer and chat template of Qwen3.6-35B-A3B unchanged. This repository is a weights release: no training data, trajectories or task text are included.
+The weights are bf16 safetensors (26 shards) with the config, tokenizer and chat template of Qwen3.6-35B-A3B unchanged. This repository is a weights release: it holds no training data, trajectories or task text. The training data is available on request as a gated dataset, [hweller1/wayfinder-training-data](https://huggingface.co/hweller1/wayfinder-training-data) (link placeholder: **not yet published**, it will not resolve until the release is approved).
 
 ## Serving
 
@@ -86,6 +86,14 @@ Out of scope:
 - Searching repositories you are not permitted to read.
 - Any use prohibited by the Muse Spark Open Usage Policy.
 
+## How it was trained
+
+Tasks are mined from real commits in public repositories. The commit subject line is the question and the files the commit changed are the answers (the gold files). Muse Spark Open, the teacher, searched each task with `grep`, `glob`, `read_file` and `report` (1,062 of the 1,383 examples also offered `semantic_search` over a voyage-code-4 index). Only runs that found every gold file, opened every file they reported and called `report` in time were kept, and the 1,350 teacher examples that survived also stayed under the task's 75th-percentile turn count and 49,152 tokens (5,683 teacher rows in, 1,350 out). With 33 examples from Agents-A1-35B the set is 1,383 examples from 344 tasks in 153 of the 244 training-split repositories, 242 of those 244 under permissive licenses.
+
+Qwen3.6-35B-A3B was then fine-tuned on those examples with LoRA supervised fine-tuning: rank 64, alpha 128, on the attention projections, the linear-attention projections and the shared expert of every MoE block (250 modules, 76.7M trainable parameters; the routed experts and the router are frozen), assistant-only loss, 2 epochs at learning rate 5e-5, 460 steps of 6 documents, 4x H200 data parallel, 88 minutes of wall time, then merged into the base weights. This is one training run with one seed. The recipe was not ablated: no run varied the data, rank or schedule against the released one, apart from the dev-set-only variant described under Training.
+
+At inference time the Scout pipeline can refine the model's list. After the model reports, one hybrid search (voyage-code-4 vectors plus BM25) is merged with its list, and a Voyage rerank-3 pass reorders positions 6 to 40. On the 200 held-out tasks (47 repositories, two seeds) recall@12 goes from 0.414 for the model's own list to 0.493 after the hybrid merge and 0.531 after the rerank (+0.117 [+0.095, +0.139], paired by task). This is a property of the Scout pipeline and not of the weights alone: the same weights without the cascade score the first number. It also lengthens the list, so precision@12 falls from 0.416 to 0.303. It was measured in its own run of the held-out tasks, so it is not directly comparable to the reported-recall table under Evaluation.
+
 ## Training
 
 - Base model: Qwen3.6-35B-A3B (`Qwen/Qwen3.6-35B-A3B`, Apache-2.0), a hybrid of Gated DeltaNet and gated-attention layers with 256 routed experts per MoE layer.
@@ -94,7 +102,53 @@ Out of scope:
 - Schedule: 2 epochs (460 steps of 6 documents), learning rate 5e-5 with cosine decay to 10%, 5 warmup steps, one document per sequence (no packing, because the recurrent layers would leak state between packed documents), 4x H200, 88 minutes.
 - Single training run (seed 0). Results describe this checkpoint, not the recipe. A second variant that upweighted examples where semantic search found a gold file grep had missed was trained and evaluated on the development set only. It was no better and is not released.
 
-The trajectories and task text are not published.
+The trajectories and task text are not in this repository. They are planned as a gated dataset that users must request access to (not yet published; see the link at the top of this card).
+
+## Task shapes it was trained on
+
+What the examples look like: one user message holding a short request, then a loop of assistant turns (reasoning, then one or more tool calls) and tool results, ending in a `report` call. The request is the subject line of a real commit, for example "Sanitize username used in proxy job names by splitting on underscores" or "Remove deprecations from OllamApi and AnthropicApi". Subject lines are one line each, median 8 words (range 3 to 98). The right files are the files that commit touched, including test files.
+
+One limit on these tables: the list of the 344 tasks actually used was not saved outside the training volume. The tables below are for the 357 training-split tasks used across all versions of this training data (155 repositories), which differ from the 344 by at most 13 tasks. All 357 are in the training split.
+
+| Task category (357 tasks) | Tasks | Share |
+|---|---|---|
+| implementing_new_features | 138 | 38.7% |
+| refactoring | 74 | 20.7% |
+| paying_tech_debt | 54 | 15.1% |
+| modernize | 36 | 10.1% |
+| cybersecurity_bug_finding | 29 | 8.1% |
+| onboarding | 19 | 5.3% |
+| db_schema_rot | 4 | 1.1% |
+| qa_over_codebases | 3 | 0.8% |
+| splitting_monolith | 0 | 0.0% |
+
+Categories come from the benchmark the tasks were mined from and describe the commit, not a hand label. No category is named bug fixing; cybersecurity_bug_finding is the nearest, at 8% of the tasks.
+
+| Language (majority gold-file extension) | Tasks | Share |
+|---|---|---|
+| Python | 83 | 23.2% |
+| TypeScript/JavaScript | 72 | 20.2% |
+| Rust | 71 | 19.9% |
+| C/C++ | 41 | 11.5% |
+| Go | 38 | 10.6% |
+| Ruby | 15 | 4.2% |
+| Other | 14 | 3.9% |
+| Swift | 9 | 2.5% |
+| C# | 8 | 2.2% |
+| Java/Kotlin | 6 | 1.7% |
+
+| Right files per task | Tasks | Share |
+|---|---|---|
+| 1 | 62 | 17.4% |
+| 2 to 3 | 132 | 37.0% |
+| 4 to 6 | 116 | 32.5% |
+| 7 or more | 47 | 13.2% |
+
+The median is 3 right files per task (range 1 to 12, mean 3.8). The 200-task held-out set used in Evaluation is harder in shape: 3 to 15 right files, median 6, at least one non-test right file that neither the words of the request nor a grep for its rarest terms reaches.
+
+Repository type was not recorded for the training tasks (it exists only for the held-out set). Tasks per repository: 155 repositories, at most 13 tasks from one repository (starkillerOG/reolink_aio), then 10 each from github/gh-aw-mcpg and pixlcore/xyops. Repository licenses of those 155: MIT 85, Apache-2.0 59, BSD-3-Clause 9, BSD-2-Clause 1, AGPL-3.0 1.
+
+Tool mix. What is known from the build summaries: of the 1,383 examples, 1,062 offered `semantic_search` alongside the other four tools and 754 of them called it at least once; the rest used `grep`, `glob` and `read_file` only. The per-tool call counts inside the training trajectories were not recomputed, because the trajectories are on the training volume and not in the repositories used for this card. For orientation only, and not the training mix: in the model's own held-out rollouts (400 rollouts, median 8 turns) `read_file` was 53.5% of tool calls, `grep` 32.5%, `glob` 6.2%, `semantic_search` 4.2% and `report` 3.6%.
 
 ## Evaluation
 
@@ -152,6 +206,76 @@ wayfinder-qwen as the chat model behind a Scout `explore` call in Muse Code, on 
 | Scout with wayfinder-qwen | 0.358 | 0.496 | 0.365 | 10.9 | 118 s |
 
 wayfinder-qwen is below stock Muse Code on recall@12: -0.104 [-0.163, -0.051] (the repository-cluster interval also excludes zero). Part of that gap is report length (10.9 files against 15.0), and precision@12 is level. Against wayfinder-glimmer the difference is -0.029 [-0.090, +0.025], which does not separate from zero at this size. The median `explore` call took 44.8 s with wayfinder-qwen and 126.2 s with wayfinder-glimmer, under different serving setups (FP8 with MTP against bf16 without it), so that ratio is not like for like. A Scout search with wayfinder-qwen is still about 1.8 times slower than stock Muse Code on these tasks.
+
+## Where it does well and where it does not
+
+Two evaluations carry the strata below. Both are hard by construction (see Task shapes), so they say how the model does on tasks where the right files are not named by the request, not how it does on an average task. Intervals are 95% paired bootstrap intervals over tasks and are not adjusted for the number of strata, so read the small ones as direction only. A stratum with fewer than 8 tasks is shown as "not enough tasks".
+
+### 200 held-out tasks: the model's own list, and after the cascade
+
+Recall@12 of three lists on the same rollouts (two seeds per task, seeds averaged, task as the unit): the model's own list, the list after hybrid search merged in, and the list after rerank (the final list). "Change" is final minus the model's own list.
+
+| Stratum | Tasks | Model's own list | After hybrid | After rerank | Change |
+|---|---|---|---|---|---|
+| All | 200 | 0.414 | 0.493 | 0.531 | +0.117 [+0.095, +0.140] |
+| **Category** | | | | | |
+| implementing_new_features | 119 | 0.392 | 0.459 | 0.503 | +0.112 [+0.083, +0.142] |
+| paying_tech_debt | 36 | 0.466 | 0.558 | 0.593 | +0.127 [+0.079, +0.177] |
+| refactoring | 25 | 0.477 | 0.570 | 0.627 | +0.151 [+0.092, +0.217] |
+| modernize | 17 | 0.388 | 0.478 | 0.467 | +0.080 [+0.027, +0.136] |
+| cybersecurity_bug_finding, db_schema_rot | 2, 1 | not enough tasks | | | |
+| **Language** | | | | | |
+| TypeScript/JavaScript | 50 | 0.414 | 0.508 | 0.548 | +0.134 [+0.088, +0.185] |
+| Java/Kotlin | 28 | 0.389 | 0.454 | 0.494 | +0.105 [+0.045, +0.173] |
+| Go | 18 | 0.428 | 0.417 | 0.508 | +0.080 [+0.000, +0.173] |
+| Other | 18 | 0.340 | 0.415 | 0.430 | +0.090 [+0.032, +0.159] |
+| C# | 18 | 0.509 | 0.605 | 0.652 | +0.143 [+0.102, +0.183] |
+| Swift | 16 | 0.453 | 0.495 | 0.525 | +0.073 [+0.018, +0.136] |
+| Rust | 16 | 0.390 | 0.556 | 0.554 | +0.164 [+0.109, +0.223] |
+| C/C++ | 15 | 0.469 | 0.513 | 0.583 | +0.113 [+0.027, +0.209] |
+| Python | 13 | 0.326 | 0.462 | 0.476 | +0.151 [+0.086, +0.221] |
+| Ruby | 8 | 0.434 | 0.516 | 0.521 | +0.087 [+0.000, +0.191] |
+| **Right files per task** | | | | | |
+| 3 to 5 | 77 | 0.485 | 0.552 | 0.567 | +0.082 [+0.052, +0.116] |
+| 6 to 8 | 62 | 0.405 | 0.497 | 0.545 | +0.141 [+0.096, +0.190] |
+| 9 or more | 61 | 0.334 | 0.415 | 0.472 | +0.138 [+0.105, +0.172] |
+
+(No held-out task has fewer than 3 right files, so there is no 1 to 2 row.)
+
+Where it does better: the model's own list is strongest on C# (0.509, 18 tasks), on tasks with 3 to 5 right files (0.485, 77 tasks) and on refactoring and paying_tech_debt (0.477 and 0.466). The cascade adds recall in every stratum with at least 8 tasks, and the interval excludes zero in all of them except Go and Ruby, where the lower end is 0.000. Where it ties: in Go and Ruby the gain is not separable from zero (18 and 8 tasks), and for Rust and modernize the hybrid merge did the work and the rerank added nothing (Rust 0.556 to 0.554, modernize 0.478 to 0.467). Where it does worse: nowhere in this table is the final list below the model's own list, but the model's own list is weakest on Python (0.326, 13 tasks), Other languages (0.340, 18 tasks) and on tasks with 9 or more right files (0.334, 61 tasks). Recall of its own list falls as the number of right files rises (0.485, 0.405, 0.334), partly because a 12-file report caps recall on large tasks. The cascade also lengthens the list and lowers precision@12 from 0.416 to 0.303 (-0.113 [-0.142, -0.085]). Repository-type strata exist for this set (26 types); only 10 have 8 or more tasks and none is reported here.
+
+### 26 tasks in Muse Code: Muse Code alone against Muse Code with Wayfinder
+
+A second Muse Code run on 26 of the same held-out tasks (18 repositories, one run per task, default configuration with direct hand-off and the cascade, wayfinder-qwen behind Scout). Same parent model on both sides, so a pair differs only by the Wayfinder `explore` call. Files found is the number of right files in the final list of 12 or fewer. The table under Evaluation is an earlier run of the same 26 tasks under a different protocol; both show Muse Code with Scout below stock Muse Code on recall@12.
+
+| | Muse Code alone | With Wayfinder | Difference |
+|---|---|---|---|
+| Right files found (of 171 across 26 tasks) | 94 | 90 | -4 |
+| Recall@12 | 0.590 | 0.536 | -0.053 [-0.127, +0.015] |
+| Parent input tokens per task | 887K | 441K | fewer on 23 of 26 tasks |
+| Muse cost per task (list price, excludes GPU) | $0.342 | $0.195 | -$0.147 [-$0.205, -$0.096] |
+| Median wall time | 80 s | 105 s | slower on 22 of 26 tasks |
+
+Per task: more right files with Wayfinder on 6 tasks, the same on 11, fewer on 9.
+
+| Stratum | Tasks | More / same / fewer | Files found, alone to with |
+|---|---|---|---|
+| implementing_new_features | 10 | 2 / 3 / 5 | 30 to 24 |
+| paying_tech_debt | 8 | 2 / 4 / 2 | 30 to 31 |
+| refactoring | 5 | not enough tasks | |
+| modernize, db_schema_rot | 2, 1 | not enough tasks | |
+| TypeScript/JavaScript | 9 | 2 / 6 / 1 | 34 to 36 |
+| C#, Java/Kotlin, Other | 3 each | not enough tasks | |
+| Go, Swift | 2 each | not enough tasks | |
+| 3 to 5 right files | 11 | 1 / 5 / 5 | 31 to 25 |
+| 6 to 8 right files | 9 | 3 / 3 / 3 | 32 to 31 |
+| 9 or more right files | 6 | not enough tasks | |
+
+Reading: with Wayfinder the coding agent reads about half as many tokens and spends about 43% less on Muse, and finds about as many right files overall, with wide uncertainty on a 26-task, one-run sample. It is slower. Where it loses ground in these data is implementing_new_features (5 of 10 tasks with fewer files) and tasks with 3 to 5 right files (5 of 11 with fewer); it ties in paying_tech_debt, TypeScript/JavaScript and tasks with 6 to 8 right files. No stratum with 8 or more tasks shows a gain of more than two files, and these samples are too small to put intervals on the per-stratum differences.
+
+Single runs are noisy. In the three-task demo batch (5 runs each, same excalidraw task), Muse Code alone found 10, 10, 10, 5 and 8 of 11 right files and Muse Code with Wayfinder found 3, 8, 4, 3 and 8, a median of 10 against 4. In the 26-task run the same excalidraw task went the other way, 6 to 8. The rust-analyzer "Remove `allow`s that are no longer necessary" task (12 right files) was a tie at 1 file in the 26-task run, and has no scored demo take in the files used here.
+
+Hypothesis about the losses, offline and exploratory, not a tested claim: the tasks where Wayfinder loses are those whose right files are not named after the request (excalidraw "Remove image preview on image insertion", rust-analyzer "Remove `allow`s...": the right files are spread over the codebase and their paths and contents do not contain the words of the request), so grep has no lexical way in, and the Muse parent's broader search may cover more ground. A check we could run offline on the 26 pairs, using the held-out set's own labels for how many non-test right files the request words do not reach: the tasks where Wayfinder found fewer files had a median of 0.67 of their non-test right files unreachable (9 tasks), against 0.40 for ties (11) and 0.37 for tasks where it found more (6). Rank correlation between that share and the change in recall@12 is -0.46 (permutation p = 0.018, n = 26). That points the same way as the hypothesis. It is one run, and it is one of five measures looked at. Two others were nominally significant too: number of directories (rho +0.49, p = 0.012), which runs the opposite way to a scatter explanation, with more directories going with better results for Wayfinder, and number of right files (rho +0.39, p = 0.048). With five looks the -0.46 does not survive a Bonferroni correction (0.018 x 5 = 0.09), the share is entangled with the number of right files, and no pre-registered test was run. Treat it as a lead, and note that the scatter half of the hypothesis is not supported.
 
 ## Limitations
 
