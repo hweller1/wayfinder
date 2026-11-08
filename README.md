@@ -14,7 +14,7 @@ Submission to the Meta hackathon, "Build for Your World", startup track, from Vo
 
 ## How it works
 
-![Scout architecture](docs/figures/architecture.png)
+![Agentic code search, the Wayfinder way: Muse Code alone against Muse Code with the Scout plugin and wayfinder-qwen](docs/figures/arch_prototype.png)
 
 Wayfinder searches with grep and file reads and reports files. One cascade then refines the list: hybrid search (`voyage-code-4` vectors plus BM25 on hashed identifiers, top 100 chunks rolled up to files) is merged with the model's list by reciprocal rank fusion, and Voyage rerank-3 reorders positions 6 to 40 with the instruction "Rank source files a developer must edit or test for this change".
 
