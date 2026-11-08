@@ -8,7 +8,7 @@ Submission to the Meta hackathon, "Build for Your World", startup track, from Vo
 
 ## What it is
 
-- **wayfinder-qwen**: Qwen3.6-35B-A3B, post trained with LoRA SFT on 1,383 successful search trajectories written by Muse Spark Open. Open weights: [hweller1/wayfinder-qwen-35b-a3b](https://huggingface.co/hweller1/wayfinder-qwen-35b-a3b). Model card: [docs/MODEL_CARD_QWEN.md](docs/MODEL_CARD_QWEN.md).
+- **wayfinder-qwen**: Qwen3.6-35B-A3B, post trained with LoRA SFT on 1,383 successful search trajectories (1,350 written by Muse Spark Open, 33 by Agents-A1-35B), released as a [gated dataset](https://huggingface.co/datasets/hweller1/wayfinder-training-data). Open weights: [hweller1/wayfinder-qwen-35b-a3b](https://huggingface.co/hweller1/wayfinder-qwen-35b-a3b). Model card: [docs/MODEL_CARD_QWEN.md](docs/MODEL_CARD_QWEN.md).
 - **Scout**: a plugin for Muse Code that hands search to Wayfinder. A hybrid search plus rerank step refines its list on every call.
 - **The index**: `voyage-code-4` vectors in turbopuffer. No code is stored.
 
@@ -17,6 +17,28 @@ Submission to the Meta hackathon, "Build for Your World", startup track, from Vo
 ![Agentic code search, the Wayfinder way: Muse Code alone against Muse Code with the Scout plugin and wayfinder-qwen](docs/figures/arch_prototype.png)
 
 Wayfinder searches with grep and file reads and reports files. One cascade then refines the list: hybrid search (`voyage-code-4` vectors plus BM25 on hashed identifiers, top 100 chunks rolled up to files) is merged with the model's list by reciprocal rank fusion, and Voyage rerank-3 reorders positions 6 to 40 with the instruction "Rank source files a developer must edit or test for this change".
+
+## Set up
+
+Offline tests, no keys needed:
+
+```bash
+cd scout && uv sync --frozen --extra gateway
+uv run pytest -q
+cd ../training && PYTHONPATH=.:../scout/src python3 -m pytest tests -q
+```
+
+1. **Serve the model.** `modal deploy deploy/modal/serve_qwen.py` (one H100, scales to zero when idle). Serving notes are in the [model card](https://huggingface.co/hweller1/wayfinder-qwen-35b-a3b).
+2. **Run the gateway and issue a key.** Follow the gateway steps in [docs/RUN.md](docs/RUN.md). It is written for wayfinder-glimmer and has the same shape.
+3. **Install the Muse Code plugin and index a repository.** Full guide: [scout/integrations/muse-code/INSTALL.md](scout/integrations/muse-code/INSTALL.md).
+
+```bash
+uv tool install ./scout && scout login --key <scout key>
+scout init --muse-code            # adds the marketplace, installs and approves the plugin
+cd /path/to/public/checkout && scout sync --wait && muse
+```
+
+Side-by-side demo runbook: [docs/demo.md](docs/demo.md). Both deployment kits were tested offline and have not been run from a fresh account. Use public repositories: Muse sends the code it reads to Meta.
 
 ## Results
 
@@ -30,7 +52,7 @@ Intervals are 95% bootstrap intervals over tasks.
 | After the merge | 0.493 |
 | After the rerank | 0.531 |
 
-The rerank adds +0.038 [+0.023, +0.054]; the whole cascade adds +0.117 [+0.095, +0.139]. Recall@5 moves from 0.336 to 0.345, which is not significant. The cascade adds about 0.4 s per search. It shows the cascade finds more of the right files in the top 12; it does not show a gain at the very top of the list.
+The rerank adds +0.038 [+0.023, +0.054]; the whole cascade adds +0.117 [+0.095, +0.140]. Recall@5 moves from 0.336 to 0.345, which is not significant. The cascade adds about 0.4 s per search. It shows the cascade finds more of the right files in the top 12; it does not show a gain at the very top of the list.
 
 **Coding pass rate.** 34 tasks that fail without search, 2 seeds, Opus 5.5 as the coder, network blocked, coder sees only the files the searcher returned.
 
@@ -49,14 +71,14 @@ Search lifts the pass rate by about 0.8 over no search. The differences between 
 
 | Model | Reported recall | Cost per task |
 |---|---|---|
-| wayfinder-qwen, own list | 0.415 | about $0.045 (open-price equivalent) |
+| wayfinder-qwen, own list | 0.415 | about $0.045 (open-price equivalent); $0.015 measured GPU cost |
 | Agents-A1-35B | 0.313 | $0.113 |
 | Sonnet 5.5 high | 0.529 | $0.120 |
 | GPT-6.1 Sol | 0.580 | $0.062 (rate unconfirmed) |
 
-With the cascade, wayfinder-qwen reaches recall@12 of 0.531, level with Sonnet and a little under GPT. The lists have different lengths, so this is not a like-for-like comparison. On recall@5 it trails the frontier models. Details: [docs/results/README.md](docs/results/README.md).
+wayfinder-qwen beats the same-size Agents-A1-35B by +0.102 [+0.078, +0.127] paired by task, in about a third of the turns, and is below both frontier models. With the cascade, wayfinder-qwen reaches recall@12 of 0.531, level with Sonnet and a little under GPT. The lists have different lengths, so this is not a like-for-like comparison. On recall@5 it trails the frontier models. Details: [docs/results/README.md](docs/results/README.md).
 
-**Inside Muse Code.** 26 tasks, one run each, default configuration.
+**Inside Muse Code, default configuration.** 26 tasks, one run each, wayfinder-qwen with the cascade.
 
 | | Muse Code alone | With Wayfinder |
 |---|---|---|
@@ -67,37 +89,19 @@ With the cascade, wayfinder-qwen reaches recall@12 of 0.531, level with Sonnet a
 | recall@5 | 0.449 | 0.383 |
 | Median time | 80 s | 105 s |
 
-Cost is about 43 percent lower and Muse Code reads about half the tokens. Precision@12 and recall@12 differ within noise. Recall@5 is lower with Wayfinder, and we have not tested why. Wayfinder is about 25 seconds slower in median time. The claim is cost and tokens, not better accuracy.
+Cost is about 43 percent lower and Muse Code reads about half the tokens. Precision@12 and recall@12 differ within noise. Recall@5 is lower with Wayfinder, and we have not tested why. Wayfinder is about 25 seconds slower in median time. The claim is cost and tokens, not better accuracy. In a second 26-task study with a free-form parent prompt and no cascade, wayfinder-qwen was below stock Muse Code on recall@12 (0.496 against 0.600, -0.104 [-0.163, -0.051]), partly because it reports fewer files (10.9 against 15.0), and the median session took 118 s against 65 s. Both studies are in the [model card](https://huggingface.co/hweller1/wayfinder-qwen-35b-a3b).
 
 **Privacy.** The index holds only vectors, keyed hashes and encrypted paths and line ranges. Chunk text is sent to Voyage to be embedded, and the gateway operator can read it in transit. A security test checks that no path segment, identifier or 20-byte source window reaches the store: [scout/tests/security/test_no_plaintext.py](scout/tests/security/test_no_plaintext.py), described in [docs/scout/PRODUCT_STATUS.md](docs/scout/PRODUCT_STATUS.md). Use public code until you have confirmed Voyage's data-retention setting.
 
 ## Limits
 
-- The Muse Code study has one run per task, so it is calibration-scale evidence.
-- Wayfinder finds fewer files than Muse Code alone on some tasks. On excalidraw it did worse in 4 of 5 batch runs. It follows the wording of the task, and the right files are not always named like it.
-- Wayfinder is slower in wall time.
+- The Muse Code studies have one run per task, so they are calibration-scale evidence, and Wayfinder is slower in wall time.
+- Wayfinder finds fewer files than Muse Code alone on some tasks (on excalidraw, 4 of 5 batch runs). It follows the wording of the task, and the right files are not always named like it.
 - The demo video shows the best of five runs per task, picked after seeing them. The 26-task numbers above are the representative ones.
-- The task records are not a separate file; they are inside the gated training-data trajectories (tasks drawn from public repositories only). The scorers and harnesses are in `eval/`.
-
-## Try it
-
-Offline tests, no keys needed:
-
-```bash
-cd scout && uv sync --frozen --extra gateway
-uv run pytest -q
-cd ../training && PYTHONPATH=.:../scout/src python3 -m pytest tests -q
-```
-
-Serving the model on Modal: `modal deploy deploy/modal/serve_qwen.py`, then the gateway and plugin steps in [docs/RUN.md](docs/RUN.md) (written for wayfinder-glimmer, same shape; the qwen serving notes are in [docs/MODEL_CARD_QWEN.md](docs/MODEL_CARD_QWEN.md)). Installing the Muse Code plugin: [scout/integrations/muse-code/INSTALL.md](scout/integrations/muse-code/INSTALL.md). Side-by-side demo runbook: [docs/demo.md](docs/demo.md). Both deployment kits were tested offline and have not been run from a fresh account.
 
 ## What was built during the event
 
-The event ran October 26 to November 4, 2026.
-
-- `scout/` descends from a repository whose history starts on October 25, 2026 (42 commits that day). Of the 408 `scout/` files here, 131 were first added on October 25, several of them empty packages.
-- `training/`, `eval/` and `deploy/` are event work, as are the model, the held-out evaluations and the studies.
-- The component table and the list of existing things this work uses and does not claim are in [docs/EVENT_WORK.md](docs/EVENT_WORK.md). [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md) lists the October 25 files.
+The event ran October 26 to November 4, 2026. `training/`, `eval/` and `deploy/` are event work, as are the model, the held-out evaluations and the studies. `scout/` descends from a repository whose history starts on October 25, 2026. The component table, the list of existing things this work uses and does not claim, and the October 25 file list are in [docs/EVENT_WORK.md](docs/EVENT_WORK.md) and [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md).
 
 ## Repository layout
 
@@ -116,4 +120,4 @@ wayfinder-glimmer is the first model trained with the same recipe (Muse Glimmer 
 
 ## License and notices
 
-Code: Apache-2.0 ([LICENSE](LICENSE)). wayfinder-qwen is a Muse Spark Open derivative: the license and usage policy travel with the weights, "Built with Muse Spark Open" is displayed by any product that uses the model, and Model-as-a-Service above US$20M revenue needs a Meta agreement. Agents-A1-35B (Apache-2.0) contributed 33 of 1,383 training examples. The license files are in [licenses/](licenses/) and [NOTICE](NOTICE) lists every obligation. The teacher trajectories are not published.
+Code: Apache-2.0 ([LICENSE](LICENSE)). wayfinder-qwen is a Muse Spark Open derivative: the license and usage policy travel with the weights, "Built with Muse Spark Open" is displayed by any product that uses the model, and Model-as-a-Service above US$20M revenue needs a Meta agreement. Agents-A1-35B (Apache-2.0) contributed 33 of 1,383 training examples. The license files are in [licenses/](licenses/) and [NOTICE](NOTICE) lists every obligation. The teacher trajectories are published only as the gated dataset linked above (access by request).
