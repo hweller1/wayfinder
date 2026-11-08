@@ -1,6 +1,6 @@
 # wayfinder
 
-An open model, post trained using Muse-Spark-Open-816B-A42B, that searches code at frontier quality.
+An open model, post trained using Muse-Spark-Open-816B-A42B, that searches code for coding agents.
 
 **Built with Muse Spark Open.**
 
@@ -73,10 +73,8 @@ Search lifts the pass rate by about 0.8 over no search. The differences between 
 |---|---|---|
 | wayfinder-qwen, own list | 0.415 | about $0.045 (open-price equivalent); $0.015 measured GPU cost |
 | Agents-A1-35B | 0.313 | $0.113 |
-| Sonnet 5.5 high | 0.529 | $0.120 |
-| GPT-6.1 Sol | 0.580 | $0.062 (rate unconfirmed) |
 
-wayfinder-qwen beats the same-size Agents-A1-35B by +0.102 [+0.078, +0.127] paired by task, in about a third of the turns, and is below both frontier models. With the cascade, wayfinder-qwen reaches recall@12 of 0.531, level with Sonnet and a little under GPT. The lists have different lengths, so this is not a like-for-like comparison. On recall@5 it trails the frontier models. Details: [docs/results/README.md](docs/results/README.md).
+wayfinder-qwen beats the same-size Agents-A1-35B by +0.102 [+0.078, +0.127] paired by task, in about a third of the turns. With the cascade, wayfinder-qwen reaches recall@12 of 0.531; the lists have different lengths, so that is not a like-for-like comparison with the model's own list. Details: [docs/results/README.md](docs/results/README.md).
 
 **Inside Muse Code, default configuration.** 26 tasks, one run each, wayfinder-qwen with the cascade.
 
